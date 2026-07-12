@@ -1,12 +1,12 @@
 # 100 Days With AI 🤖
 
 **100 days. 100 sources. One public learning log of modern Artificial
-Intelligence — from transformers, LLMs and agentic AI to MLOps,
-fine-tuning, RAG and evals.**
+Intelligence - from transformers, LLMs and agentic AI to MLOps,
+fine-tuning, RAG, security, evals and more.**
 
-Every day for 100 days I take one carefully chosen source — a paper,
-course, repo, post or tool, mixed **[Advanced]** and **[Medium]** level —
-study it, and log what actually stuck: 3–5 honest takeaways, why it
+Every day for 100 days, I take one carefully chosen source - a paper,
+course, repo, post, tool, or other source, mixed **[Advanced]** and **[Medium]** level -
+study it, and log what actually stuck: 1–5 honest takeaways, why it
 matters, and what I tried. Posted daily at ~9:00 (EEST) on
 [X (@reksas13)](https://x.com/reksas13) and
 [LinkedIn](https://www.linkedin.com/in/aurimasnausedas/) under
@@ -16,8 +16,7 @@ Inspired by [100-Days-Of-ML-Code](https://github.com/aurimas13/100-Days-Of-ML-Co
 and the resource tables of
 [Machine-Learning-Goodness](https://github.com/aurimas13/Machine-Learning-Goodness).
 
-> **Why:** learning in public beats learning alone. This repo is the
-> receipt — one entry a day, no skipped numbers, no faked expertise.
+> **Why:** learning in public beats learning alone. This repo is the receipt - one entry per day, no skipped numbers, no faked expertise.
 
 **Challenge start:** 2026-07-12 · **Day 100:** 2026-10-19
 
@@ -33,7 +32,7 @@ and the resource tables of
 
 ## 📚 Day Notes
 
-*Each day gets a section here: what the source is, 3–5 takeaways, why
+*Each day gets a section here: what the source is, 1–5 takeaways, why
 it matters, and what I learned or tried.*
 
 ### Day 1 — "2025–2035 Is the Decade of Agents" (Andrej Karpathy, X, 2025-01-23)
@@ -60,7 +59,7 @@ grounded in the post's full text.)*
   freshly bolted on via adapters, and very long task horizons remain
   unexplored territory. Karpathy suspects stuffing everything into
   context windows won't be enough; a breakthrough or two may be needed.
-- Hence the reframe: not "2025 is the year of agents" but **2025–2035
+- Hence the reframe: not "2025 is the year of agents" but **2025 – 2035
   is the decade of agents** — ending in a picture where you spin up
   organizations of agents and act as a CEO monitoring ten of them,
   dropping into the trenches to unblock.

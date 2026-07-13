@@ -27,6 +27,7 @@ and the resource tables of
 | Day | Date | Title | Level | Description | Link |
 |-----|------|-------|-------|-------------|------|
 | 1 | 2026-07-12 | "2025–2035 Is the Decade of Agents" — Andrej Karpathy | Medium | Karpathy's Jan 2025 post: agents are a decade-scale build, with humans as high-level supervisors of low-level automation | [X post](https://x.com/karpathy/status/1882544526033924438) |
+| 2 | 2026-07-13 | "Harness Design for Long-Running Application Development" — Prithvi Rajasekaran, Anthropic | Advanced | How Anthropic Labs kept a coding agent productive for 6 hours: context resets with structured handoffs, a GAN-inspired generator/evaluator split, and sprint contracts | [Anthropic Engineering](https://www.anthropic.com/engineering/harness-design-long-running-apps) |
 
 ---
 
@@ -73,6 +74,51 @@ recalibrated my expectations from "agents any month now" to a
 decade-long build, and the next 99 days of sources (context
 engineering, evals, guardrails, multi-agent design) all live inside
 that decade. Day 1 of 100 starts where the decade does.
+
+### Day 2 — "Harness Design for Long-Running Application Development" (Prithvi Rajasekaran, Anthropic Engineering, 2026-03-24)
+
+Source: [anthropic.com/engineering/harness-design-long-running-apps](https://www.anthropic.com/engineering/harness-design-long-running-apps)
+
+**Takeaways:**
+
+- Models exhibit **"context anxiety"** — they "begin wrapping up work
+  prematurely as they approach what they believe is their context
+  limit." The harness answer is a full **context reset with a
+  structured handoff file**, not compaction: "While compaction preserves
+  continuity, it doesn't give the agent a clean slate, which means
+  context anxiety can still persist."
+- **Self-evaluation fails.** "When asked to evaluate work they've
+  produced, agents tend to respond by confidently praising the work —
+  even when, to a human observer, the quality is obviously mediocre."
+  The fix is GAN-inspired: split the **generator** from a standalone
+  **evaluator tuned toward skepticism**.
+- The evaluator scores four weighted criteria — design quality,
+  originality, craft, functionality — deliberately weighted toward
+  design and originality, because models already do craft and
+  functionality well; the weighting steers away from template output.
+- The full-stack harness is **three agents**: a planner expanding the
+  brief into a spec, a generator sprinting feature-by-feature, and a
+  Playwright-based evaluator testing like a user. Each sprint starts
+  with a **sprint contract** — generator and evaluator agree what
+  "done" means *before* any code is written.
+- The trade-off in numbers: a solo run took 20 min and $9 (non-working
+  output); the full harness took 6 hr and $200 (working app). With a
+  newer model the harness was rebuilt *simpler* — sprints removed —
+  at 3 hr 50 min and $124.70. "Every component in a harness encodes an
+  assumption about what the model can't do on its own, and those
+  assumptions are worth stress testing… they can quickly go stale as
+  models improve."
+
+**Why it matters:** long-running autonomy isn't a bigger context
+window — it's architecture: resets over compaction, adversarial
+evaluation over self-grading, contracts over vibes. And the harness
+itself is a depreciating asset that must shrink as models improve.
+
+**What I learned/tried:** I went deep on this one. The idea that stuck
+hardest: every component I bolt onto an agent pipeline is a claim about
+what the model *can't* do — so each one deserves a periodic
+stress-test, or my scaffolding outlives its reason. I started auditing
+my own automation pipelines with that lens.
 
 ---
 

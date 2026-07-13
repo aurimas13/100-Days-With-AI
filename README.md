@@ -38,6 +38,8 @@ it matters, and what I learned or tried.*
 
 ### Day 1 — "2025–2035 Is the Decade of Agents" (Andrej Karpathy, X, 2025-01-23)
 
+<img src="assets/cards/day-001.png" width="420" alt="Day 1 card">
+
 Source: [x.com/karpathy/status/1882544526033924438](https://x.com/karpathy/status/1882544526033924438)
 *(The live post is behind X's wall for automated readers; this note is
 grounded in the post's full text.)*
@@ -76,6 +78,8 @@ engineering, evals, guardrails, safety, multi-agent design, etc.) all live insid
 that decade. Day 1 of 100 starts where the decade does.
 
 ### Day 2 — "Harness Design for Long-Running Application Development" (Prithvi Rajasekaran, Anthropic Engineering, 2026-03-24)
+
+<img src="assets/cards/day-002.png" width="420" alt="Day 2 card">
 
 Source: [anthropic.com/engineering/harness-design-long-running-apps](https://www.anthropic.com/engineering/harness-design-long-running-apps)
 

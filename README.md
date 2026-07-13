@@ -44,10 +44,10 @@ grounded in the post's full text.)*
 
 **Takeaways:**
 
-- Computer-use agents (like OpenAI's Operator) are to the digital world
+- Computer-use agents (like OpenAI's) are to the digital world
   what humanoid robots are to the physical one: a single general
   interface built for humans — monitor, keyboard, mouse vs. the human
-  body — that can gradually take on arbitrarily general tasks.
+  body - that can gradually take on arbitrarily general tasks.
 - The result is a *mixed-autonomy* world: humans become high-level
   supervisors of low-level automation, like a driver monitoring the
   Autopilot. It arrives in the digital world first, because flipping
@@ -56,11 +56,11 @@ grounded in the post's full text.)*
   (Universe, World of Bits) and it failed because LLMs had to happen
   first. A right idea at the wrong layer of the stack is still a wrong
   bet.
-- Even in 2025 the stack wasn't obviously ready — multimodality was
+- Even in 2025, the stack wasn't obviously ready — multimodality was
   freshly bolted on via adapters, and very long task horizons remain
-  unexplored territory. Karpathy suspects stuffing everything into
-  context windows won't be enough; a breakthrough or two may be needed.
-- Hence the reframe: not "2025 is the year of agents" but **2025 – 2035
+  unexplored territory. Karpathy suspected stuffing everything into
+  context windows won't be enough; a breakthrough or two was needed.
+- Hence the reframe: not "2025 was the year of agents" but **2025 – 2035
   is the decade of agents** — ending in a picture where you spin up
   organizations of agents and act as a CEO monitoring ten of them,
   dropping into the trenches to unblock.
@@ -72,7 +72,7 @@ this campaign covers — agent-building is a decade of engineering work
 **What I learned/tried:** I picked this as Day 1 deliberately — it
 recalibrated my expectations from "agents any month now" to a
 decade-long build, and the next 99 days of sources (context
-engineering, evals, guardrails, multi-agent design) all live inside
+engineering, evals, guardrails, safety, multi-agent design, etc.) all live inside
 that decade. Day 1 of 100 starts where the decade does.
 
 ### Day 2 — "Harness Design for Long-Running Application Development" (Prithvi Rajasekaran, Anthropic Engineering, 2026-03-24)
@@ -81,44 +81,44 @@ Source: [anthropic.com/engineering/harness-design-long-running-apps](https://www
 
 **Takeaways:**
 
-- Models exhibit **"context anxiety"** — they "begin wrapping up work
+- Models exhibit **"context anxiety"** - they "begin wrapping up work
   prematurely as they approach what they believe is their context
   limit." The harness answer is a full **context reset with a
   structured handoff file**, not compaction: "While compaction preserves
   continuity, it doesn't give the agent a clean slate, which means
   context anxiety can still persist."
 - **Self-evaluation fails.** "When asked to evaluate work they've
-  produced, agents tend to respond by confidently praising the work —
+  produced, agents tend to respond by confidently praising the work -
   even when, to a human observer, the quality is obviously mediocre."
   The fix is GAN-inspired: split the **generator** from a standalone
   **evaluator tuned toward skepticism**.
-- The evaluator scores four weighted criteria — design quality,
-  originality, craft, functionality — deliberately weighted toward
+- The evaluator scores four weighted criteria - design quality,
+  originality, craft, functionality - deliberately weighted toward
   design and originality, because models already do craft and
-  functionality well; the weighting steers away from template output.
+  Functionality well; the weighting steers away from template output.
 - The full-stack harness is **three agents**: a planner expanding the
-  brief into a spec, a generator sprinting feature-by-feature, and a
+  brief into a specification, a generator sprinting feature-by-feature, and a
   Playwright-based evaluator testing like a user. Each sprint starts
-  with a **sprint contract** — generator and evaluator agree what
+  with a **sprint contract** - generator and evaluator agree what
   "done" means *before* any code is written.
 - The trade-off in numbers: a solo run took 20 min and $9 (non-working
   output); the full harness took 6 hr and $200 (working app). With a
-  newer model the harness was rebuilt *simpler* — sprints removed —
+  newer model the harness was rebuilt *simpler* - sprints removed -
   at 3 hr 50 min and $124.70. "Every component in a harness encodes an
   assumption about what the model can't do on its own, and those
   assumptions are worth stress testing… they can quickly go stale as
   models improve."
 
 **Why it matters:** long-running autonomy isn't a bigger context
-window — it's architecture: resets over compaction, adversarial
+window - it's architecture: resets over compaction, adversarial
 evaluation over self-grading, contracts over vibes. And the harness
 itself is a depreciating asset that must shrink as models improve.
 
 **What I learned/tried:** I went deep on this one. The idea that stuck
-hardest: every component I bolt onto an agent pipeline is a claim about
-what the model *can't* do — so each one deserves a periodic
+hardest: every component I built onto an agent pipeline is a claim about
+what the model *can't* do - so each one deserves a periodic
 stress-test, or my scaffolding outlives its reason. I started auditing
-my own automation pipelines with that lens.
+my own automation pipelines this way.
 
 ---
 

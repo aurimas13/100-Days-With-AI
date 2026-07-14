@@ -64,12 +64,12 @@ grounded in the post's full text.)*
   unexplored territory. Karpathy suspected stuffing everything into
   context windows won't be enough; a breakthrough or two was needed.
 - Hence the reframe: not "2025 was the year of agents" but **2025 – 2035
-  is the decade of agents** — ending in a picture where you spin up
+  is the decade of agents** - ending in a picture where you spin up
   organizations of agents and act as a CEO monitoring ten of them,
   dropping into the trenches to unblock.
 
 **Why it matters:** this post sets the honest timescale for everything
-this campaign covers — agent-building is a decade of engineering work
+this campaign covers - agent-building is a decade of engineering work
 (context, evals, guardrails, orchestration), not a hype cycle to catch.
 
 **What I learned/tried:** I picked this as Day 1 deliberately — it

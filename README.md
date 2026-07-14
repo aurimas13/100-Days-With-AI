@@ -72,7 +72,7 @@ grounded in the post's full text.)*
 this campaign covers - agent-building is a decade of engineering work
 (context, evals, guardrails, orchestration), not a hype cycle to catch.
 
-**What I learned/tried:** I picked this as Day 1 deliberately — it
+**What I learned/tried:** I picked this as Day 1 deliberately - it
 recalibrated my expectations from "agents any month now" to a
 decade-long build, and the next 99 days of sources (context
 engineering, evals, guardrails, safety, multi-agent design, etc.) all live inside
@@ -108,7 +108,7 @@ Source: [anthropic.com/engineering/harness-design-long-running-apps](https://www
   "done" means *before* any code is written.
 - The trade-off in numbers: a solo run took 20 min and $9 (non-working
   output); the full harness took 6 hr and $200 (working app). With a
-  newer model the harness was rebuilt *simpler* - sprints removed -
+  newer model, the harness was rebuilt *simpler* - sprints removed -
   at 3 hr 50 min and $124.70. "Every component in a harness encodes an
   assumption about what the model can't do on its own, and those
   assumptions are worth stress testing… they can quickly go stale as
@@ -136,15 +136,15 @@ Source: [anthropic.com/engineering/writing-tools-for-agents](https://www.anthrop
 - Tools are a new kind of software: "a contract between deterministic
   systems and non-deterministic agents." Designing them is closer to
   prompt engineering than to classic API design.
-- More tools can hurt — "too many tools or overlapping tools can also
+- More tools can hurt - "too many tools or overlapping tools can also
   distract agents from pursuing efficient strategies." Consolidate:
   one `schedule_event` (find slot + create) beats separate
   `list_events` + `create_event`; `search_contacts` beats
   `list_contacts`.
 - Return meaning, not UUIDs: merely resolving arbitrary alphanumeric
-  UUIDs to semantically meaningful names significantly improves
+  UUIDs to semantically meaningful names significantly improve
   Claude's retrieval precision by reducing hallucinations.
-- Budget every token: a `response_format` enum cut a Slack response
+- Budget every token: a `response_format` enum cuts a Slack response
   from 206 tokens ("detailed") to 72 ("concise"); Claude Code truncates
   tool responses at 25,000 tokens by default; errors should return
   actionable guidance, not opaque tracebacks.
@@ -156,12 +156,12 @@ Source: [anthropic.com/engineering/writing-tools-for-agents](https://www.anthrop
   Claude Sonnet 3.5 to state-of-the-art on SWE-bench Verified.
 
 **Why it matters:** tool quality, not model quality, is often the
-ceiling on an agent's performance — and it is the part every builder
+ceiling on an agent's performance - and it is the part every builder
 fully controls.
 
 **What I learned/tried:** I checked these rules against the small agent
-pipelines I run daily — fewer entry points, meaningful names,
-token-lean outputs is exactly the discipline they demand. The detail
+pipelines I run daily - fewer entry points, meaningful names,
+token-lean outputs are exactly the discipline they demand. The detail
 that surprised me most: even word order in a tool name (namespacing
 like `asana_projects_search` vs `asana_search_projects`) has
 non-trivial, model-dependent effects on evals. Words are

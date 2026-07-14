@@ -28,6 +28,7 @@ and the resource tables of
 |-----|------|-------|-------|-------------|------|
 | 1 | 2026-07-12 | "2025–2035 Is the Decade of Agents" — Andrej Karpathy | Medium | Karpathy's Jan 2025 post: agents are a decade-scale build, with humans as high-level supervisors of low-level automation | [X post](https://x.com/karpathy/status/1882544526033924438) |
 | 2 | 2026-07-13 | "Harness Design for Long-Running Application Development" — Prithvi Rajasekaran, Anthropic | Advanced | How Anthropic Labs kept a coding agent productive for 6 hours: context resets with structured handoffs, a GAN-inspired generator/evaluator split, and sprint contracts | [Anthropic Engineering](https://www.anthropic.com/engineering/harness-design-long-running-apps) |
+| 3 | 2026-07-14 | "Writing Effective Tools for Agents — with Agents" — Ken Aizawa et al., Anthropic | Medium | Tools as contracts between deterministic systems and non-deterministic agents: fewer consolidated tools, semantic names over UUIDs, token budgets, and evals that let Claude refactor its own tools | [Anthropic Engineering](https://www.anthropic.com/engineering/writing-tools-for-agents) |
 
 ---
 
@@ -123,6 +124,48 @@ hardest: every component I built onto an agent pipeline is a claim about
 what the model *can't* do - so each one deserves a periodic
 stress-test, or my scaffolding outlives its reason. I started auditing
 my own automation pipelines this way.
+
+### Day 3 — "Writing Effective Tools for Agents — with Agents" (Ken Aizawa et al., Anthropic Engineering, 2025-09-11)
+
+<img src="assets/cards/day-003.png" width="420" alt="Day 3 card">
+
+Source: [anthropic.com/engineering/writing-tools-for-agents](https://www.anthropic.com/engineering/writing-tools-for-agents)
+
+**Takeaways:**
+
+- Tools are a new kind of software: "a contract between deterministic
+  systems and non-deterministic agents." Designing them is closer to
+  prompt engineering than to classic API design.
+- More tools can hurt — "too many tools or overlapping tools can also
+  distract agents from pursuing efficient strategies." Consolidate:
+  one `schedule_event` (find slot + create) beats separate
+  `list_events` + `create_event`; `search_contacts` beats
+  `list_contacts`.
+- Return meaning, not UUIDs: merely resolving arbitrary alphanumeric
+  UUIDs to semantically meaningful names significantly improves
+  Claude's retrieval precision by reducing hallucinations.
+- Budget every token: a `response_format` enum cut a Slack response
+  from 206 tokens ("detailed") to 72 ("concise"); Claude Code truncates
+  tool responses at 25,000 tokens by default; errors should return
+  actionable guidance, not opaque tracebacks.
+- Close the loop with agents themselves: prototype (quick local MCP
+  server) → evaluate (realistic multi-step tasks; track accuracy,
+  runtime, token use, tool errors) → optimize by concatenating eval
+  transcripts into Claude Code and letting it refactor the tools,
+  validated on held-out tasks. Refining tool descriptions alone took
+  Claude Sonnet 3.5 to state-of-the-art on SWE-bench Verified.
+
+**Why it matters:** tool quality, not model quality, is often the
+ceiling on an agent's performance — and it is the part every builder
+fully controls.
+
+**What I learned/tried:** I checked these rules against the small agent
+pipelines I run daily — fewer entry points, meaningful names,
+token-lean outputs is exactly the discipline they demand. The detail
+that surprised me most: even word order in a tool name (namespacing
+like `asana_projects_search` vs `asana_search_projects`) has
+non-trivial, model-dependent effects on evals. Words are
+infrastructure now.
 
 ---
 

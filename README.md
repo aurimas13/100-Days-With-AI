@@ -8,8 +8,9 @@ Every day for 100 days, I take one carefully chosen source - a paper,
 course, repo, post, tool, or other source, mixed **[Advanced]** and **[Medium]** level -
 study it, and log what actually stuck: 1–5 honest takeaways, why it
 matters, and what I tried. Posted daily at ~9:00 (EEST) on
-[X (@reksas13)](https://x.com/reksas13) and
-[LinkedIn](https://www.linkedin.com/in/aurimasnausedas/) under
+[X (@reksas13)](https://x.com/reksas13),
+[Bluesky (@reksas13.bsky.social)](https://bsky.app/profile/reksas13.bsky.social)
+and [LinkedIn](https://www.linkedin.com/in/aurimasnausedas/) under
 **#100DaysWithAI**.
 
 Inspired by [100-Days-Of-ML-Code](https://github.com/aurimas13/100-Days-Of-ML-Code)
@@ -218,6 +219,7 @@ needed.
 ## 🔗 Connect
 
 - **X:** [@reksas13](https://x.com/reksas13) — daily post, ~9:00 EEST
+- **Bluesky:** [@reksas13.bsky.social](https://bsky.app/profile/reksas13.bsky.social) — daily post, ~9:00 EEST (from Day 4)
 - **LinkedIn:** [Aurimas Nausėdas](https://www.linkedin.com/in/aurimasnausedas/) — daily post, ~9:00 EEST
 - **Newsletter:** [Molecule To Machine](https://moleculetomachine.substack.com) — weekly, where chemistry meets AI
 - **More resources:** [Machine-Learning-Goodness](https://github.com/aurimas13/Machine-Learning-Goodness)

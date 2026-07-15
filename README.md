@@ -29,6 +29,7 @@ and the resource tables of
 | 1 | 2026-07-12 | "2025–2035 Is the Decade of Agents" — Andrej Karpathy | Medium | Karpathy's Jan 2025 post: agents are a decade-scale build, with humans as high-level supervisors of low-level automation | [X post](https://x.com/karpathy/status/1882544526033924438) |
 | 2 | 2026-07-13 | "Harness Design for Long-Running Application Development" — Prithvi Rajasekaran, Anthropic | Advanced | How Anthropic Labs kept a coding agent productive for 6 hours: context resets with structured handoffs, a GAN-inspired generator/evaluator split, and sprint contracts | [Anthropic Engineering](https://www.anthropic.com/engineering/harness-design-long-running-apps) |
 | 3 | 2026-07-14 | "Writing Effective Tools for Agents — with Agents" — Ken Aizawa et al., Anthropic | Medium | Tools as contracts between deterministic systems and non-deterministic agents: fewer consolidated tools, semantic names over UUIDs, token budgets, and evals that let Claude refactor its own tools | [Anthropic Engineering](https://www.anthropic.com/engineering/writing-tools-for-agents) |
+| 4 | 2026-07-15 | "Effective Context Engineering for AI Agents" — Anthropic Applied AI | Medium | Context as a finite attention budget: context rot, right-altitude system prompts, just-in-time retrieval, and compaction / notes / sub-agents for long-horizon work | [Anthropic Engineering](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) |
 
 ---
 
@@ -166,6 +167,51 @@ that surprised me most: even word order in a tool name (namespacing
 like `asana_projects_search` vs `asana_search_projects`) has
 non-trivial, model-dependent effects on evals. Words are
 infrastructure now.
+
+### Day 4 — "Effective Context Engineering for AI Agents" (Rajasekaran, Dixon, Ryan & Hadfield, Anthropic Engineering, 2025-09-29)
+
+<img src="assets/cards/day-004.png" width="420" alt="Day 4 card">
+
+Source: [anthropic.com/engineering/effective-context-engineering-for-ai-agents](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents)
+
+**Takeaways:**
+
+- Context engineering is the superset of prompt engineering: "the set
+  of strategies for curating and maintaining the optimal set of tokens
+  (information) during LLM inference" — not just writing a good prompt.
+- **Context rot** is real and architectural: "as the number of tokens
+  in the context window increases, the model's ability to accurately
+  recall information from that context decreases." Transformers give
+  every token attention to every other token — n² pairwise
+  relationships — so context "must be treated as a finite resource
+  with diminishing marginal returns."
+- Bigger windows won't fix it: "context windows of all sizes will be
+  subject to context pollution and information relevance concerns."
+  The guiding heuristic instead: "find the smallest set of high-signal
+  tokens that maximize the likelihood of your desired outcome."
+- System prompts belong at the right altitude — a "Goldilocks zone"
+  between brittle hardcoded if-else logic and vague guidance; tools
+  stay self-contained and non-overlapping; a few diverse canonical
+  examples beat exhaustive edge-case rules.
+- Retrieval is moving just-in-time: keep lightweight identifiers
+  (file paths, queries, links) and load data at runtime (Claude Code's
+  hybrid: CLAUDE.md dropped in up front, grep/glob at runtime). For
+  long-horizon work the trio is **compaction** (distill and
+  reinitialize), **structured note-taking** (persistent NOTES.md-style
+  memory), and **sub-agents** that explore with tens of thousands of
+  tokens but return condensed 1,000–2,000-token summaries.
+
+**Why it matters:** agents rarely fail because the model is weak —
+they fail because attention is spent on low-signal tokens. Curating
+the context is the highest-leverage engineering surface an agent
+builder controls.
+
+**What I learned/tried:** three days converged on one law from three
+angles — Day 2's context resets, Day 3's token-lean tools, today's
+attention budget. My own automation pipelines keep structured notes
+and logs between runs the way this piece prescribes; now I can name
+why that works: the budget is attention, and notes spend it only when
+needed.
 
 ---
 

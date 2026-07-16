@@ -180,18 +180,18 @@ Source: [anthropic.com/engineering/effective-context-engineering-for-ai-agents](
 
 - Context engineering is the superset of prompt engineering: "the set
   of strategies for curating and maintaining the optimal set of tokens
-  (information) during LLM inference" — not just writing a good prompt.
+  (information) during LLM inference" - not just writing a good prompt.
 - **Context rot** is real and architectural: "as the number of tokens
   in the context window increases, the model's ability to accurately
   recall information from that context decreases." Transformers give
-  every token attention to every other token — n² pairwise
+  every token attention to every other token - n² pairwise
   relationships — so context "must be treated as a finite resource
   with diminishing marginal returns."
 - Bigger windows won't fix it: "context windows of all sizes will be
   subject to context pollution and information relevance concerns."
   The guiding heuristic instead: "find the smallest set of high-signal
   tokens that maximize the likelihood of your desired outcome."
-- System prompts belong at the right altitude — a "Goldilocks zone"
+- System prompts belong at the right altitude - a "Goldilocks zone"
   between brittle hardcoded if-else logic and vague guidance; tools
   stay self-contained and non-overlapping; a few diverse canonical
   examples beat exhaustive edge-case rules.
@@ -203,13 +203,13 @@ Source: [anthropic.com/engineering/effective-context-engineering-for-ai-agents](
   memory), and **sub-agents** that explore with tens of thousands of
   tokens but return condensed 1,000–2,000-token summaries.
 
-**Why it matters:** agents rarely fail because the model is weak —
+**Why it matters:** agents rarely fail because the model is weak -
 they fail because attention is spent on low-signal tokens. Curating
 the context is the highest-leverage engineering surface an agent
 builder controls.
 
 **What I learned/tried:** three days converged on one law from three
-angles — Day 2's context resets, Day 3's token-lean tools, today's
+angles - Day 2's context resets, Day 3's token-lean tools, today's
 attention budget. My own automation pipelines keep structured notes
 and logs between runs the way this piece prescribes; now I can name
 why that works: the budget is attention, and notes spend it only when
@@ -221,40 +221,40 @@ needed.
 
 <img src="assets/cards/day-005.png" width="420" alt="Day 5 card">
 
-Source: [openai.com — A practical guide to building agents](https://openai.com/business/guides-and-resources/a-practical-guide-to-building-ai-agents/)
+Source: [openai.com - A practical guide to building agents](https://openai.com/business/guides-and-resources/a-practical-guide-to-building-ai-agents/)
 ([PDF version](https://cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building-agents.pdf))
 
 **Takeaways:**
 
 - The definition is the filter: "Agents are systems that independently
   accomplish tasks on your behalf." Apps that merely integrate an LLM
-  without letting it control workflow execution — chatbots, single-turn
-  LLMs, classifiers — are not agents.
+  without letting it control workflow execution - chatbots, single-turn
+  LLMs and classifiers are not agents.
 - Build one for only three kinds of workflow: complex decision-making,
   difficult-to-maintain rule sets, and heavy reliance on unstructured
   data. "Otherwise, a deterministic solution may suffice."
-- Foundations are three components — model, tools, instructions — run
+- Foundations are three components - model, tools, instructions - run
   in a loop until an exit condition (final-output tool, no-tool-call
   response, error, or max turns). Prototype with the most capable
   model to set a baseline, then swap in smaller models where they hold.
 - Go multi-agent late: "maximize a single agent's capabilities first."
-  The tool-overload signal is overlap, not count — some implementations
+  The tool-overload signal is overlap, not count - some implementations
   "successfully manage more than 15 well-defined, distinct tools while
   others struggle with fewer than 10 overlapping tools." When you do
   split: manager pattern (agents as tools, one agent owns the user) or
   decentralized pattern (peer handoffs that transfer execution).
-- Guardrails are a layered defense — relevance and safety classifiers,
+- Guardrails are a layered defense - relevance and safety classifiers,
   PII filters, moderation, rules-based blocks, output validation, and
   tool risk ratings (read-only vs write, reversibility, financial
-  impact) — with human intervention on two triggers: exceeded failure
+  impact) - with human intervention on two triggers: exceeded failure
   thresholds and high-risk actions.
 
 **Why it matters:** this is the sober baseline for the agent hype
-cycle — most workflows don't need an agent, most agents don't need a
+cycle - most workflows don't need an agent, most agents don't need a
 fleet, and the ones that ship well start small and grow on evals.
 
 **What I learned/tried:** the tool-overlap number stopped me: 15+
-distinct tools can work while 10 overlapping ones fail — the same
+distinct tools can work while 10 overlapping ones fail - the same
 lesson as Day 3's consolidation rule, now with field numbers. My own
 single-agent pipelines with a handful of distinct tools sit exactly in
 the pattern this guide recommends; the discipline is in resisting the
@@ -264,12 +264,12 @@ fleet until a single agent demonstrably fails.
 
 ## 🔗 Connect
 
-- **X:** [@reksas13](https://x.com/reksas13) — daily post, ~9:00 EEST
-- **Bluesky:** [@reksas13.bsky.social](https://bsky.app/profile/reksas13.bsky.social) — daily post, ~9:00 EEST (from Day 4)
-- **LinkedIn:** [Aurimas Nausėdas](https://www.linkedin.com/in/aurimasnausedas/) — daily post, ~9:00 EEST
-- **Newsletter:** [Molecule To Machine](https://moleculetomachine.substack.com) — weekly, where chemistry meets AI
+- **X:** [@reksas13](https://x.com/reksas13) - daily post, ~9:00 EEST
+- **Bluesky:** [@reksas13.bsky.social](https://bsky.app/profile/reksas13.bsky.social) - daily post, ~9:00 EEST (from Day 4)
+- **LinkedIn:** [Aurimas Nausėdas](https://www.linkedin.com/in/aurimasnausedas/) - daily post, ~9:00 EEST
+- **Newsletter:** [Molecule To Machine](https://moleculetomachine.substack.com) - weekly, where chemistry meets AI
 - **More resources:** [Machine-Learning-Goodness](https://github.com/aurimas13/Machine-Learning-Goodness)
 
 ## 📄 License
 
-[MIT](LICENSE) — take the sources list, run your own 100 days.
+[MIT](LICENSE) - take the sources list, run your own 100 days.

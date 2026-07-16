@@ -31,6 +31,7 @@ and the resource tables of
 | 2 | 2026-07-13 | "Harness Design for Long-Running Application Development" — Prithvi Rajasekaran, Anthropic | Advanced | How Anthropic Labs kept a coding agent productive for 6 hours: context resets with structured handoffs, a GAN-inspired generator/evaluator split, and sprint contracts | [Anthropic Engineering](https://www.anthropic.com/engineering/harness-design-long-running-apps) |
 | 3 | 2026-07-14 | "Writing Effective Tools for Agents — with Agents" — Ken Aizawa et al., Anthropic | Medium | Tools as contracts between deterministic systems and non-deterministic agents: fewer consolidated tools, semantic names over UUIDs, token budgets, and evals that let Claude refactor its own tools | [Anthropic Engineering](https://www.anthropic.com/engineering/writing-tools-for-agents) |
 | 4 | 2026-07-15 | "Effective Context Engineering for AI Agents" — Anthropic Applied AI | Medium | Context as a finite attention budget: context rot, right-altitude system prompts, just-in-time retrieval, and compaction / notes / sub-agents for long-horizon work | [Anthropic Engineering](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) |
+| 5 | 2026-07-16 | "A Practical Guide to Building Agents" — OpenAI | Medium | OpenAI's build-your-first-agent field guide: model + tools + instructions in a loop, single agent before multi-agent, manager vs decentralized patterns, layered guardrails with human handoff | [OpenAI guide](https://openai.com/business/guides-and-resources/a-practical-guide-to-building-ai-agents/) |
 
 ---
 
@@ -213,6 +214,51 @@ attention budget. My own automation pipelines keep structured notes
 and logs between runs the way this piece prescribes; now I can name
 why that works: the budget is attention, and notes spend it only when
 needed.
+
+---
+
+### Day 5 — "A Practical Guide to Building Agents" (OpenAI, Business Guides & Resources)
+
+<img src="assets/cards/day-005.png" width="420" alt="Day 5 card">
+
+Source: [openai.com — A practical guide to building agents](https://openai.com/business/guides-and-resources/a-practical-guide-to-building-ai-agents/)
+([PDF version](https://cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building-agents.pdf))
+
+**Takeaways:**
+
+- The definition is the filter: "Agents are systems that independently
+  accomplish tasks on your behalf." Apps that merely integrate an LLM
+  without letting it control workflow execution — chatbots, single-turn
+  LLMs, classifiers — are not agents.
+- Build one for only three kinds of workflow: complex decision-making,
+  difficult-to-maintain rule sets, and heavy reliance on unstructured
+  data. "Otherwise, a deterministic solution may suffice."
+- Foundations are three components — model, tools, instructions — run
+  in a loop until an exit condition (final-output tool, no-tool-call
+  response, error, or max turns). Prototype with the most capable
+  model to set a baseline, then swap in smaller models where they hold.
+- Go multi-agent late: "maximize a single agent's capabilities first."
+  The tool-overload signal is overlap, not count — some implementations
+  "successfully manage more than 15 well-defined, distinct tools while
+  others struggle with fewer than 10 overlapping tools." When you do
+  split: manager pattern (agents as tools, one agent owns the user) or
+  decentralized pattern (peer handoffs that transfer execution).
+- Guardrails are a layered defense — relevance and safety classifiers,
+  PII filters, moderation, rules-based blocks, output validation, and
+  tool risk ratings (read-only vs write, reversibility, financial
+  impact) — with human intervention on two triggers: exceeded failure
+  thresholds and high-risk actions.
+
+**Why it matters:** this is the sober baseline for the agent hype
+cycle — most workflows don't need an agent, most agents don't need a
+fleet, and the ones that ship well start small and grow on evals.
+
+**What I learned/tried:** the tool-overlap number stopped me: 15+
+distinct tools can work while 10 overlapping ones fail — the same
+lesson as Day 3's consolidation rule, now with field numbers. My own
+single-agent pipelines with a handful of distinct tools sit exactly in
+the pattern this guide recommends; the discipline is in resisting the
+fleet until a single agent demonstrably fails.
 
 ---
 

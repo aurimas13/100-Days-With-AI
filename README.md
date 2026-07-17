@@ -32,7 +32,7 @@ and the resource tables of
 | 3 | 2026-07-14 | "Writing Effective Tools for Agents — with Agents" — Ken Aizawa et al., Anthropic | Medium | Tools as contracts between deterministic systems and non-deterministic agents: fewer consolidated tools, semantic names over UUIDs, token budgets, and evals that let Claude refactor its own tools | [Anthropic Engineering](https://www.anthropic.com/engineering/writing-tools-for-agents) |
 | 4 | 2026-07-15 | "Effective Context Engineering for AI Agents" — Anthropic Applied AI | Medium | Context as a finite attention budget: context rot, right-altitude system prompts, just-in-time retrieval, and compaction / notes / sub-agents for long-horizon work | [Anthropic Engineering](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) |
 | 5 | 2026-07-16 | "A Practical Guide to Building Agents" — OpenAI | Medium | OpenAI's build-your-first-agent field guide: model + tools + instructions in a loop, single agent before multi-agent, manager vs decentralized patterns, layered guardrails with human handoff | [OpenAI guide](https://openai.com/business/guides-and-resources/a-practical-guide-to-building-ai-agents/) |
-| 6 | 2026-07-17 | "Model Guidance: GPT-5.6" — OpenAI Developer Docs | Medium | OpenAI's GPT-5.6 migration guide: a reasoning-effort dial, pro mode, programmatic tool calling, 1.25× cache-write billing — and leaner prompts that score higher while costing a third less | [OpenAI Docs](https://developers.openai.com/api/docs/guides/latest-model) |
+| 6 | 2026-07-17 | "Model Guidance: GPT-5.6" — OpenAI Developer Docs | Medium | OpenAI's GPT-5.6 migration guide: a reasoning-effort dial, pro mode, programmatic tool calling, 1.25× cache-write billing - and leaner prompts that score higher while costing a third less | [OpenAI Docs](https://developers.openai.com/api/docs/guides/latest-model) |
 
 ---
 
@@ -275,7 +275,7 @@ Source: [developers.openai.com/api/docs/guides/latest-model](https://developers.
   `gpt-5.6-terra` (balanced), `gpt-5.6-luna` (high-volume); the bare
   `gpt-5.6` alias routes to `-sol`. Reasoning effort is a six-step
   dial: "GPT-5.6 supports `none`, `low`, `medium`, `high`, `xhigh`,
-  and `max`" — and the migration advice is to keep your baseline, then
+  and `max`" - and the migration advice is to keep your baseline, then
   test one level lower.
 - The economics headline: "In a sample of internal coding-agent eval
   runs, configurations with leaner system prompts improved evaluation
@@ -286,7 +286,7 @@ Source: [developers.openai.com/api/docs/guides/latest-model](https://developers.
   performance and token efficiency." Verbosity is not diligence.
 - Caching is now an explicit investment decision: "OpenAI bills cache
   writes at 1.25× the uncached input rate, while cache reads remain
-  discounted" — use breakpoints deliberately and watch
+  discounted" - use breakpoints deliberately and watch
   `cached_tokens` vs `cache_write_tokens`.
 - Two execution modes reshape the cost/quality trade: **pro mode**
   ("applies more model work to a request before returning a single
@@ -302,7 +302,7 @@ quality dial, the caching ledger, and the leaner-prompt numbers all
 say the same thing: token spend is a design decision, and the cheapest
 configuration is often also the best one.
 
-**What I learned/tried:** the week compounds — Day 3 said simplify
+**What I learned/tried:** the week compounds - Day 3 said simplify
 tool descriptions, Day 4 said curate the smallest high-signal context,
 and today OpenAI puts numbers on it: 10–15% better at 33–67% cheaper.
 I'm taking the 41–66% token figure as a standing dare to re-read my

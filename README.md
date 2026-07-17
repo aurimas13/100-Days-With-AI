@@ -1,25 +1,94 @@
+<div align="center">
+
 # 100 Days With AI 🤖
 
-**100 days. 100 sources. One public learning log of modern Artificial
-Intelligence - from transformers, LLMs and agentic AI to MLOps,
-fine-tuning, RAG, security, evals and more.**
+### One source a day. One honest note. For 100 days.
 
-Every day for 100 days, I take one carefully chosen source - a paper,
-course, repo, post, tool, or other source, mixed **[Advanced]** and **[Medium]** level -
-study it, and log what actually stuck: 1–5 honest takeaways, why it
-matters, and what I tried. Posted daily at ~9:00 (EEST) on
-[X (@reksas13)](https://x.com/reksas13),
-[Bluesky (@reksas13.bsky.social)](https://bsky.app/profile/reksas13.bsky.social)
-and [LinkedIn](https://www.linkedin.com/in/aurimasnausedas/) under
-**#100DaysWithAI**.
+A public learning log of modern Artificial Intelligence - transformers, LLMs,
+agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
+
+<!-- Day badge: bumped by the daily run. If this is stale, the run said so in its log. -->
+[![Day](https://img.shields.io/badge/Day-6%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
+[![Streak](https://img.shields.io/badge/Streak-unbroken-2EA043?style=for-the-badge&labelColor=0D1117)](#-progress)
+[![Level mix](https://img.shields.io/badge/Sources-Advanced%20%2B%20Medium-8957E5?style=for-the-badge&labelColor=0D1117)](#-progress)
+
+[![Last entry](https://img.shields.io/github/last-commit/aurimas13/100-Days-With-AI?label=last%20entry&color=1F6FEB&labelColor=0D1117)](https://github.com/aurimas13/100-Days-With-AI/commits/main)
+[![Stars](https://img.shields.io/github/stars/aurimas13/100-Days-With-AI?color=8957E5&labelColor=0D1117)](https://github.com/aurimas13/100-Days-With-AI/stargazers)
+[![License](https://img.shields.io/badge/License-MIT-2EA043?labelColor=0D1117)](LICENSE)
+
+**[📈 Progress](#-progress)** · **[📚 Day Notes](#-day-notes)** · **[🔗 Connect](#-connect)**
+
+`2026-07-12` ──────────── **Day 6 of 100** ────────────► `2026-10-19`
+
+</div>
+
+<div align="center">
+
+<sub>Every day, one carefully chosen source - a paper, course, repo, post or tool, mixed <b>[Advanced]</b> and <b>[Medium]</b> - studied and logged: what actually stuck, why it matters, what I tried.<br>Posted ~9:00 EEST under <b>#100DaysWithAI</b>. No skipped numbers. No faked expertise.</sub>
+
+</div>
+
+---
+
+<details>
+<summary><b>Why this repo exists</b></summary>
+
+<br>
+
+Learning in public beats learning alone - and it leaves a receipt.
+
+Most learning disappears the moment the tab closes. This is the opposite: one
+entry per day, written the same morning, in the open, whether or not the day
+went well. The constraint is the point. A source I do not understand still
+gets an honest note saying so.
+
+I am an AI engineer who came to this from chemistry, and that shows up in how
+I read these sources - I look for the mechanism, not the headline. Some days
+that produces a good metaphor. Most days it just produces a better question.
+
+</details>
+
+<details>
+<summary><b>How each day works</b></summary>
+
+<br>
+
+1. **One source** - chosen the evening before, marked **[Advanced]** or **[Medium]**.
+2. **Studied properly** - not skimmed. Quotes are verbatim or they are not quotes.
+3. **Logged here** - a row in [Progress](#-progress), then a [day note](#-day-notes)
+   with 3-5 takeaways, why it matters, and what I actually tried.
+4. **Shared** - the same note, compressed, goes out on X, Bluesky, Threads and
+   LinkedIn at ~9:00 EEST, with the day's card.
+
+Every claim in a post traces back to the source or it does not ship.
+
+</details>
+
+<details>
+<summary><b>What you can take from it</b></summary>
+
+<br>
+
+- **The sources list** - 100 curated, level-marked entry points into modern AI,
+  in [Progress](#-progress). Steal it wholesale; that is what MIT is for.
+- **The notes** - what a working engineer actually took away, including the
+  parts that did not land.
+- **The format** - if you want to run your own 100 days, this repo is a
+  working template.
+
+</details>
+
+<details>
+<summary><b>Standing on other shoulders</b></summary>
+
+<br>
 
 Inspired by [100-Days-Of-ML-Code](https://github.com/aurimas13/100-Days-Of-ML-Code)
-and the resource tables of
-[Machine-Learning-Goodness](https://github.com/aurimas13/Machine-Learning-Goodness).
+for the day-numbered log, and by the resource tables of
+[Machine-Learning-Goodness](https://github.com/aurimas13/Machine-Learning-Goodness)
+for the shape of the progress table.
 
-> **Why:** learning in public beats learning alone. This repo is the receipt - one entry per day, no skipped numbers, no faked expertise.
-
-**Challenge start:** 2026-07-12 · **Day 100:** 2026-10-19
+</details>
 
 ---
 
@@ -312,12 +381,36 @@ own pipelines' prompts with a red pen.
 
 ## 🔗 Connect
 
-- **X:** [@reksas13](https://x.com/reksas13) - daily post, ~9:00 EEST
-- **Bluesky:** [@reksas13.bsky.social](https://bsky.app/profile/reksas13.bsky.social) - daily post, ~9:00 EEST (from Day 4)
-- **LinkedIn:** [Aurimas Nausėdas](https://www.linkedin.com/in/aurimasnausedas/) - daily post, ~9:00 EEST
-- **Newsletter:** [Molecule To Machine](https://moleculetomachine.substack.com) - weekly, where chemistry meets AI
-- **More resources:** [Machine-Learning-Goodness](https://github.com/aurimas13/Machine-Learning-Goodness)
+<div align="center">
+
+**The day note goes out on all four, every morning at ~9:00 EEST.**
+
+[![X](https://img.shields.io/badge/X-@reksas13-0D1117?style=for-the-badge&logo=x&logoColor=white)](https://x.com/reksas13)
+[![Bluesky](https://img.shields.io/badge/Bluesky-@reksas13-0285FF?style=for-the-badge&logo=bluesky&logoColor=white)](https://bsky.app/profile/reksas13.bsky.social)
+[![Threads](https://img.shields.io/badge/Threads-@reksas13-000000?style=for-the-badge&logo=threads&logoColor=white)](https://www.threads.com/@reksas13)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Aurimas%20Nausėdas-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/aurimasnausedas/)
+
+</div>
+
+| | Where | What you get |
+|---|---|---|
+| 𝕏 | **[@reksas13](https://x.com/reksas13)** | The day's takeaway in one post, with the card - daily, ~9:00 EEST |
+| 🦋 | **[@reksas13.bsky.social](https://bsky.app/profile/reksas13.bsky.social)** | The same note, mirrored - daily, ~9:00 EEST |
+| 🧵 | **[@reksas13](https://www.threads.com/@reksas13)** | The same note, under the **AI Threads** topic - daily, ~9:00 EEST |
+| in | **[Aurimas Nausėdas](https://www.linkedin.com/in/aurimasnausedas/)** | The long form - the personal angle, the takeaways, what I tried |
+| 📬 | **[Molecule To Machine](https://moleculetomachine.substack.com)** | Weekly newsletter, where chemistry meets AI |
+| 📚 | **[Machine-Learning-Goodness](https://github.com/aurimas13/Machine-Learning-Goodness)** | The bigger resource collection this table's format came from |
+
+<div align="center">
+<br>
+<sub>Building something in AI, hiring, or running your own 100 days? The fastest way to reach me is a DM on any of the four.</sub>
+</div>
 
 ## 📄 License
 
 [MIT](LICENSE) - take the sources list, run your own 100 days.
+
+<div align="center">
+<br>
+<sub><b>Day 6 of 100.</b> Next entry tomorrow, ~9:00 EEST.</sub>
+</div>

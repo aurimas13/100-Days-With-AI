@@ -122,7 +122,7 @@ grounded in the post's full text.)*
 
 - Computer-use agents (like OpenAI's) are to the digital world
   what humanoid robots are to the physical one: a single general
-  interface built for humans — monitor, keyboard, mouse vs. the human
+  interface built for humans - monitor, keyboard, mouse vs. the human
   body - that can gradually take on arbitrarily general tasks.
 - The result is a *mixed-autonomy* world: humans become high-level
   supervisors of low-level automation, like a driver monitoring the
@@ -132,7 +132,7 @@ grounded in the post's full text.)*
   (Universe, World of Bits) and it failed because LLMs had to happen
   first. A right idea at the wrong layer of the stack is still a wrong
   bet.
-- Even in 2025, the stack wasn't obviously ready — multimodality was
+- Even in 2025, the stack wasn't obviously ready - multimodality was
   freshly bolted on via adapters, and very long task horizons remain
   unexplored territory. Karpathy suspected stuffing everything into
   context windows won't be enough; a breakthrough or two was needed.
@@ -255,7 +255,7 @@ Source: [anthropic.com/engineering/effective-context-engineering-for-ai-agents](
   in the context window increases, the model's ability to accurately
   recall information from that context decreases." Transformers give
   every token attention to every other token - n² pairwise
-  relationships — so context "must be treated as a finite resource
+  relationships - so context "must be treated as a finite resource
   with diminishing marginal returns."
 - Bigger windows won't fix it: "context windows of all sizes will be
   subject to context pollution and information relevance concerns."
@@ -340,7 +340,7 @@ Source: [developers.openai.com/api/docs/guides/latest-model](https://developers.
 
 **Takeaways:**
 
-- GPT-5.6 comes in three variants — `gpt-5.6-sol` (flagship),
+- GPT-5.6 comes in three variants - `gpt-5.6-sol` (flagship),
   `gpt-5.6-terra` (balanced), `gpt-5.6-luna` (high-volume); the bare
   `gpt-5.6` alias routes to `-sol`. Reasoning effort is a six-step
   dial: "GPT-5.6 supports `none`, `low`, `medium`, `high`, `xhigh`,
@@ -366,7 +366,7 @@ Source: [developers.openai.com/api/docs/guides/latest-model](https://developers.
   step." Persisted reasoning (`reasoning.context: all_turns`) reuses
   thinking across turns.
 
-**Why it matters:** model docs now read like unit economics — the
+**Why it matters:** model docs now read like unit economics - the
 quality dial, the caching ledger, and the leaner-prompt numbers all
 say the same thing: token spend is a design decision, and the cheapest
 configuration is often also the best one.

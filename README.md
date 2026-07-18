@@ -8,7 +8,7 @@ A public learning log of modern Artificial Intelligence - transformers, LLMs,
 agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 <!-- Day badge: bumped by the daily run. If this is stale, the run said so in its log. -->
-[![Day](https://img.shields.io/badge/Day-6%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
+[![Day](https://img.shields.io/badge/Day-7%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Streak](https://img.shields.io/badge/Streak-unbroken-2EA043?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Level mix](https://img.shields.io/badge/Sources-Advanced%20%2B%20Medium-8957E5?style=for-the-badge&labelColor=0D1117)](#-progress)
 
@@ -18,7 +18,7 @@ agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 **[📈 Progress](#-progress)** · **[📚 Day Notes](#-day-notes)** · **[🔗 Connect](#-connect)**
 
-`2026-07-12` ──────────── **Day 6 of 100** ────────────► `2026-10-19`
+`2026-07-12` ──────────── **Day 7 of 100** ────────────► `2026-10-19`
 
 </div>
 
@@ -102,6 +102,7 @@ for the shape of the progress table.
 | 4 | 2026-07-15 | "Effective Context Engineering for AI Agents" — Anthropic Applied AI | Medium | Context as a finite attention budget: context rot, right-altitude system prompts, just-in-time retrieval, and compaction / notes / sub-agents for long-horizon work | [Anthropic Engineering](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) |
 | 5 | 2026-07-16 | "A Practical Guide to Building Agents" — OpenAI | Medium | OpenAI's build-your-first-agent field guide: model + tools + instructions in a loop, single agent before multi-agent, manager vs decentralized patterns, layered guardrails with human handoff | [OpenAI guide](https://openai.com/business/guides-and-resources/a-practical-guide-to-building-ai-agents/) |
 | 6 | 2026-07-17 | "Model Guidance: GPT-5.6" — OpenAI Developer Docs | Medium | OpenAI's GPT-5.6 migration guide: a reasoning-effort dial, pro mode, programmatic tool calling, 1.25× cache-write billing - and leaner prompts that score higher while costing a third less | [OpenAI Docs](https://developers.openai.com/api/docs/guides/latest-model) |
+| 7 | 2026-07-18 | "Prompting Claude Fable 5" — Anthropic Docs | Medium | Migrating to the newest Claude: an effort dial, hours-long autonomous turns, grounded progress claims, memory files - and deleting the over-prescriptive prompts written for older models | [Anthropic Docs](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5) |
 
 ---
 
@@ -379,6 +380,51 @@ own pipelines' prompts with a red pen.
 
 ---
 
+### Day 7 — "Prompting Claude Fable 5" (Anthropic Documentation)
+
+<img src="assets/cards/day-007.png" width="420" alt="Day 7 card">
+
+Source: [platform.claude.com — Prompting Claude Fable 5](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5)
+
+**Takeaways:**
+
+- The headline migration advice is subtraction: "Skills developed for
+  prior models are often too prescriptive for Claude Fable 5 and can
+  degrade output quality." Capability improvements are "a good prompt
+  to re-evaluate which instructions, tools, and guardrails are still
+  needed" - the same lesson as Day 2's stale harness assumptions, now
+  from the model vendor itself.
+- Turns got longer by design: individual requests on hard tasks "can
+  run for many minutes" and autonomous runs "can extend for hours" -
+  adjust client timeouts and restructure harnesses to check on runs
+  asynchronously (scheduled jobs) rather than blocking.
+- Effort is the primary intelligence/latency/cost control (`high`
+  default, `xhigh` for capability-sensitive work) - and "lower effort
+  settings on Claude Fable 5 still perform well and often exceed
+  `xhigh` performance on prior models."
+- Trust in long runs is promptable: instructing the model to audit
+  each progress claim against an actual tool result "nearly eliminated
+  fabricated status reports even on tasks designed to elicit them."
+- Two scaffolding patterns worth copying: a memory system (one lesson
+  per file, referenced across runs) and a `send_to_user` tool so long
+  asynchronous agents can surface verbatim content mid-run - paired
+  with explicit elicitation language, since defining the tool alone
+  isn't enough. Fresh-context verifier subagents "tend to outperform
+  self-critique" (Day 2's GAN lesson again).
+
+**Why it matters:** model generations now change how you *scaffold*,
+not just what you get - and the counterintuitive direction of travel
+is that better models need fewer guardrails, shorter prompts, and more
+trust, verified by evals rather than enforced by enumeration.
+
+**What I learned/tried:** my own daily pipelines run on this exact
+model, so this was a manual for machinery I already operate. The
+deletion advice hit home - several of my automation prompts still
+enumerate behaviors one brief instruction now covers. I'm taking the
+"mostly red diff" approach to my own scaffolding next.
+
+---
+
 ## 🔗 Connect
 
 <div align="center">
@@ -412,5 +458,5 @@ own pipelines' prompts with a red pen.
 
 <div align="center">
 <br>
-<sub><b>Day 6 of 100.</b> Next entry tomorrow, ~8:00 EEST.</sub>
+<sub><b>Day 7 of 100.</b> Next entry tomorrow, ~8:00 EEST.</sub>
 </div>

@@ -24,7 +24,7 @@ agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 <div align="center">
 
-<sub>Every day, one carefully chosen source - a paper, course, repo, post, tool, technical document, other source, mixed <b>[Medium]</b> and <b>[Advanced]</b> - studied and logged: what actually stuck, why it matters, what I tried.<br>Posted ~8:00 EEST under <b>#100DaysWithAI</b>. No skipped numbers. No faked expertise.</sub>
+<sub>Every day, one carefully chosen source - a paper, course, repo, post, tool, technical document, other source, mixed <b>[Medium]</b> or <b>[Advanced]</b> - studied and logged: what actually stuck, why it matters, what I tried.<br>Posted ~8:00 EEST under <b>#100DaysWithAI</b>. No skipped numbers. No faked expertise.</sub>
 
 </div>
 

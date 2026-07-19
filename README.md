@@ -8,7 +8,7 @@ A public learning log of modern Artificial Intelligence - transformers, LLMs,
 agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 <!-- Day badge: bumped by the daily run. If this is stale, the run said so in its log. -->
-[![Day](https://img.shields.io/badge/Day-7%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
+[![Day](https://img.shields.io/badge/Day-8%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Streak](https://img.shields.io/badge/Streak-unbroken-2EA043?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Level mix](https://img.shields.io/badge/Sources-Advanced%20%2B%20Medium-8957E5?style=for-the-badge&labelColor=0D1117)](#-progress)
 
@@ -18,7 +18,7 @@ agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 **[📈 Progress](#-progress)** · **[📚 Day Notes](#-day-notes)** · **[🔗 Connect](#-connect)**
 
-`2026-07-12` ──────────── **Day 7 of 100** ────────────► `2026-10-19`
+`2026-07-12` ──────────── **Day 8 of 100** ────────────► `2026-10-19`
 
 </div>
 
@@ -103,6 +103,7 @@ for the shape of the progress table.
 | 5 | 2026-07-16 | "A Practical Guide to Building Agents" — OpenAI | Medium | OpenAI's build-your-first-agent field guide: model + tools + instructions in a loop, single agent before multi-agent, manager vs decentralized patterns, layered guardrails with human handoff | [OpenAI guide](https://openai.com/business/guides-and-resources/a-practical-guide-to-building-ai-agents/) |
 | 6 | 2026-07-17 | "Model Guidance: GPT-5.6" — OpenAI Developer Docs | Medium | OpenAI's GPT-5.6 migration guide: a reasoning-effort dial, pro mode, programmatic tool calling, 1.25× cache-write billing - and leaner prompts that score higher while costing a third less | [OpenAI Docs](https://developers.openai.com/api/docs/guides/latest-model) |
 | 7 | 2026-07-18 | "Prompting Claude Fable 5" — Anthropic Docs | Medium | Migrating to the newest Claude: an effort dial, hours-long autonomous turns, grounded progress claims, memory files - and deleting the over-prescriptive prompts written for older models | [Anthropic Docs](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5) |
+| 8 | 2026-07-19 | "The Art of Loop Engineering" — Sydney Runkle, LangChain | Medium | Four stacked agent loops - agent, verification, event-driven, hill-climbing - with human oversight at every level; value compounds in the loops that embed and improve the agent, not the agent itself | [X post](https://x.com/sydneyrunkle/status/2066928783534289358) |
 
 ---
 
@@ -425,6 +426,51 @@ enumerate behaviors one brief instruction now covers. I'm taking the
 
 ---
 
+### Day 8 — "The Art of Loop Engineering" (Sydney Runkle, LangChain, X, 2026-06-16)
+
+<img src="assets/cards/day-008.png" width="420" alt="Day 8 card">
+
+Source: [x.com/sydneyrunkle/status/2066928783534289358](https://x.com/sydneyrunkle/status/2066928783534289358)
+*(X is behind a wall for automated readers; this note is grounded in
+the post's full text.)*
+
+**Takeaways:**
+
+- The core loop is deliberately simple: "give the LLM context and let
+  it call tools in a loop until it's done." Everything else is
+  stacking - what swyx calls "loopcraft: the art of stacking loops."
+- **Loop 2, verification:** wrap the agent with a grader that scores
+  output against a rubric (deterministic checks or LLM-as-judge) and
+  feeds failures back. Costs latency and money; "worth it when quality
+  matters more than speed, which is most production use cases."
+- **Loop 3, event-driven:** crons, webhooks, and channels make the
+  agent "a component running continuously inside a larger system"
+  rather than something you invoke - the integration layer where
+  agents start working at scale.
+- **Loop 4, hill-climbing:** an analysis agent runs over production
+  traces and rewrites the harness configuration - prompts, tools,
+  graders. "The return arrow doesn't just loop back to the top - it
+  reaches inside and updates the agent loop directly." For open-weight
+  models it can even feed RL fine-tuning.
+- Humans stay in every loop where judgment matters: "an automated
+  grader can check whether links resolve; it takes a human to notice
+  the framing is wrong for the audience" - and sensitive actions get
+  live review. The strategic pivot: "focus should pivot to loops 3 and
+  4 where value compounds."
+
+**Why it matters:** the field keeps converging on the same law from
+different directions - the model is the smallest part of the system.
+This piece names where the leverage actually sits: in loops that
+embed the agent into your ecosystem and make it improve itself.
+
+**What I learned/tried:** chemistry has a word for loop 4 -
+autocatalysis, a reaction whose product accelerates the reaction. My
+own daily pipelines already run loops 1–3 (tool loops, verification
+against locked packages, cron triggers); the honest gap is loop 4 -
+my run logs are traces nobody analyzes yet. Noted as the dare.
+
+---
+
 ## 🔗 Connect
 
 <div align="center">
@@ -458,5 +504,5 @@ enumerate behaviors one brief instruction now covers. I'm taking the
 
 <div align="center">
 <br>
-<sub><b>Day 7 of 100.</b> Next entry tomorrow, ~8:00 EEST.</sub>
+<sub><b>Day 8 of 100.</b> Next entry tomorrow, ~8:00 EEST.</sub>
 </div>

@@ -8,7 +8,7 @@ A public learning log of modern Artificial Intelligence - transformers, LLMs,
 agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 <!-- Day badge: bumped by the daily run. If this is stale, the run said so in its log. -->
-[![Day](https://img.shields.io/badge/Day-8%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
+[![Day](https://img.shields.io/badge/Day-9%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Streak](https://img.shields.io/badge/Streak-unbroken-2EA043?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Level mix](https://img.shields.io/badge/Sources-Advanced%20%2B%20Medium-8957E5?style=for-the-badge&labelColor=0D1117)](#-progress)
 
@@ -18,7 +18,7 @@ agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 **[📈 Progress](#-progress)** · **[📚 Day Notes](#-day-notes)** · **[🔗 Connect](#-connect)**
 
-`2026-07-12` ──────────── **Day 8 of 100** ────────────► `2026-10-19`
+`2026-07-12` ──────────── **Day 9 of 100** ────────────► `2026-10-19`
 
 </div>
 
@@ -104,6 +104,7 @@ for the shape of the progress table.
 | 6 | 2026-07-17 | "Model Guidance: GPT-5.6" — OpenAI Developer Docs | Medium | OpenAI's GPT-5.6 migration guide: a reasoning-effort dial, pro mode, programmatic tool calling, 1.25× cache-write billing - and leaner prompts that score higher while costing a third less | [OpenAI Docs](https://developers.openai.com/api/docs/guides/latest-model) |
 | 7 | 2026-07-18 | "Prompting Claude Fable 5" — Anthropic Docs | Medium | Migrating to the newest Claude: an effort dial, hours-long autonomous turns, grounded progress claims, memory files - and deleting the over-prescriptive prompts written for older models | [Anthropic Docs](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5) |
 | 8 | 2026-07-19 | "The Art of Loop Engineering" — Sydney Runkle, LangChain | Medium | Four stacked agent loops - agent, verification, event-driven, hill-climbing - with human oversight at every level; value compounds in the loops that embed and improve the agent, not the agent itself | [X post](https://x.com/sydneyrunkle/status/2066928783534289358) |
+| 9 | 2026-07-20 | "How do you build an agent over hundreds of data models?" — Kent C. Dodds | Medium | A crowdsourced architecture thread where two people independently land on the same answer - nest the concepts into a hierarchy and expose it as tools the agent drills down through - while Kent's own lean is to start direct and simple, and divide only once that stops working | [X thread](https://x.com/kentcdodds/status/1969482734642086301) |
 
 ---
 
@@ -471,6 +472,97 @@ my run logs are traces nobody analyzes yet. Noted as the dare.
 
 ---
 
+### Day 9 — Whiteboard Agent Capabilities (Kent C. Dodds, X, 2025-09-20)
+
+<img src="assets/cards/day-009.png" width="420" alt="Day 9 card">
+
+Source: [x.com/kentcdodds/status/1969482734642086301](https://x.com/kentcdodds/status/1969482734642086301)
+Supporting: [Agentic Loop — Jimi Vaubien / bitswired](https://github.com/bitswired/demos/blob/main/projects/agentic-loop/README.md)
+
+*(X is walled to automated readers - the URL returns 402, and the archive
+search API refuses this session's auth. The root post below came through
+the X API; the replies are quoted from the thread as read in a browser.
+Three replies were cut off by "Show more" and are not completed here.)*
+
+**The question, verbatim:**
+
+> "You're tasked with building an agent that allows users to use natural
+> language to control a large and complex system that has hundreds of data
+> models covering thousands of use cases. How do you go about doing this?"
+
+Kent didn't answer it. He posted it to ~32k views and then cross-examined
+everyone who did - "I'm not asking for code examples. I'm asking for high
+level architecture." The thread is the artifact, not the post.
+
+**Takeaways:**
+
+- **Two people arrived at the same answer independently, and that is the
+  headline.** dax (@thdxr): "the dumbest approach that will definitely work
+  is to structure your stuff into a hierarchy… group related concepts, nest
+  them under other groups, try not to have too many concepts in the same
+  group… then expose this as tools the llm can selectively drill down
+  into." Tommy D. Rossi (@__morse), separately: "hierarchical decision
+  tree. split all the data models into a tree, start from the root to find
+  each model that needs to be considered for a task. turn O(N) into O(log
+  N)." Same shape, two directions.
+- **The convergence is the evidence.** dax's own test, quoting Rossi: "you
+  can tell this is the right answer because it's very specific + someone
+  else independently said the same thing." Specific *and* independently
+  duplicated - that is a cheap, sharp heuristic for reading any thread full
+  of confident architecture opinions, this one included.
+- **Kent's lean is to start blunter than that.** Replying to Shaun Smith
+  (@evalstate) - "we give an LLM fairly direct access to those apis, then
+  give our agent access to that. if that's still too much we divide and
+  orchestrate. then we see what people ask, what the model does and
+  optimise" - Kent said: "Yes. This is what I think I would explore first."
+  Not a finished architecture; a starting move. Point it at the APIs
+  directly, divide only when that stops working, and let observed usage
+  drive the optimization.
+- **The two answers aren't rivals, they're ordered.** Shaun's is where you
+  begin, dax's is what you do when "that's still too much." The hierarchy
+  is the response to a measured failure, not the opening bid - which is
+  what keeps it from being architecture astronautics.
+- **Latency is an architectural input, and it got asked about first.**
+  dax's opening question was "does it have to feel fast/interactive?" Kent:
+  "Happy to start with no, but let's assume… your users will be happier if
+  it is as fast as possible." Drill-down costs round trips; that answer is
+  what makes the depth of the tree a real decision.
+- **The rest of the thread maps the alternatives.** Matt Pocock
+  (@mattpocockuk) starts from evals, not architecture: "First, build a
+  dataset of desired input/output pairs." Ken Wheeler (@kenwheeler) wants
+  "a state machine interface for its operational flow… sub agents as tools
+  for pulling docs and workflows into task based context sub branches."
+  Juan Cruz Martinez (@jcmartinezdev) proposes a top-level agent
+  orchestrating tailored MCP servers per system. Doug Day (@dougrday) says
+  spec plus RAG - and drew the thread's best question back from Kent: "How
+  do you avoid overloading the context window or confusing it with too many
+  options?" It went unanswered.
+
+**Why it matters:** the reflex answer to hundreds of data models is one
+tool per model, and it fails for a reason the thread names precisely - too
+many concepts in one group. Every tool spends context on the way in and
+selection accuracy on the way out. Hierarchy doesn't shrink the system; it
+shrinks *how much of it the model must hold at once*, which is the only
+quantity that was ever the problem. Progressive disclosure, arrived at from
+two directions by people who weren't talking to each other.
+
+**What I learned/tried:** I'd have answered with a flat tool list, and the
+thread is a decent mirror for why - flat is what you build when you design
+from the schema instead of from what the agent must do. Took a system I
+know and tried grouping its models into a tree instead: the top level came
+out at six or seven verbs, and the rest nested underneath cleanly enough to
+be embarrassing. The chemistry instinct was right there too - you don't
+model every molecule, you find the class the reaction runs on. What I have
+*not* done is measure it. Rossi's "O(N) into O(log N)" is an analogy, not a
+benchmark, and nobody in the thread posted numbers.
+
+**A note on reading threads like this:** dax's heuristic is the portable
+part. Specificity plus independent convergence beats confidence - and this
+thread contains several confident, entirely un-duplicated answers that read
+just as well.
+
+---
+
 ## 🔗 Connect
 
 <div align="center">
@@ -504,5 +596,5 @@ my run logs are traces nobody analyzes yet. Noted as the dare.
 
 <div align="center">
 <br>
-<sub><b>Day 8 of 100.</b> Next entry tomorrow, ~8:00 EEST.</sub>
+<sub><b>Day 9 of 100.</b> Next entry tomorrow, ~8:00 EEST.</sub>
 </div>

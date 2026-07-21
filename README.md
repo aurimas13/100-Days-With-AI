@@ -105,6 +105,7 @@ for the shape of the progress table.
 | 7 | 2026-07-18 | "Prompting Claude Fable 5" - Anthropic Docs | Medium | Migrating to the newest Claude: an effort dial, hours-long autonomous turns, grounded progress claims, memory files - and deleting the over-prescriptive prompts written for older models | [Anthropic Docs](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5) |
 | 8 | 2026-07-19 | "The Art of Loop Engineering" - Sydney Runkle, LangChain | Medium | Four stacked agent loops - agent, verification, event-driven, hill-climbing - with human oversight at every level; value compounds in the loops that embed and improve the agent, not the agent itself | [X post](https://x.com/sydneyrunkle/status/2066928783534289358) |
 | 9 | 2026-07-20 | "How do you build an agent over hundreds of data models?" - Kent C. Dodds | Medium | A crowdsourced architecture thread where two people independently land on the same answer - nest the concepts into a hierarchy and expose it as tools the agent drills down through - while Kent's own lean is to start direct and simple, and divide only once that stops working | [X thread](https://x.com/kentcdodds/status/1969482734642086301) |
+| 10 | 2026-07-21 | "Prompting Best Practices" - Anthropic Docs | Medium | Structure over rhetoric: longform data at the top and the query at the bottom (reported up to 30% better responses), XML tags as boundaries, quote-grounding for long documents, and the reason behind a rule beating the rule alone | [Anthropic Docs](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices) |
 
 ---
 
@@ -563,6 +564,67 @@ just as well.
 
 ---
 
+### Day 10 — "Prompting Best Practices" (Anthropic Documentation) — milestone
+
+<img src="assets/cards/day-010.png" width="420" alt="Day 10 card">
+
+Source: [platform.claude.com — Prompting best practices](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices)
+
+*(Day 7 covered "Prompting Claude Fable 5" from the same docs family; that
+day's lesson was subtraction - deleting over-prescriptive prompts. This
+page is the general reference, and this note deliberately takes the
+structural half of it instead: where things go in a prompt, not how much to
+say.)*
+
+**Takeaways:**
+
+- **Position is an instruction.** For inputs of 20k+ tokens: "Put longform
+  data at the top" - documents above the query, instructions and examples.
+  The docs report that "queries at the end can improve response quality by
+  up to 30 percent in tests, especially with complex, multidocument
+  inputs." No benchmark is named; it is the vendor's own figure.
+- **Mark the boundaries.** XML tags (`<instructions>`, `<context>`,
+  `<input>`, nested `<document>` / `<document_content>` / `<source>`) let
+  the model tell content types apart when a prompt mixes them. Consistent,
+  descriptive tag names; nest when the content has a hierarchy.
+- **Ground long-document work in quotes.** Ask the model to pull the
+  relevant passages into `<quotes>` tags *before* it does the task - "this
+  helps Claude focus on the relevant content and ignore the rest of the
+  document."
+- **Give the reason, not just the rule.** "NEVER use ellipses" is weaker
+  than "your response will be read aloud by a text-to-speech engine, so
+  never use ellipses since the text-to-speech engine will not know how to
+  pronounce them." The stated principle: "Claude is smart enough to
+  generalize from the explanation."
+- **Examples carry format better than description does.** 3–5 examples,
+  wrapped in `<example>` tags, chosen to be relevant *and* diverse - the
+  diversity is what stops the model latching onto an unintended pattern.
+- **The golden rule for any prompt:** "Show your prompt to a colleague with
+  minimal context on the task and ask them to follow it. If they'd be
+  confused, Claude will be too."
+
+**Why it matters:** ten days of sources have all pointed outside the model
+- to harnesses, tools, context budgets, loops. This page moves the same
+finding *inside* the prompt: the layout of the text is doing measurable
+work that no amount of rewording replaces. Prompting is closer to
+information architecture than to rhetoric, which is good news, because
+architecture is teachable and rhetoric is taste.
+
+**What I learned/tried:** reordered one of my own long prompts - documents
+first, question last - and left the wording alone. I have not measured it,
+so I am not claiming the 30%; that number is theirs, from unnamed tests,
+and borrowing it would be exactly the kind of unearned claim this log is
+supposed to avoid. Recorded as an experiment to run properly, with my own
+before-and-after, rather than a result.
+
+**Milestone note (Day 10/100):** the streak is intact - ten entries, ten X
+posts, ten LinkedIn posts. The through-line so far: every source, from
+Karpathy's decade-of-agents to today's docs page, locates the leverage
+somewhere other than the model's cleverness. Ninety days left to find a
+source that argues the opposite.
+
+---
+
 ## 🔗 Connect
 
 <div align="center">
@@ -596,5 +658,5 @@ just as well.
 
 <div align="center">
 <br>
-<sub><b>Day 9 of 100.</b> Next entry tomorrow, ~8:00 EEST.</sub>
+<sub><b>Day 10 of 100.</b> Next entry tomorrow, ~8:00 EEST.</sub>
 </div>

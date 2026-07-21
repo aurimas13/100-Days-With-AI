@@ -8,7 +8,7 @@ A public learning log of modern Artificial Intelligence - transformers, LLMs,
 agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 <!-- Day badge: bumped by the daily run. If this is stale, the run said so in its log. -->
-[![Day](https://img.shields.io/badge/Day-9%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
+[![Day](https://img.shields.io/badge/Day-10%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Streak](https://img.shields.io/badge/Streak-unbroken-2EA043?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Level mix](https://img.shields.io/badge/Sources-Advanced%20%2B%20Medium-8957E5?style=for-the-badge&labelColor=0D1117)](#-progress)
 
@@ -24,7 +24,7 @@ agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 <div align="center">
 
-<sub>Every day, one carefully chosen source - a paper, course, repo, post, tool, technical document, other source, mixed <b>[Medium]</b> or <b>[Advanced]</b> - studied and logged: what actually stuck, why it matters, what I tried.<br>Posted ~8:00 EEST under <b>#100DaysWithAI</b>. No skipped numbers. No faked expertise.</sub>
+<sub>Every day, one carefully chosen source - a paper, course, repo, post, tool, technical document, other source, mixed <b>[Medium]</b> or <b>[Advanced]</b> - studied and logged: what actually stuck, why it matters, what I tried.<br>Posted ~7:00 EEST under <b>#100DaysWithAI</b>. No skipped numbers. No faked expertise.</sub>
 
 </div>
 
@@ -58,7 +58,7 @@ that produces a good metaphor. Most days it just produces a better question.
 3. **Logged here** - a row in [Progress](#-progress), then a [day note](#-day-notes)
    with 3-5 takeaways, why it matters, and what I actually tried.
 4. **Shared** - the same note, compressed, goes out on X, Bluesky, Threads and
-   LinkedIn at ~8:00 EEST, with the day's card.
+   LinkedIn at ~7:00 EEST, with the day's card.
 
 Every claim in a post traces back to the source or it does not ship.
 
@@ -629,7 +629,7 @@ source that argues the opposite.
 
 <div align="center">
 
-**The day note goes out on all four, every morning at ~8:00 EEST.**
+**The day note goes out on all four, every morning at ~7:00 EEST.**
 
 [![X](https://img.shields.io/badge/X-@reksas13-0D1117?style=for-the-badge&logo=x&logoColor=white)](https://x.com/reksas13)
 [![Bluesky](https://img.shields.io/badge/Bluesky-@reksas13-0285FF?style=for-the-badge&logo=bluesky&logoColor=white)](https://bsky.app/profile/reksas13.bsky.social)
@@ -640,9 +640,9 @@ source that argues the opposite.
 
 | | Where | What you get |
 |---|---|---|
-| 𝕏 | **[@reksas13](https://x.com/reksas13)** | The day's takeaway in one post, with the card - daily, ~8:00 EEST |
-| 🦋 | **[@reksas13.bsky.social](https://bsky.app/profile/reksas13.bsky.social)** | The same note, mirrored - daily, ~8:00 EEST |
-| 🧵 | **[@reksas13](https://www.threads.com/@reksas13)** | The same note, mirrored - daily, ~8:00 EEST |
+| 𝕏 | **[@reksas13](https://x.com/reksas13)** | The day's takeaway in one post, with the card - daily, ~7:00 EEST |
+| 🦋 | **[@reksas13.bsky.social](https://bsky.app/profile/reksas13.bsky.social)** | The same note, mirrored - daily, ~7:00 EEST |
+| 🧵 | **[@reksas13](https://www.threads.com/@reksas13)** | The same note, mirrored - daily, ~7:00 EEST |
 | in | **[Aurimas Nausėdas](https://www.linkedin.com/in/aurimasnausedas/)** | The long form - the personal angle, the takeaways, what I tried |
 | 📬 | **[Molecule To Machine](https://moleculetomachine.substack.com)** | Weekly newsletter, where chemistry meets AI, Robotics, Music |
 | 📚 | **[Machine-Learning-Goodness](https://github.com/aurimas13/Machine-Learning-Goodness)** | The bigger resource collection this table's format came from |
@@ -658,5 +658,5 @@ source that argues the opposite.
 
 <div align="center">
 <br>
-<sub><b>Day 10 of 100.</b> Next entry tomorrow, ~8:00 EEST.</sub>
+<sub><b>Day 10 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
 </div>

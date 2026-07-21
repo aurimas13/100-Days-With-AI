@@ -18,7 +18,7 @@ agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 **[📈 Progress](#-progress)** · **[📚 Day Notes](#-day-notes)** · **[🔗 Connect](#-connect)**
 
-`2026-07-12` ──────────── **Day 9 of 100** ────────────► `2026-10-19`
+`2026-07-12` ──────────── **Day 10 of 100** ────────────► `2026-10-19`
 
 </div>
 

@@ -8,7 +8,7 @@ A public learning log of modern Artificial Intelligence - transformers, LLMs,
 agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 <!-- Day badge: bumped by the daily run. If this is stale, the run said so in its log. -->
-[![Day](https://img.shields.io/badge/Day-13%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
+[![Day](https://img.shields.io/badge/Day-14%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Streak](https://img.shields.io/badge/Streak-unbroken-2EA043?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Level mix](https://img.shields.io/badge/Sources-Advanced%20%2B%20Medium-8957E5?style=for-the-badge&labelColor=0D1117)](#-progress)
 
@@ -18,7 +18,7 @@ agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 **[📈 Progress](#-progress)** · **[📚 Day Notes](#-day-notes)** · **[🔗 Connect](#-connect)**
 
-`2026-07-12` ──────────── **Day 13 of 100** ────────────► `2026-10-19`
+`2026-07-12` ──────────── **Day 14 of 100** ────────────► `2026-10-19`
 
 </div>
 
@@ -109,6 +109,7 @@ for the shape of the progress table.
 | 11 | 2026-07-22 | "What Is MCP? Model Context Protocol in Agentic AI, Explained" - Ksenia Se, Turing Post | Medium | The integration layer for agents: one open protocol replaces a custom connector per tool, turning an N×M wiring problem into N+M, with runtime discovery, a clear split from A2A, and an honest list of what it does not solve | [Turing Post](https://www.turingpost.com/p/mcp) |
 | 12 | 2026-07-23 | "How to Build an Agent" - Thorsten Ball, Amp | Medium | A working code-editing agent in under 400 lines of Go - an LLM, a loop, and three file tools; the argument that the core of every coding agent is small and the real engineering lives in the refinement around it | [Amp](https://ampcode.com/notes/how-to-build-an-agent) |
 | 13 | 2026-07-24 | "Building an AI Agent from Scratch in Python" - Leonie Monigatti | Medium | The Day 12 loop rebuilt in Python against the raw Anthropic API - an agent class, message-list memory, one schema'd calculator tool, and a run loop that pauses at tool_use, feeds the result back, and stops at a ten-turn cap | [leoniemonigatti.com](https://www.leoniemonigatti.com/blog/ai-agent-from-scratch-in-python.html) |
+| 14 | 2026-07-25 | "Building Effective Agents" - Anthropic (Schluntz & Zhang) | Medium | The workflows-vs-agents distinction and five composable patterns - prompt chaining, routing, parallelisation, orchestrator-workers, evaluator-optimiser - with the standing advice to start simple and reach for autonomy only when the steps can't be predicted; the claude-cookbooks patterns/agents notebooks are the runnable companion | [anthropic.com](https://www.anthropic.com/engineering/building-effective-agents) |
 
 ---
 
@@ -671,6 +672,20 @@ source that argues the opposite.
 
 **What I learned:** the distance between reading and running dropped to zero - this one is in the language I use daily, against the SDK I already know, and Colab-runnable. The eval() calculator is the quiet second lesson: the loop is the easy part, and tools that are safe to hand a model are the actual work - Day 3's tool-contract argument arriving from the opposite direction.
 
+### Day 14 — "Building Effective Agents" (Anthropic)
+
+<img src="assets/cards/day-014.png" width="420" alt="Day 14 card">
+
+- **Workflows and agents are different tools, not a ladder.** A workflow orchestrates LLMs and tools through code paths you write; an agent lets the model dynamically direct its own process and tool use. The essay treats them as a choice, not a hierarchy - most tasks are better served by the simpler one.
+- **Five patterns cover most of the ground.** Prompt chaining (sequential steps with gates), routing (classify, then dispatch to a specialist), parallelisation (split into sections or vote across calls), orchestrator-workers (a lead model delegates subtasks dynamically), and evaluator-optimiser (generate, critique, refine in a loop). Each is a small building block, not a framework.
+- **Reach for a real agent only when the path is unpredictable.** Autonomy fits open-ended problems where you cannot predict the number of steps - and it asks for trust in the model's decisions plus sandboxed testing, because cost and compounding errors rise with the number of turns.
+- **The through-line to Days 12-13.** "Don't hesitate to reduce abstraction layers and build with basic components." Building the loop from scratch was not a detour - it is the recommended starting point, and the reason the last two days mattered.
+- **Tools deserve HCI-level care.** On their SWE-bench work the authors report spending more time optimising the tools than the overall prompt - the agent-computer interface, documented and tested, is where reliability lives. Day 3's tool-contract argument, arriving from the design side.
+
+**Why it matters:** it reframes the whole block. After two days proving the loop is simple to build, this is the day that says the more valuable skill is knowing when not to build one - and choosing the simplest pattern that solves the problem instead of the most autonomous one.
+
+**What I learned:** reading the cookbook's patterns/agents notebooks next to the essay made the five patterns concrete - basic_workflows, orchestrator_workers, evaluator_optimizer, each a short and inspectable implementation. The lesson I am taking forward is a bias toward the smallest pattern that works, and agents only where the problem genuinely has no predictable shape.
+
 ---
 
 ## 🔗 Connect
@@ -706,5 +721,5 @@ source that argues the opposite.
 
 <div align="center">
 <br>
-<sub><b>Day 13 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
+<sub><b>Day 14 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
 </div>

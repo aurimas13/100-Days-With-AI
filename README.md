@@ -8,7 +8,7 @@ A public learning log of modern Artificial Intelligence - transformers, LLMs,
 agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 <!-- Day badge: bumped by the daily run. If this is stale, the run said so in its log. -->
-[![Day](https://img.shields.io/badge/Day-14%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
+[![Day](https://img.shields.io/badge/Day-15%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Streak](https://img.shields.io/badge/Streak-unbroken-2EA043?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Level mix](https://img.shields.io/badge/Sources-Advanced%20%2B%20Medium-8957E5?style=for-the-badge&labelColor=0D1117)](#-progress)
 
@@ -18,7 +18,7 @@ agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 **[📈 Progress](#-progress)** · **[📚 Day Notes](#-day-notes)** · **[🔗 Connect](#-connect)**
 
-`2026-07-12` ──────────── **Day 14 of 100** ────────────► `2026-10-19`
+`2026-07-12` ──────────── **Day 15 of 100** ────────────► `2026-10-19`
 
 </div>
 
@@ -110,6 +110,7 @@ for the shape of the progress table.
 | 12 | 2026-07-23 | "How to Build an Agent" - Thorsten Ball, Amp | Medium | A working code-editing agent in under 400 lines of Go - an LLM, a loop, and three file tools; the argument that the core of every coding agent is small and the real engineering lives in the refinement around it | [Amp](https://ampcode.com/notes/how-to-build-an-agent) |
 | 13 | 2026-07-24 | "Building an AI Agent from Scratch in Python" - Leonie Monigatti | Medium | The Day 12 loop rebuilt in Python against the raw Anthropic API - an agent class, message-list memory, one schema'd calculator tool, and a run loop that pauses at tool_use, feeds the result back, and stops at a ten-turn cap | [leoniemonigatti.com](https://www.leoniemonigatti.com/blog/ai-agent-from-scratch-in-python.html) |
 | 14 | 2026-07-25 | "Building Effective Agents" - Anthropic (Schluntz & Zhang) | Medium | The workflows-vs-agents distinction and five composable patterns - prompt chaining, routing, parallelisation, orchestrator-workers, evaluator-optimiser - with the standing advice to start simple and reach for autonomy only when the steps can't be predicted; the claude-cookbooks patterns/agents notebooks are the runnable companion | [anthropic.com](https://www.anthropic.com/engineering/building-effective-agents) |
+| 15 | 2026-07-26 | "How to Build an AI Agent from Scratch Using Claude API" - Dextra Labs (dev.to) | Medium | A third from-scratch build, set apart by two things the first two skipped - an AgentWithMemory class that carries conversation history across queries, and an explicit production roadmap (streaming, retries, async, Pydantic structured outputs) that refuses to pass the minimal code off as production-ready | [dev.to](https://dev.to/dextralabs/how-to-build-an-ai-agent-from-scratch-using-claude-api-with-full-code-4b40) |
 
 ---
 
@@ -686,6 +687,20 @@ source that argues the opposite.
 
 **What I learned:** reading the cookbook's patterns/agents notebooks next to the essay made the five patterns concrete - basic_workflows, orchestrator_workers, evaluator_optimizer, each a short and inspectable implementation. The lesson I am taking forward is a bias toward the smallest pattern that works, and agents only where the problem genuinely has no predictable shape.
 
+### Day 15 — "How to Build an AI Agent from Scratch Using Claude API" (Dextra Labs)
+
+<img src="assets/cards/day-015.png" width="420" alt="Day 15 card">
+
+- **A reasoning engine, not a search box.** The tutorial frames the loop as reason-then-act: tools declared as JSON schemas, an execute_tool() dispatcher mapping each call to a Python function (calculator, web_search, save_to_file), and control flow that branches on stop_reason - end_turn for a final answer, tool_use for another round.
+- **Memory as a class.** An AgentWithMemory type keeps a conversation_history list, turning a stateless single-query runner into a conversation-aware agent - a follow-up like "now do the same calculation but for ten years" resolves against the earlier turn instead of starting cold.
+- **The honest roadmap.** The piece closes by naming what the minimal code is not: streaming responses, error and retry handling, async parallel execution, and structured outputs with Pydantic. It explicitly declines to pass itself off as production-complete.
+- **The same skeleton, seen a third time.** After Go (Day 12) and Python (Day 13), the mechanics underneath are identical - schemas, a dispatcher, a message-list state - which is the point the author makes plainly: "strip away the frameworks and this is what's underneath all of them."
+- **The eval caveat, again.** The calculator evaluates expressions with a restricted-namespace eval - a demo simplification, exactly the kind of thing Day 13 flagged. Safe tools remain the real work.
+
+**Why it matters:** the value here is not the loop - I have now built it twice - but the two honest additions. State that persists across turns is what separates a tool-runner from an agent, and a written admission of what production still needs is rarer, and more useful, than a tidy demo that hides the gap.
+
+**What I learned:** the memory upgrade is the cheapest large win - a conversation_history list is all it takes to hold a thread. And the roadmap doubles as my own backlog: streaming lands on Day 18, and retries, async and structured outputs are the next things to add to anything I keep.
+
 ---
 
 ## 🔗 Connect
@@ -721,5 +736,5 @@ source that argues the opposite.
 
 <div align="center">
 <br>
-<sub><b>Day 14 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
+<sub><b>Day 15 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
 </div>

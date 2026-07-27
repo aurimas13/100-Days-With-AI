@@ -8,7 +8,7 @@ A public learning log of modern Artificial Intelligence - transformers, LLMs,
 agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 <!-- Day badge: bumped by the daily run. If this is stale, the run said so in its log. -->
-[![Day](https://img.shields.io/badge/Day-15%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
+[![Day](https://img.shields.io/badge/Day-16%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Streak](https://img.shields.io/badge/Streak-unbroken-2EA043?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Level mix](https://img.shields.io/badge/Sources-Advanced%20%2B%20Medium-8957E5?style=for-the-badge&labelColor=0D1117)](#-progress)
 
@@ -18,7 +18,7 @@ agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 **[📈 Progress](#-progress)** · **[📚 Day Notes](#-day-notes)** · **[🔗 Connect](#-connect)**
 
-`2026-07-12` ──────────── **Day 15 of 100** ────────────► `2026-10-19`
+`2026-07-12` ──────────── **Day 16 of 100** ────────────► `2026-10-19`
 
 </div>
 
@@ -111,6 +111,7 @@ for the shape of the progress table.
 | 13 | 2026-07-24 | "Building an AI Agent from Scratch in Python" - Leonie Monigatti | Medium | The Day 12 loop rebuilt in Python against the raw Anthropic API - an agent class, message-list memory, one schema'd calculator tool, and a run loop that pauses at tool_use, feeds the result back, and stops at a ten-turn cap | [leoniemonigatti.com](https://www.leoniemonigatti.com/blog/ai-agent-from-scratch-in-python.html) |
 | 14 | 2026-07-25 | "Building Effective Agents" - Anthropic (Schluntz & Zhang) | Medium | The workflows-vs-agents distinction and five composable patterns - prompt chaining, routing, parallelisation, orchestrator-workers, evaluator-optimiser - with the standing advice to start simple and reach for autonomy only when the steps can't be predicted; the claude-cookbooks patterns/agents notebooks are the runnable companion | [anthropic.com](https://www.anthropic.com/engineering/building-effective-agents) |
 | 15 | 2026-07-26 | "How to Build an AI Agent from Scratch Using Claude API" - Dextra Labs (dev.to) | Medium | A third from-scratch build, set apart by two things the first two skipped - an AgentWithMemory class that carries conversation history across queries, and an explicit production roadmap (streaming, retries, async, Pydantic structured outputs) that refuses to pass the minimal code off as production-ready | [dev.to](https://dev.to/dextralabs/how-to-build-an-ai-agent-from-scratch-using-claude-api-with-full-code-4b40) |
+| 16 | 2026-07-27 | "API Key Best Practices" - Anthropic Help Center | Medium | The unglamorous discipline that keeps everything else safe - keys out of code and into env vars or a secrets manager, .env in .gitignore, one key per environment, scheduled rotation, secret scanning in CI, usage monitoring, and immediate revocation of a suspected leak | [support.claude.com](https://support.claude.com/en/articles/9767949-api-key-best-practices-keeping-your-keys-safe-and-secure) |
 
 ---
 
@@ -701,6 +702,20 @@ source that argues the opposite.
 
 **What I learned:** the memory upgrade is the cheapest large win - a conversation_history list is all it takes to hold a thread. And the roadmap doubles as my own backlog: streaming lands on Day 18, and retries, async and structured outputs are the next things to add to anything I keep.
 
+### Day 16 — "API Key Best Practices" (Anthropic Help Center)
+
+<img src="assets/cards/day-016.png" width="420" alt="Day 16 card">
+
+- **Keys never live in code.** Inject them through environment variables and keep `.env` in `.gitignore`; in a cloud environment, prefer encrypted secret storage or a key-management system over a dotenv file. In third-party tools, add the key as an encrypted secret, never paste it into source.
+- **Compartmentalise, then rotate.** Keep separate keys for development, testing, and production so a compromise is contained to one blast radius instead of all of them, and rotate on a consistent schedule - the doc's worked example is every 90 days.
+- **Assume leaks will happen.** Enable secret scanning (a SAST tool such as Gitleaks, wired into CI/CD), review usage, and configure spend or rate limits in the Console; then delete a suspected key immediately from the API keys page.
+- **Never broadcast a key.** The doc is blunt about it: keep keys out of public forums, emails, and support tickets - a key shared to get help is a key you now have to rotate.
+- **The economics of the checklist.** None of this is exotic; the point is the asymmetry. Protecting a key costs minutes of setup, and a leaked key is a billing incident and a trust incident you did not choose. (My framing, not a claim from the source.)
+
+**Why it matters:** a week deep into building agents, every one of them runs on a key. This is the day that separates a script that works on my laptop from something I can run in the open without flinching - the boring hygiene that lets everything else be interesting.
+
+**What I learned:** I read the list against my own habits. Environment variables and gitignore were already there; the two I want to make automatic are scheduled rotation and a separate key per environment - the ones easiest to skip while a single key still works, and the ones I would most regret skipping.
+
 ---
 
 ## 🔗 Connect
@@ -736,5 +751,5 @@ source that argues the opposite.
 
 <div align="center">
 <br>
-<sub><b>Day 15 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
+<sub><b>Day 16 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
 </div>

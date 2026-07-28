@@ -8,7 +8,7 @@ A public learning log of modern Artificial Intelligence - transformers, LLMs,
 agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 <!-- Day badge: bumped by the daily run. If this is stale, the run said so in its log. -->
-[![Day](https://img.shields.io/badge/Day-16%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
+[![Day](https://img.shields.io/badge/Day-17%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Streak](https://img.shields.io/badge/Streak-unbroken-2EA043?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Level mix](https://img.shields.io/badge/Sources-Advanced%20%2B%20Medium-8957E5?style=for-the-badge&labelColor=0D1117)](#-progress)
 
@@ -18,7 +18,7 @@ agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 **[📈 Progress](#-progress)** · **[📚 Day Notes](#-day-notes)** · **[🔗 Connect](#-connect)**
 
-`2026-07-12` ──────────── **Day 16 of 100** ────────────► `2026-10-19`
+`2026-07-12` ──────────── **Day 17 of 100** ────────────► `2026-10-19`
 
 </div>
 
@@ -112,6 +112,7 @@ for the shape of the progress table.
 | 14 | 2026-07-25 | "Building Effective Agents" - Anthropic (Schluntz & Zhang) | Medium | The workflows-vs-agents distinction and five composable patterns - prompt chaining, routing, parallelisation, orchestrator-workers, evaluator-optimiser - with the standing advice to start simple and reach for autonomy only when the steps can't be predicted; the claude-cookbooks patterns/agents notebooks are the runnable companion | [anthropic.com](https://www.anthropic.com/engineering/building-effective-agents) |
 | 15 | 2026-07-26 | "How to Build an AI Agent from Scratch Using Claude API" - Dextra Labs (dev.to) | Medium | A third from-scratch build, set apart by two things the first two skipped - an AgentWithMemory class that carries conversation history across queries, and an explicit production roadmap (streaming, retries, async, Pydantic structured outputs) that refuses to pass the minimal code off as production-ready | [dev.to](https://dev.to/dextralabs/how-to-build-an-ai-agent-from-scratch-using-claude-api-with-full-code-4b40) |
 | 16 | 2026-07-27 | "API Key Best Practices" - Anthropic Help Center | Medium | The unglamorous discipline that keeps everything else safe - keys out of code and into env vars or a secrets manager, .env in .gitignore, one key per environment, scheduled rotation, secret scanning in CI, usage monitoring, and immediate revocation of a suspected leak | [support.claude.com](https://support.claude.com/en/articles/9767949-api-key-best-practices-keeping-your-keys-safe-and-secure) |
+| 17 | 2026-07-28 | "Tool use with Claude" - Anthropic Docs | Medium | The canonical model behind the hand-built loop - where tool code executes (client tools in your app vs server tools on Anthropic's infrastructure), the tool_use to tool_result round trip, the input_schema contract, and steering with tool_choice, a system-prompt nudge, and strict schema conformance | [platform.claude.com](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview) |
 
 ---
 
@@ -716,6 +717,20 @@ source that argues the opposite.
 
 **What I learned:** I read the list against my own habits. Environment variables and gitignore were already there; the two I want to make automatic are scheduled rotation and a separate key per environment - the ones easiest to skip while a single key still works, and the ones I would most regret skipping.
 
+### Day 17 — "Tool use with Claude" (Anthropic Docs)
+
+<img src="assets/cards/day-017.png" width="420" alt="Day 17 card">
+
+- **Tools split by where the code runs.** Client tools - your own functions, plus Anthropic-schema tools like bash and text_editor - execute in your application: the model returns a tool_use block and your code runs it. Server tools - web search, web fetch, code execution, tool search - run on Anthropic's infrastructure and return results directly, with no handler for you to write.
+- **The round trip is one shape.** Pass a tool with an input_schema; the model responds with stop_reason "tool_use" and one or more tool_use blocks; your code executes the call and returns a tool_result; the model uses it to answer. This is exactly the loop the last three days built by hand - now named and specified.
+- **You can steer how often it reaches for a tool.** tool_choice covers auto (the default, model decides), any (some tool), tool (force a named one), and none. A line in the system prompt shifts eagerness - "Use the tools to investigate before responding" pushes toward calling; a lighter phrasing holds back. strict:true makes the model's calls conform to your schema exactly.
+- **The schema is the contract.** A tool definition is a name, a description, and an input_schema (JSON Schema with properties and required fields). The description is load-bearing: it is what lets the model pick the right tool at the right moment - Day 3's argument, seen from the reference side.
+- **Tool use is not free.** Tool definitions and the tool-use system prompt add to the input tokens on every request; worth counting when a tool set grows large. A design consideration, not an afterthought.
+
+**Why it matters:** three days of hand-building taught the mechanics; this is the map that places them - and reveals the half I never had to build. Knowing which side of the line a tool lives on, client or server, is the first design decision, because it decides who runs the code and who bears the control.
+
+**What I learned:** the framing that reorganised my head is client-versus-server. Everything I have built so far is the client-tool path - I write the schema, I run the call. Reaching for a server tool means handing execution to Anthropic and getting the result back for free, at the cost of that control. Choosing between the two is the real design work, and it is the choice the hand-built loop never forced me to make.
+
 ---
 
 ## 🔗 Connect
@@ -751,5 +766,5 @@ source that argues the opposite.
 
 <div align="center">
 <br>
-<sub><b>Day 16 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
+<sub><b>Day 17 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
 </div>

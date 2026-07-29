@@ -8,7 +8,7 @@ A public learning log of modern Artificial Intelligence - transformers, LLMs,
 agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 <!-- Day badge: bumped by the daily run. If this is stale, the run said so in its log. -->
-[![Day](https://img.shields.io/badge/Day-17%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
+[![Day](https://img.shields.io/badge/Day-18%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Streak](https://img.shields.io/badge/Streak-unbroken-2EA043?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Level mix](https://img.shields.io/badge/Sources-Advanced%20%2B%20Medium-8957E5?style=for-the-badge&labelColor=0D1117)](#-progress)
 
@@ -18,7 +18,7 @@ agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 **[📈 Progress](#-progress)** · **[📚 Day Notes](#-day-notes)** · **[🔗 Connect](#-connect)**
 
-`2026-07-12` ──────────── **Day 17 of 100** ────────────► `2026-10-19`
+`2026-07-12` ──────────── **Day 18 of 100** ────────────► `2026-10-19`
 
 </div>
 
@@ -113,6 +113,7 @@ for the shape of the progress table.
 | 15 | 2026-07-26 | "How to Build an AI Agent from Scratch Using Claude API" - Dextra Labs (dev.to) | Medium | A third from-scratch build, set apart by two things the first two skipped - an AgentWithMemory class that carries conversation history across queries, and an explicit production roadmap (streaming, retries, async, Pydantic structured outputs) that refuses to pass the minimal code off as production-ready | [dev.to](https://dev.to/dextralabs/how-to-build-an-ai-agent-from-scratch-using-claude-api-with-full-code-4b40) |
 | 16 | 2026-07-27 | "API Key Best Practices" - Anthropic Help Center | Medium | The unglamorous discipline that keeps everything else safe - keys out of code and into env vars or a secrets manager, .env in .gitignore, one key per environment, scheduled rotation, secret scanning in CI, usage monitoring, and immediate revocation of a suspected leak | [support.claude.com](https://support.claude.com/en/articles/9767949-api-key-best-practices-keeping-your-keys-safe-and-secure) |
 | 17 | 2026-07-28 | "Tool use with Claude" - Anthropic Docs | Medium | The canonical model behind the hand-built loop - where tool code executes (client tools in your app vs server tools on Anthropic's infrastructure), the tool_use to tool_result round trip, the input_schema contract, and steering with tool_choice, a system-prompt nudge, and strict schema conformance | [platform.claude.com](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview) |
+| 18 | 2026-07-29 | "Streaming messages" - Anthropic Docs | Medium | How a response arrives incrementally over server-sent events - the message and content-block lifecycle, the typed deltas (text, partial-JSON tool input, thinking), and the practical catch that very large max_tokens needs streaming to avoid HTTP timeouts, with SDK helpers that accumulate the events back into one Message | [platform.claude.com](https://platform.claude.com/docs/en/build-with-claude/streaming) |
 
 ---
 
@@ -731,6 +732,20 @@ source that argues the opposite.
 
 **What I learned:** the framing that reorganised my head is client-versus-server. Everything I have built so far is the client-tool path - I write the schema, I run the call. Reaching for a server tool means handing execution to Anthropic and getting the result back for free, at the cost of that control. Choosing between the two is the real design work, and it is the choice the hand-built loop never forced me to make.
 
+### Day 18 — "Streaming messages" (Anthropic Docs)
+
+<img src="assets/cards/day-018.png" width="420" alt="Day 18 card">
+
+- **The stream has a lifecycle.** A message_start, then for each content block a content_block_start, a run of content_block_delta events, and a content_block_stop, followed by one or more message_delta events and a final message_stop - with ping events interspersed. Every block carries an index into the final content array.
+- **Deltas are typed.** text_delta carries the words; input_json_delta streams a tool call's arguments as partial JSON strings you accumulate and parse once the block stops; thinking_delta streams extended reasoning, closed by a signature_delta. One channel, several content types.
+- **Streaming is a robustness feature, not only UX.** For very large max_tokens the SDKs require streaming to avoid HTTP timeouts - sometimes it is the only way a long response completes, not merely a way to make it feel faster.
+- **The SDK does the bookkeeping.** get_final_message() and finalMessage() (and the Accumulate/accumulator helpers in the other languages) reassemble the events into the same complete Message that .create() returns - you stream internally and still get the whole object out.
+- **It closes Day 15's roadmap.** Streaming was the first item on the dev.to tutorial's production list; three days later this is what it actually is. The docs also note to handle unknown event types gracefully, since new ones can be added under the versioning policy.
+
+**Why it matters:** it reframes streaming from a cosmetic feature into a reliability one - the mechanism that lets long generations and tool-call inputs arrive without timing out or blocking. For any pipeline that asks for big outputs, it is not optional polish; it is how the response arrives at all.
+
+**What I learned:** I had streaming filed under "nice for demos." The correction is twofold - it is how partial tool-input JSON reaches you incrementally, and it is the required path for long outputs. I am refiling it under robustness, and noting the escape hatch: if I only want the finished text, the SDK will accumulate every event back into one Message for me.
+
 ---
 
 ## 🔗 Connect
@@ -766,5 +781,5 @@ source that argues the opposite.
 
 <div align="center">
 <br>
-<sub><b>Day 17 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
+<sub><b>Day 18 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
 </div>

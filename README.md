@@ -8,7 +8,7 @@ A public learning log of modern Artificial Intelligence - transformers, LLMs,
 agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 <!-- Day badge: bumped by the daily run. If this is stale, the run said so in its log. -->
-[![Day](https://img.shields.io/badge/Day-18%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
+[![Day](https://img.shields.io/badge/Day-19%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Streak](https://img.shields.io/badge/Streak-unbroken-2EA043?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Level mix](https://img.shields.io/badge/Sources-Advanced%20%2B%20Medium-8957E5?style=for-the-badge&labelColor=0D1117)](#-progress)
 
@@ -18,7 +18,7 @@ agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 **[📈 Progress](#-progress)** · **[📚 Day Notes](#-day-notes)** · **[🔗 Connect](#-connect)**
 
-`2026-07-12` ──────────── **Day 18 of 100** ────────────► `2026-10-19`
+`2026-07-12` ──────────── **Day 19 of 100** ────────────► `2026-10-19`
 
 </div>
 
@@ -114,6 +114,7 @@ for the shape of the progress table.
 | 16 | 2026-07-27 | "API Key Best Practices" - Anthropic Help Center | Medium | The unglamorous discipline that keeps everything else safe - keys out of code and into env vars or a secrets manager, .env in .gitignore, one key per environment, scheduled rotation, secret scanning in CI, usage monitoring, and immediate revocation of a suspected leak | [support.claude.com](https://support.claude.com/en/articles/9767949-api-key-best-practices-keeping-your-keys-safe-and-secure) |
 | 17 | 2026-07-28 | "Tool use with Claude" - Anthropic Docs | Medium | The canonical model behind the hand-built loop - where tool code executes (client tools in your app vs server tools on Anthropic's infrastructure), the tool_use to tool_result round trip, the input_schema contract, and steering with tool_choice, a system-prompt nudge, and strict schema conformance | [platform.claude.com](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview) |
 | 18 | 2026-07-29 | "Streaming messages" - Anthropic Docs | Medium | How a response arrives incrementally over server-sent events - the message and content-block lifecycle, the typed deltas (text, partial-JSON tool input, thinking), and the practical catch that very large max_tokens needs streaming to avoid HTTP timeouts, with SDK helpers that accumulate the events back into one Message | [platform.claude.com](https://platform.claude.com/docs/en/build-with-claude/streaming) |
+| 19 | 2026-07-30 | "Claude Agent SDK Demos" - Anthropic (GitHub) | Medium | The official example apps for the Claude Agent SDK - the hand-rolled loop handed back as send()/stream()/query() with session persistence and subagents, shown through real demos: a parallel-subagent research agent, an IMAP email assistant, and a resume generator | [github.com](https://github.com/anthropics/claude-agent-sdk-demos) |
 
 ---
 
@@ -746,6 +747,20 @@ source that argues the opposite.
 
 **What I learned:** I had streaming filed under "nice for demos." The correction is twofold - it is how partial tool-input JSON reaches you incrementally, and it is the required path for long outputs. I am refiling it under robustness, and noting the escape hatch: if I only want the finished text, the SDK will accumulate every event back into one Message for me.
 
+### Day 19 — "Claude Agent SDK Demos" (Anthropic)
+
+<img src="assets/cards/day-019.png" width="420" alt="Day 19 card">
+
+- **The SDK packages the whole week.** The loop I hand-rolled becomes send(), stream() and query(), with built-in session persistence and multi-turn handling - the V2 Session API splits send() and stream() rather than exposing a single query() generator. Everything the last seven days built by hand is here as method calls.
+- **The demos are real applications, not toys.** A Research Agent breaks a request into subtopics, spawns parallel researcher subagents, synthesises a report, and tracks subagent activity; an Email Agent does IMAP inbox display and agentic search; a Resume Generator web-searches a name across LinkedIn, GitHub and news and assembles a one-page .docx. Excel, chat UIs, and an AskUserQuestion-preview demo round out the set.
+- **TypeScript and Bun, self-contained.** The primary language is TypeScript on Bun (or Node 18+), Express/React/WebSocket across the UI demos, and each example is its own directory with its own README - a gallery of shapes rather than one hello-world.
+- **Sequence is the lesson.** Building the loop by hand first is what makes the SDK legible - each method maps to a knot I tied myself over the week, so send() and stream() read as the same loop with the bookkeeping removed, not a black box.
+- **The honest boundary.** The repo states plainly that these are demo applications for local development only, not for production. That single caveat is tomorrow's entire subject - securely deploying an agent.
+
+**Why it matters:** it closes the hand-rolling arc. Days 12-18 taught the primitives one at a time; the SDK is their packaged form, and seeing real apps built on it - multi-agent research, email, document generation - shows what the primitives were for.
+
+**What I learned:** the reframe is send()/stream() as the loop I already know with the plumbing hidden. I built each piece raw to understand it, so reaching for the SDK now is not a leap of faith - I know exactly what every method is standing in for, and where I would drop back down if I had to.
+
 ---
 
 ## 🔗 Connect
@@ -781,5 +796,5 @@ source that argues the opposite.
 
 <div align="center">
 <br>
-<sub><b>Day 18 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
+<sub><b>Day 19 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
 </div>

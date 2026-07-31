@@ -8,7 +8,7 @@ A public learning log of modern Artificial Intelligence - transformers, LLMs,
 agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 <!-- Day badge: bumped by the daily run. If this is stale, the run said so in its log. -->
-[![Day](https://img.shields.io/badge/Day-19%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
+[![Day](https://img.shields.io/badge/Day-20%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Streak](https://img.shields.io/badge/Streak-unbroken-2EA043?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Level mix](https://img.shields.io/badge/Sources-Advanced%20%2B%20Medium-8957E5?style=for-the-badge&labelColor=0D1117)](#-progress)
 
@@ -18,7 +18,7 @@ agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 **[📈 Progress](#-progress)** · **[📚 Day Notes](#-day-notes)** · **[🔗 Connect](#-connect)**
 
-`2026-07-12` ──────────── **Day 19 of 100** ────────────► `2026-10-19`
+`2026-07-12` ──────────── **Day 20 of 100** ────────────► `2026-10-19`
 
 </div>
 
@@ -115,6 +115,7 @@ for the shape of the progress table.
 | 17 | 2026-07-28 | "Tool use with Claude" - Anthropic Docs | Medium | The canonical model behind the hand-built loop - where tool code executes (client tools in your app vs server tools on Anthropic's infrastructure), the tool_use to tool_result round trip, the input_schema contract, and steering with tool_choice, a system-prompt nudge, and strict schema conformance | [platform.claude.com](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview) |
 | 18 | 2026-07-29 | "Streaming messages" - Anthropic Docs | Medium | How a response arrives incrementally over server-sent events - the message and content-block lifecycle, the typed deltas (text, partial-JSON tool input, thinking), and the practical catch that very large max_tokens needs streaming to avoid HTTP timeouts, with SDK helpers that accumulate the events back into one Message | [platform.claude.com](https://platform.claude.com/docs/en/build-with-claude/streaming) |
 | 19 | 2026-07-30 | "Claude Agent SDK Demos" - Anthropic (GitHub) | Medium | The official example apps for the Claude Agent SDK - the hand-rolled loop handed back as send()/stream()/query() with session persistence and subagents, shown through real demos: a parallel-subagent research agent, an IMAP email assistant, and a resume generator | [github.com](https://github.com/anthropics/claude-agent-sdk-demos) |
+| 20 | 2026-07-31 | "Securely deploying AI agents" - Claude Agent SDK Docs | Medium | Why yesterday's demos are local-dev only, and how you would harden them - prompt injection as the core deployment threat, then defence in depth: isolation (sandbox / container / gVisor / VM), least privilege (read-only mounts, network allowlists, dropped Linux capabilities), and a proxy that injects credentials the agent never sees | [code.claude.com](https://code.claude.com/docs/en/agent-sdk/secure-deployment.md) |
 
 ---
 
@@ -761,6 +762,20 @@ source that argues the opposite.
 
 **What I learned:** the reframe is send()/stream() as the loop I already know with the plumbing hidden. I built each piece raw to understand it, so reaching for the SDK now is not a leap of faith - I know exactly what every method is standing in for, and where I would drop back down if I had to.
 
+### Day 20 — "Securely deploying AI agents" (Claude Agent SDK Docs)
+
+<img src="assets/cards/day-020.png" width="420" alt="Day 20 card">
+
+- **Prompt injection is the deployment threat.** Unlike fixed-path software, an agent generates its actions from context - so content it processes (a file, a webpage, a README with unusual instructions) can steer it in ways the operator did not intend. The models are trained to resist, but the guide's stance is that defence in depth is still the right posture.
+- **The principles are old and boring, which is the point.** Securing an agent is the same job as running any semi-trusted code: isolation, least privilege, defence in depth. No exotic infrastructure required - just controls layered to your threat model.
+- **Least privilege, made concrete.** Mount only the directories the agent needs and prefer read-only; restrict the network to specific endpoints through a proxy; drop Linux capabilities in containers; inject credentials rather than exposing them. Each control shrinks what a compromise can reach.
+- **The proxy/credential pattern is the reusable idea.** Run a proxy outside the agent's security boundary that injects the API key into outgoing requests: the agent can make the call but never sees the credential, and the proxy enforces an endpoint allowlist and logs every request. A compromise then reaches endpoints, not secrets.
+- **Isolation is a spectrum, and read-only still leaks.** From sandbox-runtime (bubblewrap / sandbox-exec, very low overhead) to hardened containers (--cap-drop ALL, --network none plus a Unix socket to the proxy) to gVisor (userspace syscall interception) to Firecracker microVMs - match the strength to the threat. And a read-only code mount can still expose secrets (.env, ~/.aws, ~/.ssh), so sanitise before mounting.
+
+**Why it matters:** it is the production counterweight to Day 19. The SDK makes agents easy to build; this makes them safe to run where it matters. It reframes "agent security" from a property you hope the model has into an architecture you build around the agent - the same defence-in-depth thinking, applied to a component that writes its own actions.
+
+**What I learned:** the reframe I am keeping is to treat the agent as semi-trusted code by default, and to put the credential behind a proxy so a compromise reaches endpoints, not secrets. It is the lethal-trifecta problem the guide itself links to, made concrete - cut the line between untrusted input and sensitive capability, and most of the risk goes with it.
+
 ---
 
 ## 🔗 Connect
@@ -796,5 +811,5 @@ source that argues the opposite.
 
 <div align="center">
 <br>
-<sub><b>Day 19 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
+<sub><b>Day 20 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
 </div>

@@ -8,7 +8,7 @@ A public learning log of modern Artificial Intelligence - transformers, LLMs,
 agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 <!-- Day badge: bumped by the daily run. If this is stale, the run said so in its log. -->
-[![Day](https://img.shields.io/badge/Day-20%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
+[![Day](https://img.shields.io/badge/Day-21%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Streak](https://img.shields.io/badge/Streak-unbroken-2EA043?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Level mix](https://img.shields.io/badge/Sources-Advanced%20%2B%20Medium-8957E5?style=for-the-badge&labelColor=0D1117)](#-progress)
 
@@ -18,7 +18,7 @@ agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 **[📈 Progress](#-progress)** · **[📚 Day Notes](#-day-notes)** · **[🔗 Connect](#-connect)**
 
-`2026-07-12` ──────────── **Day 20 of 100** ────────────► `2026-10-19`
+`2026-07-12` ──────────── **Day 21 of 100** ────────────► `2026-10-19`
 
 </div>
 
@@ -116,6 +116,7 @@ for the shape of the progress table.
 | 18 | 2026-07-29 | "Streaming messages" - Anthropic Docs | Medium | How a response arrives incrementally over server-sent events - the message and content-block lifecycle, the typed deltas (text, partial-JSON tool input, thinking), and the practical catch that very large max_tokens needs streaming to avoid HTTP timeouts, with SDK helpers that accumulate the events back into one Message | [platform.claude.com](https://platform.claude.com/docs/en/build-with-claude/streaming) |
 | 19 | 2026-07-30 | "Claude Agent SDK Demos" - Anthropic (GitHub) | Medium | The official example apps for the Claude Agent SDK - the hand-rolled loop handed back as send()/stream()/query() with session persistence and subagents, shown through real demos: a parallel-subagent research agent, an IMAP email assistant, and a resume generator | [github.com](https://github.com/anthropics/claude-agent-sdk-demos) |
 | 20 | 2026-07-31 | "Securely deploying AI agents" - Claude Agent SDK Docs | Medium | Why yesterday's demos are local-dev only, and how you would harden them - prompt injection as the core deployment threat, then defence in depth: isolation (sandbox / container / gVisor / VM), least privilege (read-only mounts, network allowlists, dropped Linux capabilities), and a proxy that injects credentials the agent never sees | [code.claude.com](https://code.claude.com/docs/en/agent-sdk/secure-deployment.md) |
+| 21 | 2026-08-01 | "Request context" - Mastra Docs | Medium | Dependency injection for agents - one agent configured per request instead of one agent per case: instructions, model, tools and memory each become a sync or async function reading a typed RequestContext, populated in code or from request headers in server middleware, with schema validation and reserved keys for multi-tenant isolation | [mastra.ai](https://mastra.ai/docs/server/request-context) |
 
 ---
 
@@ -776,6 +777,20 @@ source that argues the opposite.
 
 **What I learned:** the reframe I am keeping is to treat the agent as semi-trusted code by default, and to put the credential behind a proxy so a compromise reaches endpoints, not secrets. It is the lethal-trifecta problem the guide itself links to, made concrete - cut the line between untrusted input and sensitive capability, and most of the risk goes with it.
 
+### Day 21 — "Request context" (Mastra Docs)
+
+<img src="assets/cards/day-021.png" width="420" alt="Day 21 card">
+
+- **Dependency injection, borrowed for agents.** Request context is a mechanism for passing runtime values into agent primitives - `.set(key, value)` to define, `.get(key)` to read, with `.keys()`, `.entries()` and `.all` alongside. The docs draw the line explicitly: this is not memory. Memory carries conversation history; request context carries the conditions of *this* call.
+- **Configuration stops being a constant and becomes a function.** `instructions`, `model`, `tools`, `memory`, `agents` and `workflows` can each be a sync or async function that receives the request context. That single change is what collapses "one agent per case" into one agent that resolves itself per request - different system prompt by user metadata, a smaller model on the free tier, fewer tools for a lower-privileged role.
+- **Typed end to end, and validated if you want it.** `new RequestContext<UserTier>()` carries a type parameter through the whole flow: `.set()` enforces the right types and `.get()` returns inferred ones. An optional `requestContextSchema` validates the context at runtime through a JSON Schema validator - Zod, Valibot or ArkType.
+- **The edge populates it.** Values can be set in code or by server middleware reading the request itself. The documented example pulls a Cloudflare header and derives a unit from it: `const country = context.req.header('CF-IPCountry')`, then `requestContext.set('temperature-unit', country === 'US' ? 'fahrenheit' : 'celsius')`. The agent code never learns where the value came from.
+- **It reaches further than agents, including into tenancy.** Agents, tools, workflows, steps and processors (input processors, output processors, scorers) all accept it, and the reserved keys `MASTRA_RESOURCE_ID_KEY` and `MASTRA_THREAD_ID_KEY` exist to keep tenants isolated from one another.
+
+**Why it matters:** it is the constructive half of yesterday. Day 20 was about what an agent must never reach; this is about what it should be handed, freshly, on every call - and both are answered at the boundary rather than inside the prompt. It is also the cheap escape from a trap worth avoiding early: forking a new agent for every customer, tier and language until the fleet is unmaintainable.
+
+**What I learned:** the reframe is agent configuration as a function of the request rather than a property of the agent. A second lesson came free and unplanned - the URL I had queued for this, the "dynamic agents" page, now returns a 404, and the idea lives under a different name: the `RuntimeContext` introduced in Mastra 0.9.0 and written up by Sam Bhagwat in April 2025 is today's `RequestContext`. In a field moving this fast, a saved link is a snapshot, not an address - check the API before you quote it.
+
 ---
 
 ## 🔗 Connect
@@ -811,5 +826,5 @@ source that argues the opposite.
 
 <div align="center">
 <br>
-<sub><b>Day 20 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
+<sub><b>Day 21 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
 </div>

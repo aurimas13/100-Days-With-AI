@@ -8,7 +8,7 @@ A public learning log of modern Artificial Intelligence - transformers, LLMs,
 agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 <!-- Day badge: bumped by the daily run. If this is stale, the run said so in its log. -->
-[![Day](https://img.shields.io/badge/Day-21%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
+[![Day](https://img.shields.io/badge/Day-22%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Streak](https://img.shields.io/badge/Streak-unbroken-2EA043?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Level mix](https://img.shields.io/badge/Sources-Advanced%20%2B%20Medium-8957E5?style=for-the-badge&labelColor=0D1117)](#-progress)
 
@@ -18,7 +18,7 @@ agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 **[📈 Progress](#-progress)** · **[📚 Day Notes](#-day-notes)** · **[🔗 Connect](#-connect)**
 
-`2026-07-12` ──────────── **Day 21 of 100** ────────────► `2026-10-19`
+`2026-07-12` ──────────── **Day 22 of 100** ────────────► `2026-10-19`
 
 </div>
 
@@ -117,6 +117,7 @@ for the shape of the progress table.
 | 19 | 2026-07-30 | "Claude Agent SDK Demos" - Anthropic (GitHub) | Medium | The official example apps for the Claude Agent SDK - the hand-rolled loop handed back as send()/stream()/query() with session persistence and subagents, shown through real demos: a parallel-subagent research agent, an IMAP email assistant, and a resume generator | [github.com](https://github.com/anthropics/claude-agent-sdk-demos) |
 | 20 | 2026-07-31 | "Securely deploying AI agents" - Claude Agent SDK Docs | Medium | Why yesterday's demos are local-dev only, and how you would harden them - prompt injection as the core deployment threat, then defence in depth: isolation (sandbox / container / gVisor / VM), least privilege (read-only mounts, network allowlists, dropped Linux capabilities), and a proxy that injects credentials the agent never sees | [code.claude.com](https://code.claude.com/docs/en/agent-sdk/secure-deployment.md) |
 | 21 | 2026-08-01 | "Request context" - Mastra Docs | Medium | Dependency injection for agents - one agent configured per request instead of one agent per case: instructions, model, tools and memory each become a sync or async function reading a typed RequestContext, populated in code or from request headers in server middleware, with schema validation and reserved keys for multi-tenant isolation | [mastra.ai](https://mastra.ai/docs/server/request-context) |
+| 22 | 2026-08-02 | "OWASP Top 10 for Agentic Applications" - OWASP GenAI Security Project | Advanced | The first agent-specific risk list, released 9 Dec 2025 after a year of work by 100+ contributors - ten risks from goal hijack and tool misuse through memory poisoning and insecure inter-agent communication to cascading failures and rogue agents, marking the shift from preventing bad outputs to containing bad autonomy | [genai.owasp.org](https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/) |
 
 ---
 
@@ -791,6 +792,20 @@ source that argues the opposite.
 
 **What I learned:** the reframe is agent configuration as a function of the request rather than a property of the agent. A second lesson came free and unplanned - the URL I had queued for this, the "dynamic agents" page, now returns a 404, and the idea lives under a different name: the `RuntimeContext` introduced in Mastra 0.9.0 and written up by Sam Bhagwat in April 2025 is today's `RequestContext`. In a field moving this fast, a saved link is a snapshot, not an address - check the API before you quote it.
 
+### Day 22 — "OWASP Top 10 for Agentic Applications" (OWASP GenAI Security Project)
+
+<img src="assets/cards/day-022.png" width="420" alt="Day 22 card">
+
+- **The ten, in full, because the names are the lesson.** ASI01 Agent Goal Hijack, ASI02 Tool Misuse, ASI03 Identity & Privilege Abuse, ASI04 Agentic Supply Chain Vulnerabilities, ASI05 Unexpected Code Execution, ASI06 Memory & Context Poisoning, ASI07 Insecure Inter-Agent Communication, ASI08 Cascading Failures, ASI09 Human-Agent Trust Exploitation, ASI10 Rogue Agents. Read them as a list of things that cannot happen to a chatbot.
+- **The subject changed, not just the list.** Classic application security asks whether a system produces a bad output. Six of these ten are only possible once software can plan, remember, delegate and act - a poisoned memory, a hijacked goal, a failure that cascades between agents. The unit of harm is no longer a response; it is a sequence of actions taken on your behalf.
+- **Two risks are about people, not code.** ASI09, Human-Agent Trust Exploitation, names the fact that a confident agent is a social attack surface, and ASI10, Rogue Agents, covers the ones operating outside your view entirely. Neither is patchable. Both are governance.
+- **Provenance worth knowing.** Released 9 December 2025 by the OWASP GenAI Security Project, chaired by John Sotiropoulos with Keren Katz and Ron F. Del Rosario, drawing on more than a year of work and over 100 security researchers and practitioners, with an expert review board including NIST, the European Commission and the Alan Turing Institute. It ships alongside version 1.1 of the project's Agentic AI Threats & Mitigations taxonomy.
+- **It is a checklist you can actually run a design against.** Each risk maps to the parts of an agent you already build - the prompt, the tools, the memory, the identity it acts under, the channel it uses to talk to other agents. That mapping is what makes it useful on a Monday rather than only in a threat-modelling workshop.
+
+**Why it matters:** it turns a fear into an inventory. Days 20 and 21 were about single controls - isolation, least privilege, configuration injected per request - and controls are only as good as the threat list you chose them against. This is that list, written by people who had to defend real systems, and it is the reference the next three days measure themselves against.
+
+**What I learned:** the reframe is that agent security is not LLM security with more steps. It is the security of a thing that acts - which means the questions I ask of my own setups change from "could it say something wrong" to "what could it do, under whose identity, with what memory, and who would notice". Reading ASI06 and ASI03 in particular against my own tooling was uncomfortable in a useful way.
+
 ---
 
 ## 🔗 Connect
@@ -826,5 +841,5 @@ source that argues the opposite.
 
 <div align="center">
 <br>
-<sub><b>Day 21 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
+<sub><b>Day 22 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
 </div>

@@ -126,7 +126,7 @@ for the shape of the progress table.
 *Each day gets a section here: what the source is, 1–5 takeaways, why
 it matters, and what I learned or tried.*
 
-### Day 1 — "2025–2035 Is the Decade of Agents" (Andrej Karpathy, X, 2025-01-23)
+### Day 1 - "2025–2035 Is the Decade of Agents" (Andrej Karpathy, X, 2025-01-23)
 
 <img src="assets/cards/day-001.png" width="420" alt="Day 1 card">
 
@@ -167,7 +167,7 @@ decade-long build, and the next 99 days of sources (context
 engineering, evals, guardrails, safety, multi-agent design, etc.) all live inside
 that decade. Day 1 of 100 starts where the decade does.
 
-### Day 2 — "Harness Design for Long-Running Application Development" (Prithvi Rajasekaran, Anthropic Engineering, 2026-03-24)
+### Day 2 - "Harness Design for Long-Running Application Development" (Prithvi Rajasekaran, Anthropic Engineering, 2026-03-24)
 
 <img src="assets/cards/day-002.png" width="420" alt="Day 2 card">
 
@@ -214,7 +214,7 @@ what the model *can't* do - so each one deserves a periodic
 stress-test, or my scaffolding outlives its reason. I started auditing
 my own automation pipelines this way.
 
-### Day 3 — "Writing Effective Tools for Agents — with Agents" (Ken Aizawa et al., Anthropic Engineering, 2025-09-11)
+### Day 3 - "Writing Effective Tools for Agents — with Agents" (Ken Aizawa et al., Anthropic Engineering, 2025-09-11)
 
 <img src="assets/cards/day-003.png" width="420" alt="Day 3 card">
 
@@ -256,7 +256,7 @@ like `asana_projects_search` vs `asana_search_projects`) has
 non-trivial, model-dependent effects on evals. Words are
 infrastructure now.
 
-### Day 4 — "Effective Context Engineering for AI Agents" (Rajasekaran, Dixon, Ryan & Hadfield, Anthropic Engineering, 2025-09-29)
+### Day 4 - "Effective Context Engineering for AI Agents" (Rajasekaran, Dixon, Ryan & Hadfield, Anthropic Engineering, 2025-09-29)
 
 <img src="assets/cards/day-004.png" width="420" alt="Day 4 card">
 
@@ -303,7 +303,7 @@ needed.
 
 ---
 
-### Day 5 — "A Practical Guide to Building Agents" (OpenAI, Business Guides & Resources)
+### Day 5 - "A Practical Guide to Building Agents" (OpenAI, Business Guides & Resources)
 
 <img src="assets/cards/day-005.png" width="420" alt="Day 5 card">
 
@@ -348,7 +348,7 @@ fleet until a single agent demonstrably fails.
 
 ---
 
-### Day 6 — "Model Guidance: GPT-5.6" (OpenAI Developer Docs)
+### Day 6 - "Model Guidance: GPT-5.6" (OpenAI Developer Docs)
 
 <img src="assets/cards/day-006.png" width="420" alt="Day 6 card">
 
@@ -395,7 +395,7 @@ own pipelines' prompts with a red pen.
 
 ---
 
-### Day 7 — "Prompting Claude Fable 5" (Anthropic Documentation)
+### Day 7 - "Prompting Claude Fable 5" (Anthropic Documentation)
 
 <img src="assets/cards/day-007.png" width="420" alt="Day 7 card">
 
@@ -440,7 +440,7 @@ enumerate behaviors one brief instruction now covers. I'm taking the
 
 ---
 
-### Day 8 — "The Art of Loop Engineering" (Sydney Runkle, LangChain, X, 2026-06-16)
+### Day 8 - "The Art of Loop Engineering" (Sydney Runkle, LangChain, X, 2026-06-16)
 
 <img src="assets/cards/day-008.png" width="420" alt="Day 8 card">
 
@@ -485,7 +485,7 @@ my run logs are traces nobody analyzes yet. Noted as the dare.
 
 ---
 
-### Day 9 — Whiteboard Agent Capabilities (Kent C. Dodds, X, 2025-09-20)
+### Day 9 - Whiteboard Agent Capabilities (Kent C. Dodds, X, 2025-09-20)
 
 <img src="assets/cards/day-009.png" width="420" alt="Day 9 card">
 
@@ -576,7 +576,7 @@ just as well.
 
 ---
 
-### Day 10 — "Prompting Best Practices" (Anthropic Documentation) — milestone
+### Day 10 - "Prompting Best Practices" (Anthropic Documentation) — milestone
 
 <img src="assets/cards/day-010.png" width="420" alt="Day 10 card">
 
@@ -637,7 +637,7 @@ source that argues the opposite.
 
 ---
 
-### Day 11 — "What Is MCP? Model Context Protocol in Agentic AI, Explained" (Turing Post)
+### Day 11 - "What Is MCP? Model Context Protocol in Agentic AI, Explained" (Turing Post)
 
 <img src="assets/cards/day-011.png" width="420" alt="Day 11 card">
 
@@ -653,7 +653,7 @@ source that argues the opposite.
 
 ---
 
-### Day 12 — "How to Build an Agent" (Amp)
+### Day 12 - "How to Build an Agent" (Amp)
 
 <img src="assets/cards/day-012.png" width="420" alt="Day 12 card">
 
@@ -666,7 +666,7 @@ source that argues the opposite.
 
 **What I learned:** Day 5 gave me the field guide; this gave me the mechanism, and the two snapped together - "model + tools + instructions in a loop" is no longer a diagram but code I can read. It also reframes yesterday's MCP note: MCP standardises exactly the tool wiring this loop does by hand, one protocol in place of a bespoke read/list/edit trio per agent. I have read the code rather than typed it in yet - running the loop myself is the obvious next exercise, and the post is written to make that a one-evening job.
 
-### Day 13 — "Building an AI Agent from Scratch in Python" (Leonie Monigatti)
+### Day 13 - "Building an AI Agent from Scratch in Python" (Leonie Monigatti)
 
 <img src="assets/cards/day-013.png" width="420" alt="Day 13 card">
 
@@ -680,7 +680,7 @@ source that argues the opposite.
 
 **What I learned:** the distance between reading and running dropped to zero - this one is in the language I use daily, against the SDK I already know, and Colab-runnable. The eval() calculator is the quiet second lesson: the loop is the easy part, and tools that are safe to hand a model are the actual work - Day 3's tool-contract argument arriving from the opposite direction.
 
-### Day 14 — "Building Effective Agents" (Anthropic)
+### Day 14 - "Building Effective Agents" (Anthropic)
 
 <img src="assets/cards/day-014.png" width="420" alt="Day 14 card">
 
@@ -694,7 +694,7 @@ source that argues the opposite.
 
 **What I learned:** reading the cookbook's patterns/agents notebooks next to the essay made the five patterns concrete - basic_workflows, orchestrator_workers, evaluator_optimizer, each a short and inspectable implementation. The lesson I am taking forward is a bias toward the smallest pattern that works, and agents only where the problem genuinely has no predictable shape.
 
-### Day 15 — "How to Build an AI Agent from Scratch Using Claude API" (Dextra Labs)
+### Day 15 - "How to Build an AI Agent from Scratch Using Claude API" (Dextra Labs)
 
 <img src="assets/cards/day-015.png" width="420" alt="Day 15 card">
 
@@ -708,7 +708,7 @@ source that argues the opposite.
 
 **What I learned:** the memory upgrade is the cheapest large win - a conversation_history list is all it takes to hold a thread. And the roadmap doubles as my own backlog: streaming lands on Day 18, and retries, async and structured outputs are the next things to add to anything I keep.
 
-### Day 16 — "API Key Best Practices" (Anthropic Help Center)
+### Day 16 - "API Key Best Practices" (Anthropic Help Center)
 
 <img src="assets/cards/day-016.png" width="420" alt="Day 16 card">
 
@@ -722,7 +722,7 @@ source that argues the opposite.
 
 **What I learned:** I read the list against my own habits. Environment variables and gitignore were already there; the two I want to make automatic are scheduled rotation and a separate key per environment - the ones easiest to skip while a single key still works, and the ones I would most regret skipping.
 
-### Day 17 — "Tool use with Claude" (Anthropic Docs)
+### Day 17 - "Tool use with Claude" (Anthropic Docs)
 
 <img src="assets/cards/day-017.png" width="420" alt="Day 17 card">
 
@@ -736,7 +736,7 @@ source that argues the opposite.
 
 **What I learned:** the framing that reorganised my head is client-versus-server. Everything I have built so far is the client-tool path - I write the schema, I run the call. Reaching for a server tool means handing execution to Anthropic and getting the result back for free, at the cost of that control. Choosing between the two is the real design work, and it is the choice the hand-built loop never forced me to make.
 
-### Day 18 — "Streaming messages" (Anthropic Docs)
+### Day 18 - "Streaming messages" (Anthropic Docs)
 
 <img src="assets/cards/day-018.png" width="420" alt="Day 18 card">
 
@@ -750,7 +750,7 @@ source that argues the opposite.
 
 **What I learned:** I had streaming filed under "nice for demos." The correction is twofold - it is how partial tool-input JSON reaches you incrementally, and it is the required path for long outputs. I am refiling it under robustness, and noting the escape hatch: if I only want the finished text, the SDK will accumulate every event back into one Message for me.
 
-### Day 19 — "Claude Agent SDK Demos" (Anthropic)
+### Day 19 - "Claude Agent SDK Demos" (Anthropic)
 
 <img src="assets/cards/day-019.png" width="420" alt="Day 19 card">
 
@@ -764,7 +764,7 @@ source that argues the opposite.
 
 **What I learned:** the reframe is send()/stream() as the loop I already know with the plumbing hidden. I built each piece raw to understand it, so reaching for the SDK now is not a leap of faith - I know exactly what every method is standing in for, and where I would drop back down if I had to.
 
-### Day 20 — "Securely deploying AI agents" (Claude Agent SDK Docs)
+### Day 20 - "Securely deploying AI agents" (Claude Agent SDK Docs)
 
 <img src="assets/cards/day-020.png" width="420" alt="Day 20 card">
 
@@ -778,7 +778,7 @@ source that argues the opposite.
 
 **What I learned:** the reframe I am keeping is to treat the agent as semi-trusted code by default, and to put the credential behind a proxy so a compromise reaches endpoints, not secrets. It is the lethal-trifecta problem the guide itself links to, made concrete - cut the line between untrusted input and sensitive capability, and most of the risk goes with it.
 
-### Day 21 — "Request context" (Mastra Docs)
+### Day 21 - "Request context" (Mastra Docs)
 
 <img src="assets/cards/day-021.png" width="420" alt="Day 21 card">
 
@@ -792,7 +792,7 @@ source that argues the opposite.
 
 **What I learned:** the reframe is agent configuration as a function of the request rather than a property of the agent. A second lesson came free and unplanned - the URL I had queued for this, the "dynamic agents" page, now returns a 404, and the idea lives under a different name: the `RuntimeContext` introduced in Mastra 0.9.0 and written up by Sam Bhagwat in April 2025 is today's `RequestContext`. In a field moving this fast, a saved link is a snapshot, not an address - check the API before you quote it.
 
-### Day 22 — "OWASP Top 10 for Agentic Applications" (OWASP GenAI Security Project)
+### Day 22 - "OWASP Top 10 for Agentic Applications" (OWASP GenAI Security Project)
 
 <img src="assets/cards/day-022.png" width="420" alt="Day 22 card">
 

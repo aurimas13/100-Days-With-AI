@@ -8,7 +8,7 @@ A public learning log of modern Artificial Intelligence - transformers, LLMs,
 agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 <!-- Day badge: bumped by the daily run. If this is stale, the run said so in its log. -->
-[![Day](https://img.shields.io/badge/Day-22%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
+[![Day](https://img.shields.io/badge/Day-23%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Streak](https://img.shields.io/badge/Streak-unbroken-2EA043?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Level mix](https://img.shields.io/badge/Sources-Advanced%20%2B%20Medium-8957E5?style=for-the-badge&labelColor=0D1117)](#-progress)
 
@@ -18,7 +18,7 @@ agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 **[📈 Progress](#-progress)** · **[📚 Day Notes](#-day-notes)** · **[🔗 Connect](#-connect)**
 
-`2026-07-12` ──────────── **Day 22 of 100** ────────────► `2026-10-19`
+`2026-07-12` ──────────── **Day 23 of 100** ────────────► `2026-10-19`
 
 </div>
 
@@ -118,6 +118,7 @@ for the shape of the progress table.
 | 20 | 2026-07-31 | "Securely deploying AI agents" - Claude Agent SDK Docs | Medium | Why yesterday's demos are local-dev only, and how you would harden them - prompt injection as the core deployment threat, then defence in depth: isolation (sandbox / container / gVisor / VM), least privilege (read-only mounts, network allowlists, dropped Linux capabilities), and a proxy that injects credentials the agent never sees | [code.claude.com](https://code.claude.com/docs/en/agent-sdk/secure-deployment.md) |
 | 21 | 2026-08-01 | "Request context" - Mastra Docs | Medium | Dependency injection for agents - one agent configured per request instead of one agent per case: instructions, model, tools and memory each become a sync or async function reading a typed RequestContext, populated in code or from request headers in server middleware, with schema validation and reserved keys for multi-tenant isolation | [mastra.ai](https://mastra.ai/docs/server/request-context) |
 | 22 | 2026-08-02 | "OWASP Top 10 for Agentic Applications" - OWASP GenAI Security Project | Advanced | The first agent-specific risk list, released 9 Dec 2025 after a year of work by 100+ contributors - ten risks from goal hijack and tool misuse through memory poisoning and insecure inter-agent communication to cascading failures and rogue agents, marking the shift from preventing bad outputs to containing bad autonomy | [genai.owasp.org](https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/) |
+| 23 | 2026-08-03 | "AgentDojo: A Dynamic Environment to Evaluate Prompt Injection Attacks and Defenses for LLM Agents" - Debenedetti et al. | Advanced | The measurement layer under agent security - an extensible environment rather than a fixed test suite, with 97 realistic tasks and 629 security cases across workspace, Slack, banking and travel, scoring benign utility, utility under attack and targeted attack success rate, and finding that leading models fail many tasks even with no adversary present | [arXiv 2406.13352](https://arxiv.org/abs/2406.13352) |
 
 ---
 
@@ -806,6 +807,20 @@ source that argues the opposite.
 
 **What I learned:** the reframe is that agent security is not LLM security with more steps. It is the security of a thing that acts - which means the questions I ask of my own setups change from "could it say something wrong" to "what could it do, under whose identity, with what memory, and who would notice". Reading ASI06 and ASI03 in particular against my own tooling was uncomfortable in a useful way.
 
+### Day 23 — "AgentDojo" (Debenedetti, Zhang, Balunović, Beurer-Kellner, Fischer, Tramèr)
+
+<img src="assets/cards/day-023.png" width="420" alt="Day 23 card">
+
+- **Three numbers, not one, and that is the design.** Benign utility is "the fraction of user tasks that the model solves in the absence of any attacks". Utility under attack is "the fraction of security cases where the agent solves the user task correctly, without any adversarial side effects". Targeted attack success rate is "the fraction of security cases where the attacker's goal is met". A defence that scores well on the third while destroying the first is not a defence, and only measuring all three makes that visible.
+- **The environments are mundane on purpose.** Four domains - Workspace (email, calendar, cloud drive), Slack (messages, web pages, files), Banking (transactions, statements) and Travel (flights, restaurants, car rentals) - populated with 97 realistic user tasks and 629 security cases. Injections sit where untrusted data naturally arrives, in an email body or a file, rather than being bolted onto a tool response.
+- **A benchmark that expects to be attacked.** It is "not a static test suite, but rather an extensible environment for designing and evaluating new agent tasks, defenses, and adaptive attacks". Injection tasks even expose a ground-truth sequence of calls implementing the attacker's goal, so stronger attacks can be built against it deliberately. A static security benchmark is a benchmark you have already overfitted.
+- **The most quoted result is not the most useful one.** Yes, the strongest model of the day reached only about 78% benign utility, and a leading model saw a targeted attack success rate near 48% while tool isolation cut attack success to around 7.5%. Those numbers are already dated. The durable finding is structural: at the time of writing, existing attacks broke some security properties but not all, and no defence was close to free.
+- **The honest caveat, from the authors.** They flag that their attacks and defences are relatively simple, that scaling the task set would benefit from automation, and that the environment currently applies only to text-based agents. A benchmark that states its own ceiling is one you can trust further.
+
+**Why it matters:** it is the instrument the rest of the week needs. Day 22 gave the list of what can go wrong; a list without measurement is an opinion. Tomorrow's defence is scored on exactly this benchmark, and being able to read that score honestly - utility retained, not just attacks blocked - is the difference between evaluating a defence and admiring it.
+
+**What I learned:** the reframe is that security and capability are measured together or not at all. I had been thinking of hardening as something you add and then check. The three-metric shape says the real question is always what the defence cost you, and I now want that framing for anything I bolt onto my own tools - what did this control take away, not merely what did it stop.
+
 ---
 
 ## 🔗 Connect
@@ -841,5 +856,5 @@ source that argues the opposite.
 
 <div align="center">
 <br>
-<sub><b>Day 22 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
+<sub><b>Day 23 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
 </div>

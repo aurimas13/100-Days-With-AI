@@ -8,7 +8,7 @@ A public learning log of modern Artificial Intelligence - transformers, LLMs,
 agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 <!-- Day badge: bumped by the daily run. If this is stale, the run said so in its log. -->
-[![Day](https://img.shields.io/badge/Day-23%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
+[![Day](https://img.shields.io/badge/Day-24%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Streak](https://img.shields.io/badge/Streak-unbroken-2EA043?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Level mix](https://img.shields.io/badge/Sources-Advanced%20%2B%20Medium-8957E5?style=for-the-badge&labelColor=0D1117)](#-progress)
 
@@ -18,7 +18,7 @@ agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 **[📈 Progress](#-progress)** · **[📚 Day Notes](#-day-notes)** · **[🔗 Connect](#-connect)**
 
-`2026-07-12` ──────────── **Day 23 of 100** ────────────► `2026-10-19`
+`2026-07-12` ──────────── **Day 24 of 100** ────────────► `2026-10-19`
 
 </div>
 
@@ -119,6 +119,7 @@ for the shape of the progress table.
 | 21 | 2026-08-01 | "Request context" - Mastra Docs | Medium | Dependency injection for agents - one agent configured per request instead of one agent per case: instructions, model, tools and memory each become a sync or async function reading a typed RequestContext, populated in code or from request headers in server middleware, with schema validation and reserved keys for multi-tenant isolation | [mastra.ai](https://mastra.ai/docs/server/request-context) |
 | 22 | 2026-08-02 | "OWASP Top 10 for Agentic Applications" - OWASP GenAI Security Project | Advanced | The first agent-specific risk list, released 9 Dec 2025 after a year of work by 100+ contributors - ten risks from goal hijack and tool misuse through memory poisoning and insecure inter-agent communication to cascading failures and rogue agents, marking the shift from preventing bad outputs to containing bad autonomy | [genai.owasp.org](https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/) |
 | 23 | 2026-08-03 | "AgentDojo: A Dynamic Environment to Evaluate Prompt Injection Attacks and Defenses for LLM Agents" - Debenedetti et al. | Advanced | The measurement layer under agent security - an extensible environment rather than a fixed test suite, with 97 realistic tasks and 629 security cases across workspace, Slack, banking and travel, scoring benign utility, utility under attack and targeted attack success rate, and finding that leading models fail many tasks even with no adversary present | [arXiv 2406.13352](https://arxiv.org/abs/2406.13352) |
+| 24 | 2026-08-04 | "Defeating Prompt Injections by Design" (CaMeL) - Debenedetti et al., Google DeepMind | Advanced | A defence that assumes the model will be fooled and removes its ability to matter - a privileged LLM sees only the user's query and emits code, a quarantined LLM parses untrusted data with tool-calling stripped, and a custom interpreter tracks provenance so capability policies can block unauthorised flows at tool-call time, scoring 77% of AgentDojo tasks with provable security against 84% undefended | [arXiv 2503.18813](https://arxiv.org/abs/2503.18813) |
 
 ---
 
@@ -807,7 +808,7 @@ source that argues the opposite.
 
 **What I learned:** the reframe is that agent security is not LLM security with more steps. It is the security of a thing that acts - which means the questions I ask of my own setups change from "could it say something wrong" to "what could it do, under whose identity, with what memory, and who would notice". Reading ASI06 and ASI03 in particular against my own tooling was uncomfortable in a useful way.
 
-### Day 23 — "AgentDojo" (Debenedetti, Zhang, Balunović, Beurer-Kellner, Fischer, Tramèr)
+### Day 23 - "AgentDojo" (Debenedetti, Zhang, Balunović, Beurer-Kellner, Fischer, Tramèr)
 
 <img src="assets/cards/day-023.png" width="420" alt="Day 23 card">
 
@@ -820,6 +821,20 @@ source that argues the opposite.
 **Why it matters:** it is the instrument the rest of the week needs. Day 22 gave the list of what can go wrong; a list without measurement is an opinion. Tomorrow's defence is scored on exactly this benchmark, and being able to read that score honestly - utility retained, not just attacks blocked - is the difference between evaluating a defence and admiring it.
 
 **What I learned:** the reframe is that security and capability are measured together or not at all. I had been thinking of hardening as something you add and then check. The three-metric shape says the real question is always what the defence cost you, and I now want that framing for anything I bolt onto my own tools - what did this control take away, not merely what did it stop.
+
+### Day 24 - "Defeating Prompt Injections by Design" (CaMeL, Google DeepMind)
+
+<img src="assets/cards/day-024.png" width="420" alt="Day 24 card">
+
+- **Two models, and the split is the whole idea.** The privileged LLM receives only the user's original query and never touches untrusted content; its job is to emit a plan as code. The quarantined LLM is the one that reads the untrusted material - an email body, a web page - and it has tool-calling stripped entirely. The component that can act cannot be influenced, and the component that can be influenced cannot act.
+- **The plan is code, and a custom interpreter runs it.** Rather than letting the model improvise its next call after each result, the privileged model writes a Python-like program up front. A restricted interpreter executes it, which is what makes the control flow fixed before any untrusted byte is read. As the paper puts it, CaMeL "explicitly extracts the control and data flows from the (trusted) query; therefore, the untrusted data retrieved by the LLM can never impact the program flow".
+- **Capabilities travel with the values.** Every value carries metadata recording where it came from, so the interpreter can perform data-flow analysis and tell derived-from-untrusted apart from derived-from-user. Policies are then enforced at tool-call time - a send to an address that came out of untrusted text can be refused, because the refusal is a property of the data's lineage rather than a judgement about the text.
+- **The number, honestly stated.** CaMeL solves 77% of AgentDojo tasks with provable security, against 84% for an undefended system. That is the real trade in the paper's own words, and it is the reason Day 23 came first - a defence is only legible once you can read what it cost. Note the widely circulated "67%" figure is not the paper's.
+- **The authors do not claim it is solved.** Their stated limitation is human, not technical: CaMeL "suffers from users needing to codify and specify security polic[ies]", and balancing security against usability is hard. A defence whose strength depends on someone writing good policies inherits every weakness of the people writing them.
+
+**Why it matters:** it is the strongest available answer to the threat Day 22 put at the top of its list, and it answers it in a way that does not depend on the model being clever. Filters and classifiers ask an LLM to spot an attack; this makes the attack structurally incapable of reaching anything that matters. It is the same instinct as Day 20's credential proxy, generalised into an architecture.
+
+**What I learned:** the reframe is that you do not have to win the argument with the injected text. If the model reading hostile input holds no capabilities, being persuaded costs nothing. I keep meeting this shape now - cut the line between untrusted input and consequential action - and CaMeL is its most complete expression so far. The honest counterweight is the policy burden, which is exactly where I would expect a real deployment of this to go wrong.
 
 ---
 
@@ -856,5 +871,5 @@ source that argues the opposite.
 
 <div align="center">
 <br>
-<sub><b>Day 23 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
+<sub><b>Day 24 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
 </div>

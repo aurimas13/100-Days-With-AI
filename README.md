@@ -8,7 +8,7 @@ A public learning log of modern Artificial Intelligence - transformers, LLMs,
 agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 <!-- Day badge: bumped by the daily run. If this is stale, the run said so in its log. -->
-[![Day](https://img.shields.io/badge/Day-24%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
+[![Day](https://img.shields.io/badge/Day-25%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Streak](https://img.shields.io/badge/Streak-unbroken-2EA043?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Level mix](https://img.shields.io/badge/Sources-Advanced%20%2B%20Medium-8957E5?style=for-the-badge&labelColor=0D1117)](#-progress)
 
@@ -18,7 +18,7 @@ agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 **[📈 Progress](#-progress)** · **[📚 Day Notes](#-day-notes)** · **[🔗 Connect](#-connect)**
 
-`2026-07-12` ──────────── **Day 24 of 100** ────────────► `2026-10-19`
+`2026-07-12` ──────────── **Day 25 of 100** ────────────► `2026-10-19`
 
 </div>
 
@@ -120,6 +120,7 @@ for the shape of the progress table.
 | 22 | 2026-08-02 | "OWASP Top 10 for Agentic Applications" - OWASP GenAI Security Project | Advanced | The first agent-specific risk list, released 9 Dec 2025 after a year of work by 100+ contributors - ten risks from goal hijack and tool misuse through memory poisoning and insecure inter-agent communication to cascading failures and rogue agents, marking the shift from preventing bad outputs to containing bad autonomy | [genai.owasp.org](https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/) |
 | 23 | 2026-08-03 | "AgentDojo: A Dynamic Environment to Evaluate Prompt Injection Attacks and Defenses for LLM Agents" - Debenedetti et al. | Advanced | The measurement layer under agent security - an extensible environment rather than a fixed test suite, with 97 realistic tasks and 629 security cases across workspace, Slack, banking and travel, scoring benign utility, utility under attack and targeted attack success rate, and finding that leading models fail many tasks even with no adversary present | [arXiv 2406.13352](https://arxiv.org/abs/2406.13352) |
 | 24 | 2026-08-04 | "Defeating Prompt Injections by Design" (CaMeL) - Debenedetti et al., Google DeepMind | Advanced | A defence that assumes the model will be fooled and removes its ability to matter - a privileged LLM sees only the user's query and emits code, a quarantined LLM parses untrusted data with tool-calling stripped, and a custom interpreter tracks provenance so capability policies can block unauthorised flows at tool-call time, scoring 77% of AgentDojo tasks with provable security against 84% undefended | [arXiv 2503.18813](https://arxiv.org/abs/2503.18813) |
+| 25 | 2026-08-05 | "Design Patterns for Securing LLM Agents against Prompt Injections" - Beurer-Kellner et al. | Advanced | The synthesis the first quarter was building toward - six patterns that trade agency for provable safety: action-selector, plan-then-execute, LLM map-reduce, dual LLM, code-then-execute and context-minimisation, each constraining an agent so that ingested untrusted input cannot trigger consequential action, with the trade-offs and case studies made explicit | [arXiv 2506.08837](https://arxiv.org/abs/2506.08837) |
 
 ---
 
@@ -836,6 +837,22 @@ source that argues the opposite.
 
 **What I learned:** the reframe is that you do not have to win the argument with the injected text. If the model reading hostile input holds no capabilities, being persuaded costs nothing. I keep meeting this shape now - cut the line between untrusted input and consequential action - and CaMeL is its most complete expression so far. The honest counterweight is the policy burden, which is exactly where I would expect a real deployment of this to go wrong.
 
+### Day 25 - "Design Patterns for Securing LLM Agents against Prompt Injections" (Beurer-Kellner et al.)
+
+<img src="assets/cards/day-025.png" width="420" alt="Day 25 card">
+
+- **The sentence the whole week points at.** "Once an LLM agent has ingested untrusted input, it must be constrained so that it is *impossible* for that input to trigger any consequential actions." Not unlikely. Impossible. Every pattern below is a different way of paying for that word.
+- **The six, and what each gives up.** *Action-selector* - the agent triggers tools but never sees their responses, so it cannot be steered by them. *Plan-then-execute* - tool output can inform results but cannot change which actions were already chosen. *LLM map-reduce* - sub-agents each handle untrusted content in isolation and their results are aggregated safely. *Dual LLM* - a privileged model coordinates a quarantined one through symbolic variables, never touching the untrusted text itself. *Code-then-execute* - the privileged model writes a program in a sandboxed language that fixes both tool calls and data flow. *Context-minimisation* - unnecessary content is stripped from the context between turns, closing off user-side injections.
+- **They are a spectrum of surrendered agency, not a menu of equals.** Action-selector is the most restrictive and the safest; a general assistant that reasons freely over whatever it reads is the least. Choosing a pattern is choosing how much autonomy the task genuinely needs, which is a product decision wearing a security costume.
+- **Yesterday's paper is one of these.** CaMeL is the dual-LLM and code-then-execute patterns built out in full. Seeing it named as a point in a design space, rather than as the answer, is what makes the space useful - and it is why this paper reads better after the specific one than before it.
+- **Fourteen authors, and a familiar cast.** Luca Beurer-Kellner, Beat Buesser, Ana-Maria Creţu, Edoardo Debenedetti, Daniel Dobos, Daniel Fabian, Marc Fischer, David Froelicher, Kathrin Grosse, Daniel Naeff, Ezinwanne Ozoani, Andrew Paverd, Florian Tramèr and Václav Volhejn. Debenedetti and Tramèr also wrote the benchmark on Day 23 and the defence on Day 24 - three days, one research community, followed across two years.
+
+**Why it matters:** it closes the arc. Day 22 named the threats, Day 23 built the instrument, Day 24 showed one defence in full, and this is the map they all sit on. It also reframes the goal: you are not trying to make an agent that cannot be fooled, you are trying to build one where being fooled does not matter.
+
+**What I learned - and the quarter-way note.** Twenty-five days in, the through-line has been sharper than I expected. The first half of this stretch was about giving an agent more power: a loop, tools, streaming, an SDK, configuration per request. This week was about taking power away on purpose, and it has been the more interesting half. The reframe I am keeping is that every one of these six patterns is the same move in a different key - put distance between what reads the world and what can change it. That idea has now turned up as a credential proxy, as a request context, as a quarantined model, and as a design space. Seventy-five days left, and I would rather spend some of them building something small under these constraints than reading another framework.
+
+*Sources: [arXiv 2506.08837](https://arxiv.org/abs/2506.08837) (preprint, v1 10 Jun 2025, v3 27 Jun 2025). The six pattern names and their one-line descriptions, and the quoted sentence, come from [Simon Willison's summary](https://simonwillison.net/2025/Jun/13/prompt-injection-design-patterns/), which quotes the paper directly - the arXiv abstract refers to "a set of principled design patterns" without naming them.*
+
 ---
 
 ## 🔗 Connect
@@ -871,5 +888,5 @@ source that argues the opposite.
 
 <div align="center">
 <br>
-<sub><b>Day 24 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
+<sub><b>Day 25 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
 </div>

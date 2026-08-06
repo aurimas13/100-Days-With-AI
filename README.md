@@ -8,7 +8,7 @@ A public learning log of modern Artificial Intelligence - transformers, LLMs,
 agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 <!-- Day badge: bumped by the daily run. If this is stale, the run said so in its log. -->
-[![Day](https://img.shields.io/badge/Day-25%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
+[![Day](https://img.shields.io/badge/Day-26%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Streak](https://img.shields.io/badge/Streak-unbroken-2EA043?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Level mix](https://img.shields.io/badge/Sources-Advanced%20%2B%20Medium-8957E5?style=for-the-badge&labelColor=0D1117)](#-progress)
 
@@ -18,7 +18,7 @@ agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 **[📈 Progress](#-progress)** · **[📚 Day Notes](#-day-notes)** · **[🔗 Connect](#-connect)**
 
-`2026-07-12` ──────────── **Day 25 of 100** ────────────► `2026-10-19`
+`2026-07-12` ──────────── **Day 26 of 100** ────────────► `2026-10-19`
 
 </div>
 
@@ -121,6 +121,7 @@ for the shape of the progress table.
 | 23 | 2026-08-03 | "AgentDojo: A Dynamic Environment to Evaluate Prompt Injection Attacks and Defenses for LLM Agents" - Debenedetti et al. | Advanced | The measurement layer under agent security - an extensible environment rather than a fixed test suite, with 97 realistic tasks and 629 security cases across workspace, Slack, banking and travel, scoring benign utility, utility under attack and targeted attack success rate, and finding that leading models fail many tasks even with no adversary present | [arXiv 2406.13352](https://arxiv.org/abs/2406.13352) |
 | 24 | 2026-08-04 | "Defeating Prompt Injections by Design" (CaMeL) - Debenedetti et al., Google DeepMind | Advanced | A defence that assumes the model will be fooled and removes its ability to matter - a privileged LLM sees only the user's query and emits code, a quarantined LLM parses untrusted data with tool-calling stripped, and a custom interpreter tracks provenance so capability policies can block unauthorised flows at tool-call time, scoring 77% of AgentDojo tasks with provable security against 84% undefended | [arXiv 2503.18813](https://arxiv.org/abs/2503.18813) |
 | 25 | 2026-08-05 | "Design Patterns for Securing LLM Agents against Prompt Injections" - Beurer-Kellner et al. | Advanced | The synthesis the first quarter was building toward - six patterns that trade agency for provable safety: action-selector, plan-then-execute, LLM map-reduce, dual LLM, code-then-execute and context-minimisation, each constraining an agent so that ingested untrusted input cannot trigger consequential action, with the trade-offs and case studies made explicit | [arXiv 2506.08837](https://arxiv.org/abs/2506.08837) |
+| 26 | 2026-08-06 | "A Benchmark to Understand the Role of Knowledge Graphs on Large Language Model's Accuracy for Question Answering on Enterprise SQL Databases" - Sequeda, Allemang & Jacob | Advanced | The meaning layer, measured - 43 enterprise questions over an insurance schema, answered by GPT-4 twice: straight against the SQL tables, and against a knowledge graph built from those same tables with an ontology and mappings. 16.7% correct becomes 54.2%, and on normalised schemas raw SQL scores 0% | [arXiv 2311.07509](https://arxiv.org/abs/2311.07509) |
 
 ---
 
@@ -853,6 +854,22 @@ source that argues the opposite.
 
 *Sources: [arXiv 2506.08837](https://arxiv.org/abs/2506.08837) (preprint, v1 10 Jun 2025, v3 27 Jun 2025). The six pattern names and their one-line descriptions, and the quoted sentence, come from [Simon Willison's summary](https://simonwillison.net/2025/Jun/13/prompt-injection-design-patterns/), which quotes the paper directly - the arXiv abstract refers to "a set of principled design patterns" without naming them.*
 
+### Day 26 - "A Benchmark to Understand the Role of Knowledge Graphs on LLM Accuracy" (Sequeda, Allemang, Jacob)
+
+<img src="assets/cards/day-026.png" width="420" alt="Day 26 card">
+
+- **The data did not change. Only the description of it did.** Both conditions run the same GPT-4, the same zero-shot prompt template, over the same insurance data. One is pointed at the SQL schema; the other at a knowledge graph defined over those same tables by an ontology and a set of mappings. Overall accuracy goes from **16.7%** to **54.2%**. Nothing was cleaned, backfilled or re-ingested in between - the second condition simply writes down what the tables mean.
+- **The failure is not spread evenly, and that is the whole finding.** The benchmark crosses two axes - question complexity (plain reporting vs metrics and KPIs) and schema complexity (few denormalised tables vs many normalised ones with many-to-many joins). On low-complexity schemas, raw SQL is survivable: 25.5% and 37.4%. On high-complexity schemas it is **0% and 0%**. Not "worse" - zero. The knowledge graph condition on those same hard schemas returns 35.7% and 38.7%. Real enterprise schemas are the normalised ones.
+- **A benchmark deliberately built to look like work, not like a leaderboard.** 43 natural-language questions over an enterprise insurance schema, split into business reporting queries (`SELECT-FROM` shaped) and metric and KPI queries needing aggregations and mathematical functions. The prompt template is kept deliberately simple so the variable under test is the contextual information supplied, not prompt craft.
+- **The follow-up says the ceiling is not fixed either.** Allemang and Sequeda's next paper adds an Ontology-based Query Check, which uses the ontology to detect that a generated SPARQL query is wrong, and an LLM repair step fed the explanation of the error. Accuracy reaches **72%**, with **8%** of answers being an explicit "I don't know" and 20% still wrong. The "I don't know" number is the interesting one: an ontology gives a system a way to notice it is out of its depth, which a bare schema does not.
+- **Honest limits.** This is a single domain (insurance), a single schema, 43 questions, one model, one prompt, and the authors are from a company selling a knowledge-graph product. The arXiv listing shows no peer-reviewed venue for the benchmark paper. None of that makes the 0% on normalised schemas less interesting, but it does mean the correct reading is directional, not a coefficient to plug into a business case.
+
+**Why it matters:** the standard enterprise answer to "is your data ready for AI?" is to point at the warehouse, and the warehouse genuinely works - the data got in, which is exactly what it was scoped and measured on. This paper is the cheapest available demonstration that "the data is in there" and "the data can be reasoned over" are different claims, and it puts a number on the gap between them. The people who knew which table to trust were holding that layer up by hand, and a model has no way to ask them.
+
+**What I learned:** I have been treating context as a retrieval problem - find the right rows, put them in the window. The 0% column reframes it. The model was not missing data; it had every table. It was missing the agreement about what the tables mean, and that agreement never existed in machine-readable form because humans were supplying it for free. That is not something more context solves. It is something somebody has to sit down and write.
+
+*Sources: [arXiv 2311.07509](https://arxiv.org/abs/2311.07509) (preprint, v1 13 Nov 2023; cs.AI, cs.CL, cs.DB). The quadrant figures come from the [full text at ar5iv](https://ar5iv.labs.arxiv.org/html/2311.07509) - the abstract rounds them to 16% and 54%. The follow-up is [arXiv 2405.11706](https://arxiv.org/abs/2405.11706), "Increasing the LLM Accuracy for Question Answering: Ontologies to the Rescue!" (v1 20 May 2024). Disclosure: the authors are affiliated with data.world, which sells knowledge-graph tooling.*
+
 ---
 
 ## 🔗 Connect
@@ -888,5 +905,5 @@ source that argues the opposite.
 
 <div align="center">
 <br>
-<sub><b>Day 25 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
+<sub><b>Day 26 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
 </div>

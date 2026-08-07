@@ -8,7 +8,7 @@ A public learning log of modern Artificial Intelligence - transformers, LLMs,
 agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 <!-- Day badge: bumped by the daily run. If this is stale, the run said so in its log. -->
-[![Day](https://img.shields.io/badge/Day-26%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
+[![Day](https://img.shields.io/badge/Day-27%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Streak](https://img.shields.io/badge/Streak-unbroken-2EA043?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Level mix](https://img.shields.io/badge/Sources-Advanced%20%2B%20Medium-8957E5?style=for-the-badge&labelColor=0D1117)](#-progress)
 
@@ -18,7 +18,7 @@ agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 **[📈 Progress](#-progress)** · **[📚 Day Notes](#-day-notes)** · **[🔗 Connect](#-connect)**
 
-`2026-07-12` ──────────── **Day 26 of 100** ────────────► `2026-10-19`
+`2026-07-12` ──────────── **Day 27 of 100** ────────────► `2026-10-19`
 
 </div>
 
@@ -122,6 +122,7 @@ for the shape of the progress table.
 | 24 | 2026-08-04 | "Defeating Prompt Injections by Design" (CaMeL) - Debenedetti et al., Google DeepMind | Advanced | A defence that assumes the model will be fooled and removes its ability to matter - a privileged LLM sees only the user's query and emits code, a quarantined LLM parses untrusted data with tool-calling stripped, and a custom interpreter tracks provenance so capability policies can block unauthorised flows at tool-call time, scoring 77% of AgentDojo tasks with provable security against 84% undefended | [arXiv 2503.18813](https://arxiv.org/abs/2503.18813) |
 | 25 | 2026-08-05 | "Design Patterns for Securing LLM Agents against Prompt Injections" - Beurer-Kellner et al. | Advanced | The synthesis the first quarter was building toward - six patterns that trade agency for provable safety: action-selector, plan-then-execute, LLM map-reduce, dual LLM, code-then-execute and context-minimisation, each constraining an agent so that ingested untrusted input cannot trigger consequential action, with the trade-offs and case studies made explicit | [arXiv 2506.08837](https://arxiv.org/abs/2506.08837) |
 | 26 | 2026-08-06 | "A Benchmark to Understand the Role of Knowledge Graphs on Large Language Model's Accuracy for Question Answering on Enterprise SQL Databases" - Sequeda, Allemang & Jacob | Advanced | The meaning layer, measured - 43 enterprise questions over an insurance schema, answered by GPT-4 twice: straight against the SQL tables, and against a knowledge graph built from those same tables with an ontology and mappings. 16.7% correct becomes 54.2%, and on normalised schemas raw SQL scores 0% | [arXiv 2311.07509](https://arxiv.org/abs/2311.07509) |
+| 27 | 2026-08-07 | "Key Considerations for Domain Expert Involvement in LLM Design and Evaluation: An Ethnographic Study" - Szymanski, Anuyah, Li & Metoyer | Advanced | Twelve weeks inside a team building a pedagogical chatbot, watching what actually happens when developers try to get expert knowledge into an LLM system - four practices they fell into, and three obstacles that were about motivation, participation and ownership rather than technique | [arXiv 2602.14357](https://arxiv.org/abs/2602.14357) |
 
 ---
 
@@ -870,6 +871,22 @@ source that argues the opposite.
 
 *Sources: [arXiv 2311.07509](https://arxiv.org/abs/2311.07509) (preprint, v1 13 Nov 2023; cs.AI, cs.CL, cs.DB). The quadrant figures come from the [full text at ar5iv](https://ar5iv.labs.arxiv.org/html/2311.07509) - the abstract rounds them to 16% and 54%. The follow-up is [arXiv 2405.11706](https://arxiv.org/abs/2405.11706), "Increasing the LLM Accuracy for Question Answering: Ontologies to the Rescue!" (v1 20 May 2024). Disclosure: the authors are affiliated with data.world, which sells knowledge-graph tooling.*
 
+### Day 27 - "Key Considerations for Domain Expert Involvement in LLM Design and Evaluation" (Szymanski, Anuyah, Li, Metoyer)
+
+<img src="assets/cards/day-027.png" width="420" alt="Day 27 card">
+
+- **This is an observation study, not a method paper, and that is why it is useful.** Twelve weeks of ethnographic observation of one team building a pedagogical chatbot, plus interviews with both the developers and the domain experts. Nobody is selling a framework. The output is a description of what a real team did when the expert knowledge it needed would not come out on demand.
+- **Four practices the team fell into, none of them in anyone's plan.** Creating workarounds for data collection when the intended route did not produce enough. Turning to augmentation - synthetic or model-generated material - when expert input was limited. Co-developing evaluation criteria *with* the experts rather than handing them a rubric. And a hybrid evaluation strategy mixing expert, developer and LLM judgement. Read in order, those four are a story about a team steadily lowering its dependence on a scarce human.
+- **The obstacles are organisational, and one of them is uncomfortable.** The authors name expert motivation and trust, difficulty structuring participatory design, and questions around the **ownership and integration** of expert knowledge. That third one is the sharp edge. Asking a domain expert to write down their judgement is asking them to externalise the thing that makes them necessary, and a project that has not thought about what that person becomes afterwards is relying on goodwill it has not earned.
+- **Co-developed evaluation criteria is the finding I would steal.** The instinct is to have engineers define correctness and then get an expert to grade against it. What the team converged on is the reverse order: the criteria themselves are the artefact the expert co-authors. That matches what evaluation practitioners argue independently - the expensive, non-delegable part is deciding what "good" means, not doing the labelling.
+- **Recommendations are modest and mostly social.** Stronger AI literacy across everyone involved, transparent consent processes, and frameworks that accept the expert's role will change over the life of a project rather than being fixed at kickoff. No tooling claim.
+
+**Why it matters:** the standard framing says the bottleneck in domain-specific AI is data. This is twelve weeks of evidence that the bottleneck is a person's willingness and standing to hand over what they know, and the project's honesty about what happens to them next. That is not a problem an engineering team can solve by trying harder.
+
+**What I learned:** I have been assuming that if I could just get enough time with an expert, the knowledge would transfer. The ownership finding says the transfer itself is the negotiation, not the preamble to it. It reframes something in my own building too - when I write a rule into a system I am making a claim about who decides, and I have not been recording who agreed to it.
+
+*Sources: [arXiv 2602.14357](https://arxiv.org/abs/2602.14357) (preprint, v1 16 Feb 2026; cs.HC, cs.AI). The arXiv listing states no peer-reviewed venue. The study observes ONE team building ONE pedagogical chatbot - a single-site ethnography, so the note says "a real team", never "teams". Cited as a practitioner echo rather than as evidence: Chris Lovejoy, ["How to leverage domain experts for building domain-specific vertical AI"](https://chrislovejoy.me/domain-experts-ai).*
+
 ---
 
 ## 🔗 Connect
@@ -905,5 +922,5 @@ source that argues the opposite.
 
 <div align="center">
 <br>
-<sub><b>Day 26 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
+<sub><b>Day 27 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
 </div>

@@ -8,7 +8,7 @@ A public learning log of modern Artificial Intelligence - transformers, LLMs,
 agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 <!-- Day badge: bumped by the daily run. If this is stale, the run said so in its log. -->
-[![Day](https://img.shields.io/badge/Day-27%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
+[![Day](https://img.shields.io/badge/Day-28%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Streak](https://img.shields.io/badge/Streak-unbroken-2EA043?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Level mix](https://img.shields.io/badge/Sources-Advanced%20%2B%20Medium-8957E5?style=for-the-badge&labelColor=0D1117)](#-progress)
 
@@ -18,7 +18,7 @@ agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 **[📈 Progress](#-progress)** · **[📚 Day Notes](#-day-notes)** · **[🔗 Connect](#-connect)**
 
-`2026-07-12` ──────────── **Day 27 of 100** ────────────► `2026-10-19`
+`2026-07-12` ──────────── **Day 28 of 100** ────────────► `2026-10-19`
 
 </div>
 
@@ -123,6 +123,7 @@ for the shape of the progress table.
 | 25 | 2026-08-05 | "Design Patterns for Securing LLM Agents against Prompt Injections" - Beurer-Kellner et al. | Advanced | The synthesis the first quarter was building toward - six patterns that trade agency for provable safety: action-selector, plan-then-execute, LLM map-reduce, dual LLM, code-then-execute and context-minimisation, each constraining an agent so that ingested untrusted input cannot trigger consequential action, with the trade-offs and case studies made explicit | [arXiv 2506.08837](https://arxiv.org/abs/2506.08837) |
 | 26 | 2026-08-06 | "A Benchmark to Understand the Role of Knowledge Graphs on Large Language Model's Accuracy for Question Answering on Enterprise SQL Databases" - Sequeda, Allemang & Jacob | Advanced | The meaning layer, measured - 43 enterprise questions over an insurance schema, answered by GPT-4 twice: straight against the SQL tables, and against a knowledge graph built from those same tables with an ontology and mappings. 16.7% correct becomes 54.2%, and on normalised schemas raw SQL scores 0% | [arXiv 2311.07509](https://arxiv.org/abs/2311.07509) |
 | 27 | 2026-08-07 | "Key Considerations for Domain Expert Involvement in LLM Design and Evaluation: An Ethnographic Study" - Szymanski, Anuyah, Li & Metoyer | Advanced | Twelve weeks inside a team building a pedagogical chatbot, watching what actually happens when developers try to get expert knowledge into an LLM system - four practices they fell into, and three obstacles that were about motivation, participation and ownership rather than technique | [arXiv 2602.14357](https://arxiv.org/abs/2602.14357) |
+| 28 | 2026-08-08 | "Future of Work with AI Agents: Auditing Automation and Augmentation Potential across the U.S. Workforce" - Shao, Zope, Jiang, Pei, Nguyen, Brynjolfsson & Yang | Advanced | An audit of which work people actually want automated, set against what AI can actually do - 1,500 workers, 104 occupations, 844 O*NET tasks, a Human Agency Scale for how much human involvement each task should keep, and four zones including the one where capability and desire point in opposite directions | [arXiv 2506.06576](https://arxiv.org/abs/2506.06576) |
 
 ---
 
@@ -887,6 +888,22 @@ source that argues the opposite.
 
 *Sources: [arXiv 2602.14357](https://arxiv.org/abs/2602.14357) (preprint, v1 16 Feb 2026; cs.HC, cs.AI). The arXiv listing states no peer-reviewed venue. The study observes ONE team building ONE pedagogical chatbot - a single-site ethnography, so the note says "a real team", never "teams". Cited as a practitioner echo rather than as evidence: Chris Lovejoy, ["How to leverage domain experts for building domain-specific vertical AI"](https://chrislovejoy.me/domain-experts-ai).*
 
+### Day 28 - "Future of Work with AI Agents" (Shao, Zope, Jiang, Pei, Nguyen, Brynjolfsson, Yang)
+
+<img src="assets/cards/day-028.png" width="420" alt="Day 28 card">
+
+- **Two questions, asked separately, then crossed.** Most automation commentary collapses "can it?" and "should it?" into one. This paper keeps them apart: **1,500 domain workers** rate what they want automated or augmented across **844 tasks in 104 occupations**, drawn from the U.S. Department of Labor's O*NET database, while AI experts rate what is currently feasible. The interesting content is entirely in the disagreement between the two ratings.
+- **Four zones, and only one of them is comfortable.** The **Automation "Green Light" Zone** - desired and capable - is where the easy wins live. The **R&D Opportunity Zone** - wanted but not yet possible - is the roadmap. The **Low Priority Zone** is neither. And then the **Automation "Red Light" Zone**: tasks that are technically automatable and that the workers doing them do not want automated. That zone is where deployments die quietly, and no model improvement touches it.
+- **The Human Agency Scale is the part I would actually use.** Rather than a binary automate/do-not-automate flag, the HAS gives "a shared language to quantify the preferred level of human involvement" in a task. That turns an argument ("is this safe to automate?") into a specification a system can be built against, which is exactly the move the analyst role is supposed to make.
+- **The unit of analysis is the task, not the job.** Occupations decompose into tasks with wildly different profiles, which is why "will AI take this job" is close to unanswerable and "should a system take this task, and how much human should stay in it" is tractable. Deciding which decision is worth supporting is a different skill from building the support.
+- **What it does not do.** It measures stated preference and expert-assessed capability, both self-reported instruments, both point-in-time - the capability side ages fastest. It is a U.S. workforce audit built on O*NET, so occupational structure elsewhere may not map. And a worker's preference is not automatically the right answer; it is one input a company has to weigh, not a veto it has to obey.
+
+**Why it matters:** the role the industry keeps advertising for is someone who knows which decision is worth money and can decompose it into things a system can compute. This paper is the closest thing to a public instrument for the first half of that, and the Red Light Zone is a reminder that the constraint is not always capability. Something can be buildable, valuable, and still not survive contact with the people whose work it changes.
+
+**What I learned:** I have been picking what to automate by looking at what is annoying and technically tractable. Those are two of the four inputs. The zone framing added a third I had not been asking for - whether the person doing it wants it gone - and a fourth in the Human Agency Scale, which is how much of them should remain in the loop by design rather than by accident.
+
+*Sources: [arXiv 2506.06576](https://arxiv.org/abs/2506.06576) (preprint, v1 6 Jun 2025, v3 1 Feb 2026; cs.CY). The arXiv listing states no peer-reviewed venue. The four zone names are quoted from the paper's own framing; per-zone task counts are not quoted, because this entry has not verified them from the full text. Cited only as the complementary half - decomposition rather than selection - and not as evidence for this paper's findings: Wei Sun, ["Decision-Centric Design for LLM Systems"](https://arxiv.org/abs/2604.00414) (preprint, v1 1 Apr 2026; cs.AI, cs.LG).*
+
 ---
 
 ## 🔗 Connect
@@ -922,5 +939,5 @@ source that argues the opposite.
 
 <div align="center">
 <br>
-<sub><b>Day 27 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
+<sub><b>Day 28 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
 </div>

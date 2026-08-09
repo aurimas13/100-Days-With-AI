@@ -8,7 +8,7 @@ A public learning log of modern Artificial Intelligence - transformers, LLMs,
 agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 <!-- Day badge: bumped by the daily run. If this is stale, the run said so in its log. -->
-[![Day](https://img.shields.io/badge/Day-28%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
+[![Day](https://img.shields.io/badge/Day-29%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Streak](https://img.shields.io/badge/Streak-unbroken-2EA043?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Level mix](https://img.shields.io/badge/Sources-Advanced%20%2B%20Medium-8957E5?style=for-the-badge&labelColor=0D1117)](#-progress)
 
@@ -18,7 +18,7 @@ agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 **[📈 Progress](#-progress)** · **[📚 Day Notes](#-day-notes)** · **[🔗 Connect](#-connect)**
 
-`2026-07-12` ──────────── **Day 28 of 100** ────────────► `2026-10-19`
+`2026-07-12` ──────────── **Day 29 of 100** ────────────► `2026-10-19`
 
 </div>
 
@@ -124,6 +124,7 @@ for the shape of the progress table.
 | 26 | 2026-08-06 | "A Benchmark to Understand the Role of Knowledge Graphs on Large Language Model's Accuracy for Question Answering on Enterprise SQL Databases" - Sequeda, Allemang & Jacob | Advanced | The meaning layer, measured - 43 enterprise questions over an insurance schema, answered by GPT-4 twice: straight against the SQL tables, and against a knowledge graph built from those same tables with an ontology and mappings. 16.7% correct becomes 54.2%, and on normalised schemas raw SQL scores 0% | [arXiv 2311.07509](https://arxiv.org/abs/2311.07509) |
 | 27 | 2026-08-07 | "Key Considerations for Domain Expert Involvement in LLM Design and Evaluation: An Ethnographic Study" - Szymanski, Anuyah, Li & Metoyer | Advanced | Twelve weeks inside a team building a pedagogical chatbot, watching what actually happens when developers try to get expert knowledge into an LLM system - four practices they fell into, and three obstacles that were about motivation, participation and ownership rather than technique | [arXiv 2602.14357](https://arxiv.org/abs/2602.14357) |
 | 28 | 2026-08-08 | "Future of Work with AI Agents: Auditing Automation and Augmentation Potential across the U.S. Workforce" - Shao, Zope, Jiang, Pei, Nguyen, Brynjolfsson & Yang | Advanced | An audit of which work people actually want automated, set against what AI can actually do - 1,500 workers, 104 occupations, 844 O*NET tasks, a Human Agency Scale for how much human involvement each task should keep, and four zones including the one where capability and desire point in opposite directions | [arXiv 2506.06576](https://arxiv.org/abs/2506.06576) |
+| 29 | 2026-08-09 | "Effective context engineering for AI agents" - Anthropic Applied AI team | Advanced | Context treated as a finite attention budget rather than storage - why performance degrades as the window fills, what belongs in a system prompt, tools and examples, just-in-time retrieval instead of pre-loading, and the three techniques that keep long-horizon agents coherent: compaction, structured note-taking outside the window, and sub-agents with clean contexts | [anthropic.com](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) |
 
 ---
 
@@ -904,6 +905,22 @@ source that argues the opposite.
 
 *Sources: [arXiv 2506.06576](https://arxiv.org/abs/2506.06576) (preprint, v1 6 Jun 2025, v3 1 Feb 2026; cs.CY). The arXiv listing states no peer-reviewed venue. The four zone names are quoted from the paper's own framing; per-zone task counts are not quoted, because this entry has not verified them from the full text. Cited only as the complementary half - decomposition rather than selection - and not as evidence for this paper's findings: Wei Sun, ["Decision-Centric Design for LLM Systems"](https://arxiv.org/abs/2604.00414) (preprint, v1 1 Apr 2026; cs.AI, cs.LG).*
 
+### Day 29 - "Effective context engineering for AI agents" (Anthropic Applied AI team)
+
+<img src="assets/cards/day-029.png" width="420" alt="Day 29 card">
+
+- **The reframe: context is a budget you spend, not a drawer you fill.** The piece argues for treating context as "a precious, finite resource", because attention is finite in a way storage is not - a transformer has to weigh n² pairwise relationships across n tokens, so every token added dilutes every other one. The term they use for what happens as the window fills is **context rot**. Bigger windows do not remove the constraint; they raise the price of being careless with it.
+- **Prompt engineering is a subset, and the distinction is about scope.** Prompt engineering asks how to word an instruction. Context engineering asks what configuration of the entire token space - system prompt, tools, examples, retrieved documents, message history, external notes - is most likely to produce the behaviour you want, across many turns rather than one. Agents loop, and a looping system generates its own growing dataset that has to be curated as it goes.
+- **Three concrete disciplines, none of them clever.** System prompts at the right altitude, organised into distinct sections rather than written as one block. Tools that are minimal and non-overlapping, with parameters that are obvious - an ambiguous tool set makes the model's decision harder before it has started. And examples that are few and canonical rather than an exhaustive catalogue of edge cases. Curated beats comprehensive in all three.
+- **Just-in-time retrieval over pre-loading.** Rather than stuffing everything relevant in up front, let the agent pull what it needs through tools at runtime, using lightweight identifiers - file paths, timestamps, folder structure - as the map. Metadata carries signal about relevance that the content itself does not. In practice the recommendation is hybrid: retrieve some up front for speed, leave the rest explorable.
+- **For long-horizon work, three named techniques.** **Compaction** - summarise as the window approaches its limit, keeping decisions and discarding spent tool output. **Structured note-taking** - the agent maintains persistent memory in files outside the context window, which is what lets a task survive for hours. **Sub-agent architectures** - specialised agents work in clean contexts and return condensed results to a coordinator.
+
+**Why it matters:** the industry keeps saying that the next wave of AI professionals will come from finance, logistics, healthcare, manufacturing and media rather than from ML research. This is the document that explains what those people would actually be doing. Deciding which document, which rule, which exception and which definition earns a place in a finite attention budget is a domain judgement wearing an engineering hat. The model is not the thing you need expertise about.
+
+**What I learned:** I had been treating a bigger context window as headroom. Framing it as an attention budget flips it into a cost, and it changed how I read my own set-ups - most of what I put in a system prompt is there because I was not sure what could be left out, which is exactly the habit the piece is arguing against. Curation is a decision, and undecided context is just cost.
+
+*Sources: [anthropic.com/engineering](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) (Anthropic Engineering, 29 September 2025). Bylined to the Applied AI team - Prithvi Rajasekaran, Ethan Dixon, Carly Ryan and Jeremy Hadfield, with contributions from Rafi Ayub, Hannah Moran, Cal Rueb and Connor Jennings. **Status: a vendor engineering blog, not a paper** - a practitioner account from a model provider, with the interest that implies. The terminology quoted here - "a precious, finite resource", context rot, compaction, structured note-taking, sub-agent architectures, just-in-time retrieval - is theirs and is quoted as theirs.*
+
 ---
 
 ## 🔗 Connect
@@ -939,5 +956,5 @@ source that argues the opposite.
 
 <div align="center">
 <br>
-<sub><b>Day 28 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
+<sub><b>Day 29 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
 </div>

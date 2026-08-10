@@ -8,7 +8,7 @@ A public learning log of modern Artificial Intelligence - transformers, LLMs,
 agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 <!-- Day badge: bumped by the daily run. If this is stale, the run said so in its log. -->
-[![Day](https://img.shields.io/badge/Day-29%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
+[![Day](https://img.shields.io/badge/Day-30%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Streak](https://img.shields.io/badge/Streak-unbroken-2EA043?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Level mix](https://img.shields.io/badge/Sources-Advanced%20%2B%20Medium-8957E5?style=for-the-badge&labelColor=0D1117)](#-progress)
 
@@ -18,7 +18,7 @@ agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 **[📈 Progress](#-progress)** · **[📚 Day Notes](#-day-notes)** · **[🔗 Connect](#-connect)**
 
-`2026-07-12` ──────────── **Day 29 of 100** ────────────► `2026-10-19`
+`2026-07-12` ──────────── **Day 30 of 100** ────────────► `2026-10-19`
 
 </div>
 
@@ -125,6 +125,7 @@ for the shape of the progress table.
 | 27 | 2026-08-07 | "Key Considerations for Domain Expert Involvement in LLM Design and Evaluation: An Ethnographic Study" - Szymanski, Anuyah, Li & Metoyer | Advanced | Twelve weeks inside a team building a pedagogical chatbot, watching what actually happens when developers try to get expert knowledge into an LLM system - four practices they fell into, and three obstacles that were about motivation, participation and ownership rather than technique | [arXiv 2602.14357](https://arxiv.org/abs/2602.14357) |
 | 28 | 2026-08-08 | "Future of Work with AI Agents: Auditing Automation and Augmentation Potential across the U.S. Workforce" - Shao, Zope, Jiang, Pei, Nguyen, Brynjolfsson & Yang | Advanced | An audit of which work people actually want automated, set against what AI can actually do - 1,500 workers, 104 occupations, 844 O*NET tasks, a Human Agency Scale for how much human involvement each task should keep, and four zones including the one where capability and desire point in opposite directions | [arXiv 2506.06576](https://arxiv.org/abs/2506.06576) |
 | 29 | 2026-08-09 | "Effective context engineering for AI agents" - Anthropic Applied AI team | Advanced | Context treated as a finite attention budget rather than storage - why performance degrades as the window fills, what belongs in a system prompt, tools and examples, just-in-time retrieval instead of pre-loading, and the three techniques that keep long-horizon agents coherent: compaction, structured note-taking outside the window, and sub-agents with clean contexts | [anthropic.com](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) |
+| 30 | 2026-08-10 | "The New Code" - Sean Grove (OpenAI), AI Engineer World's Fair 2025 | Advanced | The argument that the specification, not the code, is the durable artefact - code as a lossy projection of intent, OpenAI's Model Spec as a living markdown document whose clauses carry IDs and example prompts that function as unit tests, and the claim that writing code is only 10-20% of where an engineer's value sits | [YouTube](https://www.youtube.com/watch?v=8rABwKRsec4) |
 
 ---
 
@@ -923,6 +924,24 @@ source that argues the opposite.
 
 ---
 
+### Day 30 - "The New Code" (Sean Grove, OpenAI)
+
+<img src="assets/cards/day-030.png" width="420" alt="Day 30 card">
+
+- **The claim that carries the talk: code is 10-20% of the value.** The other 80-90% is what Grove calls structured communication - working out what people actually need, planning the approach, and verifying the result. If that split is even roughly right, then most of an engineer's leverage has always sat outside the editor, and the collapse in implementation cost simply made that visible rather than causing it.
+- **Code is a lossy projection of the specification.** The spec holds all the requirements and the intent; the code is one rendering of it. Grove's point is that a sufficiently precise spec can produce "good TypeScript, good Rust, servers, clients, documentation, tutorials, blog posts" - and that discarding the prompt after keeping the output, which is what most people do, is throwing away the source and keeping the build artefact.
+- **The Model Spec is the worked example, and it is the practical part.** OpenAI's own specification of intended model behaviour is a living markdown document, open-sourced, contributed to by technical and non-technical people alike. Every clause carries a unique identifier and associated example prompts that act as its unit tests. That is the mechanism that turns a document from a statement of values into something enforceable - a clause you cannot test is a preference, not a specification.
+- **The legal analogy is more than decoration.** Grove reads the U.S. Constitution as a national model specification: versioned by amendment, interpreted case by case, with judicial review as its evaluation loop. It is a useful frame because it makes the maintenance visible. Specs are not written once; they accumulate interpretation, and the interpretation has to be captured somewhere or it drifts back into people's heads.
+- **The line worth keeping.** "Software engineering has never been about code" - it is "the precise exploration by humans of software solutions to human problems." Overstated as slogans are, it names the thing correctly: the artefact everyone optimised for was never the point, it was just the expensive part.
+
+**Why it matters:** the working description of an AI engineer that keeps recurring is someone who spends more time on the specification and the evaluation than on the implementation, which reads as slow to anyone still assuming execution is where time goes. This talk is the clearest statement of why that is not slowness. It also closes a loop with yesterday - if a clause needs an example prompt to be testable, then writing the spec and writing the eval are the same act, done once.
+
+**What I learned:** I keep prompts as scratch and commit the output. That is backwards by this argument, and it is a habit I can change today rather than a principle I have to agree with first. The clause-with-test-cases shape is the concrete version: if I cannot write the example that would fail, I have not specified anything, I have expressed a preference.
+
+*Sources: [YouTube](https://www.youtube.com/watch?v=8rABwKRsec4) - "The New Code — Sean Grove, OpenAI", AI Engineer channel, recorded at AI Engineer World's Fair 2025, approx. 22 minutes. **Video ID caveat:** a second upload of the same talk circulates as `BIvILtt164I`; the link above is the AI Engineer channel upload and matches that channel's title convention, and if it ever 404s the other is the same talk. **Sourcing caveat, and it matters:** the quotations in this entry come from a published transcript summary of the talk, not from the video's own captions. They are reported as Grove's wording and should be treated as transcript-derived - the 10-20% figure and the "software engineering has never been about code" line are the two worth re-checking against the video before anyone quotes them onward. Supporting: OpenAI's Model Spec, open-sourced, referenced in the talk as the worked example.*
+
+---
+
 ## 🔗 Connect
 
 <div align="center">
@@ -956,5 +975,5 @@ source that argues the opposite.
 
 <div align="center">
 <br>
-<sub><b>Day 29 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
+<sub><b>Day 30 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
 </div>

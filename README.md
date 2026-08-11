@@ -8,7 +8,7 @@ A public learning log of modern Artificial Intelligence - transformers, LLMs,
 agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 <!-- Day badge: bumped by the daily run. If this is stale, the run said so in its log. -->
-[![Day](https://img.shields.io/badge/Day-30%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
+[![Day](https://img.shields.io/badge/Day-31%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Streak](https://img.shields.io/badge/Streak-unbroken-2EA043?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Level mix](https://img.shields.io/badge/Sources-Advanced%20%2B%20Medium-8957E5?style=for-the-badge&labelColor=0D1117)](#-progress)
 
@@ -18,7 +18,7 @@ agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 **[📈 Progress](#-progress)** · **[📚 Day Notes](#-day-notes)** · **[🔗 Connect](#-connect)**
 
-`2026-07-12` ──────────── **Day 30 of 100** ────────────► `2026-10-19`
+`2026-07-12` ──────────── **Day 31 of 100** ────────────► `2026-10-19`
 
 </div>
 
@@ -126,6 +126,7 @@ for the shape of the progress table.
 | 28 | 2026-08-08 | "Future of Work with AI Agents: Auditing Automation and Augmentation Potential across the U.S. Workforce" - Shao, Zope, Jiang, Pei, Nguyen, Brynjolfsson & Yang | Advanced | An audit of which work people actually want automated, set against what AI can actually do - 1,500 workers, 104 occupations, 844 O*NET tasks, a Human Agency Scale for how much human involvement each task should keep, and four zones including the one where capability and desire point in opposite directions | [arXiv 2506.06576](https://arxiv.org/abs/2506.06576) |
 | 29 | 2026-08-09 | "Effective context engineering for AI agents" - Anthropic Applied AI team | Advanced | Context treated as a finite attention budget rather than storage - why performance degrades as the window fills, what belongs in a system prompt, tools and examples, just-in-time retrieval instead of pre-loading, and the three techniques that keep long-horizon agents coherent: compaction, structured note-taking outside the window, and sub-agents with clean contexts | [anthropic.com](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) |
 | 30 | 2026-08-10 | "The New Code" - Sean Grove (OpenAI), AI Engineer World's Fair 2025 | Advanced | The argument that the specification, not the code, is the durable artefact - code as a lossy projection of intent, OpenAI's Model Spec as a living markdown document whose clauses carry IDs and example prompts that function as unit tests, and the claim that writing code is only 10-20% of where an engineer's value sits | [YouTube](https://www.youtube.com/watch?v=8rABwKRsec4) |
+| 31 | 2026-08-11 | "Asymmetry of verification and verifier's law" - Jason Wei | Advanced | Why some tasks are far easier to check than to solve, the five properties that make a task cheap to verify, and the rule that follows - the ease of training AI to do something is proportional to how verifiable it is. Paired with the organisational half: verification is the only phase of the work with no natural owner, and giving it one is the decision that makes the rest compound | [jasonwei.net](https://www.jasonwei.net/blog/asymmetry-of-verification-and-verifiers-law) |
 
 ---
 
@@ -942,6 +943,24 @@ source that argues the opposite.
 
 ---
 
+### Day 31 - "Asymmetry of verification and verifier's law" (Jason Wei)
+
+<img src="assets/cards/day-031.png" width="420" alt="Day 31 card">
+
+- **The asymmetry, stated plainly.** Some tasks are much harder to solve than to check. Sudoku and crosswords take a long time to fill in and a moment to validate. A website takes a team years to build and any layperson a minute to see is broken. Competition maths is hours of work and instant with an answer key. The gap between doing and checking is not a curiosity - with reinforcement learning that actually works, it is what determines where progress happens.
+- **Verifier's law, verbatim.** "The ease of training AI to solve a task is proportional to how verifiable the task is. All tasks that are possible to solve and easy to verify will be solved by AI." That is a strong claim and worth holding at arm's length, but the direction is hard to argue with: capability follows measurability, and things nobody can score reliably stay stuck regardless of how much they matter.
+- **Five properties that make a task cheap to verify.** Objective truth - people agree on what a good solution is. Fast to verify - seconds, not a review cycle. Scalable to verify - many solutions at once. Low noise - the verdict tracks actual quality rather than wobbling. Continuous reward - you can rank solutions, not just pass or fail them. Read that list against your own system and it doubles as a diagnostic for why a particular loop refuses to close.
+- **The organisational half, which the essay does not cover and which matters more day to day.** Four kinds of work have obvious owners: someone aligns, someone specifies, someone models the language, someone builds. Verification has all four of them, and therefore none. It is universally everybody's *second* priority. That is the most convincing explanation I have seen for why so many teams describe a feedback loop they intend to close and never do.
+- **The practical answer is a named person, and it is smaller than it sounds.** The evals practitioners' version of this is a single principal domain expert - a "benevolent dictator" - who is the arbiter of quality: a psychologist for a mental-health assistant, a lawyer for legal analysis. One expert eliminates annotation conflicts and prevents the paralysis of too many graders. They can take input from everyone; they still decide. Alongside that: bottom-up error analysis on real traces rather than top-down generic metrics, a purpose-built viewer so anyone can see what the system actually did, and treating the criteria as a living document because criteria drift is real.
+
+**Why it matters:** if there is one staffing decision to take from this whole arc, it is this one. Give verification an explicit owner before you need one, because it is the phase that decides whether the other three compound or just accumulate. Alignment, specification and language modelling all produce artefacts that quietly decay unless something scores them, and scoring is precisely the job that no one is measured on.
+
+**What I learned:** I have been treating evaluation as the thing you do after building, when the honest description is that it is the thing that makes building mean anything. The five properties gave me a diagnostic I did not have - when a loop of mine will not close, I can now ask which property is missing rather than concluding the task is just hard. Most often for me it is low noise: my own judgement of "good" moves between sittings, which is criteria drift with a personal name on it.
+
+*Sources: [jasonwei.net](https://www.jasonwei.net/blog/asymmetry-of-verification-and-verifiers-law) (Jason Wei, 15 July 2025), freely readable in full. **Title discrepancy, stated rather than smoothed over:** the page heading reads "Asymmetry of verification and verifier's rule", while the URL and the author's own announcement say "verifier's law"; the law is quoted verbatim above and the heading here uses "law" to match the URL and the way it is cited elsewhere. Both wordings are the author's. Supporting, for the ownership half: Hamel Husain, "A Field Guide to Rapidly Improving AI Products" - [hamel.dev](https://hamel.dev/blog/posts/field-guide/) (24 March 2025), the source of the single principal domain expert framing, error analysis on real traces, the data viewer point and criteria drift. **Status: both are practitioner blog posts, not peer-reviewed work.** Verifier's law is an argued claim, not a measured result, and this entry says so.*
+
+---
+
 ## 🔗 Connect
 
 <div align="center">
@@ -975,5 +994,5 @@ source that argues the opposite.
 
 <div align="center">
 <br>
-<sub><b>Day 30 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
+<sub><b>Day 31 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
 </div>

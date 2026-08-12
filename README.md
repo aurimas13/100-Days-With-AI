@@ -8,7 +8,7 @@ A public learning log of modern Artificial Intelligence - transformers, LLMs,
 agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 <!-- Day badge: bumped by the daily run. If this is stale, the run said so in its log. -->
-[![Day](https://img.shields.io/badge/Day-31%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
+[![Day](https://img.shields.io/badge/Day-32%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Streak](https://img.shields.io/badge/Streak-unbroken-2EA043?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Level mix](https://img.shields.io/badge/Sources-Advanced%20%2B%20Medium-8957E5?style=for-the-badge&labelColor=0D1117)](#-progress)
 
@@ -18,7 +18,7 @@ agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 **[📈 Progress](#-progress)** · **[📚 Day Notes](#-day-notes)** · **[🔗 Connect](#-connect)**
 
-`2026-07-12` ──────────── **Day 31 of 100** ────────────► `2026-10-19`
+`2026-07-12` ──────────── **Day 32 of 100** ────────────► `2026-10-19`
 
 </div>
 
@@ -127,6 +127,7 @@ for the shape of the progress table.
 | 29 | 2026-08-09 | "Effective context engineering for AI agents" - Anthropic Applied AI team | Advanced | Context treated as a finite attention budget rather than storage - why performance degrades as the window fills, what belongs in a system prompt, tools and examples, just-in-time retrieval instead of pre-loading, and the three techniques that keep long-horizon agents coherent: compaction, structured note-taking outside the window, and sub-agents with clean contexts | [anthropic.com](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) |
 | 30 | 2026-08-10 | "The New Code" - Sean Grove (OpenAI), AI Engineer World's Fair 2025 | Advanced | The argument that the specification, not the code, is the durable artefact - code as a lossy projection of intent, OpenAI's Model Spec as a living markdown document whose clauses carry IDs and example prompts that function as unit tests, and the claim that writing code is only 10-20% of where an engineer's value sits | [YouTube](https://www.youtube.com/watch?v=8rABwKRsec4) |
 | 31 | 2026-08-11 | "Asymmetry of verification and verifier's law" - Jason Wei | Advanced | Why some tasks are far easier to check than to solve, the five properties that make a task cheap to verify, and the rule that follows - the ease of training AI to do something is proportional to how verifiable it is. Paired with the organisational half: verification is the only phase of the work with no natural owner, and giving it one is the decision that makes the rest compound | [jasonwei.net](https://www.jasonwei.net/blog/asymmetry-of-verification-and-verifiers-law) |
+| 32 | 2026-08-12 | "Reflections on Palantir" - Nabeel S. Qureshi | Advanced | A first-hand account of the forward deployed engineer model from eight years inside the company that invented it - FDEs onsite at the customer three or four days a week solving the specific problem badly and fast, a separate product team generalising whatever they built, and the observation that deployments died of organisational politics far more often than of engineering | [nabeelqu.co](https://nabeelqu.co/reflections-on-palantir) |
 
 ---
 
@@ -961,6 +962,24 @@ source that argues the opposite.
 
 ---
 
+### Day 32 - "Reflections on Palantir" (Nabeel S. Qureshi)
+
+<img src="assets/cards/day-032.png" width="420" alt="Day 32 card">
+
+- **Two engineering populations, deliberately kept different.** Forward deployed engineers worked at customer sites three or four days a week - unusual to the point of strange for a Silicon Valley company. Product development engineers built the platform and rarely visited a customer. The division of labour is stated cleanly by the author: "Your job was to solve the problem, and not worry about overfitting; PD's job was to take whatever you'd built and generalize it, with the goal of selling it elsewhere." Permission to overfit, granted explicitly to one group and withheld from the other, is the whole mechanism.
+- **What the FDE actually did was less glamorous than the title.** A year at Airbus in Toulouse: "you took disparate sources of data — work orders, missing parts, quality issues — and put them in a nice interface." The value was not in the interface. It was in knowing which of those sources to trust and what the numbers meant on a factory floor, which is knowledge you get by being in the building and cannot get from a requirements document.
+- **The scarce trait was social, not technical.** Being a successful FDE "required an unusual sensitivity to social context", and the real job was to "partner with your corporate counterparts at the highest level and gain their trust." That is a different hiring profile from a strong engineer, and it explains why the role is hard to fill at scale rather than merely expensive.
+- **Deployments died of politics, and the paper trail says so.** Data owners treat access as a source of power and job security, so a pilot could burn eight to twelve weeks simply getting to the data, leaving almost nothing for the work itself. The essay lists public failures - a $110 million government website that does not function, healthcare.gov, a $40 million San Francisco payroll system - as cases where politics beat substance. Access is a negotiation before it is a permission.
+- **The costs were real and internal.** Small autonomous teams of four or five moved fast across many sites, and travel expenses spiralled. Culturally the bias was "get on a plane first, ask questions later." Influence tracked visible project momentum rather than title, which the author calls a "hero-shithead rollercoaster" at scale - a polite way of saying the model was unstable to be inside even while it worked commercially.
+
+**Why it matters:** every AI company is now hiring for this shape, and mostly copying the job description rather than the structure that made it work. The structure has three parts: an engineer permitted to overfit, a separate team whose job is to generalise, and a loop between them. Hire the first without the second and you have bought consultancy. The essay is also the honest counterweight to the current enthusiasm - it describes the model from the inside, including the parts that were unpleasant.
+
+**What I learned:** the phrase that reorganised my thinking is permission to overfit. I have been treating generalisation as a virtue to apply while building, and that is often just refusing to learn the specific case first. Solving one customer's problem badly, on purpose, with someone else responsible for making it general, is a division of labour rather than a lapse in standards - and I do not have that second person, so I should stop pretending I am both.
+
+*Sources: [nabeelqu.co](https://nabeelqu.co/reflections-on-palantir) - Nabeel S. Qureshi, a retrospective on an eight-year stint at Palantir, also mirrored at [medium.com](https://medium.com/@nabeelqu/reflections-on-palantir-52433cf95439) (the canonical URL rate-limits automated readers, and the mirror served the same text). **Status: a personal essay, first-hand and openly partisan about its subject.** It is evidence about how the model felt and functioned from inside one company, not a study of the model's effectiveness, and this entry treats it that way throughout. **Quotation note:** quoted phrases keep the author's original American spelling ("generalize"); the surrounding prose is British per house style. **Rejected source, recorded so it is not re-attempted:** Gergely Orosz, "What are Forward Deployed Engineers, and why are they so in demand?" (The Pragmatic Engineer, 12 Aug 2025) is the best-researched piece on the role but paywalls mid-article, so it is not usable as a primary here.*
+
+---
+
 ## 🔗 Connect
 
 <div align="center">
@@ -994,5 +1013,5 @@ source that argues the opposite.
 
 <div align="center">
 <br>
-<sub><b>Day 31 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
+<sub><b>Day 32 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
 </div>

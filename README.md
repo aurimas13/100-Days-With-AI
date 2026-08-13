@@ -8,7 +8,7 @@ A public learning log of modern Artificial Intelligence - transformers, LLMs,
 agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 <!-- Day badge: bumped by the daily run. If this is stale, the run said so in its log. -->
-[![Day](https://img.shields.io/badge/Day-32%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
+[![Day](https://img.shields.io/badge/Day-33%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Streak](https://img.shields.io/badge/Streak-unbroken-2EA043?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Level mix](https://img.shields.io/badge/Sources-Advanced%20%2B%20Medium-8957E5?style=for-the-badge&labelColor=0D1117)](#-progress)
 
@@ -18,7 +18,7 @@ agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 **[📈 Progress](#-progress)** · **[📚 Day Notes](#-day-notes)** · **[🔗 Connect](#-connect)**
 
-`2026-07-12` ──────────── **Day 32 of 100** ────────────► `2026-10-19`
+`2026-07-12` ──────────── **Day 33 of 100** ────────────► `2026-10-19`
 
 </div>
 
@@ -128,6 +128,7 @@ for the shape of the progress table.
 | 30 | 2026-08-10 | "The New Code" - Sean Grove (OpenAI), AI Engineer World's Fair 2025 | Advanced | The argument that the specification, not the code, is the durable artefact - code as a lossy projection of intent, OpenAI's Model Spec as a living markdown document whose clauses carry IDs and example prompts that function as unit tests, and the claim that writing code is only 10-20% of where an engineer's value sits | [YouTube](https://www.youtube.com/watch?v=8rABwKRsec4) |
 | 31 | 2026-08-11 | "Asymmetry of verification and verifier's law" - Jason Wei | Advanced | Why some tasks are far easier to check than to solve, the five properties that make a task cheap to verify, and the rule that follows - the ease of training AI to do something is proportional to how verifiable it is. Paired with the organisational half: verification is the only phase of the work with no natural owner, and giving it one is the decision that makes the rest compound | [jasonwei.net](https://www.jasonwei.net/blog/asymmetry-of-verification-and-verifiers-law) |
 | 32 | 2026-08-12 | "Reflections on Palantir" - Nabeel S. Qureshi | Advanced | A first-hand account of the forward deployed engineer model from eight years inside the company that invented it - FDEs onsite at the customer three or four days a week solving the specific problem badly and fast, a separate product team generalising whatever they built, and the observation that deployments died of organisational politics far more often than of engineering | [nabeelqu.co](https://nabeelqu.co/reflections-on-palantir) |
+| 33 | 2026-08-13 | "The GenAI Divide: State of AI in Business 2025" - MIT NANDA | Advanced | The origin of the "95% of AI pilots deliver no measurable P&L impact" figure that half the industry now quotes - what the report actually surveyed, what it concluded about the learning gap between tools and organisations, and the substantial methodological criticism it drew once the number went viral | [report PDF](https://mlq.ai/media/quarterly_decks/v0.1_State_of_AI_in_Business_2025_Report.pdf) |
 
 ---
 
@@ -980,6 +981,24 @@ source that argues the opposite.
 
 ---
 
+### Day 33 - "The GenAI Divide: State of AI in Business 2025" (MIT NANDA)
+
+<img src="assets/cards/day-033.png" width="420" alt="Day 33 card">
+
+- **The claim, and where it comes from.** Roughly **95% of generative AI pilots produce no measurable profit-and-loss impact**, against something in the range of $30-40 billion of enterprise investment. The evidence base as described is 52 executive interviews, a survey of 153 leaders, and an analysis of 300 public AI deployments. The report's own framing is "high adoption but low transformation".
+- **The diagnosis is the useful half, and it is not about models.** The failure is attributed to a learning gap - in the tools and in the organisations around them - rather than to model capability. The supporting shape: generic chatbots reach high adoption for trivial tasks and stall the moment a workflow needs real context and customisation, while only a small fraction of custom tools survive the crossing from pilot to production. That is an integration finding, not an intelligence finding.
+- **Now the part that usually gets left out.** This is not peer-reviewed work. It was issued as preliminary findings, and after the number went viral several analysts asked the authors to publish the underlying data, with at least one arguing that the 95% figure is difficult to reconstruct from the report itself and that it should be substantiated or withdrawn. Futuriom's assessment was that the report "paints an irresponsible and unfounded picture of what's happening in Enterprise AI."
+- **There is also an incentive worth naming.** NANDA's own agenda concerns agent-based, decentralised AI infrastructure. A report concluding that current enterprise AI approaches are failing is not neutral with respect to that agenda. That does not make the finding wrong; it means the finding should not be quoted as a neutral audit, which is exactly how it usually is quoted.
+- **What survives all of that.** The defence offered by its supporters is the one I find persuasive: the specific percentage is fragile, and the structural claim is not. The blockage sits in integration, workflow and organisational readiness rather than in what the models can do, and that claim is independently corroborated by essentially every practitioner account of enterprise deployment. Take the direction; do not take the decimal.
+
+**Why it matters:** this single number is doing an enormous amount of work in the market right now. It is the stated justification for a wave of AI Operations Lead postings - one internal person expected to find the manual work, build the systems, drive adoption, own governance and report a monthly result. If a role is being created off the back of a statistic, the statistic is worth reading at source, including its criticism. The role may well be justified; the evidence that is usually cited for it is weaker than its confidence suggests.
+
+**What I learned:** the honest lesson is about my own reading rather than about enterprise AI. I had repeated the 95% figure without ever having opened the report, because it confirmed something I already believed. Going to the source did not overturn the conclusion, but it changed what I am entitled to say - "one widely cited and contested report found" is a different sentence from "95% of AI pilots fail", and only one of them is true.
+
+*Sources: the report PDF at [mlq.ai](https://mlq.ai/media/quarterly_decks/v0.1_State_of_AI_in_Business_2025_Report.pdf) - a mirrored copy, because MIT NANDA has not hosted a stable public link. Note the `v0.1` in the filename: it is a preliminary document, and this entry says so in the note itself rather than only here. Critical coverage used for the criticism section: Futuriom, "Why We Don't Believe MIT NANDA's Weird AI Study" - [futuriom.com](https://www.futuriom.com/articles/news/why-we-dont-believe-mit-nandas-werid-ai-study/2025/08) - and [aiwiki.ai](https://aiwiki.ai/wiki/mit_genai_divide_report). **Status: a preliminary industry report, not peer-reviewed, with a documented dispute over its headline figure and a disclosed interest on the part of its publisher.** All three of those facts appear in the note above, not only in this line. **Verification limit, stated honestly:** the survey counts - 52 interviews, 153 leaders, 300 deployments - and the 95% figure are taken from the report's own summary and from coverage of it. This entry does not claim to have reproduced the analysis, and it makes no claim about per-industry breakdowns.*
+
+---
+
 ## 🔗 Connect
 
 <div align="center">
@@ -1013,5 +1032,5 @@ source that argues the opposite.
 
 <div align="center">
 <br>
-<sub><b>Day 32 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
+<sub><b>Day 33 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
 </div>

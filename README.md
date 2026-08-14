@@ -8,7 +8,7 @@ A public learning log of modern Artificial Intelligence - transformers, LLMs,
 agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 <!-- Day badge: bumped by the daily run. If this is stale, the run said so in its log. -->
-[![Day](https://img.shields.io/badge/Day-33%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
+[![Day](https://img.shields.io/badge/Day-34%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Streak](https://img.shields.io/badge/Streak-unbroken-2EA043?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Level mix](https://img.shields.io/badge/Sources-Advanced%20%2B%20Medium-8957E5?style=for-the-badge&labelColor=0D1117)](#-progress)
 
@@ -18,7 +18,7 @@ agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 **[📈 Progress](#-progress)** · **[📚 Day Notes](#-day-notes)** · **[🔗 Connect](#-connect)**
 
-`2026-07-12` ──────────── **Day 33 of 100** ────────────► `2026-10-19`
+`2026-07-12` ──────────── **Day 34 of 100** ────────────► `2026-10-19`
 
 </div>
 
@@ -129,6 +129,7 @@ for the shape of the progress table.
 | 31 | 2026-08-11 | "Asymmetry of verification and verifier's law" - Jason Wei | Advanced | Why some tasks are far easier to check than to solve, the five properties that make a task cheap to verify, and the rule that follows - the ease of training AI to do something is proportional to how verifiable it is. Paired with the organisational half: verification is the only phase of the work with no natural owner, and giving it one is the decision that makes the rest compound | [jasonwei.net](https://www.jasonwei.net/blog/asymmetry-of-verification-and-verifiers-law) |
 | 32 | 2026-08-12 | "Reflections on Palantir" - Nabeel S. Qureshi | Advanced | A first-hand account of the forward deployed engineer model from eight years inside the company that invented it - FDEs onsite at the customer three or four days a week solving the specific problem badly and fast, a separate product team generalising whatever they built, and the observation that deployments died of organisational politics far more often than of engineering | [nabeelqu.co](https://nabeelqu.co/reflections-on-palantir) |
 | 33 | 2026-08-13 | "The GenAI Divide: State of AI in Business 2025" - MIT NANDA | Advanced | The origin of the "95% of AI pilots deliver no measurable P&L impact" figure that half the industry now quotes - what the report actually surveyed, what it concluded about the learning gap between tools and organisations, and the substantial methodological criticism it drew once the number went viral | [report PDF](https://mlq.ai/media/quarterly_decks/v0.1_State_of_AI_in_Business_2025_Report.pdf) |
+| 34 | 2026-08-14 | "The Rise of the AI Engineer" - Shawn "swyx" Wang | Medium | The essay that named the role, three years before the current wave of titles - applied AI splitting off from ML research because foundation models made capability available through an API, and why the job that resulted is an engineering job rather than a research one | [latent.space](https://www.latent.space/p/ai-engineer) |
 
 ---
 
@@ -999,6 +1000,24 @@ source that argues the opposite.
 
 ---
 
+### Day 34 - "The Rise of the AI Engineer" (Shawn "swyx" Wang)
+
+<img src="assets/cards/day-034.png" width="420" alt="Day 34 card">
+
+- **The observation that started it: a shift right in who can do applied AI.** Work that in 2013 needed five years and a research team became, by 2023, something reachable with API documentation and a spare afternoon. Not because the science got easier, but because capability arrived pre-built and behind an interface. Everything downstream - the titles, the salaries, the arguments about what counts as a real AI job - follows from that one change in access.
+- **The distinction that has aged best.** "When it comes to shipping AI products, you want engineers, not researchers." The AI engineer does not need PyTorch or the training-side fundamentals; they work with APIs and open models and are judged on whether a product works. That was contentious when written and is now simply how most of the industry is organised.
+- **Code came back, and that is the part people forget.** The early enthusiasm was for prompt engineering as a standalone skill. What actually emerged is that human-written code orchestrating model calls is where the systems live - context assembly, tools, retrieval, permissions, fallbacks. The prompt is one component inside a program, not a replacement for one.
+- **Reading it in 2026, the interesting thing is what it did not name.** The essay gets the split right and stops at one role. What has happened since is that the same split kept subdividing: the person with the standing to align departments, the person who decides which decision is worth supporting, the person who owns the shared vocabulary, the person who builds and verifies - and, in the market, the forward deployed engineer and the AI operations lead as two commercial packagings of the same set of jobs. One essay, one role; three years later, a role family.
+- **Which is why the titles are unreliable and the mandates are not.** AI operations lead can mean internal transformation, platform reliability, or running a business function that happens to use AI. Applied AI engineer can mean product work, deployment work, or technical consulting. The durable question is not what the title says but which of the four kinds of work the job actually owns, and whether anyone owns the checking.
+
+**Why it matters:** this is the origin document for the whole arc. Reading it after eight days on the meaning layer, domain expertise, decision selection, context, specification, verification and the forward deployed engineer makes the shape obvious: applied AI separated from research once, and it has been separating into specialisms ever since. Anyone job-hunting into this market is better served by reading the mandate than the title, and this essay is where the titles started.
+
+**What I learned:** I have been treating the newer roles as if they appeared from nowhere in the last eighteen months. They did not. They are the continuation of a split that was already legible in 2023, which means the sensible way to position myself is not to chase whichever title is currently fashionable but to be able to say which parts of the work I can own - and, after Day 31, whether I am willing to own the checking.
+
+*Sources: [latent.space](https://www.latent.space/p/ai-engineer) - Shawn "swyx" Wang, "The Rise of the AI Engineer", Latent Space, 30 June 2023, freely readable in full and read at source for this entry. **Status: an essay, not a study.** The level is recorded as Medium for that reason - it is the canonical piece that named the role rather than a piece of research, and marking it Advanced would be flattering it. The job-posting trend it cites is its own observation rather than an external dataset, and this entry deliberately repeats no figure from it. **Rejected source, recorded so it is not re-attempted:** Chris Lovejoy's "The Domain-Native AI Organization" (chrislovejoy.me/domain-native-ai-org, April 2026) was the other candidate for this slot and sits closer to the role-relations question, but the page carries no article text - the argument lives in a slide PDF that exceeds the fetch limit and in an unlinked recording - so it could not be read at source. An unreadable source is not a source. It stays a live candidate if the deck or the recording can be supplied.*
+
+---
+
 ## 🔗 Connect
 
 <div align="center">
@@ -1032,5 +1051,5 @@ source that argues the opposite.
 
 <div align="center">
 <br>
-<sub><b>Day 33 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
+<sub><b>Day 34 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
 </div>

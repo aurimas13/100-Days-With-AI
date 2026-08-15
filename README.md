@@ -8,7 +8,7 @@ A public learning log of modern Artificial Intelligence - transformers, LLMs,
 agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 <!-- Day badge: bumped by the daily run. If this is stale, the run said so in its log. -->
-[![Day](https://img.shields.io/badge/Day-34%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
+[![Day](https://img.shields.io/badge/Day-35%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Streak](https://img.shields.io/badge/Streak-unbroken-2EA043?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Level mix](https://img.shields.io/badge/Sources-Advanced%20%2B%20Medium-8957E5?style=for-the-badge&labelColor=0D1117)](#-progress)
 
@@ -18,7 +18,7 @@ agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 **[📈 Progress](#-progress)** · **[📚 Day Notes](#-day-notes)** · **[🔗 Connect](#-connect)**
 
-`2026-07-12` ──────────── **Day 34 of 100** ────────────► `2026-10-19`
+`2026-07-12` ──────────── **Day 35 of 100** ────────────► `2026-10-19`
 
 </div>
 
@@ -130,6 +130,7 @@ for the shape of the progress table.
 | 32 | 2026-08-12 | "Reflections on Palantir" - Nabeel S. Qureshi | Advanced | A first-hand account of the forward deployed engineer model from eight years inside the company that invented it - FDEs onsite at the customer three or four days a week solving the specific problem badly and fast, a separate product team generalising whatever they built, and the observation that deployments died of organisational politics far more often than of engineering | [nabeelqu.co](https://nabeelqu.co/reflections-on-palantir) |
 | 33 | 2026-08-13 | "The GenAI Divide: State of AI in Business 2025" - MIT NANDA | Advanced | The origin of the "95% of AI pilots deliver no measurable P&L impact" figure that half the industry now quotes - what the report actually surveyed, what it concluded about the learning gap between tools and organisations, and the substantial methodological criticism it drew once the number went viral | [report PDF](https://mlq.ai/media/quarterly_decks/v0.1_State_of_AI_in_Business_2025_Report.pdf) |
 | 34 | 2026-08-14 | "The Rise of the AI Engineer" - Shawn "swyx" Wang | Medium | The essay that named the role, three years before the current wave of titles - applied AI splitting off from ML research because foundation models made capability available through an API, and why the job that resulted is an engineering job rather than a research one | [latent.space](https://www.latent.space/p/ai-engineer) |
+| 35 | 2026-08-15 | "A Practical Guide to Agentic AI Transition in Organizations" - Bandara et al. | Advanced | Seven principles for moving an organisation to agentic workflows, built around keeping the human as orchestrator rather than executor - decomposing manual processes into agents with defined inputs and outputs, teams of no more than three or four, business-domain representatives as core members, and interaction boundaries decided in advance rather than discovered | [arXiv 2602.10122](https://arxiv.org/abs/2602.10122) |
 
 ---
 
@@ -1018,6 +1019,24 @@ source that argues the opposite.
 
 ---
 
+### Day 35 - "A Practical Guide to Agentic AI Transition in Organizations" (Bandara et al.)
+
+<img src="assets/cards/day-035.png" width="420" alt="Day 35 card">
+
+- **Seven principles, and the ordering is the argument.** They run: understand the business domain and its manual processes; delegate those processes into agents; keep humans as the orchestrators; use AI to build the agentic workflows; build small autonomous teams; sustain deep collaboration between engineering and business; and keep adapting. Understanding the domain is first and building is fourth, which is the same re-proportioning this whole arc has been circling.
+- **The orchestrator model, stated concretely enough to copy.** "A single human coordinator interacts with, invokes, and supervises diverse agentic workflows through a unified natural language interface", with each workflow independently exposed through an MCP server. The human is not in the loop as an approver bolted onto the end; they are the point the workflows radiate from. That is an architecture decision with an org-chart consequence, which is the useful kind.
+- **Where governance actually lives here.** The paper puts it in the design of interaction points: "Certain actions may require human validation, escalation, or intervention based on risk, uncertainty, or business impact. Designing these interaction points ensures that agentic workflows operate autonomously where appropriate while remaining aligned with organizational control, trust, and accountability requirements." Deciding in advance which actions need a human is the closest this guide comes to naming an owner for verification - and it is a design-time decision, not a runtime reaction.
+- **Team shape: three or four people, with the business inside the team.** Large hierarchical structures are described as "poorly suited to agentic AI development due to the inherent uncertainty and exploratory nature of the work", and "including business-domain representatives as core members of the team is essential." Not consulted, not interviewed at kickoff - members. That is the structural answer to the ownership problem the ethnography on Day 27 documented.
+- **The case study is small, honest, and does not carry numbers.** A tourism SME, six candidate use cases (invoicing, itinerary planning, transport management, customer enquiries, supplier coordination, booking management), delivered by a single engineer using AI-assisted development tools, primarily Claude Code. The planning workflow decomposes into five specialised agents. Evaluation criteria are listed - reasoning correctness, output consistency, operational usefulness, interpretability for human supervisors, efficiency gains against the manual process, alignment with responsible AI principles. **No efficiency, cost or error figures are reported.** A guide, then, not evidence, and it should be read as one.
+
+**Why it matters:** it closes the arc on the practical question. Days 26 to 31 said what the work is - meaning, domain judgement, decision selection, context, specification, verification. Days 32 to 34 said who does it and where the titles came from. This one says what the team looks like when it is small enough that one person holds several of those jobs at once, which is the situation almost everyone reading is actually in. Below roughly a hundred people, the four roles collapse into a handful of people and the design constraint becomes not losing meaning in the handoffs.
+
+**What I learned:** the line I am keeping is that interaction points are designed rather than discovered. Everywhere I have automated something for myself, the answer to "when should this stop and ask me" got settled after the first time it went wrong. Deciding it up front, per action, on risk and business impact, is both more work and obviously correct - and it is the same move as writing the spec before the code, which is where this arc started.
+
+*Sources: the arXiv abstract page at [arXiv 2602.10122](https://arxiv.org/abs/2602.10122) (v1, 27 January 2026; cs.CY, cs.AI), with the principles, quotations and case study read from the full text at [arxiv.org/html/2602.10122v1](https://arxiv.org/html/2602.10122v1). Lead author Eranga Bandara, with sixteen co-authors including Ross Gore, Sachin Shetty, Ravi Mukkamala, Peter Foytik, Xueping Liang and Kasun De Zoysa; the table credits "Bandara et al." rather than listing seventeen names. **Status: a preprint, and a guide rather than a study.** The listing states no peer-reviewed venue. The note says explicitly that no efficiency, cost or error figures are reported, because the paper's shape invites a reader to assume a measured result that is not there.*
+
+---
+
 ## 🔗 Connect
 
 <div align="center">
@@ -1051,5 +1070,5 @@ source that argues the opposite.
 
 <div align="center">
 <br>
-<sub><b>Day 34 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
+<sub><b>Day 35 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
 </div>

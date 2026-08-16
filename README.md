@@ -8,7 +8,7 @@ A public learning log of modern Artificial Intelligence - transformers, LLMs,
 agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 <!-- Day badge: bumped by the daily run. If this is stale, the run said so in its log. -->
-[![Day](https://img.shields.io/badge/Day-35%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
+[![Day](https://img.shields.io/badge/Day-36%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Streak](https://img.shields.io/badge/Streak-unbroken-2EA043?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Level mix](https://img.shields.io/badge/Sources-Advanced%20%2B%20Medium-8957E5?style=for-the-badge&labelColor=0D1117)](#-progress)
 
@@ -18,7 +18,7 @@ agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 **[📈 Progress](#-progress)** · **[📚 Day Notes](#-day-notes)** · **[🔗 Connect](#-connect)**
 
-`2026-07-12` ──────────── **Day 35 of 100** ────────────► `2026-10-19`
+`2026-07-12` ──────────── **Day 36 of 100** ────────────► `2026-10-19`
 
 </div>
 
@@ -131,6 +131,7 @@ for the shape of the progress table.
 | 33 | 2026-08-13 | "The GenAI Divide: State of AI in Business 2025" - MIT NANDA | Advanced | The origin of the "95% of AI pilots deliver no measurable P&L impact" figure that half the industry now quotes - what the report actually surveyed, what it concluded about the learning gap between tools and organisations, and the substantial methodological criticism it drew once the number went viral | [report PDF](https://mlq.ai/media/quarterly_decks/v0.1_State_of_AI_in_Business_2025_Report.pdf) |
 | 34 | 2026-08-14 | "The Rise of the AI Engineer" - Shawn "swyx" Wang | Medium | The essay that named the role, three years before the current wave of titles - applied AI splitting off from ML research because foundation models made capability available through an API, and why the job that resulted is an engineering job rather than a research one | [latent.space](https://www.latent.space/p/ai-engineer) |
 | 35 | 2026-08-15 | "A Practical Guide to Agentic AI Transition in Organizations" - Bandara et al. | Advanced | Seven principles for moving an organisation to agentic workflows, built around keeping the human as orchestrator rather than executor - decomposing manual processes into agents with defined inputs and outputs, teams of no more than three or four, business-domain representatives as core members, and interaction boundaries decided in advance rather than discovered | [arXiv 2602.10122](https://arxiv.org/abs/2602.10122) |
+| 36 | 2026-08-16 | "Tutorial: Build a tool-using agent" - Anthropic Docs | Medium | The build path behind Day 17's reference map - five standalone rings that go from one tool call to a working agent, adding exactly one idea each: the tool_use to tool_result round trip, the while loop over stop_reason, parallel tool blocks returned in a single user message, failures returned as is_error results rather than raised, and finally the SDK tool runner that deletes the loop you just wrote | [platform.claude.com](https://platform.claude.com/docs/en/agents-and-tools/tool-use/build-a-tool-using-agent) |
 
 ---
 
@@ -1037,6 +1038,25 @@ source that argues the opposite.
 
 ---
 
+### Day 36 - "Tutorial: Build a tool-using agent" (Anthropic Docs)
+
+<img src="assets/cards/day-036.png" width="420" alt="Day 36 card">
+
+- **Five concentric rings, each one runnable on its own.** The tutorial builds a calendar agent in five stages, and every stage is a complete program: "Every ring runs standalone. Copy any ring into a fresh file and it will run without the code from earlier rings." That constraint is the pedagogy - you never carry an unexplained helper forward, so each ring's diff *is* the lesson.
+- **Ring 1 is the round trip, and the schema is deliberately awkward.** A tool is a name, a description, and an input_schema; the model answers with `stop_reason: "tool_use"` and a block carrying an id, the tool name and structured input; you run it and reply with a `tool_result` whose `tool_use_id` matches. The example schema uses nested objects, an array of attendees and optional fields on purpose - "closer to real-world tools than a flat string argument". Two defensive details are stated outright: the tool_result goes in a **user** message, and "a response may contain text blocks before the tool_use block, so filter by type rather than assuming position".
+- **Ring 2 is the whole loop, and it is smaller than expected.** Keep one growing messages list; `while response.stop_reason == "tool_use"`, run the tool, append the assistant turn and the tool_result turn, call again. Append incrementally - never rebuild the history from scratch. That is the entire agentic loop, and everything people call an agent framework is decoration on it.
+- **Ring 3 is where a naive loop breaks.** "A single response can contain multiple tool_use blocks. Process all of them and return all results together in one user message." Ring 1 and 2 pin this shut with `tool_choice: {"type": "auto", "disable_parallel_tool_use": true}`; Ring 3 drops the flag and replaces "take the first tool_use block" with a loop over every block. Handling only the first is the bug that survives longest, because it looks correct on every single-tool test you write.
+- **Ring 4 makes failure a message, not an exception.** A tool that raises should come back as a `tool_result` with `is_error: true` and the error text as content - "Claude will see the error and can retry, use a different tool, or explain the problem to the user". The instinct to let the exception escape kills the loop; the instinct to swallow it silently hides the failure from the one participant who could route around it.
+- **Ring 5 deletes the loop.** The final ring replaces the hand-written `while` with the SDK's tool runner (`client.beta.messages.tool_runner` in Python, `toolRunner` in TypeScript), where tools are declared as ordinary typed functions with docstrings rather than hand-written JSON Schema, and the loop collapses into a single call. It is still beta, and it is a harness only - it drives tools you define, on infrastructure you host.
+
+**Why it matters:** Day 17 gave me the map and Days 18-21 gave me the surrounding machinery, but a map is not a build. This is the shortest honest path from one API call to something that deserves the word agent, and the fact that it fits in five short programs is itself the argument: the loop is not the hard part.
+
+**What I learned:** the ring that changed how I read agent code was the fourth, not the fifth. Returning a failure as a normal result rather than raising it is a small line of code and a large change in posture - the model stops being a function you call and becomes a participant that can be told bad news and asked to try something else. And the tutorial's final move is quietly the honest one: it teaches you to write the loop and then shows you the abstraction that removes it, on the theory that you should know what an abstraction is hiding before you accept it. I would rather have written the ugly version once.
+
+*Sources: the tutorial at [platform.claude.com](https://platform.claude.com/docs/en/agents-and-tools/tool-use/build-a-tool-using-agent). **Status: official Anthropic documentation**, not a paper - no peer review, and no benchmark claims are made or repeated here. Rings 1-3 were read in full and every quoted sentence above comes from that read; the `is_error` contract and the tool-runner entry points were cross-checked against the Anthropic SDK reference. Two claims that surfaced in a second pass were **dropped as unverified**: a specific default value for the runner's `max_iterations`, and a claim that tool functions must be synchronous, which the Python SDK's async decorator contradicts. The entry says the runner is beta because the SDK reference says so.*
+
+---
+
 ## 🔗 Connect
 
 <div align="center">
@@ -1070,5 +1090,5 @@ source that argues the opposite.
 
 <div align="center">
 <br>
-<sub><b>Day 35 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
+<sub><b>Day 36 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
 </div>

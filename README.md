@@ -8,7 +8,7 @@ A public learning log of modern Artificial Intelligence - transformers, LLMs,
 agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 <!-- Day badge: bumped by the daily run. If this is stale, the run said so in its log. -->
-[![Day](https://img.shields.io/badge/Day-36%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
+[![Day](https://img.shields.io/badge/Day-37%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Streak](https://img.shields.io/badge/Streak-unbroken-2EA043?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Level mix](https://img.shields.io/badge/Sources-Advanced%20%2B%20Medium-8957E5?style=for-the-badge&labelColor=0D1117)](#-progress)
 
@@ -18,7 +18,7 @@ agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 **[📈 Progress](#-progress)** · **[📚 Day Notes](#-day-notes)** · **[🔗 Connect](#-connect)**
 
-`2026-07-12` ──────────── **Day 36 of 100** ────────────► `2026-10-19`
+`2026-07-12` ──────────── **Day 37 of 100** ────────────► `2026-10-19`
 
 </div>
 
@@ -132,6 +132,7 @@ for the shape of the progress table.
 | 34 | 2026-08-14 | "The Rise of the AI Engineer" - Shawn "swyx" Wang | Medium | The essay that named the role, three years before the current wave of titles - applied AI splitting off from ML research because foundation models made capability available through an API, and why the job that resulted is an engineering job rather than a research one | [latent.space](https://www.latent.space/p/ai-engineer) |
 | 35 | 2026-08-15 | "A Practical Guide to Agentic AI Transition in Organizations" - Bandara et al. | Advanced | Seven principles for moving an organisation to agentic workflows, built around keeping the human as orchestrator rather than executor - decomposing manual processes into agents with defined inputs and outputs, teams of no more than three or four, business-domain representatives as core members, and interaction boundaries decided in advance rather than discovered | [arXiv 2602.10122](https://arxiv.org/abs/2602.10122) |
 | 36 | 2026-08-16 | "Tutorial: Build a tool-using agent" - Anthropic Docs | Medium | The build path behind Day 17's reference map - five standalone rings that go from one tool call to a working agent, adding exactly one idea each: the tool_use to tool_result round trip, the while loop over stop_reason, parallel tool blocks returned in a single user message, failures returned as is_error results rather than raised, and finally the SDK tool runner that deletes the loop you just wrote | [platform.claude.com](https://platform.claude.com/docs/en/agents-and-tools/tool-use/build-a-tool-using-agent) |
+| 37 | 2026-08-17 | "Define tools" - Anthropic Docs | Medium | The other half of yesterday's build - what actually goes in a tool definition and why the description carries more weight than the schema: a stated floor of 3-4 sentences covering when not to use a tool and what it does not return, consolidation of related operations behind one action parameter, service namespacing in tool names, responses shaped to return only high-signal fields, optional input_examples for nested inputs, and the four tool_choice modes with their caching and prefill side effects | [platform.claude.com](https://platform.claude.com/docs/en/agents-and-tools/tool-use/define-tools) |
 
 ---
 
@@ -1055,6 +1056,22 @@ source that argues the opposite.
 
 *Sources: the tutorial at [platform.claude.com](https://platform.claude.com/docs/en/agents-and-tools/tool-use/build-a-tool-using-agent). **Status: official Anthropic documentation**, not a paper - no peer review, and no benchmark claims are made or repeated here. Rings 1-3 were read in full and every quoted sentence above comes from that read; the `is_error` contract and the tool-runner entry points were cross-checked against the Anthropic SDK reference. Two claims that surfaced in a second pass were **dropped as unverified**: a specific default value for the runner's `max_iterations`, and a claim that tool functions must be synchronous, which the Python SDK's async decorator contradicts. The entry says the runner is beta because the SDK reference says so.*
 
+### Day 37 - "Define tools" (Anthropic Docs)
+
+<img src="assets/cards/day-037.png" width="420" alt="Day 37 card">
+
+- **The sentence that reframes the whole thing.** "Provide extremely detailed descriptions. This is by far the most important factor in tool performance." Not the schema, not the model, not the temperature - the English. Yesterday I built the loop; today the docs say the quality of what runs inside it is bounded by how well I wrote a paragraph.
+- **There is an actual floor, and most tool descriptions I have written are under it.** Aim for at least 3-4 sentences per tool, more when it is complex, covering what the tool does, when it should be used **and when it should not**, what each parameter means and how it changes behaviour, and the caveats - explicitly including what the tool does *not* return. The docs make the case with two versions of the same `get_stock_price` tool: one that states the exchange, the currency, the moment the price refers to and the fact that it returns nothing else, and one that says "Gets the stock price for a ticker."
+- **Fewer, fatter tools beat many thin ones.** "Consolidate related operations into fewer tools." Rather than `create_pr`, `review_pr` and `merge_pr`, expose one tool with an `action` parameter: fewer, more capable tools reduce selection ambiguity and make the surface easier to navigate. The companion rule is namespacing - `github_list_prs`, `slack_send_message` - so that selection stays unambiguous as the library grows, which matters more once tool search is loading definitions on demand.
+- **The response is part of the interface too.** "Design tool responses to return only high-signal information." Return semantic, stable identifiers - slugs or UUIDs - rather than opaque internal references, and include only the fields the model needs to decide its next step. Bloated responses waste context and bury the part that mattered. This is the same instinct as the description rule, pointed the other way: both are about what the model reads.
+- **Two smaller levers worth knowing.** `input_examples` attaches schema-validated sample inputs to a tool for the nested or format-sensitive cases; each example must validate against the input_schema or the request is rejected, it does not work on server-side tools, and it costs roughly 20-50 prompt tokens for a simple example and 100-200 for a complex nested one. And `tool_choice` has four settings - `auto` (the default when tools are present), `any`, a named `tool`, and `none` - with two consequences that are easy to trip over: forcing a tool prefills the assistant message, so the model emits no natural-language sentence first no matter what you asked for, and changing `tool_choice` invalidates cached message blocks while leaving tool definitions and the system prompt cached.
+
+**Why it matters:** it puts the lever where I did not expect it. A tool that is never called is indistinguishable from a tool that does not exist, and the thing that decides whether it gets called is a paragraph of prose - which means tool design is a writing problem wearing an engineering costume.
+
+**What I learned - and what I want to test.** The instruction I have been quietly breaking is "say when *not* to use it". Every tool description I have written describes a capability; almost none of them draw the boundary, and the boundary is what stops a model reaching for the wrong tool at the wrong moment. The other reframe I am keeping is that the API builds a system prompt out of your tool definitions - the definitions are not a config blob handed to a dispatcher, they are text the model reads, which is exactly why the 3-4 sentence floor is a floor and not a style note. Next: take the tools in this channel's own automation, write the boundary sentence for each, and see whether selection actually gets cleaner or whether I just made the prompt longer.
+
+*Sources: the documentation page at [platform.claude.com](https://platform.claude.com/docs/en/agents-and-tools/tool-use/define-tools). **Status: official Anthropic documentation**, not a paper - no peer review, and no benchmark or performance figures are claimed here. "By far the most important factor in tool performance" is the docs' own wording, quoted as guidance rather than as a measured result, and no number is attached to it. The page was read in full: the quoted sentences, the 3-4 sentence floor, the `create_pr`/`review_pr`/`merge_pr` consolidation example, the namespacing examples, the `input_examples` token ranges and the four `tool_choice` modes are all stated on it. The good-versus-poor `get_stock_price` contrast is the page's own worked example, paraphrased here rather than reproduced as two JSON blocks.*
+
 ---
 
 ## 🔗 Connect
@@ -1090,5 +1107,5 @@ source that argues the opposite.
 
 <div align="center">
 <br>
-<sub><b>Day 36 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
+<sub><b>Day 37 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
 </div>

@@ -8,7 +8,7 @@ A public learning log of modern Artificial Intelligence - transformers, LLMs,
 agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 <!-- Day badge: bumped by the daily run. If this is stale, the run said so in its log. -->
-[![Day](https://img.shields.io/badge/Day-37%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
+[![Day](https://img.shields.io/badge/Day-38%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Streak](https://img.shields.io/badge/Streak-unbroken-2EA043?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Level mix](https://img.shields.io/badge/Sources-Advanced%20%2B%20Medium-8957E5?style=for-the-badge&labelColor=0D1117)](#-progress)
 
@@ -18,7 +18,7 @@ agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 **[📈 Progress](#-progress)** · **[📚 Day Notes](#-day-notes)** · **[🔗 Connect](#-connect)**
 
-`2026-07-12` ──────────── **Day 37 of 100** ────────────► `2026-10-19`
+`2026-07-12` ──────────── **Day 38 of 100** ────────────► `2026-10-19`
 
 </div>
 
@@ -133,6 +133,7 @@ for the shape of the progress table.
 | 35 | 2026-08-15 | "A Practical Guide to Agentic AI Transition in Organizations" - Bandara et al. | Advanced | Seven principles for moving an organisation to agentic workflows, built around keeping the human as orchestrator rather than executor - decomposing manual processes into agents with defined inputs and outputs, teams of no more than three or four, business-domain representatives as core members, and interaction boundaries decided in advance rather than discovered | [arXiv 2602.10122](https://arxiv.org/abs/2602.10122) |
 | 36 | 2026-08-16 | "Tutorial: Build a tool-using agent" - Anthropic Docs | Medium | The build path behind Day 17's reference map - five standalone rings that go from one tool call to a working agent, adding exactly one idea each: the tool_use to tool_result round trip, the while loop over stop_reason, parallel tool blocks returned in a single user message, failures returned as is_error results rather than raised, and finally the SDK tool runner that deletes the loop you just wrote | [platform.claude.com](https://platform.claude.com/docs/en/agents-and-tools/tool-use/build-a-tool-using-agent) |
 | 37 | 2026-08-17 | "Define tools" - Anthropic Docs | Medium | The other half of yesterday's build - what actually goes in a tool definition and why the description carries more weight than the schema: a stated floor of 3-4 sentences covering when not to use a tool and what it does not return, consolidation of related operations behind one action parameter, service namespacing in tool names, responses shaped to return only high-signal fields, optional input_examples for nested inputs, and the four tool_choice modes with their caching and prefill side effects | [platform.claude.com](https://platform.claude.com/docs/en/agents-and-tools/tool-use/define-tools) |
+| 38 | 2026-08-18 | "Agent SDK overview" - Claude Agent SDK Docs | Medium | The SDK's front door, and mostly a decision table: Claude Code handed over as a library with the same tools, agent loop and context management in Python or TypeScript, set against the CLI, the Client SDK where you write the loop yourself, and hosted Managed Agents where Anthropic runs the sandbox; a capability list that is Claude Code's own (hooks, subagents, MCP, permissions, sessions, plugins) with skills, commands and memory loading from `.claude/` exactly as they do in the terminal; and three non-code constraints - API-key authentication only, branding rules, commercial terms - that decide whether what you build can ship | [code.claude.com](https://code.claude.com/docs/en/agent-sdk/overview.md) |
 
 ---
 
@@ -1072,6 +1073,22 @@ source that argues the opposite.
 
 *Sources: the documentation page at [platform.claude.com](https://platform.claude.com/docs/en/agents-and-tools/tool-use/define-tools). **Status: official Anthropic documentation**, not a paper - no peer review, and no benchmark or performance figures are claimed here. "By far the most important factor in tool performance" is the docs' own wording, quoted as guidance rather than as a measured result, and no number is attached to it. The page was read in full: the quoted sentences, the 3-4 sentence floor, the `create_pr`/`review_pr`/`merge_pr` consolidation example, the namespacing examples, the `input_examples` token ranges and the four `tool_choice` modes are all stated on it. The good-versus-poor `get_stock_price` contrast is the page's own worked example, paraphrased here rather than reproduced as two JSON blocks.*
 
+### Day 38 - "Agent SDK overview" (Claude Agent SDK Docs)
+
+<img src="assets/cards/day-038.png" width="420" alt="Day 38 card">
+
+- **The claim is smaller than it sounds and bigger than it looks.** The SDK "gives you the same tools, agent loop, and context management that power Claude Code, programmable in Python and TypeScript". Not a reimplementation, not an inspired-by: the harness itself, importable. The page's working definition of an agent sits one line above it - "an application that completes a task by planning its own steps and calling tools that read files, run commands, or edit code" - which is exactly the loop Days 12-18 built by hand.
+- **Four Claude products answer "build an agent", and this page exists to stop you picking the wrong one.** The **Agent SDK** is a library running the agent loop inside your own process. The **Claude Code CLI** is the terminal interface, built for daily interactive use and one-off tasks. The **Client SDK** is direct access to the Anthropic API rather than to Claude Code, and you implement the tool loop yourself. **Managed Agents** is a hosted REST API and, in the page's own words, "a separate product from the Agent SDK" - Anthropic runs both the agent and the sandbox. The axis underneath all four is the same: where the loop runs, and who owns the sandbox.
+- **Python and TypeScript only, and the documented escape hatch is the CLI.** To drive the same agent loop from any other language, you run the CLI as a subprocess with the `-p` flag and `--output-format json`. Worth knowing before assuming a Go or Rust service is locked out: it is not, it just talks to a process instead of importing a package.
+- **The capability list is Claude Code's own feature list, which is the actually useful discovery.** Built-in tools for reading, writing and editing files, running commands and searching the web; hooks that run custom code at points in the agent lifecycle; subagents for focused subtasks; MCP for external tools and data; permissions deciding which tools run automatically and which need approval; sessions that keep context across exchanges and can be resumed or forked; plugins that package skills, agents, hooks and MCP servers and load by local path. And the line I did not expect: skills, commands and memory "load automatically from your project's `.claude/` and from `~/.claude/`, same as Claude Code".
+- **Three constraints on the page are not code at all, and they are the ones that decide whether a product ships.** Unless previously approved, Anthropic does not allow third-party developers to offer claude.ai login or rate limits for products built on the SDK, so API-key authentication is the path. The branding rules allow "Claude Agent" and "{YourAgentName} Powered by Claude" but not "Claude Code" or "Claude Code Agent", and rule out Claude Code-style ASCII art or visuals. And use of the SDK is governed by Anthropic's Commercial Terms of Service, including when it powers products you sell on to your own customers.
+
+**Why it matters:** it settles a question that has been implicit since Day 19. The agent loop is not the moat and the model is not the whole product - the harness around them is a distributable thing, and Anthropic now distributes theirs. For anyone choosing where to start, the four-way comparison is worth more than the feature list: three of those four options are the wrong tool for any given job, and picking wrong costs weeks rather than hours.
+
+**What I learned - and what I want to test.** I have been treating my own harness as scaffolding: hooks, skills, permission rules, per-project settings, all filed under "terminal setup" and assumed to stop at the terminal's edge. The page says that folder is read the same way by an SDK agent, which reframes months of configuration as a portable asset rather than local decoration. Next: take one small automation I already run through the CLI, run it through the SDK's quickstart instead, and find out how much of the `.claude/` configuration genuinely carries over versus how much of it only ever worked because a human was sitting in front of it.
+
+*Sources: the documentation page at [code.claude.com](https://code.claude.com/docs/en/agent-sdk/overview.md). **Status: official Anthropic documentation**, not a paper - no peer review, and no benchmark, performance or adoption figures are claimed on it or repeated here. Every quoted sentence above is on the page: the four-product comparison table, the capability table, the `-p` / `--output-format json` subprocess route for other languages, the claude.ai login restriction, the branding allow and deny lists, and the Commercial Terms clause. Adjacency worth stating plainly: Day 19 covered this SDK's demo apps and Day 20 its secure deployment, and this is the front door neither reached - no takeaway is carried over from either day. The overview was read in full via its `.md` endpoint; the pages it links to on the agent loop, sessions, permissions, hooks, subagents, MCP and plugins were NOT fetched, so nothing about their contents is asserted here. **Injection watch:** the fetched page is prefixed with a block addressed to an AI reader, instructing it to fetch the host's documentation index and discover all available pages before exploring further. It was treated as data and not acted on, and no follow-on fetch was made. The identical preamble appeared on the Day 20 fetch from this host, so it is a property of the endpoint rather than an anomaly on this page.*
+
 ---
 
 ## 🔗 Connect
@@ -1107,5 +1124,5 @@ source that argues the opposite.
 
 <div align="center">
 <br>
-<sub><b>Day 37 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
+<sub><b>Day 38 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
 </div>

@@ -16,7 +16,7 @@ agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 [![Stars](https://img.shields.io/github/stars/aurimas13/100-Days-With-AI?color=8957E5&labelColor=0D1117)](https://github.com/aurimas13/100-Days-With-AI/stargazers)
 [![License](https://img.shields.io/badge/License-MIT-2EA043?labelColor=0D1117)](LICENSE)
 
-**[📈 Progress](#-progress)** · **[📚 Day Notes](#-day-notes)** · **[🔗 Connect](#-connect)**
+**[📈 Progress](#-progress)** · **[📚 Day Notes](#-day-notes)** · **[🤝 AI Collaboration](#-ai-collaboration)** · **[🔗 Connect](#-connect)**
 
 `2026-07-12` ──────────── **Day 40 of 100** ────────────► `2026-10-19`
 
@@ -1124,6 +1124,37 @@ source that argues the opposite.
 **What I learned - and what I want to test.** The list reads as an inventory rather than a curriculum, so the useful move is to score something real against it rather than to study it. My plan is to take the smallest agent I actually run, walk the seven in order, and write down where it fails today. My prediction before doing that: it passes on reliability and permission boundaries, because those were forced on it early, and fails on evaluation and observability, because it has tracing in the sense of logs but no test cases with known good answers and no cost-per-task figure at all. Retrieval I cannot fail yet, since the pipeline does not retrieve anything - which is itself worth noticing, because it means one seventh of this list is untested rather than passed.
 
 *Sources: the video at [youtube.com/watch?v=mtiOK2QG9Q0](https://www.youtube.com/watch?v=mtiOK2QG9Q0). **Status: a short explainer video from IBM Technology**, not a paper - no benchmark, study, failure rate or worked example appears anywhere in it, and its persuasive force comes from restating established engineering practice rather than from evidence. **Title and channel were verified live** at YouTube's oEmbed endpoint, which returned title "The 7 Skills You Need to Build AI Agents" and author "IBM Technology"; **publication date and duration could NOT be confirmed** - the watch page returned only navigation and footer text to the fetcher and oEmbed carries neither field, so neither appears anywhere in this note, and no presenter is named because the fetch never returned one. **Sourcing caveat, and it matters:** the wording quoted above comes from a third-party transcript supplied with the source drop (noiz.io's YouTube transcript tool), not from the video's own captions, which were not read - the quoted phrases are reported as the video's wording and should be read as transcript-derived. That transcript is machine-produced and visibly imperfect in places, so nothing here rests on any single word of it, and each quoted fragment was chosen because the surrounding paragraph makes the same claim independently. View counts, likes and channel-level framing are deliberately not quoted, because they change daily and would date the note. Adjacency worth stating plainly: Day 34 used Shawn Wang's "The Rise of the AI Engineer", which argues that a new role is forming, while this video argues what that role has to know, and Day 39 used 12-Factor Agents, whose thesis that good agents are mostly ordinary software this video shares from the opposite direction - the agreement is noted once above, and no takeaway from either day is reused. **Injection watch: one instruction-shaped string, and it is the video's own subject matter** - the transcript's security section quotes a prompt-injection attempt as the example of the attack it describes, which is quoted content about attacks rather than an instruction to any reader, and it was treated as data throughout.*
+
+---
+
+## 🤝 AI Collaboration
+
+<sub>Standing disclosure. Published Day 41, 2026-08-21, and describing how every day of this project has been made.</sub>
+
+I build this project **with AI, in the open**, and this is the standing note about it.
+
+I collaborate with **[Claude](https://claude.ai)** on this repository and on every post that points at it. Claude assists with the research, the drafting, the relevant visual content (the day cards), and the editing that happens before anything ships. On some surfaces it also publishes the finished result automatically: the X post, the Bluesky post and this repository entry. I remain human in the loop throughout. Nothing goes out until I have done the final edit and review and agreed to publish it.
+
+> I affirm that all AI-generated and co-created content underwent thorough review and evaluation. The final output accurately reflects my understanding, expertise, and intended meaning. While AI assistance was instrumental in the process, I maintain full responsibility for the content, its accuracy, and its presentation. This disclosure is made in the spirit of transparency and to acknowledge the role of AI in the creation process.
+
+<details>
+<summary><b>Who does what, day by day</b></summary>
+
+<br>
+
+| Stage | Who |
+|---|---|
+| Choosing the day's source | **Me** |
+| Reading and researching that source | Claude |
+| Drafting the day note and the four posts | Claude |
+| Rendering the day card | Claude, from a fixed template I approved |
+| Final edit, review, and the decision to publish | **Me** |
+| Publishing to X and Bluesky, and pushing this repo entry | Automated, on my standing approval of the prepared text |
+| Publishing to LinkedIn and Threads | **Me**, pasted by hand |
+
+Nothing is posted that I have not read. Where the automation publishes, it publishes text I approved beforehand, unchanged. Where a source is paywalled or unreachable, the day note says so and claims nothing beyond what could be verified. There are no invented benchmarks, quotes or numbers anywhere in this repository.
+
+</details>
 
 ---
 

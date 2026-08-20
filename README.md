@@ -185,6 +185,8 @@ decade-long build, and the next 99 days of sources (context
 engineering, evals, guardrails, safety, multi-agent design, etc.) all live inside
 that decade. Day 1 of 100 starts where the decade does.
 
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
+
 ### Day 2 - "Harness Design for Long-Running Application Development" (Prithvi Rajasekaran, Anthropic Engineering, 2026-03-24)
 
 <img src="assets/cards/day-002.png" width="420" alt="Day 2 card">
@@ -232,6 +234,8 @@ what the model *can't* do - so each one deserves a periodic
 stress-test, or my scaffolding outlives its reason. I started auditing
 my own automation pipelines this way.
 
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
+
 ### Day 3 - "Writing Effective Tools for Agents — with Agents" (Ken Aizawa et al., Anthropic Engineering, 2025-09-11)
 
 <img src="assets/cards/day-003.png" width="420" alt="Day 3 card">
@@ -273,6 +277,8 @@ that surprised me most: even word order in a tool name (namespacing
 like `asana_projects_search` vs `asana_search_projects`) has
 non-trivial, model-dependent effects on evals. Words are
 infrastructure now.
+
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
 
 ### Day 4 - "Effective Context Engineering for AI Agents" (Rajasekaran, Dixon, Ryan & Hadfield, Anthropic Engineering, 2025-09-29)
 
@@ -321,6 +327,8 @@ needed.
 
 ---
 
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
+
 ### Day 5 - "A Practical Guide to Building Agents" (OpenAI, Business Guides & Resources)
 
 <img src="assets/cards/day-005.png" width="420" alt="Day 5 card">
@@ -365,6 +373,8 @@ the pattern this guide recommends; the discipline is in resisting the
 fleet until a single agent demonstrably fails.
 
 ---
+
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
 
 ### Day 6 - "Model Guidance: GPT-5.6" (OpenAI Developer Docs)
 
@@ -413,6 +423,8 @@ own pipelines' prompts with a red pen.
 
 ---
 
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
+
 ### Day 7 - "Prompting Claude Fable 5" (Anthropic Documentation)
 
 <img src="assets/cards/day-007.png" width="420" alt="Day 7 card">
@@ -458,6 +470,8 @@ enumerate behaviors one brief instruction now covers. I'm taking the
 
 ---
 
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
+
 ### Day 8 - "The Art of Loop Engineering" (Sydney Runkle, LangChain, X, 2026-06-16)
 
 <img src="assets/cards/day-008.png" width="420" alt="Day 8 card">
@@ -502,6 +516,8 @@ against locked packages, cron triggers); the honest gap is loop 4 -
 my run logs are traces nobody analyzes yet. Noted as the dare.
 
 ---
+
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
 
 ### Day 9 - Whiteboard Agent Capabilities (Kent C. Dodds, X, 2025-09-20)
 
@@ -594,6 +610,8 @@ just as well.
 
 ---
 
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
+
 ### Day 10 - "Prompting Best Practices" (Anthropic Documentation) — milestone
 
 <img src="assets/cards/day-010.png" width="420" alt="Day 10 card">
@@ -655,6 +673,8 @@ source that argues the opposite.
 
 ---
 
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
+
 ### Day 11 - "What Is MCP? Model Context Protocol in Agentic AI, Explained" (Turing Post)
 
 <img src="assets/cards/day-011.png" width="420" alt="Day 11 card">
@@ -671,6 +691,8 @@ source that argues the opposite.
 
 ---
 
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
+
 ### Day 12 - "How to Build an Agent" (Amp)
 
 <img src="assets/cards/day-012.png" width="420" alt="Day 12 card">
@@ -683,6 +705,8 @@ source that argues the opposite.
 **Why it matters:** if the core is this small, understanding agents stops being a spectator sport - anyone who can write a loop can hold the whole design in their head. It also relocates the differentiation: products can't compete on the loop, so they compete on the layers this campaign keeps meeting - tool contracts (Day 3), context engineering (Day 4), the field-guide patterns (Day 5), protocols (Day 11).
 
 **What I learned:** Day 5 gave me the field guide; this gave me the mechanism, and the two snapped together - "model + tools + instructions in a loop" is no longer a diagram but code I can read. It also reframes yesterday's MCP note: MCP standardises exactly the tool wiring this loop does by hand, one protocol in place of a bespoke read/list/edit trio per agent. I have read the code rather than typed it in yet - running the loop myself is the obvious next exercise, and the post is written to make that a one-evening job.
+
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
 
 ### Day 13 - "Building an AI Agent from Scratch in Python" (Leonie Monigatti)
 
@@ -698,6 +722,8 @@ source that argues the opposite.
 
 **What I learned:** the distance between reading and running dropped to zero - this one is in the language I use daily, against the SDK I already know, and Colab-runnable. The eval() calculator is the quiet second lesson: the loop is the easy part, and tools that are safe to hand a model are the actual work - Day 3's tool-contract argument arriving from the opposite direction.
 
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
+
 ### Day 14 - "Building Effective Agents" (Anthropic)
 
 <img src="assets/cards/day-014.png" width="420" alt="Day 14 card">
@@ -711,6 +737,8 @@ source that argues the opposite.
 **Why it matters:** it reframes the whole block. After two days proving the loop is simple to build, this is the day that says the more valuable skill is knowing when not to build one - and choosing the simplest pattern that solves the problem instead of the most autonomous one.
 
 **What I learned:** reading the cookbook's patterns/agents notebooks next to the essay made the five patterns concrete - basic_workflows, orchestrator_workers, evaluator_optimizer, each a short and inspectable implementation. The lesson I am taking forward is a bias toward the smallest pattern that works, and agents only where the problem genuinely has no predictable shape.
+
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
 
 ### Day 15 - "How to Build an AI Agent from Scratch Using Claude API" (Dextra Labs)
 
@@ -726,6 +754,8 @@ source that argues the opposite.
 
 **What I learned:** the memory upgrade is the cheapest large win - a conversation_history list is all it takes to hold a thread. And the roadmap doubles as my own backlog: streaming lands on Day 18, and retries, async and structured outputs are the next things to add to anything I keep.
 
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
+
 ### Day 16 - "API Key Best Practices" (Anthropic Help Center)
 
 <img src="assets/cards/day-016.png" width="420" alt="Day 16 card">
@@ -739,6 +769,8 @@ source that argues the opposite.
 **Why it matters:** a week deep into building agents, every one of them runs on a key. This is the day that separates a script that works on my laptop from something I can run in the open without flinching - the boring hygiene that lets everything else be interesting.
 
 **What I learned:** I read the list against my own habits. Environment variables and gitignore were already there; the two I want to make automatic are scheduled rotation and a separate key per environment - the ones easiest to skip while a single key still works, and the ones I would most regret skipping.
+
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
 
 ### Day 17 - "Tool use with Claude" (Anthropic Docs)
 
@@ -754,6 +786,8 @@ source that argues the opposite.
 
 **What I learned:** the framing that reorganised my head is client-versus-server. Everything I have built so far is the client-tool path - I write the schema, I run the call. Reaching for a server tool means handing execution to Anthropic and getting the result back for free, at the cost of that control. Choosing between the two is the real design work, and it is the choice the hand-built loop never forced me to make.
 
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
+
 ### Day 18 - "Streaming messages" (Anthropic Docs)
 
 <img src="assets/cards/day-018.png" width="420" alt="Day 18 card">
@@ -767,6 +801,8 @@ source that argues the opposite.
 **Why it matters:** it reframes streaming from a cosmetic feature into a reliability one - the mechanism that lets long generations and tool-call inputs arrive without timing out or blocking. For any pipeline that asks for big outputs, it is not optional polish; it is how the response arrives at all.
 
 **What I learned:** I had streaming filed under "nice for demos." The correction is twofold - it is how partial tool-input JSON reaches you incrementally, and it is the required path for long outputs. I am refiling it under robustness, and noting the escape hatch: if I only want the finished text, the SDK will accumulate every event back into one Message for me.
+
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
 
 ### Day 19 - "Claude Agent SDK Demos" (Anthropic)
 
@@ -782,6 +818,8 @@ source that argues the opposite.
 
 **What I learned:** the reframe is send()/stream() as the loop I already know with the plumbing hidden. I built each piece raw to understand it, so reaching for the SDK now is not a leap of faith - I know exactly what every method is standing in for, and where I would drop back down if I had to.
 
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
+
 ### Day 20 - "Securely deploying AI agents" (Claude Agent SDK Docs)
 
 <img src="assets/cards/day-020.png" width="420" alt="Day 20 card">
@@ -795,6 +833,8 @@ source that argues the opposite.
 **Why it matters:** it is the production counterweight to Day 19. The SDK makes agents easy to build; this makes them safe to run where it matters. It reframes "agent security" from a property you hope the model has into an architecture you build around the agent - the same defence-in-depth thinking, applied to a component that writes its own actions.
 
 **What I learned:** the reframe I am keeping is to treat the agent as semi-trusted code by default, and to put the credential behind a proxy so a compromise reaches endpoints, not secrets. It is the lethal-trifecta problem the guide itself links to, made concrete - cut the line between untrusted input and sensitive capability, and most of the risk goes with it.
+
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
 
 ### Day 21 - "Request context" (Mastra Docs)
 
@@ -810,6 +850,8 @@ source that argues the opposite.
 
 **What I learned:** the reframe is agent configuration as a function of the request rather than a property of the agent. A second lesson came free and unplanned - the URL I had queued for this, the "dynamic agents" page, now returns a 404, and the idea lives under a different name: the `RuntimeContext` introduced in Mastra 0.9.0 and written up by Sam Bhagwat in April 2025 is today's `RequestContext`. In a field moving this fast, a saved link is a snapshot, not an address - check the API before you quote it.
 
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
+
 ### Day 22 - "OWASP Top 10 for Agentic Applications" (OWASP GenAI Security Project)
 
 <img src="assets/cards/day-022.png" width="420" alt="Day 22 card">
@@ -823,6 +865,8 @@ source that argues the opposite.
 **Why it matters:** it turns a fear into an inventory. Days 20 and 21 were about single controls - isolation, least privilege, configuration injected per request - and controls are only as good as the threat list you chose them against. This is that list, written by people who had to defend real systems, and it is the reference the next three days measure themselves against.
 
 **What I learned:** the reframe is that agent security is not LLM security with more steps. It is the security of a thing that acts - which means the questions I ask of my own setups change from "could it say something wrong" to "what could it do, under whose identity, with what memory, and who would notice". Reading ASI06 and ASI03 in particular against my own tooling was uncomfortable in a useful way.
+
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
 
 ### Day 23 - "AgentDojo" (Debenedetti, Zhang, Balunović, Beurer-Kellner, Fischer, Tramèr)
 
@@ -838,6 +882,8 @@ source that argues the opposite.
 
 **What I learned:** the reframe is that security and capability are measured together or not at all. I had been thinking of hardening as something you add and then check. The three-metric shape says the real question is always what the defence cost you, and I now want that framing for anything I bolt onto my own tools - what did this control take away, not merely what did it stop.
 
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
+
 ### Day 24 - "Defeating Prompt Injections by Design" (CaMeL, Google DeepMind)
 
 <img src="assets/cards/day-024.png" width="420" alt="Day 24 card">
@@ -851,6 +897,8 @@ source that argues the opposite.
 **Why it matters:** it is the strongest available answer to the threat Day 22 put at the top of its list, and it answers it in a way that does not depend on the model being clever. Filters and classifiers ask an LLM to spot an attack; this makes the attack structurally incapable of reaching anything that matters. It is the same instinct as Day 20's credential proxy, generalised into an architecture.
 
 **What I learned:** the reframe is that you do not have to win the argument with the injected text. If the model reading hostile input holds no capabilities, being persuaded costs nothing. I keep meeting this shape now - cut the line between untrusted input and consequential action - and CaMeL is its most complete expression so far. The honest counterweight is the policy burden, which is exactly where I would expect a real deployment of this to go wrong.
+
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
 
 ### Day 25 - "Design Patterns for Securing LLM Agents against Prompt Injections" (Beurer-Kellner et al.)
 
@@ -868,6 +916,8 @@ source that argues the opposite.
 
 *Sources: [arXiv 2506.08837](https://arxiv.org/abs/2506.08837) (preprint, v1 10 Jun 2025, v3 27 Jun 2025). The six pattern names and their one-line descriptions, and the quoted sentence, come from [Simon Willison's summary](https://simonwillison.net/2025/Jun/13/prompt-injection-design-patterns/), which quotes the paper directly - the arXiv abstract refers to "a set of principled design patterns" without naming them.*
 
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
+
 ### Day 26 - "A Benchmark to Understand the Role of Knowledge Graphs on LLM Accuracy" (Sequeda, Allemang, Jacob)
 
 <img src="assets/cards/day-026.png" width="420" alt="Day 26 card">
@@ -883,6 +933,8 @@ source that argues the opposite.
 **What I learned:** I have been treating context as a retrieval problem - find the right rows, put them in the window. The 0% column reframes it. The model was not missing data; it had every table. It was missing the agreement about what the tables mean, and that agreement never existed in machine-readable form because humans were supplying it for free. That is not something more context solves. It is something somebody has to sit down and write.
 
 *Sources: [arXiv 2311.07509](https://arxiv.org/abs/2311.07509) (preprint, v1 13 Nov 2023; cs.AI, cs.CL, cs.DB). The quadrant figures come from the [full text at ar5iv](https://ar5iv.labs.arxiv.org/html/2311.07509) - the abstract rounds them to 16% and 54%. The follow-up is [arXiv 2405.11706](https://arxiv.org/abs/2405.11706), "Increasing the LLM Accuracy for Question Answering: Ontologies to the Rescue!" (v1 20 May 2024). Disclosure: the authors are affiliated with data.world, which sells knowledge-graph tooling.*
+
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
 
 ### Day 27 - "Key Considerations for Domain Expert Involvement in LLM Design and Evaluation" (Szymanski, Anuyah, Li, Metoyer)
 
@@ -900,6 +952,8 @@ source that argues the opposite.
 
 *Sources: [arXiv 2602.14357](https://arxiv.org/abs/2602.14357) (preprint, v1 16 Feb 2026; cs.HC, cs.AI). The arXiv listing states no peer-reviewed venue. The study observes ONE team building ONE pedagogical chatbot - a single-site ethnography, so the note says "a real team", never "teams". Cited as a practitioner echo rather than as evidence: Chris Lovejoy, ["How to leverage domain experts for building domain-specific vertical AI"](https://chrislovejoy.me/domain-experts-ai).*
 
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
+
 ### Day 28 - "Future of Work with AI Agents" (Shao, Zope, Jiang, Pei, Nguyen, Brynjolfsson, Yang)
 
 <img src="assets/cards/day-028.png" width="420" alt="Day 28 card">
@@ -915,6 +969,8 @@ source that argues the opposite.
 **What I learned:** I have been picking what to automate by looking at what is annoying and technically tractable. Those are two of the four inputs. The zone framing added a third I had not been asking for - whether the person doing it wants it gone - and a fourth in the Human Agency Scale, which is how much of them should remain in the loop by design rather than by accident.
 
 *Sources: [arXiv 2506.06576](https://arxiv.org/abs/2506.06576) (preprint, v1 6 Jun 2025, v3 1 Feb 2026; cs.CY). The arXiv listing states no peer-reviewed venue. The four zone names are quoted from the paper's own framing; per-zone task counts are not quoted, because this entry has not verified them from the full text. Cited only as the complementary half - decomposition rather than selection - and not as evidence for this paper's findings: Wei Sun, ["Decision-Centric Design for LLM Systems"](https://arxiv.org/abs/2604.00414) (preprint, v1 1 Apr 2026; cs.AI, cs.LG).*
+
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
 
 ### Day 29 - "Effective context engineering for AI agents" (Anthropic Applied AI team)
 
@@ -934,6 +990,8 @@ source that argues the opposite.
 
 ---
 
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
+
 ### Day 30 - "The New Code" (Sean Grove, OpenAI)
 
 <img src="assets/cards/day-030.png" width="420" alt="Day 30 card">
@@ -951,6 +1009,8 @@ source that argues the opposite.
 *Sources: [YouTube](https://www.youtube.com/watch?v=8rABwKRsec4) - "The New Code — Sean Grove, OpenAI", AI Engineer channel, recorded at AI Engineer World's Fair 2025, approx. 22 minutes. **Video ID caveat:** a second upload of the same talk circulates as `BIvILtt164I`; the link above is the AI Engineer channel upload and matches that channel's title convention, and if it ever 404s the other is the same talk. **Sourcing caveat, and it matters:** the quotations in this entry come from a published transcript summary of the talk, not from the video's own captions. They are reported as Grove's wording and should be treated as transcript-derived - the 10-20% figure and the "software engineering has never been about code" line are the two worth re-checking against the video before anyone quotes them onward. Supporting: OpenAI's Model Spec, open-sourced, referenced in the talk as the worked example.*
 
 ---
+
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
 
 ### Day 31 - "Asymmetry of verification and verifier's law" (Jason Wei)
 
@@ -970,6 +1030,8 @@ source that argues the opposite.
 
 ---
 
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
+
 ### Day 32 - "Reflections on Palantir" (Nabeel S. Qureshi)
 
 <img src="assets/cards/day-032.png" width="420" alt="Day 32 card">
@@ -987,6 +1049,8 @@ source that argues the opposite.
 *Sources: [nabeelqu.co](https://nabeelqu.co/reflections-on-palantir) - Nabeel S. Qureshi, a retrospective on an eight-year stint at Palantir, also mirrored at [medium.com](https://medium.com/@nabeelqu/reflections-on-palantir-52433cf95439) (the canonical URL rate-limits automated readers, and the mirror served the same text). **Status: a personal essay, first-hand and openly partisan about its subject.** It is evidence about how the model felt and functioned from inside one company, not a study of the model's effectiveness, and this entry treats it that way throughout. **Quotation note:** quoted phrases keep the author's original American spelling ("generalize"); the surrounding prose is British per house style. **Rejected source, recorded so it is not re-attempted:** Gergely Orosz, "What are Forward Deployed Engineers, and why are they so in demand?" (The Pragmatic Engineer, 12 Aug 2025) is the best-researched piece on the role but paywalls mid-article, so it is not usable as a primary here.*
 
 ---
+
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
 
 ### Day 33 - "The GenAI Divide: State of AI in Business 2025" (MIT NANDA)
 
@@ -1006,6 +1070,8 @@ source that argues the opposite.
 
 ---
 
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
+
 ### Day 34 - "The Rise of the AI Engineer" (Shawn "swyx" Wang)
 
 <img src="assets/cards/day-034.png" width="420" alt="Day 34 card">
@@ -1023,6 +1089,8 @@ source that argues the opposite.
 *Sources: [latent.space](https://www.latent.space/p/ai-engineer) - Shawn "swyx" Wang, "The Rise of the AI Engineer", Latent Space, 30 June 2023, freely readable in full and read at source for this entry. **Status: an essay, not a study.** The level is recorded as Medium for that reason - it is the canonical piece that named the role rather than a piece of research, and marking it Advanced would be flattering it. The job-posting trend it cites is its own observation rather than an external dataset, and this entry deliberately repeats no figure from it. **Rejected source, recorded so it is not re-attempted:** Chris Lovejoy's "The Domain-Native AI Organization" (chrislovejoy.me/domain-native-ai-org, April 2026) was the other candidate for this slot and sits closer to the role-relations question, but the page carries no article text - the argument lives in a slide PDF that exceeds the fetch limit and in an unlinked recording - so it could not be read at source. An unreadable source is not a source. It stays a live candidate if the deck or the recording can be supplied.*
 
 ---
+
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
 
 ### Day 35 - "A Practical Guide to Agentic AI Transition in Organizations" (Bandara et al.)
 
@@ -1042,6 +1110,8 @@ source that argues the opposite.
 
 ---
 
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
+
 ### Day 36 - "Tutorial: Build a tool-using agent" (Anthropic Docs)
 
 <img src="assets/cards/day-036.png" width="420" alt="Day 36 card">
@@ -1059,6 +1129,8 @@ source that argues the opposite.
 
 *Sources: the tutorial at [platform.claude.com](https://platform.claude.com/docs/en/agents-and-tools/tool-use/build-a-tool-using-agent). **Status: official Anthropic documentation**, not a paper - no peer review, and no benchmark claims are made or repeated here. Rings 1-3 were read in full and every quoted sentence above comes from that read; the `is_error` contract and the tool-runner entry points were cross-checked against the Anthropic SDK reference. Two claims that surfaced in a second pass were **dropped as unverified**: a specific default value for the runner's `max_iterations`, and a claim that tool functions must be synchronous, which the Python SDK's async decorator contradicts. The entry says the runner is beta because the SDK reference says so.*
 
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
+
 ### Day 37 - "Define tools" (Anthropic Docs)
 
 <img src="assets/cards/day-037.png" width="420" alt="Day 37 card">
@@ -1075,6 +1147,8 @@ source that argues the opposite.
 
 *Sources: the documentation page at [platform.claude.com](https://platform.claude.com/docs/en/agents-and-tools/tool-use/define-tools). **Status: official Anthropic documentation**, not a paper - no peer review, and no benchmark or performance figures are claimed here. "By far the most important factor in tool performance" is the docs' own wording, quoted as guidance rather than as a measured result, and no number is attached to it. The page was read in full: the quoted sentences, the 3-4 sentence floor, the `create_pr`/`review_pr`/`merge_pr` consolidation example, the namespacing examples, the `input_examples` token ranges and the four `tool_choice` modes are all stated on it. The good-versus-poor `get_stock_price` contrast is the page's own worked example, paraphrased here rather than reproduced as two JSON blocks.*
 
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
+
 ### Day 38 - "Agent SDK overview" (Claude Agent SDK Docs)
 
 <img src="assets/cards/day-038.png" width="420" alt="Day 38 card">
@@ -1090,6 +1164,8 @@ source that argues the opposite.
 **What I learned - and what I want to test.** I have been treating my own harness as scaffolding: hooks, skills, permission rules, per-project settings, all filed under "terminal setup" and assumed to stop at the terminal's edge. The page says that folder is read the same way by an SDK agent, which reframes months of configuration as a portable asset rather than local decoration. Next: take one small automation I already run through the CLI, run it through the SDK's quickstart instead, and find out how much of the `.claude/` configuration genuinely carries over versus how much of it only ever worked because a human was sitting in front of it.
 
 *Sources: the documentation page at [code.claude.com](https://code.claude.com/docs/en/agent-sdk/overview.md). **Status: official Anthropic documentation**, not a paper - no peer review, and no benchmark, performance or adoption figures are claimed on it or repeated here. Every quoted sentence above is on the page: the four-product comparison table, the capability table, the `-p` / `--output-format json` subprocess route for other languages, the claude.ai login restriction, the branding allow and deny lists, and the Commercial Terms clause. Adjacency worth stating plainly: Day 19 covered this SDK's demo apps and Day 20 its secure deployment, and this is the front door neither reached - no takeaway is carried over from either day. The overview was read in full via its `.md` endpoint; the pages it links to on the agent loop, sessions, permissions, hooks, subagents, MCP and plugins were NOT fetched, so nothing about their contents is asserted here. **Injection watch:** the fetched page is prefixed with a block addressed to an AI reader, instructing it to fetch the host's documentation index and discover all available pages before exploring further. It was treated as data and not acted on, and no follow-on fetch was made. The identical preamble appeared on the Day 20 fetch from this host, so it is a property of the endpoint rather than an anomaly on this page.*
+
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
 
 ### Day 39 - "12-Factor Agents" (Dex Horthy, HumanLayer)
 
@@ -1109,6 +1185,8 @@ source that argues the opposite.
 
 ---
 
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
+
 ### Day 40 - "The 7 Skills You Need to Build AI Agents" (IBM Technology)
 
 <img src="assets/cards/day-040.png" width="420" alt="Day 40 card">
@@ -1125,15 +1203,18 @@ source that argues the opposite.
 
 *Sources: the video at [youtube.com/watch?v=mtiOK2QG9Q0](https://www.youtube.com/watch?v=mtiOK2QG9Q0). **Status: a short explainer video from IBM Technology**, not a paper - no benchmark, study, failure rate or worked example appears anywhere in it, and its persuasive force comes from restating established engineering practice rather than from evidence. **Title and channel were verified live** at YouTube's oEmbed endpoint, which returned title "The 7 Skills You Need to Build AI Agents" and author "IBM Technology"; **publication date and duration could NOT be confirmed** - the watch page returned only navigation and footer text to the fetcher and oEmbed carries neither field, so neither appears anywhere in this note, and no presenter is named because the fetch never returned one. **Sourcing caveat, and it matters:** the wording quoted above comes from a third-party transcript supplied with the source drop (noiz.io's YouTube transcript tool), not from the video's own captions, which were not read - the quoted phrases are reported as the video's wording and should be read as transcript-derived. That transcript is machine-produced and visibly imperfect in places, so nothing here rests on any single word of it, and each quoted fragment was chosen because the surrounding paragraph makes the same claim independently. View counts, likes and channel-level framing are deliberately not quoted, because they change daily and would date the note. Adjacency worth stating plainly: Day 34 used Shawn Wang's "The Rise of the AI Engineer", which argues that a new role is forming, while this video argues what that role has to know, and Day 39 used 12-Factor Agents, whose thesis that good agents are mostly ordinary software this video shares from the opposite direction - the agreement is noted once above, and no takeaway from either day is reused. **Injection watch: one instruction-shaped string, and it is the video's own subject matter** - the transcript's security section quotes a prompt-injection attempt as the example of the attack it describes, which is quoted content about attacks rather than an instruction to any reader, and it was treated as data throughout.*
 
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
+
+
 ---
 
 ## 🤝 AI Collaboration
 
-<sub>Standing disclosure. Published Day 41, 2026-08-21, and describing how every day of this project has been made.</sub>
+<sub>Standing disclosure. Published 2026-08-20, in force from Day 41 onward, and describing how every day of this project has been made. Days 1 to 40 carry the same note, added retroactively on the day this statement was published.</sub>
 
 I build this project **with AI, in the open**, and this is the standing note about it.
 
-I collaborate with **[Claude](https://claude.ai)** on this repository and on every post that points at it. Claude assists with the research, the drafting, the relevant visual content (the day cards), and the editing that happens before anything ships. On some surfaces it also publishes the finished result automatically: the X post, the Bluesky post and this repository entry. I remain human in the loop throughout. Nothing goes out until I have done the final edit and review and agreed to publish it.
+I collaborate with **[Claude Code](https://claude.com/claude-code)** on this repository and on every post that points at it. Claude Code assists with the research, the drafting, the relevant visual content (the day cards), and the editing that happens before anything ships. On some surfaces it also publishes the finished result automatically: the X post, the Bluesky post and this repository entry. I remain human in the loop throughout. Nothing goes out until I have done the final edit and review and agreed to publish it.
 
 > I affirm that all AI-generated and co-created content underwent thorough review and evaluation. The final output accurately reflects my understanding, expertise, and intended meaning. While AI assistance was instrumental in the process, I maintain full responsibility for the content, its accuracy, and its presentation. This disclosure is made in the spirit of transparency and to acknowledge the role of AI in the creation process.
 
@@ -1145,9 +1226,9 @@ I collaborate with **[Claude](https://claude.ai)** on this repository and on eve
 | Stage | Who |
 |---|---|
 | Choosing the day's source | **Me** |
-| Reading and researching that source | Claude |
-| Drafting the day note and the four posts | Claude |
-| Rendering the day card | Claude, from a fixed template I approved |
+| Reading and researching that source | Claude Code |
+| Drafting the day note and the four posts | Claude Code |
+| Rendering the day card | Claude Code, from a fixed template I approved |
 | Final edit, review, and the decision to publish | **Me** |
 | Publishing to X and Bluesky, and pushing this repo entry | Automated, on my standing approval of the prepared text |
 | Publishing to LinkedIn and Threads | **Me**, pasted by hand |

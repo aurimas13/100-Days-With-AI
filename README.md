@@ -8,7 +8,7 @@ A public learning log of modern Artificial Intelligence - transformers, LLMs,
 agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 <!-- Day badge: bumped by the daily run. If this is stale, the run said so in its log. -->
-[![Day](https://img.shields.io/badge/Day-40%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
+[![Day](https://img.shields.io/badge/Day-41%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Streak](https://img.shields.io/badge/Streak-unbroken-2EA043?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Level mix](https://img.shields.io/badge/Sources-Advanced%20%2B%20Medium-8957E5?style=for-the-badge&labelColor=0D1117)](#-progress)
 
@@ -18,7 +18,7 @@ agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 **[📈 Progress](#-progress)** · **[📚 Day Notes](#-day-notes)** · **[🤝 AI Collaboration](#-ai-collaboration)** · **[🔗 Connect](#-connect)**
 
-`2026-07-12` ──────────── **Day 40 of 100** ────────────► `2026-10-19`
+`2026-07-12` ──────────── **Day 41 of 100** ────────────► `2026-10-19`
 
 </div>
 
@@ -136,6 +136,7 @@ for the shape of the progress table.
 | 38 | 2026-08-18 | "Agent SDK overview" - Claude Agent SDK Docs | Medium | The SDK's front door, and mostly a decision table: Claude Code handed over as a library with the same tools, agent loop and context management in Python or TypeScript, set against the CLI, the Client SDK where you write the loop yourself, and hosted Managed Agents where Anthropic runs the sandbox; a capability list that is Claude Code's own (hooks, subagents, MCP, permissions, sessions, plugins) with skills, commands and memory loading from `.claude/` exactly as they do in the terminal; and three non-code constraints - API-key authentication only, branding rules, commercial terms - that decide whether what you build can ship | [code.claude.com](https://code.claude.com/docs/en/agent-sdk/overview.md) |
 | 39 | 2026-08-19 | "12-Factor Agents" - Dex Horthy (HumanLayer) | Medium | A reliability manifesto that borrows its form from 12 Factor Apps and its evidence from at least 100 SaaS builders: most products calling themselves AI agents are mostly deterministic code with LLM steps placed at the few points that matter, and the twelve factors are the software constraints that follow - three of them beginning with the verb own (your prompts, your context window, your control flow), the rest structural rather than clever, plus an honourable-mention thirteenth on pre-fetching context; the failure it keeps returning to is the 80% wall, where the framework that got you there fast is the thing you must reverse-engineer to get any further | [github.com/humanlayer](https://github.com/humanlayer/12-factor-agents) |
 | 40 | 2026-08-20 | "The 7 Skills You Need to Build AI Agents" - IBM Technology | Medium | A survey of what building production agents actually demands, framed by a job advertisement that asks one prompt engineer to cover distributed systems, API design, machine learning operations, security engineering and product management: system design, tool and contract design, retrieval engineering, reliability engineering, security and safety, evaluation and observability, and product thinking - four of the seven presented as existing disciplines transplanted rather than as anything new, with the closing instruction that when an agent fails the root cause is usually the system rather than the wording | [YouTube](https://www.youtube.com/watch?v=mtiOK2QG9Q0) |
+| 41 | 2026-08-21 | "IBM Bob" - IBM | Medium | An enterprise coding agent read as a pair of pages, the marketing one and the documentation one: three purpose-built modes (agent, ask, plan), subagents spawned as parallel workstreams, a terminal companion, MCP for custom tools, usage analytics, and legacy modernisation in Java, RPG and COBOL as a headline use case - set against a landing page whose evidence is a single client migration reported as roughly 90% faster delivery and a claim that the product will not hallucinate on topics outside its knowledge, neither of which carries a method | [bob.ibm.com](https://bob.ibm.com/) |
 
 ---
 
@@ -1205,6 +1206,22 @@ source that argues the opposite.
 
 <sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
 
+### Day 41 - "IBM Bob" (IBM)
+
+<img src="assets/cards/day-041.png" width="420" alt="Day 41 card">
+
+- **Two pages, two genres, and the difference is the lesson.** The landing page sells: "Your AI-Powered Development Partner", natural-language coding, background work on long-running tasks, enterprise service integrations. The IDE documentation describes: an "AI SDLC partner that augments your existing workflows", with the operating detail a developer would actually need. Read together, the documentation is where the product becomes legible, and it is the page this entry relies on for anything factual.
+- **The instrument itself is now conventional, which is worth saying plainly.** Three purpose-built modes: agent for writing, modifying and refactoring; ask for answering questions about a codebase; plan for design before implementation. Subagents spawned as "parallel workstreams" on complex tasks. A terminal-side companion. MCP for custom tools and integrations. File access and command execution. Nothing in that list would surprise anyone who used a coding agent this month, which is itself the finding: mode-switching and subagents have become standard equipment rather than differentiators.
+- **The two claims that need a method and do not have one.** First, a client migration from Java 11 to Java 25 presented as "~90% faster delivery — 3 days vs. ~30+ days". One customer, one migration, no sample size, no definition of the baseline and no statement of what was being counted - that is a testimonial, and this entry treats it as one. Second, a guardrail claim that the product will not hallucinate on topics it does not know. That is a testable property - refusal rates, calibration on out-of-scope questions, error rates on generated migrations - and none of that evidence is published on the page. Neither claim is called false here. They are called unevidenced, which is a different and more accurate thing.
+- **What the pages establish that a weekend project could not.** COBOL and RPG named as first-class targets alongside Java. Usage analytics aimed at whoever pays for the seats rather than at the developer using them. Guardrails stated as product policy. Integrations with existing enterprise services. And a published end-of-life: two older IDE versions stop functioning on 30 September 2026, with an upgrade path named. Every one of those answers a procurement question rather than a coding one, and together they are the actual product.
+- **What is not on the pages.** No pricing beyond the existence of a free trial and paid tiers, no model disclosure, no evaluation of any kind, and no independent write-up. The entry claims nothing about how it performs, because nothing read today would support such a claim.
+
+**Why it matters:** the interesting question about enterprise coding agents is no longer whether the model can refactor a file - three vendors this week say yes - but what a large organisation needs before it will let one near its code. On the evidence of these two pages the answer is governance: scope that includes the languages nobody writes new code in, analytics for the budget holder, guardrails written down, and a deprecation calendar. That is a less exciting answer than capability, and probably a more durable one.
+
+**What I learned - and what I want to test.** The habit worth keeping is procedural rather than technical: read the documentation before the landing page, because the documentation is written for the person who has to make it work. What I want to test across the next two days is whether the modes are converging by accident or by argument. Bob's plan mode and agent mode look like the same primitive I expect to find in Cline and opencode tomorrow and the day after; if all three independently arrive at "one mode that may write, one that may not", that is a design finding rather than a coincidence, and it is testable simply by reading their documentation side by side.
+
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
+
 
 ---
 
@@ -1272,5 +1289,5 @@ Nothing is posted that I have not read. Where the automation publishes, it publi
 
 <div align="center">
 <br>
-<sub><b>Day 40 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
+<sub><b>Day 41 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
 </div>

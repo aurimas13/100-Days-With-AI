@@ -8,7 +8,7 @@ A public learning log of modern Artificial Intelligence - transformers, LLMs,
 agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 <!-- Day badge: bumped by the daily run. If this is stale, the run said so in its log. -->
-[![Day](https://img.shields.io/badge/Day-41%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
+[![Day](https://img.shields.io/badge/Day-42%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Streak](https://img.shields.io/badge/Streak-unbroken-2EA043?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Level mix](https://img.shields.io/badge/Sources-Advanced%20%2B%20Medium-8957E5?style=for-the-badge&labelColor=0D1117)](#-progress)
 
@@ -18,7 +18,7 @@ agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 **[📈 Progress](#-progress)** · **[📚 Day Notes](#-day-notes)** · **[🤝 AI Collaboration](#-ai-collaboration)** · **[🔗 Connect](#-connect)**
 
-`2026-07-12` ──────────── **Day 41 of 100** ────────────► `2026-10-19`
+`2026-07-12` ──────────── **Day 42 of 100** ────────────► `2026-10-19`
 
 </div>
 
@@ -137,6 +137,7 @@ for the shape of the progress table.
 | 39 | 2026-08-19 | "12-Factor Agents" - Dex Horthy (HumanLayer) | Medium | A reliability manifesto that borrows its form from 12 Factor Apps and its evidence from at least 100 SaaS builders: most products calling themselves AI agents are mostly deterministic code with LLM steps placed at the few points that matter, and the twelve factors are the software constraints that follow - three of them beginning with the verb own (your prompts, your context window, your control flow), the rest structural rather than clever, plus an honourable-mention thirteenth on pre-fetching context; the failure it keeps returning to is the 80% wall, where the framework that got you there fast is the thing you must reverse-engineer to get any further | [github.com/humanlayer](https://github.com/humanlayer/12-factor-agents) |
 | 40 | 2026-08-20 | "The 7 Skills You Need to Build AI Agents" - IBM Technology | Medium | A survey of what building production agents actually demands, framed by a job advertisement that asks one prompt engineer to cover distributed systems, API design, machine learning operations, security engineering and product management: system design, tool and contract design, retrieval engineering, reliability engineering, security and safety, evaluation and observability, and product thinking - four of the seven presented as existing disciplines transplanted rather than as anything new, with the closing instruction that when an agent fails the root cause is usually the system rather than the wording | [YouTube](https://www.youtube.com/watch?v=mtiOK2QG9Q0) |
 | 41 | 2026-08-21 | "IBM Bob" - IBM | Medium | An enterprise coding agent read as a pair of pages, the marketing one and the documentation one: three purpose-built modes (agent, ask, plan), subagents spawned as parallel workstreams, a terminal companion, MCP for custom tools, usage analytics, and legacy modernisation in Java, RPG and COBOL as a headline use case - set against a landing page whose evidence is a single client migration reported as roughly 90% faster delivery and a claim that the product will not hallucinate on topics outside its knowledge, neither of which carries a method | [bob.ibm.com](https://bob.ibm.com/) |
+| 42 | 2026-08-22 | "Cline" - Cline (open source, Apache 2.0) | Medium | An open-source coding agent whose defining decision is a default rather than a capability: every file write and every command waits for explicit approval, and plan mode cannot write at all until you switch out of it, with the permission boundary expressed as a mode instead of a setting - available as an editor extension, a command-line tool and an embeddable SDK, running against any major model provider or your own endpoint, key or weights, and offering, a few paragraphs later in the same documentation, fully headless automation for continuous integration, which is where the promise of always being in control turns out to be a property of how you ran it | [cline.bot](https://cline.bot/) |
 
 ---
 
@@ -1222,6 +1223,22 @@ source that argues the opposite.
 
 <sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
 
+### Day 42 - "Cline" (open source, Apache 2.0)
+
+<img src="assets/cards/day-042.png" width="420" alt="Day 42 card">
+
+- **The default is the design.** The overview documentation states it flatly: "Every action requires your explicit approval. You're always in control", and the capability line reads "Read files, write code, run commands, all with your approval". Not approval for destructive operations, not approval when the model is uncertain - every action, explicitly, every time. That is a strong default and an unusual one, and it is the first thing the documentation chooses to say about how the tool behaves.
+- **Plan and act, with the boundary expressed as a mode.** The landing page describes the workflow as "Plan, then Act": "Toggle Plan mode to align on a strategy, then Act to execute." Plan mode does not merely discourage edits, it cannot make them. A permission boundary implemented as a mode is much harder to lose track of than the same boundary implemented as a setting, because the mode is visible in the interface every second you are in it.
+- **Deployment is deliberately plural, and so is model access.** It ships as an editor extension for Visual Studio Code and JetBrains, as a command-line tool, as a Kanban-style board, and as an SDK for embedding in other software. On models it claims to work with every major provider and invites you to "Bring your own key, your own endpoint, or your own weights", with three commercial routes in: pay per use, a subscription, or your own key. The licence is Apache 2.0, which is what makes the last of those a real option rather than a gesture.
+- **The sentence that complicates the first bullet.** The same overview offers "interactive chat or fully headless automation for CI/CD and scripting". Both statements are true, of different configurations. The practical consequence is worth stating plainly: being always in control is a property of how the tool was run, not a property of the tool, and any team quoting the approval guarantee should know which mode their pipeline is actually using.
+- **What is not claimed here.** No benchmark, no evaluation, no error rate. The landing page carries install counts, a star count and a marketplace rating, all of which move daily and none of which are reproduced in this entry.
+
+**Why it matters:** the safety conversation about coding agents usually happens at the level of models, and this is a reminder that most of it is decided at the level of defaults. An agent that stops before every action and one that runs headless in continuous integration can be the same software with different flags. The interesting engineering question is not whether the tool can be made safe, but which configuration a team ends up standardising on when the deadline arrives.
+
+**What I learned - and what I want to test.** Approval-at-every-step is an interface hypothesis, not a guarantee, and the honest version of it is a question I cannot answer from the documentation: does a gate at every step catch mistakes, or does it train the reviewer to click through? That is measurable in principle - approval latency, the rate at which proposed diffs are rejected, whether rejection rate falls as a session lengthens - and I have found nothing published on it. What I want to try is the cheap version on my own work: record how often I actually reject a proposed change over a week, and see whether the number falls as I get used to saying yes.
+
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
+
 
 ---
 
@@ -1289,5 +1306,5 @@ Nothing is posted that I have not read. Where the automation publishes, it publi
 
 <div align="center">
 <br>
-<sub><b>Day 41 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
+<sub><b>Day 42 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
 </div>

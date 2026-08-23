@@ -8,7 +8,7 @@ A public learning log of modern Artificial Intelligence - transformers, LLMs,
 agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 <!-- Day badge: bumped by the daily run. If this is stale, the run said so in its log. -->
-[![Day](https://img.shields.io/badge/Day-42%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
+[![Day](https://img.shields.io/badge/Day-43%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Streak](https://img.shields.io/badge/Streak-unbroken-2EA043?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Level mix](https://img.shields.io/badge/Sources-Advanced%20%2B%20Medium-8957E5?style=for-the-badge&labelColor=0D1117)](#-progress)
 
@@ -18,7 +18,7 @@ agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 **[📈 Progress](#-progress)** · **[📚 Day Notes](#-day-notes)** · **[🤝 AI Collaboration](#-ai-collaboration)** · **[🔗 Connect](#-connect)**
 
-`2026-07-12` ──────────── **Day 42 of 100** ────────────► `2026-10-19`
+`2026-07-12` ──────────── **Day 43 of 100** ────────────► `2026-10-19`
 
 </div>
 
@@ -138,6 +138,7 @@ for the shape of the progress table.
 | 40 | 2026-08-20 | "The 7 Skills You Need to Build AI Agents" - IBM Technology | Medium | A survey of what building production agents actually demands, framed by a job advertisement that asks one prompt engineer to cover distributed systems, API design, machine learning operations, security engineering and product management: system design, tool and contract design, retrieval engineering, reliability engineering, security and safety, evaluation and observability, and product thinking - four of the seven presented as existing disciplines transplanted rather than as anything new, with the closing instruction that when an agent fails the root cause is usually the system rather than the wording | [YouTube](https://www.youtube.com/watch?v=mtiOK2QG9Q0) |
 | 41 | 2026-08-21 | "IBM Bob" - IBM | Medium | An enterprise coding agent read as a pair of pages, the marketing one and the documentation one: three purpose-built modes (agent, ask, plan), subagents spawned as parallel workstreams, a terminal companion, MCP for custom tools, usage analytics, and legacy modernisation in Java, RPG and COBOL as a headline use case - set against a landing page whose evidence is a single client migration reported as roughly 90% faster delivery and a claim that the product will not hallucinate on topics outside its knowledge, neither of which carries a method | [bob.ibm.com](https://bob.ibm.com/) |
 | 42 | 2026-08-22 | "Cline" - Cline (open source, Apache 2.0) | Medium | An open-source coding agent whose defining decision is a default rather than a capability: every file write and every command waits for explicit approval, and plan mode cannot write at all until you switch out of it, with the permission boundary expressed as a mode instead of a setting - available as an editor extension, a command-line tool and an embeddable SDK, running against any major model provider or your own endpoint, key or weights, and offering, a few paragraphs later in the same documentation, fully headless automation for continuous integration, which is where the promise of always being in control turns out to be a property of how you ran it | [cline.bot](https://cline.bot/) |
+| 43 | 2026-08-23 | "opencode" - anomalyco (open source, MIT) | Medium | A terminal-first coding agent whose two built-in agents are the point: build, the default full-access agent for development work, and plan, a read-only agent that denies file edits and asks permission before running shell commands, switched with a single keystroke, alongside a general subagent for wide searches, a terminal interface as the primary surface with a desktop application still in beta, and installation through every package manager a developer already has - read as the closing day of three consecutive days on coding agents, where an enterprise product, an editor extension and a terminal binary turn out to have independently converged on the same primitive of one mode that may write and one that may only read | [github.com/anomalyco](https://github.com/anomalyco/opencode) |
 
 ---
 
@@ -1239,6 +1240,22 @@ source that argues the opposite.
 
 <sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
 
+### Day 43 - "opencode" (anomalyco, open source)
+
+<img src="assets/cards/day-043.png" width="420" alt="Day 43 card">
+
+- **Two built-in agents, and the read-only one is a first-class citizen.** The README describes build as the "Default, full-access agent for development work" and plan as a "Read-only agent for analysis and code exploration" that denies file edits by default and asks permission before running shell commands, recommended for "exploring unfamiliar codebases or planning changes". A third, general, is a subagent for wide searches. Switching is a keystroke, which matters more than it sounds: a constrained mode one key away gets used, while the same constraint behind a menu does not.
+- **Terminal first, and the ordering is deliberate.** The terminal interface is the primary surface; a native desktop application for macOS, Windows and Linux exists but is marked beta. Installation runs through the package managers a developer already has - a shell installer, npm, Homebrew, Scoop, Chocolatey, the Arch repositories, mise and nix. MIT licensed, written in TypeScript, with the repository's own description reading "The open source coding agent."
+- **The convergence across three days, which is this entry's actual claim.** Day 41's enterprise product separates agent, ask and plan modes. Day 42's editor extension splits plan from act and gates every action on explicit approval. This one gives you build and plan on the Tab key. Three companies, three business models, three interfaces, one shape: a mode that may write and a mode that may only read. Nothing suggests they coordinated.
+- **Two explanations, and no evidence here to choose between them.** Either unconstrained write access failed often enough in practice that each team independently added a handbrake, or one implementation was persuasive and got copied twice. The first would make the read-only mode a hard-won safety finding; the second would make it a convention. This entry states both rather than picking, because picking would require release histories and incident reports that were not read.
+- **What was verified, and what a repository page cannot show.** The repository metadata was checked directly rather than eyeballed: full name `anomalyco/opencode`, MIT licence, TypeScript, homepage opencode.ai, created 2025-04-30, default branch `dev` - note that `main` does not exist, and a raw README fetch against `main` returns 404. What no page here shows is the agent completing a task, which is the honest limit of three days spent reading documentation.
+
+**Why it matters:** a week spent reading three coding agents produced one finding worth more than any individual feature list. The industry is standardising a permission boundary at the level of modes rather than settings, and it is doing so from three different commercial directions at once. That is the kind of agreement that usually indicates a lesson learned rather than a fashion, and it is a small piece of evidence that the agent question is moving from what these systems can do towards what they should be allowed to do without asking.
+
+**What I learned - and what I want to test.** The comparison was only possible because three sources landed on consecutive days, which is an argument for reading in clusters rather than one unrelated thing per day. What I want to test is the convergence claim itself, with the cheapest available experiment: install the two open tools, put each in its read-only mode, point them at the same unfamiliar repository, and see whether the constrained mode is actually usable for exploration or whether it degrades into a chat window that cannot help. If the read-only mode is genuinely useful, the convergence is a design finding. If it is theatre, three products copied a feature nobody uses.
+
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
+
 
 ---
 
@@ -1306,5 +1323,5 @@ Nothing is posted that I have not read. Where the automation publishes, it publi
 
 <div align="center">
 <br>
-<sub><b>Day 42 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
+<sub><b>Day 43 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
 </div>

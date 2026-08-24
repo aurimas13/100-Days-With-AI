@@ -8,7 +8,7 @@ A public learning log of modern Artificial Intelligence - transformers, LLMs,
 agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 <!-- Day badge: bumped by the daily run. If this is stale, the run said so in its log. -->
-[![Day](https://img.shields.io/badge/Day-43%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
+[![Day](https://img.shields.io/badge/Day-44%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Streak](https://img.shields.io/badge/Streak-unbroken-2EA043?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Level mix](https://img.shields.io/badge/Sources-Advanced%20%2B%20Medium-8957E5?style=for-the-badge&labelColor=0D1117)](#-progress)
 
@@ -18,7 +18,7 @@ agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 **[📈 Progress](#-progress)** · **[📚 Day Notes](#-day-notes)** · **[🤝 AI Collaboration](#-ai-collaboration)** · **[🔗 Connect](#-connect)**
 
-`2026-07-12` ──────────── **Day 43 of 100** ────────────► `2026-10-19`
+`2026-07-12` ──────────── **Day 44 of 100** ────────────► `2026-10-19`
 
 </div>
 
@@ -139,6 +139,7 @@ for the shape of the progress table.
 | 41 | 2026-08-21 | "IBM Bob" - IBM | Medium | An enterprise coding agent read as a pair of pages, the marketing one and the documentation one: three purpose-built modes (agent, ask, plan), subagents spawned as parallel workstreams, a terminal companion, MCP for custom tools, usage analytics, and legacy modernisation in Java, RPG and COBOL as a headline use case - set against a landing page whose evidence is a single client migration reported as roughly 90% faster delivery and a claim that the product will not hallucinate on topics outside its knowledge, neither of which carries a method | [bob.ibm.com](https://bob.ibm.com/) |
 | 42 | 2026-08-22 | "Cline" - Cline (open source, Apache 2.0) | Medium | An open-source coding agent whose defining decision is a default rather than a capability: every file write and every command waits for explicit approval, and plan mode cannot write at all until you switch out of it, with the permission boundary expressed as a mode instead of a setting - available as an editor extension, a command-line tool and an embeddable SDK, running against any major model provider or your own endpoint, key or weights, and offering, a few paragraphs later in the same documentation, fully headless automation for continuous integration, which is where the promise of always being in control turns out to be a property of how you ran it | [cline.bot](https://cline.bot/) |
 | 43 | 2026-08-23 | "opencode" - anomalyco (open source, MIT) | Medium | A terminal-first coding agent whose two built-in agents are the point: build, the default full-access agent for development work, and plan, a read-only agent that denies file edits and asks permission before running shell commands, switched with a single keystroke, alongside a general subagent for wide searches, a terminal interface as the primary surface with a desktop application still in beta, and installation through every package manager a developer already has - read as the closing day of three consecutive days on coding agents, where an enterprise product, an editor extension and a terminal binary turn out to have independently converged on the same primitive of one mode that may write and one that may only read | [github.com/anomalyco](https://github.com/anomalyco/opencode) |
+| 44 | 2026-08-24 | "Context Engineering" - Andrej Karpathy (X), read via Willison and Schmid | Medium | The post that renamed the discipline in June 2025, read at second hand because the original is now behind a login wall: a prompt is a short task description, whereas context is the entire window an agent is given - instructions, user input, conversation history, long-term memory, retrieved documents, tool definitions and output format - so the work moves from choosing words to designing the system that assembles them, with Philipp Schmid's "right information and tools, in the right format, at the right time" as the definition that stuck and Simon Willison's observation that a term survives on its inferred rather than its intended meaning as the reason this one did, and with the widely repeated claim that agent failures are context failures rather than model failures recorded here as an untested hypothesis | [x.com/karpathy](https://x.com/karpathy/status/1937902205765607626) |
 
 ---
 
@@ -1256,6 +1257,22 @@ source that argues the opposite.
 
 <sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
 
+### Day 44 - "Context Engineering" (Andrej Karpathy, via Willison and Schmid)
+
+<img src="assets/cards/day-044.png" width="420" alt="Day 44 card">
+
+- **The rename, and what it moves.** The line everyone quotes is "+1 for 'context engineering' over 'prompt engineering'", and the reason given is that people hear "prompt" as a short task description. The reframing is not cosmetic: a prompt is a string you write, whereas context is the entire window a model sees on the next step. That turns a wording problem into a systems problem, which is a different job with different skills.
+- **What "context" actually contains.** Philipp Schmid's inventory is the useful part, because it is auditable: instructions, the user's input, conversation history, long-term memory, retrieved information, the available tools, and the specification of the output format. His definition - the right information and tools, in the right format, at the right time - is the phrasing that propagated, and it describes a dynamic system rather than a static text.
+- **Why this term stuck and the previous one did not.** Simon Willison's argument is the sharpest thing read today and it generalises past this case: "inferred definitions are the ones that stick". He had defended "prompt engineering", but the public inferred it as typing things into a chatbot, and that inference beat the intended meaning. He expects "context engineering" to fare better because what people infer from it is much closer to what practitioners mean. He also quotes Shopify's Tobi Lutke framing it as providing all the context needed for the task to be plausibly solvable.
+- **The claim this entry does NOT accept yet.** All three readings repeat some form of "agent failures are context failures, not model failures". It is plausible and it matches six weeks of reading, and none of these sources measures it - no failure taxonomy, no counts, no controlled comparison. It is recorded here as a working hypothesis, and it is worth noticing that the claim travelled a great deal faster than any evidence for it.
+- **What could not be verified, and why that is the day's other lesson.** The original post is unreachable without an account, and Willison's own quotation of it is explicitly truncated with "[..]" marks, so even the second-hand copy is partial. The date given in this project's backlog is 2025-06-25; Willison's post is dated 2025-06-27 and describes the tweet as recently amplified, which is consistent but is not independent confirmation. Everything quoted above was read; nothing was reconstructed from memory.
+
+**Why it matters:** the vocabulary a field uses decides what its practitioners think they are doing. While the job was called prompt engineering, the work looked like phrasing and the market priced it accordingly. Called context engineering, the same work looks like assembling the right state for the next model call - retrieval, memory, tool surfaces, formatting, compaction - which is ordinary engineering and can be reasoned about, tested and hired for. The rename is the cheapest useful thing that happened to this discipline in 2025.
+
+**What I learned - and what I want to test.** The unplanned lesson was about sourcing rather than context: the post that renamed a discipline is now unreadable without an account, and the definitions that actually circulate were written by two other people within a week of it. When the origin is closed, the commentary becomes the record. What I want to test is the hypothesis I refused to accept above, with the cheapest experiment available: take an agent run that failed, print the full context window it was given rather than the prompt I wrote, and see whether the missing piece was information the model never received. If it usually was, the claim earns its status. If the model had everything and still failed, it does not.
+
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
+
 
 ---
 
@@ -1323,5 +1340,5 @@ Nothing is posted that I have not read. Where the automation publishes, it publi
 
 <div align="center">
 <br>
-<sub><b>Day 43 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
+<sub><b>Day 44 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
 </div>

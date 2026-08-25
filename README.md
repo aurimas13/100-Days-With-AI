@@ -8,7 +8,7 @@ A public learning log of modern Artificial Intelligence - transformers, LLMs,
 agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 <!-- Day badge: bumped by the daily run. If this is stale, the run said so in its log. -->
-[![Day](https://img.shields.io/badge/Day-44%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
+[![Day](https://img.shields.io/badge/Day-45%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Streak](https://img.shields.io/badge/Streak-unbroken-2EA043?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Level mix](https://img.shields.io/badge/Sources-Advanced%20%2B%20Medium-8957E5?style=for-the-badge&labelColor=0D1117)](#-progress)
 
@@ -18,7 +18,7 @@ agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 **[📈 Progress](#-progress)** · **[📚 Day Notes](#-day-notes)** · **[🤝 AI Collaboration](#-ai-collaboration)** · **[🔗 Connect](#-connect)**
 
-`2026-07-12` ──────────── **Day 44 of 100** ────────────► `2026-10-19`
+`2026-07-12` ──────────── **Day 45 of 100** ────────────► `2026-10-19`
 
 </div>
 
@@ -140,6 +140,7 @@ for the shape of the progress table.
 | 42 | 2026-08-22 | "Cline" - Cline (open source, Apache 2.0) | Medium | An open-source coding agent whose defining decision is a default rather than a capability: every file write and every command waits for explicit approval, and plan mode cannot write at all until you switch out of it, with the permission boundary expressed as a mode instead of a setting - available as an editor extension, a command-line tool and an embeddable SDK, running against any major model provider or your own endpoint, key or weights, and offering, a few paragraphs later in the same documentation, fully headless automation for continuous integration, which is where the promise of always being in control turns out to be a property of how you ran it | [cline.bot](https://cline.bot/) |
 | 43 | 2026-08-23 | "opencode" - anomalyco (open source, MIT) | Medium | A terminal-first coding agent whose two built-in agents are the point: build, the default full-access agent for development work, and plan, a read-only agent that denies file edits and asks permission before running shell commands, switched with a single keystroke, alongside a general subagent for wide searches, a terminal interface as the primary surface with a desktop application still in beta, and installation through every package manager a developer already has - read as the closing day of three consecutive days on coding agents, where an enterprise product, an editor extension and a terminal binary turn out to have independently converged on the same primitive of one mode that may write and one that may only read | [github.com/anomalyco](https://github.com/anomalyco/opencode) |
 | 44 | 2026-08-24 | "Claude Academy" - Anthropic | Medium | Anthropic's course platform, read first as a catalogue and then as three certificates finished in four days and added to LinkedIn - AI Fluency: Framework & Foundations, AI Fluency for Builders, and Introduction to Agent Skills - whose 4D framework of Delegation, Description, Discernment and Diligence names in its fourth competency the disclosure practice this project has carried on every post since Day 41, recorded here with its honest limit: a certificate attests that the lessons were completed and a final assessment passed, not that the holder is competent | [academy.claude.com](https://academy.claude.com/courses) |
+| 45 | 2026-08-25 | "Skills For Real Engineers" - Matt Pocock | Medium | Twenty-five MIT-licensed agent skills taken straight from a working engineer's `.agents` directory, sorted on a single axis - who is allowed to invoke them - with user-invoked skills orchestrating, model-invoked skills holding the reusable discipline, and one call-graph rule holding the layer together: a user-invoked skill may invoke model-invoked skills but never another user-invoked one; the collection's argument is that agent failures are old software-engineering failures running faster, and it anchors each of its four named failure modes to a book that predates the agent era | [github.com/mattpocock/skills](https://github.com/mattpocock/skills/tree/main) |
 
 ---
 
@@ -1273,6 +1274,22 @@ source that argues the opposite.
 
 <sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
 
+### Day 45 - "Skills For Real Engineers" (Matt Pocock)
+
+<img src="assets/cards/day-045.png" width="420" alt="Day 45 card">
+
+- **One axis, and it is the whole organising idea.** Every skill in the repository is classified by who may invoke it. **User-invoked** skills are reachable only when the human types them, such as `/grill-me`, and their stated job is to orchestrate. **Model-invoked** skills can be reached by the agent itself when the task fits, and they hold the reusable discipline. The counts, taken from the Reference section rather than from any claim on the page: nine user-invoked and nine model-invoked under Engineering, five and two under Productivity, twenty-five in total.
+- **The constraint that makes the split load-bearing.** Quoted exactly: "A user-invoked skill may invoke model-invoked skills, but never another user-invoked one." That is a call-graph rule. Orchestrators may call disciplines; orchestrators may not call orchestrators. Without it, a skills directory degenerates into commands summoning commands, and the layer stops being legible to the person maintaining it. It is also the repository applying its own deep-module advice to itself rather than only to the code it helps you write.
+- **Four failure modes, each anchored to a book older than the agent.** Misalignment, answered with a grilling session, cites The Pragmatic Programmer. Verbosity, answered with a shared project vocabulary in `CONTEXT.md`, cites Eric Evans on the ubiquitous language of Domain-Driven Design. Broken code, answered with feedback loops and a red-green-refactor `tdd` skill plus a gated `diagnosing-bugs` loop, cites The Pragmatic Programmer again on small deliberate steps. The ball of mud, answered with `to-spec` and `improve-codebase-architecture`, cites Kent Beck on investing in design every day and John Ousterhout on deep modules.
+- **The sentence that carries the argument.** "Because agents can radically speed up coding, they also accelerate software entropy." That is a claim about rate rather than about capability, and it reframes the whole collection: these are not AI techniques, they are ordinary engineering disciplines being reasserted because the thing generating code got faster than the thing reviewing it.
+- **Two install paths, deliberately exclusive, and one honest hedge.** The Claude Code plugin installs a managed read-only bundle that updates when the author ships; skills.sh copies editable files you own and can hack on. The README is explicit that picking both "leaves you with every skill twice". And on `improve-codebase-architecture` it declines to oversell: "It is a survey, not a rescue" - on an old codebase it will surface real candidates but will not untangle the mud for you. A repository that marks the limits of its own tools is worth more than one that does not.
+
+**Why it matters:** most published agent-skill collections are lists. This one is a structure, and the structure is a claim about authority - which parts of a workflow a human must start, and which parts an agent may reach for on its own. That distinction is going to matter far more as skill libraries grow, because the failure it prevents is not a bug but an illegibility: a directory nobody can reason about because everything can call everything. The four failure modes underneath are a second claim, quieter and more provocative - that the agent era has not produced new ways for software projects to fail, only faster ones, and that the fixes were written down between 1999 and 2018.
+
+**What I learned - and what I want to test.** The lesson was structural rather than technical: I had been thinking of skills as a flat inventory of things an agent can do, and the invocation axis is a better primitive than any taxonomy by topic. What I want to test is the rule itself, on my own collection. I will sort every skill I have written into user-invoked and model-invoked, then look for the violation the rule forbids - an orchestrator invoking another orchestrator. If I find none, the rule is describing discipline I already had. If I find several, it has bought me a refactor I would not otherwise have known to make. Either result is worth the hour. What I cannot claim today is any experience of the skills in use: I read this repository, I did not run it, and those are different activities.
+
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
+
 ---
 
 ## 🤝 AI Collaboration
@@ -1339,5 +1356,5 @@ Nothing is posted that I have not read. Where the automation publishes, it publi
 
 <div align="center">
 <br>
-<sub><b>Day 44 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
+<sub><b>Day 45 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
 </div>

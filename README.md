@@ -8,7 +8,7 @@ A public learning log of modern Artificial Intelligence - transformers, LLMs,
 agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 <!-- Day badge: bumped by the daily run. If this is stale, the run said so in its log. -->
-[![Day](https://img.shields.io/badge/Day-45%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
+[![Day](https://img.shields.io/badge/Day-46%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Streak](https://img.shields.io/badge/Streak-unbroken-2EA043?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Level mix](https://img.shields.io/badge/Sources-Advanced%20%2B%20Medium-8957E5?style=for-the-badge&labelColor=0D1117)](#-progress)
 
@@ -18,7 +18,7 @@ agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 **[📈 Progress](#-progress)** · **[📚 Day Notes](#-day-notes)** · **[🤝 AI Collaboration](#-ai-collaboration)** · **[🔗 Connect](#-connect)**
 
-`2026-07-12` ──────────── **Day 45 of 100** ────────────► `2026-10-19`
+`2026-07-12` ──────────── **Day 46 of 100** ────────────► `2026-10-19`
 
 </div>
 
@@ -141,6 +141,7 @@ for the shape of the progress table.
 | 43 | 2026-08-23 | "opencode" - anomalyco (open source, MIT) | Medium | A terminal-first coding agent whose two built-in agents are the point: build, the default full-access agent for development work, and plan, a read-only agent that denies file edits and asks permission before running shell commands, switched with a single keystroke, alongside a general subagent for wide searches, a terminal interface as the primary surface with a desktop application still in beta, and installation through every package manager a developer already has - read as the closing day of three consecutive days on coding agents, where an enterprise product, an editor extension and a terminal binary turn out to have independently converged on the same primitive of one mode that may write and one that may only read | [github.com/anomalyco](https://github.com/anomalyco/opencode) |
 | 44 | 2026-08-24 | "Claude Academy" - Anthropic | Medium | Anthropic's course platform, read first as a catalogue and then as three certificates finished in four days and added to LinkedIn - AI Fluency: Framework & Foundations, AI Fluency for Builders, and Introduction to Agent Skills - whose 4D framework of Delegation, Description, Discernment and Diligence names in its fourth competency the disclosure practice this project has carried on every post since Day 41, recorded here with its honest limit: a certificate attests that the lessons were completed and a final assessment passed, not that the holder is competent | [academy.claude.com](https://academy.claude.com/courses) |
 | 45 | 2026-08-25 | "Skills For Real Engineers" - Matt Pocock | Medium | Twenty-five MIT-licensed agent skills taken straight from a working engineer's `.agents` directory, sorted on a single axis - who is allowed to invoke them - with user-invoked skills orchestrating, model-invoked skills holding the reusable discipline, and one call-graph rule holding the layer together: a user-invoked skill may invoke model-invoked skills but never another user-invoked one; the collection's argument is that agent failures are old software-engineering failures running faster, and it anchors each of its four named failure modes to a book that predates the agent era | [github.com/mattpocock/skills](https://github.com/mattpocock/skills/tree/main) |
+| 46 | 2026-08-26 | "Scaling Domain Data Repetition in LLM Pretraining" - Li, Gu, Dai, Hao, Xu, Wu, Zheng & Zhang (Tsinghua University and ByteDance Seed) | Advanced | A pretraining study of how many times high-quality domain data can be repeated before repetition stops helping, whose central result is a reversal caused by an experimental convention rather than by new evidence: holding the training-set size fixed across model scales makes the optimal repetition count fall as models grow, while holding the tokens-per-parameter ratio fixed - so the token budget grows with the model, as it does in practice - makes it rise, with both behaviours shown in one figure from the same runs and each derived as a theorem, and with the safe repetition count predicted almost entirely by how well the model already does on the domain (Pearson -0.944 against minimum validation loss) rather than by how much unique data is held (0.018); arXiv:2608.14071v1, a preprint, not peer reviewed | [arXiv 2608.14071](https://arxiv.org/abs/2608.14071) |
 
 ---
 
@@ -1290,6 +1291,23 @@ source that argues the opposite.
 
 <sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
 
+### Day 46 - "Scaling Domain Data Repetition in LLM Pretraining" (Tsinghua University and ByteDance Seed)
+
+<img src="assets/cards/day-046.png" width="420" alt="Day 46 card">
+
+- **The problem, which is about scarcity rather than technique.** General web text scales easily; high-quality domain data - code, maths, Wikipedia, medical text - does not. Compute-optimal training means the token budget grows with model size, so if the amount of good domain data stays fixed, its share of the mixture falls as the model grows. Repeating the domain data you have counteracts that dilution, at the cost of eventually overfitting it. The paper's whole subject is where that trade-off turns.
+- **The reversal, and it is the finding worth carrying away.** Existing cross-scale work holds the training-set size fixed and concludes that larger models overfit repeated data sooner, so repetition should be minimised as models grow. This paper holds the tokens-per-parameter ratio TPP = D/N fixed instead, so the budget grows with the model, and the optimal repetition count **increases** with model size. Both panels are in Figure 1, from the authors' own runs, and each behaviour is derived rather than only observed - Theorem 4.3 for the fixed-budget case, Theorem 4.4 for the fixed-TPP case. The evidence did not change. The control variable did.
+- **What actually predicts the safe repetition count, with the paper's numbers.** Fitting a quadratic to validation loss against repetition count and taking its minimum, the estimated optimum correlates with the domain's minimum validation loss at a Pearson **-0.944**, with model size at **0.400**, and with the fraction of unique high-quality data at **0.018**. In plain terms: how well the model already does on a domain almost entirely determines how often that domain can be repeated, model scale matters a little, and how much unique data you are sitting on matters essentially not at all. Domains differ sharply - Math bottoms out at around five repetitions while Wiki, Code and Medical turn earlier.
+- **The mechanism the authors propose, quoted.** "Repeated optimization decreases the knowledge-acquisition error but increases the noise-fitting error, and the optimal repetition count is the point at which the latter marginal effect begins to dominate." Under a fixed budget, growing the model reaches toward rarer knowledge without supplying new observations of it, so noise-fitting dominates sooner. Under fixed TPP the budget grows too, so the useful phase lasts longer.
+- **The practical payoff, and the direction of its error.** Sweep repetition counts on a small proxy model at the same TPP and any convenient unique-data fraction, then carry the result upward. The paper states the transfer claim in italics: *a repetition count that does not cause overfitting on the proxy model also remains safe for a larger model under the same tokens-per-parameter ratio.* The mistake it invites is therefore under-repetition, not a ruined run, which is the right way round for an expensive training job.
+- **What this entry does not accept without saying so.** The reported optima are minima of fitted curves, not observed runs - the authors are explicit about it, and it is why the plots carry values like 5.5 repetitions, which nobody can execute. The grid is four domains, four model sizes from 348M to 1.85B, three unique-data fractions and repetition counts one to seven, with the domains never mixed in a single run. The exact TPP is never given, only that it is a constant above 100. And this is arXiv v1 with no venue listed: a preprint, not peer reviewed.
+
+**Why it matters:** the useful content here is methodological before it is numerical. Two groups can run the same experiment on data repetition, hold different quantities constant, and publish advice that points in opposite directions - and both can be correct about the world they measured. That is not a flaw in either study; it is what a control variable does. Anyone comparing scaling results, whether about repetition, batch size or mixture weights, inherits this problem, and the first question to ask of a disagreement is not whose numbers are better but what each side refused to let vary. The secondary lesson is about scarcity: the binding constraint in pretraining has moved from compute toward good data, and the -0.944 correlation says the value of repeating a corpus is set by how well the model already handles it, not by how much of it you own.
+
+**What I learned - and what I want to test.** The lesson was a reading habit rather than a result. I have been treating disagreements between papers as evidence problems, and this one is a definitional problem wearing an evidence problem's clothes. What I want to test is whether that habit pays outside this case: for the next three scaling claims I meet that seem to contradict each other, I will write down what each study held fixed before I look at any number, and see how often the contradiction survives the exercise. If it usually dissolves, I have been reading the literature wrongly for months. If it usually survives, then this paper is a striking special case rather than a general warning, which is also worth knowing. What I cannot claim is any hands-on check: I have read this paper, I have not trained anything on its recipe, and at these model sizes I am not going to.
+
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
+
 ---
 
 ## 🤝 AI Collaboration
@@ -1356,5 +1374,5 @@ Nothing is posted that I have not read. Where the automation publishes, it publi
 
 <div align="center">
 <br>
-<sub><b>Day 45 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
+<sub><b>Day 46 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
 </div>

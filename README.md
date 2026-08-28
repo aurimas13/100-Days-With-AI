@@ -8,7 +8,7 @@ A public learning log of modern Artificial Intelligence - transformers, LLMs,
 agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 <!-- Day badge: bumped by the daily run. If this is stale, the run said so in its log. -->
-[![Day](https://img.shields.io/badge/Day-47%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
+[![Day](https://img.shields.io/badge/Day-48%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Streak](https://img.shields.io/badge/Streak-unbroken-2EA043?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Level mix](https://img.shields.io/badge/Sources-Advanced%20%2B%20Medium-8957E5?style=for-the-badge&labelColor=0D1117)](#-progress)
 
@@ -18,7 +18,7 @@ agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 **[📈 Progress](#-progress)** · **[📚 Day Notes](#-day-notes)** · **[🤝 AI Collaboration](#-ai-collaboration)** · **[🔗 Connect](#-connect)**
 
-`2026-07-12` ──────────── **Day 47 of 100** ────────────► `2026-10-19`
+`2026-07-12` ──────────── **Day 48 of 100** ────────────► `2026-10-19`
 
 </div>
 
@@ -143,6 +143,7 @@ for the shape of the progress table.
 | 45 | 2026-08-25 | "Skills For Real Engineers" - Matt Pocock | Medium | Twenty-five MIT-licensed agent skills taken straight from a working engineer's `.agents` directory, sorted on a single axis - who is allowed to invoke them - with user-invoked skills orchestrating, model-invoked skills holding the reusable discipline, and one call-graph rule holding the layer together: a user-invoked skill may invoke model-invoked skills but never another user-invoked one; the collection's argument is that agent failures are old software-engineering failures running faster, and it anchors each of its four named failure modes to a book that predates the agent era | [github.com/mattpocock/skills](https://github.com/mattpocock/skills/tree/main) |
 | 46 | 2026-08-26 | "Scaling Domain Data Repetition in LLM Pretraining" - Li, Gu, Dai, Hao, Xu, Wu, Zheng & Zhang (Tsinghua University and ByteDance Seed) | Advanced | A pretraining study of how many times high-quality domain data can be repeated before repetition stops helping, whose central result is a reversal caused by an experimental convention rather than by new evidence: holding the training-set size fixed across model scales makes the optimal repetition count fall as models grow, while holding the tokens-per-parameter ratio fixed - so the token budget grows with the model, as it does in practice - makes it rise, with both behaviours shown in one figure from the same runs and each derived as a theorem, and with the safe repetition count predicted almost entirely by how well the model already does on the domain (Pearson -0.944 against minimum validation loss) rather than by how much unique data is held (0.018); arXiv:2608.14071v1, a preprint, not peer reviewed | [arXiv 2608.14071](https://arxiv.org/abs/2608.14071) |
 | 47 | 2026-08-27 | "How Long Contexts Fail" - Drew Breunig | Advanced | A working taxonomy of long-context degradation, splitting what is usually treated as one problem into four failure modes separated by mechanism rather than by symptom - poisoning, where an error entering the context is then repeatedly referenced; distraction, where the context grows long enough that the model over-focuses on it and neglects its training; confusion, where superfluous content is used and drags the answer down; and clash, where accumulated information and tools contradict each other - and assembling the evidence from five other groups' results rather than the author's own, the sharpest being a Databricks finding that correctness began to fall around 32k for Llama 3.1 405b and earlier for smaller models, and a GeoEngine result where a quantised Llama 3.1 8b failed with 46 tools and succeeded with 19 while comfortably inside its 16k window; the article names no fixes, deferring them to a follow-up post | [dbreunig.com](https://www.dbreunig.com/2025/06/22/how-contexts-fail-and-how-to-fix-them.html) |
+| 48 | 2026-08-28 | "AI Systems Out-Persuade Expert Humans" - Kobi Hackenburg et al. | Advanced | Four preregistered experiments covering 18,978 conversations with 6,923 people, pitting frontier AI against five classes of human persuader - random laypeople, tournament-selected laypeople, professional canvassers paid £140 an hour, 56 elite competitive debaters including four world champions and eleven continental champions, and those same debaters after coaching against the AI that had beaten them - and finding AI ahead of every class, by 8.2 points over random laypeople and 4.6 over elite debaters, with coaching adding a statistically insignificant 1.0 point despite the debaters writing 19% more words and making 54% more fact-checkable claims; the decisive result is the constraint arm, where capping the AI to human message length and human reply speed collapsed its advantage over the strongest human group to 0.0 points, identifying information throughput rather than rhetorical skill as the source of the edge, and a fourth study found the advantage carried into real-money charitable giving | [arxiv.org](https://arxiv.org/abs/2606.16475) |
 
 ---
 
@@ -1325,6 +1326,22 @@ source that argues the opposite.
 
 <sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
 
+### Day 48 - "AI Systems Out-Persuade Expert Humans" (Kobi Hackenburg et al.)
+
+<img src="assets/cards/day-048.png" width="420" alt="Day 48 card">
+
+- **The humans were selected to be hard to beat, and were still beaten.** Five persuader classes across four preregistered experiments (n = 18,978 conversations from 6,923 people): random laypeople, the top ~10% of a separate four-round persuasion tournament, professional canvassers on £140 an hour, and 56 elite competitive debaters with a mean 8.9 years of experience, four world champions and eleven continental champions among them. The debaters picked their own issues, had 21 days of notice, eight paid hours of preparation and bonuses up to £1,000. AI exceeded random laypeople by 8.2 percentage points of attitude shift, tournament-selected laypeople by 5.6, and elite debaters by 4.6.
+- **Coaching the humans against the AI barely moved them.** 43 returning debaters got a tool that let them chat with the AI that beat them, review their own annotated transcripts, and see what the AI would have said at any point, then trained over four-hour sessions. Afterwards they wrote about 9.8 more words per message (+19%) and deployed 1.6 more fact-checkable claims per conversation (+54%) - and their persuasiveness improved by 1.0 percentage point, with a confidence interval spanning zero.
+- **Constraining the AI closed the gap completely.** In the first study elite debaters averaged 54 words per reply and took roughly 95 seconds; the AI averaged 294 words with sub-second latency. When the authors capped the AI to human-calibrated limits - 92 seconds per response, about 51 words - its advantage over the coached debaters fell from 4.1 percentage points to 0.0, with a confidence interval of -1.7 to +1.6.
+- **The result held at the level of individuals, not just class averages.** Of 318 per-persuader estimates, none exceeded the pooled AI estimate; the best single human came in at 9.9 points, still 4.0 below the AI.
+- **It transferred to money.** A fourth study put the systems against professional canvassers from a UK fundraising firm on real donations to Save the Children, where AI was nearly three times more effective.
+
+**Why it matters:** the headline reading of this paper is that AI argues better than champions, which invites either alarm or dismissal and settles nothing. The constraint arm gives a mechanism instead: the advantage is information throughput, the rate at which relevant content is produced, not superior reasoning or rhetoric. That is a falsifiable claim, and it tells you the exact intervention - rate limiting - that removes the edge. It also reframes the risk. A persuasion advantage grounded in throughput is one that scales with deployment rather than with model cleverness.
+
+**What I learned/tried:** I read this one as a caution about my own judgement rather than as a finding about debating. When an agent produces a well-marshalled case, I treat the fluency as evidence of reasoning quality. This paper is a clean demonstration that volume delivered faster than a person can respond is, on its own, enough to look like superior argument - and that it took a deliberately handicapped condition to tell the two apart. The practical note I am keeping is to be more suspicious of long, fast, confident output, and less impressed by the fact that I could not immediately counter it.
+
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
+
 ---
 
 ## 🤝 AI Collaboration
@@ -1391,5 +1408,5 @@ Nothing is posted that I have not read. Where the automation publishes, it publi
 
 <div align="center">
 <br>
-<sub><b>Day 47 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
+<sub><b>Day 48 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
 </div>

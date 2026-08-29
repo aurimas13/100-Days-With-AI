@@ -8,7 +8,7 @@ A public learning log of modern Artificial Intelligence - transformers, LLMs,
 agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 <!-- Day badge: bumped by the daily run. If this is stale, the run said so in its log. -->
-[![Day](https://img.shields.io/badge/Day-48%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
+[![Day](https://img.shields.io/badge/Day-49%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Streak](https://img.shields.io/badge/Streak-unbroken-2EA043?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Level mix](https://img.shields.io/badge/Sources-Advanced%20%2B%20Medium-8957E5?style=for-the-badge&labelColor=0D1117)](#-progress)
 
@@ -18,7 +18,7 @@ agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 **[📈 Progress](#-progress)** · **[📚 Day Notes](#-day-notes)** · **[🤝 AI Collaboration](#-ai-collaboration)** · **[🔗 Connect](#-connect)**
 
-`2026-07-12` ──────────── **Day 48 of 100** ────────────► `2026-10-19`
+`2026-07-12` ──────────── **Day 49 of 100** ────────────► `2026-10-19`
 
 </div>
 
@@ -144,6 +144,7 @@ for the shape of the progress table.
 | 46 | 2026-08-26 | "Scaling Domain Data Repetition in LLM Pretraining" - Li, Gu, Dai, Hao, Xu, Wu, Zheng & Zhang (Tsinghua University and ByteDance Seed) | Advanced | A pretraining study of how many times high-quality domain data can be repeated before repetition stops helping, whose central result is a reversal caused by an experimental convention rather than by new evidence: holding the training-set size fixed across model scales makes the optimal repetition count fall as models grow, while holding the tokens-per-parameter ratio fixed - so the token budget grows with the model, as it does in practice - makes it rise, with both behaviours shown in one figure from the same runs and each derived as a theorem, and with the safe repetition count predicted almost entirely by how well the model already does on the domain (Pearson -0.944 against minimum validation loss) rather than by how much unique data is held (0.018); arXiv:2608.14071v1, a preprint, not peer reviewed | [arXiv 2608.14071](https://arxiv.org/abs/2608.14071) |
 | 47 | 2026-08-27 | "How Long Contexts Fail" - Drew Breunig | Advanced | A working taxonomy of long-context degradation, splitting what is usually treated as one problem into four failure modes separated by mechanism rather than by symptom - poisoning, where an error entering the context is then repeatedly referenced; distraction, where the context grows long enough that the model over-focuses on it and neglects its training; confusion, where superfluous content is used and drags the answer down; and clash, where accumulated information and tools contradict each other - and assembling the evidence from five other groups' results rather than the author's own, the sharpest being a Databricks finding that correctness began to fall around 32k for Llama 3.1 405b and earlier for smaller models, and a GeoEngine result where a quantised Llama 3.1 8b failed with 46 tools and succeeded with 19 while comfortably inside its 16k window; the article names no fixes, deferring them to a follow-up post | [dbreunig.com](https://www.dbreunig.com/2025/06/22/how-contexts-fail-and-how-to-fix-them.html) |
 | 48 | 2026-08-28 | "AI Systems Out-Persuade Expert Humans" - Kobi Hackenburg et al. | Advanced | Four preregistered experiments covering 18,978 conversations with 6,923 people, pitting frontier AI against five classes of human persuader - random laypeople, tournament-selected laypeople, professional canvassers paid £140 an hour, 56 elite competitive debaters including four world champions and eleven continental champions, and those same debaters after coaching against the AI that had beaten them - and finding AI ahead of every class, by 8.2 points over random laypeople and 4.6 over elite debaters, with coaching adding a statistically insignificant 1.0 point despite the debaters writing 19% more words and making 54% more fact-checkable claims; the decisive result is the constraint arm, where capping the AI to human message length and human reply speed collapsed its advantage over the strongest human group to 0.0 points, identifying information throughput rather than rhetorical skill as the source of the edge, and a fourth study found the advantage carried into real-money charitable giving | [arxiv.org](https://arxiv.org/abs/2606.16475) |
+| 49 | 2026-08-29 | "Training AI Scientists to Replicate Research" - Damon Falck et al. (Inherent Laboratories) | Advanced | A training setup for agents that reproduce published results, built on Replica, an automatically generated space of 310 figure-replication tasks drawn from 100 machine learning and AI-for-science papers spanning 1990 to 2026, where each task hands the agent a paper with one results figure irreversibly redacted, 60 minutes and a one-seventh MIG slice of an H200 GPU, and asks for the missing plot; because replication has no verifiable reward, the authors auto-generate a per-task rubric with the original figure hidden from the rubric writer so it grades the paper's claim rather than the plot's cosmetics, and use a coding agent with workspace access as the judge so it can re-run the code it is scoring; the resulting agent, Faraday, is Qwen3.6-27B post-trained with a turn-level credit variant of GRPO and using a frontier coding agent as a tool, and it wins on 73% of in-distribution tasks and 60% of held-out ones, with the sharpest comparison being that the same base model in the same harness with the same tool scores 0.554 on the held-out set against Faraday's 0.791 | [arxiv.org](https://arxiv.org/abs/2608.13331) |
 
 ---
 
@@ -1344,6 +1345,24 @@ source that argues the opposite.
 
 ---
 
+### Day 49 - "Training AI Scientists to Replicate Research" (Damon Falck et al.)
+
+<img src="assets/cards/day-049.png" width="420" alt="Day 49 card">
+
+- **The task space is generated, not hand-built, which is what makes it scale.** Replica takes 100 well-known machine learning and AI-for-science papers, runs a three-stage vision-language pipeline to locate a main-text results figure and its caption, and irreversibly redacts that figure from the PDF. The agent gets the mutilated paper, a container with research libraries and internet access, 60 minutes and a one-seventh MIG slice of an H200 GPU, and has to produce the missing plot. That yields 310 tasks - 242 for training from ML papers, 68 held out from AI-for-science papers - with each paper contributing between 1 and 13 tasks, median 2.
+- **The reward design is the actual contribution.** Replication is non-verifiable: matching the original plot exactly is not the goal, since the time and compute limits usually make a full-scale reproduction impossible and a faithful scaled-down version is what is being asked for. So a rubric is auto-generated per task by a separate model, **with the original figure hidden from the rubric generator**, which forces the rubric to encode the paper's claim rather than axis ranges and formatting. The rubric is also hidden from the agent during training, so it cannot be gamed.
+- **The judge is a coding agent, not a text grader.** Scoring is done by a coding agent given the same workspace and tools the agent had, plus the replication codebase, the git history and the original figure, and ten minutes to explore. It can re-execute the agent's code to check whether a claimed result is real. It scores five dimensions - visual match, support for the paper's scientific claim, whether the experiment implements what the paper describes, sensible use of the compute budget, and whether the agent acted with integrity rather than cheating - each 0 to 1, sampled three times to cut variance.
+- **Faraday is small and directs something much larger.** It is Qwen3.6-27B, post-trained with a turn-level credit variant of GRPO on the Replica training split, and it uses a frontier coding agent as a tool - the paper's phrase is coding agents as tools. The authors note it directs a model they cite an estimate of 5 trillion parameters for, and still adds performance over that larger model working alone.
+- **The numbers, scoped honestly.** Faraday outperforms the two frontier baselines on 73% of in-distribution ML tasks and 60% of held-out AI-for-science tasks, averaging a 6% improvement over one and 8% over the other on the test split. The comparison that carries the most weight is the ablation: base Qwen3.6-27B scores 0.554 on the held-out set, Faraday 0.791, running in the same harness with the same coding agent available to both.
+
+**Why it matters:** the headline invites a wrong reading - that a 27B model now beats frontier systems. It does not. It beats them at figure replication, judged by an LLM rubric, after reinforcement learning on 242 tasks from that distribution. What generalises is the shape of the result rather than the ranking. Because the base model and the trained model share a harness and a tool, the gain cannot be attributed to better code generation; it has to come from the layer deciding what to attempt, how far to scale an experiment down, and when a shortcut would flatter the outcome. That is a claim about where capability can be added cheaply, and it is testable.
+
+**What I learned/tried:** my default assumption in agent work has been that improving an agent means reaching for a stronger underlying model. This paper is the clearest counter-example I have read, because it holds the underlying model fixed and trains only the directing layer. I also took the rubric trick as a transferable idea rather than a detail: hiding the answer from whoever writes the grading criteria is a cheap way to stop a rubric from rewarding surface resemblance, and it applies well beyond paper replication - any time I am tempted to grade an agent against a known-good output, the criteria should be written without seeing it.
+
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
+
+---
+
 ## 🤝 AI Collaboration
 
 <sub>Standing disclosure. Published 2026-08-20, in force from Day 41 onward, and describing how every day of this project has been made. Days 1 to 40 carry the same note, added retroactively on the day this statement was published.</sub>
@@ -1408,5 +1427,5 @@ Nothing is posted that I have not read. Where the automation publishes, it publi
 
 <div align="center">
 <br>
-<sub><b>Day 48 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
+<sub><b>Day 49 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
 </div>

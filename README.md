@@ -8,7 +8,7 @@ A public learning log of modern Artificial Intelligence - transformers, LLMs,
 agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 <!-- Day badge: bumped by the daily run. If this is stale, the run said so in its log. -->
-[![Day](https://img.shields.io/badge/Day-77%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
+[![Day](https://img.shields.io/badge/Day-78%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Streak](https://img.shields.io/badge/Streak-unbroken-2EA043?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Level mix](https://img.shields.io/badge/Sources-Advanced%20%2B%20Medium-8957E5?style=for-the-badge&labelColor=0D1117)](#-progress)
 
@@ -18,7 +18,7 @@ agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 **[📈 Progress](#-progress)** · **[📚 Day Notes](#-day-notes)** · **[🤝 AI Collaboration](#-ai-collaboration)** · **[🔗 Connect](#-connect)**
 
-`2026-07-12` ──────────── **Day 77 of 100** ────────────► `2026-10-19`
+`2026-07-12` ──────────── **Day 78 of 100** ────────────► `2026-10-19`
 
 </div>
 
@@ -173,6 +173,7 @@ for the shape of the progress table.
 | 75 | 2026-09-24 | "The lethal trifecta for AI agents: private data, untrusted content, and external communication" - Simon Willison | Medium | Milestone day, three quarters in: the short essay that names the one combination of agent capabilities to refuse - "Access to your private data", "Exposure to untrusted content" and "The ability to externally communicate" - because "If your agent combines these three features, an attacker can easily trick it into accessing your private data and sending it to that attacker"; it explains why ("LLMs are unable to reliably distinguish the importance of instructions based on where they came from"), why MCP makes the mix easy ("it encourages users to mix and match tools from different sources"), and why vendor guardrails are no answer ("in web application security 95% is very much a failing grade"), ending on the only safe move for anyone combining tools themselves: "avoid that lethal trifecta combination entirely"; read here as the plain-language frame over the Days 22-25 security arc, recorded with the limits that it is a June 2025 blog post rather than a study and that nothing was run here | [simonwillison.net](https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/) |
 | 76 | 2026-09-25 | "My review of Claude's new Code Interpreter, released under a very confusing name" - Simon Willison | Medium | A hands-on review of the feature Anthropic shipped as "Upgraded file creation and analysis", which Willison reads as Claude's version of ChatGPT Code Interpreter: "Claude can now write and execute custom Python (and Node.js) code in a server-side sandbox and use it to process and analyze data"; he maps the sandbox by asking Claude to describe it (Ubuntu 24.04.2, Python 3.12.3, Node.js v18.19.1, about 9GB of RAM, running as root) and finds its network behind a proxy allowlist that still includes package registries and github.com; the day's reading follows straight on from Day 75, because Anthropic's own help text lists the full lethal trifecta for this feature - "Reading sensitive data from a claude.ai connected knowledge source (e.g., Remote MCP, projects) and using the sandbox environment to make an external network request to leak the data" - and Willison's gloss is that "allowlisting github.com opens an enormous array of potential exfiltration vectors", so a sandbox narrows the way out without removing it, and the stated mitigation, to "monitor Claude while using the feature and stop it if you see it using or accessing data unexpectedly", hands the last line of defence to the user; recorded with the limits that it is a September 2025 first-look review, that the environment details are what the model reported about itself, that the allowlist may have changed since, and that nothing was run here | [simonwillison.net](https://simonwillison.net/2025/Sep/9/claude-code-interpreter/) |
 | 77 | 2026-09-26 | "LLM Guardrails for Data Leakage, Prompt Injection, and More" - Confident AI | Medium | A practitioner guide to runtime guardrails, which it defines as "pre-defined rules and filters designed to protect LLM applications from vulnerabilities like data leakage, bias, and hallucination", split into input guards (prompt injection, jailbreaking, privacy, topical, toxicity, code injection) and output guards (data leakage, toxicity, bias, hallucination, illegal activity); the line the day turns on is the compounding arithmetic - "even if your LLM guards are on average 90% accurate, by applying 5 guards you'll have a false positive 40% of the time" - which is why it argues guards must be fast, binary ("merely provide a 0 or 1 flag") and aimed at worst cases, since "guarding something based on functionality instead of safety is a recipe for disaster"; read here as the vendor-side answer to Day 75, where Willison called 95% "a failing grade" for security; recorded with the limits that no author or date appears on the page, that Confident AI also publishes DeepEval and DeepTeam, the open-source tools the guide points to, that the 40% figure assumes independent guards, and that nothing was run here | [confident-ai.com](https://www.confident-ai.com/blog/llm-guardrails-the-ultimate-guide-to-safeguard-llm-systems) |
+| 78 | 2026-09-27 | "MCP Security Notification: Tool Poisoning Attacks" - Luca Beurer-Kellner & Marc Fischer, Invariant Labs | Advanced | The security note that named the Tool Poisoning Attack, where "malicious instructions are embedded within MCP tool descriptions that are invisible to users but visible to AI models", which works because "MCP's security model assumes that tool descriptions are trustworthy and benign"; in their proof of concept against Cursor a poisoned `add` tool had the agent read Cursor's `mcp.json` config and the user's SSH private key (`id_rsa`) and pass them out through a hidden `sidenote` parameter, and the note adds two variants - rug pulls, where "a malicious server can change the tool description after the client has already approved it", and shadowing, where one server's description redirected a trusted server's `send_email` to the attacker; the fixes it proposes are visible tool descriptions, version pinning and cross-server dataflow controls; read here as the lethal trifecta of Day 75 arriving through a tool's own metadata, from two of the authors behind Days 23 and 25; recorded with the limits that it is a vendor's demonstration (Invariant later released MCP-Scan, per the page's Apr 11 update), dated 2025-04-01, and that nothing was run here | [invariantlabs.ai](https://invariantlabs.ai/blog/mcp-security-notification-tool-poisoning-attacks) |
 
 ---
 
@@ -1863,6 +1864,22 @@ source that argues the opposite.
 
 <sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
 
+### Day 78 - "MCP Security Notification: Tool Poisoning Attacks" (Beurer-Kellner & Fischer, Invariant Labs)
+
+<img src="assets/cards/day-078.png" width="420" alt="Day 78 card">
+
+- **The attack surface is the description, not the code.** "A Tool Poisoning Attack occurs when malicious instructions are embedded within MCP tool descriptions that are invisible to users but visible to AI models." The asymmetry is the whole attack: "AI models see the complete tool descriptions, including hidden instructions, while users typically only see simplified versions in their UI." And it works because "MCP's security model assumes that tool descriptions are trustworthy and benign."
+- **The proof of concept reads like an ordinary tool.** The poisoned tool is an `add` function whose docstring carries an `<IMPORTANT>` block telling the model to read Cursor's `mcp.json` config and the user's SSH private key (`id_rsa`), pass the contents through a `sidenote` parameter, and "Do not mention that you first need to read the file." Against Cursor, the note reports that the agent "willingly reads" the config file "and other sensitive files like SSH keys and sends them to the malicious server." Cursor does show a confirmation dialog, "but even in its extended mode, it does not show the full tool input (e.g. the included SSH key is completely hidden)."
+- **Approval once is not approval forever.** MCP's package and server model "allows for _rug pulls_ - where a malicious server can change the tool description after the client has already approved it." A server that was clean on install can turn later.
+- **A tool does not have to be called to do harm.** In the second experiment a malicious server's description changed how a different, trusted server's `send_email` behaved, so "the agent willingly sends all emails to the attacker, even if the user explicitly specifies a different recipient." Their heading for it: "Shadowing Is Enough".
+- **Three mitigations.** Tool descriptions "should be clearly visible to users"; "Clients should pin the version of the MCP server and its tools to prevent unauthorized changes"; and servers need "stricter boundaries and dataflow controls" between them. **What is not verified here:** nothing was run - no MCP server was built or poisoned. The note is dated 2025-04-01 and clients may have changed since. Invariant Labs sells security tooling and the page's Apr 11 update announces its own MCP-Scan, so this is a vendor describing a problem its product addresses.
+
+**Why it matters:** Day 75 was Willison's lethal trifecta: private data, untrusted content and a way to send data out, all in one agent. This note shows the untrusted content arriving somewhere most people would not look - the metadata of a tool they chose to install. It is also a sequel within this log: Beurer-Kellner and Fischer are two of the authors behind AgentDojo (Day 23) and the six design patterns (Day 25), and here they show the problem in a real client rather than a benchmark. For anyone wiring MCP servers into an agent, the practical lesson is that installing a tool also installs its description into the model's context, where the model can treat it with the same weight as your own instructions.
+
+**What I learned/tried:** I had been thinking of an MCP server as code that runs when called. The note made me treat it as text that the model reads every time, whether the tool is called or not, which is why shadowing works without the malicious tool ever being used. The habit I am taking from it is simple: read the full description of any tool before connecting it, prefer pinned versions, and keep servers that can reach private data apart from servers that can send data out. No server was built or tested for this entry; this is what I learned from reading the note.
+
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
+
 ---
 
 ## 🤝 AI Collaboration
@@ -1929,7 +1946,7 @@ Nothing is posted that I have not read. Where the automation publishes, it publi
 
 <div align="center">
 <br>
-<sub><b>Day 77 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
+<sub><b>Day 78 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
 </div>
 
 

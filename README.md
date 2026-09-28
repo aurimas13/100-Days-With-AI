@@ -8,7 +8,7 @@ A public learning log of modern Artificial Intelligence - transformers, LLMs,
 agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 <!-- Day badge: bumped by the daily run. If this is stale, the run said so in its log. -->
-[![Day](https://img.shields.io/badge/Day-79%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
+[![Day](https://img.shields.io/badge/Day-80%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Streak](https://img.shields.io/badge/Streak-unbroken-2EA043?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Level mix](https://img.shields.io/badge/Sources-Advanced%20%2B%20Medium-8957E5?style=for-the-badge&labelColor=0D1117)](#-progress)
 
@@ -18,7 +18,7 @@ agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 **[📈 Progress](#-progress)** · **[📚 Day Notes](#-day-notes)** · **[🤝 AI Collaboration](#-ai-collaboration)** · **[🔗 Connect](#-connect)**
 
-`2026-07-12` ──────────── **Day 79 of 100** ────────────► `2026-10-19`
+`2026-07-12` ──────────── **Day 80 of 100** ────────────► `2026-10-19`
 
 </div>
 
@@ -175,6 +175,7 @@ for the shape of the progress table.
 | 77 | 2026-09-26 | "LLM Guardrails for Data Leakage, Prompt Injection, and More" - Confident AI | Medium | A practitioner guide to runtime guardrails, which it defines as "pre-defined rules and filters designed to protect LLM applications from vulnerabilities like data leakage, bias, and hallucination", split into input guards (prompt injection, jailbreaking, privacy, topical, toxicity, code injection) and output guards (data leakage, toxicity, bias, hallucination, illegal activity); the line the day turns on is the compounding arithmetic - "even if your LLM guards are on average 90% accurate, by applying 5 guards you'll have a false positive 40% of the time" - which is why it argues guards must be fast, binary ("merely provide a 0 or 1 flag") and aimed at worst cases, since "guarding something based on functionality instead of safety is a recipe for disaster"; read here as the vendor-side answer to Day 75, where Willison called 95% "a failing grade" for security; recorded with the limits that no author or date appears on the page, that Confident AI also publishes DeepEval and DeepTeam, the open-source tools the guide points to, that the 40% figure assumes independent guards, and that nothing was run here | [confident-ai.com](https://www.confident-ai.com/blog/llm-guardrails-the-ultimate-guide-to-safeguard-llm-systems) |
 | 78 | 2026-09-27 | "MCP Security Notification: Tool Poisoning Attacks" - Luca Beurer-Kellner & Marc Fischer, Invariant Labs | Advanced | The security note that named the Tool Poisoning Attack, where "malicious instructions are embedded within MCP tool descriptions that are invisible to users but visible to AI models", which works because "MCP's security model assumes that tool descriptions are trustworthy and benign"; in their proof of concept against Cursor a poisoned `add` tool had the agent read Cursor's `mcp.json` config and the user's SSH private key (`id_rsa`) and pass them out through a hidden `sidenote` parameter, and the note adds two variants - rug pulls, where "a malicious server can change the tool description after the client has already approved it", and shadowing, where one server's description redirected a trusted server's `send_email` to the attacker; the fixes it proposes are visible tool descriptions, version pinning and cross-server dataflow controls; read here as the lethal trifecta of Day 75 arriving through a tool's own metadata, from two of the authors behind Days 23 and 25; recorded with the limits that it is a vendor's demonstration (Invariant later released MCP-Scan, per the page's Apr 11 update), dated 2025-04-01, and that nothing was run here | [invariantlabs.ai](https://invariantlabs.ai/blog/mcp-security-notification-tool-poisoning-attacks) |
 | 79 | 2026-09-28 | "Em-ergence of the em-dash: a population-level rise in em-dash frequency in medRxiv preprints at the dawn of the large-language-model era" - Przemysław Czuma | Medium | A pre-registered study (OSF HFT8C) of 69,632 first-version medRxiv preprints from 2020-2025, read as raw JATS XML so the author's own typography survives, asking one binary question: does the Discussion section contain at least one em dash (U+2014)? Prevalence rose from 4.23% before ChatGPT's release (30 November 2022) to 11.58% after, +7.35 percentage points (95% CI 6.94-7.77, odds ratio 2.96), not as a step but as a take-off: near 4% through 2023, 8.0% in 2024, 20.3% in 2025; a placebo breakpoint inside the pre-LLM era and a boilerplate-section placebo both came out clean; recorded with the author's own limits that it is a population-level marker, not a per-paper detector, cannot establish causation, and that this is a v1 preprint (28 June 2026, not peer reviewed); nothing was run here | [arxiv.org](https://arxiv.org/abs/2606.29540) |
+| 80 | 2026-09-29 | "Scaling Discovery through Test-Time Communication" - Park, Kontonis, Garg, Krishnamurthy, Papailiopoulos | Advanced | A preprint testing whether identical agents with no predefined roles and no orchestrator, communicating only through a shared directory with an append-only log, beat the same agents working independently; on ARC-AGI-3 "team@3 matches best@13 and team@5 matches best@33", and a game unsolved in 64 single-agent trials is solved by team@5 65% of the time; the gains carry to research-style tasks (a new best score on polyomino packing, and a 1,957-byte MNIST classifier at 99.4% test accuracy against a 2,461-byte best-known human solution); the authors name the mechanism "verified progress sharing" and print its limits: cut to one agent's total budget, the team falls below a single agent, and on Terminal-Bench 2.0, without reliable feedback, team@2 "does not outperform pass@2"; recorded as a v1 arXiv preprint (17 September 2026, not peer reviewed), agents run in GitHub Copilot CLI with Claude and GPT models, and nothing was run here | [arxiv.org](https://arxiv.org/abs/2609.21032) |
 
 ---
 
@@ -1897,6 +1898,22 @@ source that argues the opposite.
 
 <sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
 
+### Day 80 - "Scaling Discovery through Test-Time Communication" (Park et al.)
+
+<img src="assets/cards/day-080.png" width="420" alt="Day 80 card">
+
+- **The simplest possible team.** No roles, no manager agent. Identical agents share a workspace through "an append-only communication log, which acts as an asynchronous broadcast channel", plus shared records of which approaches are taken, what evidence disconfirms them, and the scores so far. Agents claim distinct approaches using atomic filesystem operations so they do not collide.
+- **The scaling result.** On ARC-AGI-3, a benchmark that requires novel problem solving: "team@3 matches best@13 and team@5 matches best@33, making them as effective as 4.3× and 6.6× times as many independent agents". The advantage grows with team size.
+- **Not only efficiency.** "Team@5 also solves the game LP85, which remains unsolved across 64 single-agent trials, 65% of the time." In the abstract's words: "a task that no single agent can solve, a team of agents can solve reliably."
+- **Research-style tasks too.** On polyomino packing, a team of three reached 0.945, which the authors report as a new best score on the benchmark. On MNIST classifier compression, a team of four produced a 1,957-byte classifier at 99.4% test accuracy, smaller than the best prior result, which the authors reproduce as a 2,461-byte submission.
+- **Where it does not help.** "We then reduce team@5's per-agent action budget to 0.2×, so its total action budget matches that of a single agent" - and the team then drops below a single agent. "On Terminal-Bench 2.0, where available feedback may not reliably rank intermediate solutions, team@2 improves over a single attempt but does not outperform pass@2."
+
+**Why it matters:** Multi-agent systems have come up often in this log, usually as orchestrators and role charts. This paper strips all of that away and asks a smaller question: if agents simply share what they found, does the group get further than the same number working alone? The answer is yes, under two conditions the authors state plainly: enough compute, and a clear way to tell better from worse. They call the mechanism "verified progress sharing". That gives a practical test before building a team of agents: can a breakthrough be checked? If not, independent attempts may do just as well for less.
+
+**What I learned/tried:** I came in thinking the value of multi-agent setups lay in the structure: planner, coder, critic. Here the structure is almost nothing, a folder and a log, and the gain comes from what gets written into it. It reminded me of a shared lab notebook: five experiments become one result only when each person can see, and trust, what the others already showed. I also noted the setup: the agents were Claude Sonnet 4.6, Claude Opus 4.6 and GPT-5.6 Sol in GitHub Copilot CLI. I read the abstract and the HTML full text; nothing was run for this entry.
+
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
+
 ---
 
 ## 🤝 AI Collaboration
@@ -1963,7 +1980,7 @@ Nothing is posted that I have not read. Where the automation publishes, it publi
 
 <div align="center">
 <br>
-<sub><b>Day 79 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
+<sub><b>Day 80 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
 </div>
 
 

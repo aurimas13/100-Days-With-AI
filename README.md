@@ -8,7 +8,7 @@ A public learning log of modern Artificial Intelligence - transformers, LLMs,
 agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 <!-- Day badge: bumped by the daily run. If this is stale, the run said so in its log. -->
-[![Day](https://img.shields.io/badge/Day-80%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
+[![Day](https://img.shields.io/badge/Day-81%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Streak](https://img.shields.io/badge/Streak-unbroken-2EA043?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Level mix](https://img.shields.io/badge/Sources-Advanced%20%2B%20Medium-8957E5?style=for-the-badge&labelColor=0D1117)](#-progress)
 
@@ -18,7 +18,7 @@ agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 **[📈 Progress](#-progress)** · **[📚 Day Notes](#-day-notes)** · **[🤝 AI Collaboration](#-ai-collaboration)** · **[🔗 Connect](#-connect)**
 
-`2026-07-12` ──────────── **Day 80 of 100** ────────────► `2026-10-19`
+`2026-07-12` ──────────── **Day 81 of 100** ────────────► `2026-10-19`
 
 </div>
 
@@ -176,6 +176,7 @@ for the shape of the progress table.
 | 78 | 2026-09-27 | "MCP Security Notification: Tool Poisoning Attacks" - Luca Beurer-Kellner & Marc Fischer, Invariant Labs | Advanced | The security note that named the Tool Poisoning Attack, where "malicious instructions are embedded within MCP tool descriptions that are invisible to users but visible to AI models", which works because "MCP's security model assumes that tool descriptions are trustworthy and benign"; in their proof of concept against Cursor a poisoned `add` tool had the agent read Cursor's `mcp.json` config and the user's SSH private key (`id_rsa`) and pass them out through a hidden `sidenote` parameter, and the note adds two variants - rug pulls, where "a malicious server can change the tool description after the client has already approved it", and shadowing, where one server's description redirected a trusted server's `send_email` to the attacker; the fixes it proposes are visible tool descriptions, version pinning and cross-server dataflow controls; read here as the lethal trifecta of Day 75 arriving through a tool's own metadata, from two of the authors behind Days 23 and 25; recorded with the limits that it is a vendor's demonstration (Invariant later released MCP-Scan, per the page's Apr 11 update), dated 2025-04-01, and that nothing was run here | [invariantlabs.ai](https://invariantlabs.ai/blog/mcp-security-notification-tool-poisoning-attacks) |
 | 79 | 2026-09-28 | "Em-ergence of the em-dash: a population-level rise in em-dash frequency in medRxiv preprints at the dawn of the large-language-model era" - Przemysław Czuma | Medium | A pre-registered study (OSF HFT8C) of 69,632 first-version medRxiv preprints from 2020-2025, read as raw JATS XML so the author's own typography survives, asking one binary question: does the Discussion section contain at least one em dash (U+2014)? Prevalence rose from 4.23% before ChatGPT's release (30 November 2022) to 11.58% after, +7.35 percentage points (95% CI 6.94-7.77, odds ratio 2.96), not as a step but as a take-off: near 4% through 2023, 8.0% in 2024, 20.3% in 2025; a placebo breakpoint inside the pre-LLM era and a boilerplate-section placebo both came out clean; recorded with the author's own limits that it is a population-level marker, not a per-paper detector, cannot establish causation, and that this is a v1 preprint (28 June 2026, not peer reviewed); nothing was run here | [arxiv.org](https://arxiv.org/abs/2606.29540) |
 | 80 | 2026-09-29 | "Scaling Discovery through Test-Time Communication" - Park, Kontonis, Garg, Krishnamurthy, Papailiopoulos | Advanced | A preprint testing whether identical agents with no predefined roles and no orchestrator, communicating only through a shared directory with an append-only log, beat the same agents working independently; on ARC-AGI-3 "team@3 matches best@13 and team@5 matches best@33", and a game unsolved in 64 single-agent trials is solved by team@5 65% of the time; the gains carry to research-style tasks (a new best score on polyomino packing, and a 1,957-byte MNIST classifier at 99.4% test accuracy against a 2,461-byte best-known human solution); the authors name the mechanism "verified progress sharing" and print its limits: cut to one agent's total budget, the team falls below a single agent, and on Terminal-Bench 2.0, without reliable feedback, team@2 "does not outperform pass@2"; recorded as a v1 arXiv preprint (17 September 2026, not peer reviewed), agents run in GitHub Copilot CLI with Claude and GPT models, and nothing was run here | [arxiv.org](https://arxiv.org/abs/2609.21032) |
+| 81 | 2026-09-30 | "Claude Marketplace: one place to discover plugins, agents, and services from our partners" - Anthropic | Medium | Anthropic's launch post for a single marketplace with three shelves: more than 2,000 connectors and plugins (Atlassian, Google, Microsoft, Notion, Salesforce and others), Claude-powered agents and products (CrowdStrike, Cursor, Harvey, Legora, Lovable, Snowflake) that teams can buy with "a portion of their committed Anthropic spend", and consulting partners from the Claude Partner Network (Accenture, Boston Consulting Group, Deloitte); builders get in by writing MCP connectors or Agent Skills plugins, by applying to list a product, or by joining the partner network; read as a vendor announcement with partner quotes and no pricing or usage figures, and nothing was bought or listed here | [claude.com](https://claude.com/blog/claude-marketplace) |
 
 ---
 
@@ -1914,6 +1915,22 @@ source that argues the opposite.
 
 <sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
 
+### Day 81 - "Claude Marketplace: one place to discover plugins, agents, and services from our partners" (Anthropic)
+
+<img src="assets/cards/day-081.png" width="420" alt="Day 81 card">
+
+- **Three shelves in one place.** Connectors and plugins ("more than 2,000 available today, including Atlassian, Google, Microsoft, Notion, Salesforce, and more"), Claude-powered agents and products, and service partners - consultancies and system integrators from the Claude Partner Network such as Accenture, Boston Consulting Group and Deloitte.
+- **The billing is the real change.** Teams can "use a portion of your committed Anthropic spend on Claude-powered software from companies like CrowdStrike, Cursor, Harvey, Legora, Lovable, and Snowflake". Snowflake's quote names the payoff: "cutting procurement cycles and accelerating time to value".
+- **Already in use.** The post's customer spotlight: CodeRabbit put part of its Anthropic commitment toward Vercel, where its coding agents run, and Power Digital and ThoughtSpot did the same with Snowflake, where their data lives.
+- **Three ways in for builders.** Build a connector or plugin on the Model Context Protocol and Agent Skills, "the open standards pioneered by Anthropic"; apply to list a Claude-powered product so teams can buy it from committed spend; or join the Claude Partner Network to appear as a service partner.
+- **What is not in it.** No pricing, no share of spend that can be redirected, no usage numbers. Seven partner quotes (Atlassian, CrowdStrike, Hebbia, Legora, Notion, Salesforce, Snowflake) carry the rest, and they read as what they are: launch marketing.
+
+**Why it matters:** This log has covered MCP (Day 11) and agent skills (Day 45) as engineering standards. The marketplace turns both into a distribution channel, and adds the part engineers rarely see: purchasing. In large companies a new AI tool often waits months for a vendor review, and a budget already committed to one provider is the path of least resistance. Letting that budget buy a partner's agent removes friction for the buyer. The same mechanism also concentrates more of the spend, and more of the choice of tools, inside one provider's ecosystem - a trade worth naming before it becomes a default.
+
+**What I learned/tried:** I expected a catalogue and found a billing decision. The connector count is the headline, but the sentence that changes behaviour is the one about committed spend, and the customer examples (Vercel, Snowflake) are infrastructure rather than chat apps. I read the blog post itself; nothing was bought, installed or listed for this entry.
+
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
+
 ---
 
 ## 🤝 AI Collaboration
@@ -1980,7 +1997,7 @@ Nothing is posted that I have not read. Where the automation publishes, it publi
 
 <div align="center">
 <br>
-<sub><b>Day 80 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
+<sub><b>Day 81 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
 </div>
 
 

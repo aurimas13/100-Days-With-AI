@@ -8,7 +8,7 @@ A public learning log of modern Artificial Intelligence - transformers, LLMs,
 agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 <!-- Day badge: bumped by the daily run. If this is stale, the run said so in its log. -->
-[![Day](https://img.shields.io/badge/Day-81%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
+[![Day](https://img.shields.io/badge/Day-82%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Streak](https://img.shields.io/badge/Streak-unbroken-2EA043?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Level mix](https://img.shields.io/badge/Sources-Advanced%20%2B%20Medium-8957E5?style=for-the-badge&labelColor=0D1117)](#-progress)
 
@@ -18,7 +18,7 @@ agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 **[📈 Progress](#-progress)** · **[📚 Day Notes](#-day-notes)** · **[🤝 AI Collaboration](#-ai-collaboration)** · **[🔗 Connect](#-connect)**
 
-`2026-07-12` ──────────── **Day 81 of 100** ────────────► `2026-10-19`
+`2026-07-12` ──────────── **Day 82 of 100** ────────────► `2026-10-19`
 
 </div>
 
@@ -177,6 +177,7 @@ for the shape of the progress table.
 | 79 | 2026-09-28 | "Em-ergence of the em-dash: a population-level rise in em-dash frequency in medRxiv preprints at the dawn of the large-language-model era" - Przemysław Czuma | Medium | A pre-registered study (OSF HFT8C) of 69,632 first-version medRxiv preprints from 2020-2025, read as raw JATS XML so the author's own typography survives, asking one binary question: does the Discussion section contain at least one em dash (U+2014)? Prevalence rose from 4.23% before ChatGPT's release (30 November 2022) to 11.58% after, +7.35 percentage points (95% CI 6.94-7.77, odds ratio 2.96), not as a step but as a take-off: near 4% through 2023, 8.0% in 2024, 20.3% in 2025; a placebo breakpoint inside the pre-LLM era and a boilerplate-section placebo both came out clean; recorded with the author's own limits that it is a population-level marker, not a per-paper detector, cannot establish causation, and that this is a v1 preprint (28 June 2026, not peer reviewed); nothing was run here | [arxiv.org](https://arxiv.org/abs/2606.29540) |
 | 80 | 2026-09-29 | "Scaling Discovery through Test-Time Communication" - Park, Kontonis, Garg, Krishnamurthy, Papailiopoulos | Advanced | A preprint testing whether identical agents with no predefined roles and no orchestrator, communicating only through a shared directory with an append-only log, beat the same agents working independently; on ARC-AGI-3 "team@3 matches best@13 and team@5 matches best@33", and a game unsolved in 64 single-agent trials is solved by team@5 65% of the time; the gains carry to research-style tasks (a new best score on polyomino packing, and a 1,957-byte MNIST classifier at 99.4% test accuracy against a 2,461-byte best-known human solution); the authors name the mechanism "verified progress sharing" and print its limits: cut to one agent's total budget, the team falls below a single agent, and on Terminal-Bench 2.0, without reliable feedback, team@2 "does not outperform pass@2"; recorded as a v1 arXiv preprint (17 September 2026, not peer reviewed), agents run in GitHub Copilot CLI with Claude and GPT models, and nothing was run here | [arxiv.org](https://arxiv.org/abs/2609.21032) |
 | 81 | 2026-09-30 | "Claude Marketplace: one place to discover plugins, agents, and services from our partners" - Anthropic | Medium | Anthropic's launch post for a single marketplace with three shelves: more than 2,000 connectors and plugins (Atlassian, Google, Microsoft, Notion, Salesforce and others), Claude-powered agents and products (CrowdStrike, Cursor, Harvey, Legora, Lovable, Snowflake) that teams can buy with "a portion of their committed Anthropic spend", and consulting partners from the Claude Partner Network (Accenture, Boston Consulting Group, Deloitte); builders get in by writing MCP connectors or Agent Skills plugins, by applying to list a product, or by joining the partner network; read as a vendor announcement with partner quotes and no pricing or usage figures, and nothing was bought or listed here | [claude.com](https://claude.com/blog/claude-marketplace) |
+| 82 | 2026-10-01 | "Unlocking Lossless Speedups in LLMs via Discrete Diffusion" - Sahoo et al. | Advanced | A preprint (17 authors; affiliations include the Institute of Foundation Models, UIUC, Cornell Tech, Harvard, Rutgers and Cerebras) proposing "diffusion-augmented LLMs": models that keep an autoregressive (AR) output distribution but split their parameters into AR weights trained with next-token prediction and "lightweight diffusion weights, trained to generate multiple tokens simultaneously", plus a sampler family, Ψ-Spec, claimed to give "lossless acceleration"; the resulting Uno models report higher throughput than speculative decoding (DFlash and Eagle3, per the project page) at every evaluated batch size and up to 3× over the base AR model; read from the abstract and project page only, since no HTML full text exists and the PDF does not extract | [arXiv](https://arxiv.org/abs/2609.04010) |
 
 ---
 
@@ -1931,6 +1932,22 @@ source that argues the opposite.
 
 <sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
 
+### Day 82 - "Unlocking Lossless Speedups in LLMs via Discrete Diffusion" (Sahoo et al.)
+
+<img src="assets/cards/day-082.png" width="420" alt="Day 82 card">
+
+- **The problem it attacks.** LLMs "owe much of their success to next-token prediction (NTP), but their autoregressive (AR) structure requires slow, sequential token generation." One token at a time is the bottleneck.
+- **One model, two sets of weights.** The paper's "diffusion-augmented LLMs" define "an AR model distribution while using diffusion to draw multiple tokens in parallel from that distribution". AR weights are trained with the standard objective; "lightweight diffusion weights" are learned in "a simple Diffusion Distillation phase that adds negligible overhead to existing LLM training pipelines". The distribution stays autoregressive; only the sampling goes parallel.
+- **Two contrasts the authors draw themselves.** "Unlike speculative decoding, our method requires no separate draft model. Unlike diffusion LLMs (d-LLMs), it accelerates generation without sacrificing the quality of the underlying AR model." The samplers that do this are called Ψ-Spec.
+- **The reported results, with their hedges kept.** Uno "achieves higher throughput than leading speculative-decoding methods at every evaluated batch size" - the project page names them as DFlash and Eagle3 - "and delivers up to 3× speedups over the base AR model, including at the largest batch size supported by the device." The 8B Uno model is reported to beat the 26B DiffusionGemma and Mercury 2 "across all evaluated benchmarks in agentic tool use, coding, and long-context reasoning". Uno models "can be trained from scratch or built by augmenting existing open-weight AR LLMs", and code and checkpoints are released.
+- **What could not be checked.** Only the abstract and the project page were readable: arXiv has no HTML version of this paper and the PDF does not extract. So there are no per-benchmark scores, no ablations and no stated limitations here, and "lossless" is reported as the authors' claim, not as something verified. The project page also gives a second figure, "up to 2.5× speedup over the base AR model", without saying here how it differs from the 3×.
+
+**Why it matters:** Speed is where inference cost lives, and the usual trade is quality for speed: smaller models, quantisation, or diffusion LLMs that generate in parallel but lose some of what the autoregressive model knew. This paper claims to refuse that trade by construction - the AR distribution is kept and only the way tokens are drawn from it changes. The batch-size detail is the part to watch. Many decoding tricks shine on a single request and fade under heavy batching, when the hardware is already busy. A method that still wins at the largest batch the device supports would matter for anyone serving models at scale, which is exactly why it needs independent checking. With code and checkpoints public, it can be checked.
+
+**What I learned/tried:** The chemist in me read this as a catalyst: a catalyst speeds up a reaction without moving its equilibrium, and that is precisely the promise of "lossless" here - same distribution, faster route to it. That also told me what to ask of it: a catalyst claim is only as good as the proof that the equilibrium really did not shift, and the abstract states the claim without showing that proof. I read the arXiv abstract and the project page; the full paper was not readable and nothing was run for this entry.
+
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
+
 ---
 
 ## 🤝 AI Collaboration
@@ -1997,7 +2014,7 @@ Nothing is posted that I have not read. Where the automation publishes, it publi
 
 <div align="center">
 <br>
-<sub><b>Day 81 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
+<sub><b>Day 82 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
 </div>
 
 

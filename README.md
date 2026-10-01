@@ -8,7 +8,7 @@ A public learning log of modern Artificial Intelligence - transformers, LLMs,
 agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 <!-- Day badge: bumped by the daily run. If this is stale, the run said so in its log. -->
-[![Day](https://img.shields.io/badge/Day-82%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
+[![Day](https://img.shields.io/badge/Day-83%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Streak](https://img.shields.io/badge/Streak-unbroken-2EA043?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Level mix](https://img.shields.io/badge/Sources-Advanced%20%2B%20Medium-8957E5?style=for-the-badge&labelColor=0D1117)](#-progress)
 
@@ -18,7 +18,7 @@ agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 **[📈 Progress](#-progress)** · **[📚 Day Notes](#-day-notes)** · **[🤝 AI Collaboration](#-ai-collaboration)** · **[🔗 Connect](#-connect)**
 
-`2026-07-12` ──────────── **Day 82 of 100** ────────────► `2026-10-19`
+`2026-07-12` ──────────── **Day 83 of 100** ────────────► `2026-10-19`
 
 </div>
 
@@ -178,6 +178,7 @@ for the shape of the progress table.
 | 80 | 2026-09-29 | "Scaling Discovery through Test-Time Communication" - Park, Kontonis, Garg, Krishnamurthy, Papailiopoulos | Advanced | A preprint testing whether identical agents with no predefined roles and no orchestrator, communicating only through a shared directory with an append-only log, beat the same agents working independently; on ARC-AGI-3 "team@3 matches best@13 and team@5 matches best@33", and a game unsolved in 64 single-agent trials is solved by team@5 65% of the time; the gains carry to research-style tasks (a new best score on polyomino packing, and a 1,957-byte MNIST classifier at 99.4% test accuracy against a 2,461-byte best-known human solution); the authors name the mechanism "verified progress sharing" and print its limits: cut to one agent's total budget, the team falls below a single agent, and on Terminal-Bench 2.0, without reliable feedback, team@2 "does not outperform pass@2"; recorded as a v1 arXiv preprint (17 September 2026, not peer reviewed), agents run in GitHub Copilot CLI with Claude and GPT models, and nothing was run here | [arxiv.org](https://arxiv.org/abs/2609.21032) |
 | 81 | 2026-09-30 | "Claude Marketplace: one place to discover plugins, agents, and services from our partners" - Anthropic | Medium | Anthropic's launch post for a single marketplace with three shelves: more than 2,000 connectors and plugins (Atlassian, Google, Microsoft, Notion, Salesforce and others), Claude-powered agents and products (CrowdStrike, Cursor, Harvey, Legora, Lovable, Snowflake) that teams can buy with "a portion of their committed Anthropic spend", and consulting partners from the Claude Partner Network (Accenture, Boston Consulting Group, Deloitte); builders get in by writing MCP connectors or Agent Skills plugins, by applying to list a product, or by joining the partner network; read as a vendor announcement with partner quotes and no pricing or usage figures, and nothing was bought or listed here | [claude.com](https://claude.com/blog/claude-marketplace) |
 | 82 | 2026-10-01 | "PageIndex: Vectorless, Reasoning-based RAG" - VectifyAI | Medium | An open-source (MIT) retrieval engine that replaces the vector index with "a hierarchical tree index" built from each document's layout and lets an LLM "reason its way through it", with "no vector DBs or chunking"; the README reports about $0.001 per page to index, native PDF input costing 2.1× more per query at 52 pages and 16.6× more at 420, and 98.7% on FinanceBench; read from the README only, numbers are vendor-reported and nothing was run | [GitHub](https://github.com/VectifyAI/PageIndex) |
+| 83 | 2026-10-02 | "Claude Agent From Scratch" - Aurimas Nausėdas (my build, from the Dextra Labs guide) | Advanced | My own ReAct agent on the Claude API, built by following the Day 15 guide and taken to a live site: a hand-written Think - Act - Observe loop, real tools (calculator, weather, world clock, web search), memory in Supabase, every step streamed to the page, plus an explained-like-you're-five walkthrough of the guide and the five fixes it needed | [Live](https://agent.aurimas.io) · [GitHub](https://github.com/aurimas13/Claude-Agent-From-Scratch) · [Guide](https://dev.to/dextralabs/how-to-build-an-ai-agent-from-scratch-using-claude-api-with-full-code-4b40) |
 
 ---
 
@@ -1948,6 +1949,33 @@ source that argues the opposite.
 
 <sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
 
+### Day 83 - "Claude Agent From Scratch" (my build, from the Dextra Labs guide)
+
+<img src="assets/cards/day-083.png" width="420" alt="Day 83 card">
+
+Day 15 read [the guide](https://dev.to/dextralabs/how-to-build-an-ai-agent-from-scratch-using-claude-api-with-full-code-4b40). Day 83 is what I built from it: a live demo at [agent.aurimas.io](https://agent.aurimas.io), code at [Claude-Agent-From-Scratch](https://github.com/aurimas13/Claude-Agent-From-Scratch), and a [How it works](https://agent.aurimas.io/how-it-works) page that explains the guide like you're five. Here is the guide, step by step, the same way.
+
+| Guide step | Explained like you're five | What it needed in practice |
+|---|---|---|
+| 0 · Prerequisites | Set up a clean kitchen first: one box (a virtual environment) with exactly the ingredients this project needs. | `ModuleNotFoundError` after `pip install`: pip filled one Python (conda base) and the script ran another. A per-project `.venv` and `python -m pip` fixed it. |
+| 1 · Claude API setup | Run a phone line to the brain and say hello. If "What is 2 + 2?" comes back "Four", the line works. | The client has no `workspace_id` argument; a key already belongs to one workspace, so if needed it goes in as a header. |
+| 2 · Define your tools | Give the brain a toolbox with a clear label on every tool. Claude only ever reads the labels; my Python does the real work. | The tools list must be a bare array (wrapped in an object it is a 400). The guide's `eval()` calculator became one that only understands maths. |
+| 3 · The ReAct loop | Brain and hands take turns: "use the calculator" - "here's 19671.51" - "thanks, here's your answer". Repeat until the brain says it is done. | Branch on `stop_reason`, never on content blocks: one `else: return` a level too deep quit the agent whenever Claude spoke before a tool call. |
+| 4 · Run it | Press play and watch each step print. | A terminal chat, a notebook that follows the guide cell by cell, and a web page that streams every step. |
+| 5 · Adding memory | Give the agent a notebook so the second question can build on the first. | The guide's memory class calls itself with an empty message, which the API rejects; it became the same bounded loop as step 3, with history kept in Supabase. |
+
+- **An agent is four parts.** On the ELI5 page it is a clever kid with a **brain** (Claude, which decides what to do but can slip on exact maths and cannot know today's weather), **hands** (tools - the brain asks, the code does the work), a **notebook** (the message list, sent back in full every turn, which is how it remembers the "$50,000" from two questions ago) and a **filing cabinet** (Supabase, so the notebook survives closing the tab).
+- **The heart is one loop.** The guide's `run_agent()` sends the question plus the tool labels, then reads `stop_reason`: `tool_use` means run the tool and append a `tool_result` to the messages; `end_turn` means the answer is ready. Worked example from my page: "$10,000 at 7% for 10 years" - Think ("that's maths"), Act (`calculator("10000 * 1.07 ** 10")`), Observe (`19671.51`), Think ("I have what I need"), Answer. My version also handles `pause_turn`, `max_tokens`, refusals and an iteration cap, so an unexpected stop reason cannot loop forever.
+- **From tutorial to product.** The guide's simulated search, `eval()` calculator and `save_to_file` became Anthropic's server-side web search with sources, an AST calculator with limits, real Open-Meteo weather and world time, and `save_note` to the database. Server-Sent Events stream every text delta, tool call and tool result to a Think / Act / Observe timeline (Next.js on Vercel, FastAPI on Railway).
+- **A free demo is a wallet with a door.** The site checks a visitor is human once (Cloudflare Turnstile, then a signed 12-hour session cookie), rate-limits each visitor, stores IPs only as hashes, logs the cost of every question against a daily USD cap, and answers a repeated first question from a cache at zero cost. Keys stay on the server, and fetched web pages are treated as data, never instructions.
+- **What the README claims for itself.** 39 offline tests against a fake Claude stream, CI with ruff, pytest, eslint, tsc and gitleaks, and a non-root Docker image. The roadmap it still lists: prompt-caching the tool definitions, Redis rate limiting, a small eval suite, optional sign-in.
+
+**Why it matters:** The guide is honest that its code is minimal, and Day 15 took it at that word. Building it shows where the minimal version breaks: an API that rejects empty messages, a tools payload with the wrong shape, an `eval()` a stranger could reach, and a loop that ends on the wrong signal. Nearly every fix is about *control* - who decides when the loop stops, what a tool is allowed to run, how much a visitor can spend - which is most of what separates a demo agent from one you can leave running in public.
+
+**What I learned/tried:** On Day 15 I wrote that the guide's roadmap was my backlog. Streaming, real tools and persistent memory are now shipped, after a minimalist [Calculator-Agent](https://github.com/aurimas13/Calculator-Agent) first. Explaining it like I would to a five-year-old was the real test: if I could not say what the brain, the hands and the notebook each do, I did not understand the loop yet. The bug that taught me most was the misplaced `else`, because the agent looked fine until Claude said one sentence before reaching for a tool.
+
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
+
 ---
 
 ## 🤝 AI Collaboration
@@ -2014,7 +2042,7 @@ Nothing is posted that I have not read. Where the automation publishes, it publi
 
 <div align="center">
 <br>
-<sub><b>Day 82 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
+<sub><b>Day 83 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
 </div>
 
 

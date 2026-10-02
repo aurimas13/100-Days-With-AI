@@ -8,7 +8,7 @@ A public learning log of modern Artificial Intelligence - transformers, LLMs,
 agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 <!-- Day badge: bumped by the daily run. If this is stale, the run said so in its log. -->
-[![Day](https://img.shields.io/badge/Day-83%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
+[![Day](https://img.shields.io/badge/Day-84%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Streak](https://img.shields.io/badge/Streak-unbroken-2EA043?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Level mix](https://img.shields.io/badge/Sources-Advanced%20%2B%20Medium-8957E5?style=for-the-badge&labelColor=0D1117)](#-progress)
 
@@ -18,7 +18,7 @@ agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 **[📈 Progress](#-progress)** · **[📚 Day Notes](#-day-notes)** · **[🤝 AI Collaboration](#-ai-collaboration)** · **[🔗 Connect](#-connect)**
 
-`2026-07-12` ──────────── **Day 83 of 100** ────────────► `2026-10-19`
+`2026-07-12` ──────────── **Day 84 of 100** ────────────► `2026-10-19`
 
 </div>
 
@@ -179,6 +179,7 @@ for the shape of the progress table.
 | 81 | 2026-09-30 | "Claude Marketplace: one place to discover plugins, agents, and services from our partners" - Anthropic | Medium | Anthropic's launch post for a single marketplace with three shelves: more than 2,000 connectors and plugins (Atlassian, Google, Microsoft, Notion, Salesforce and others), Claude-powered agents and products (CrowdStrike, Cursor, Harvey, Legora, Lovable, Snowflake) that teams can buy with "a portion of their committed Anthropic spend", and consulting partners from the Claude Partner Network (Accenture, Boston Consulting Group, Deloitte); builders get in by writing MCP connectors or Agent Skills plugins, by applying to list a product, or by joining the partner network; read as a vendor announcement with partner quotes and no pricing or usage figures, and nothing was bought or listed here | [claude.com](https://claude.com/blog/claude-marketplace) |
 | 82 | 2026-10-01 | "PageIndex: Vectorless, Reasoning-based RAG" - VectifyAI | Medium | An open-source (MIT) retrieval engine that replaces the vector index with "a hierarchical tree index" built from each document's layout and lets an LLM "reason its way through it", with "no vector DBs or chunking"; the README reports about $0.001 per page to index, native PDF input costing 2.1× more per query at 52 pages and 16.6× more at 420, and 98.7% on FinanceBench; read from the README only, numbers are vendor-reported and nothing was run | [GitHub](https://github.com/VectifyAI/PageIndex) |
 | 83 | 2026-10-02 | "Claude Agent From Scratch" - Aurimas Nausėdas (my build, from the Dextra Labs guide) | Advanced | My own ReAct agent on the Claude API, built by following the Day 15 guide and taken to a live site: a hand-written Think - Act - Observe loop, real tools (calculator, weather, world clock, web search), memory in Supabase, every step streamed to the page, plus an explained-like-you're-five walkthrough of the guide and the five fixes it needed | [Live](https://agent.aurimas.io) · [GitHub](https://github.com/aurimas13/Claude-Agent-From-Scratch) · [Guide](https://dev.to/dextralabs/how-to-build-an-ai-agent-from-scratch-using-claude-api-with-full-code-4b40) |
+| 84 | 2026-10-03 | "Unlocking Lossless Speedups in LLMs via Discrete Diffusion" - Sahoo et al. | Advanced | A preprint proposing "diffusion-augmented LLMs" that keep an autoregressive model's distribution but use lightweight diffusion weights and a sampler family called Ψ-Spec to "draw multiple tokens in parallel from that distribution"; the resulting Uno models claim "up to 3×" speedups over the base model and higher throughput than leading speculative decoding (DFlash, Eagle3) "at every evaluated batch size" with no separate draft model, and the 8B Uno is reported to beat the 26B DiffusionGemma and Mercury 2 on the authors' own evaluation; read from the abstract, project page and code README only (v1, 3 September 2026, not peer reviewed), the project page charts "up to 2.5×", and nothing was run | [arxiv.org](https://arxiv.org/abs/2609.04010) |
 
 ---
 
@@ -1976,6 +1977,22 @@ Day 15 read [the guide](https://dev.to/dextralabs/how-to-build-an-ai-agent-from-
 
 <sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
 
+### Day 84 - "Unlocking Lossless Speedups in LLMs via Discrete Diffusion" (Sahoo et al.)
+
+<img src="assets/cards/day-084.png" width="420" alt="Day 84 card">
+
+- **The bottleneck it targets.** LLMs "owe much of their success to next-token prediction (NTP), but their autoregressive (AR) structure requires slow, sequential token generation." One token, one forward pass, in order.
+- **The idea in one sentence.** The authors propose "diffusion-augmented LLMs, a new class of models that defines an AR model distribution while using diffusion to draw multiple tokens in parallel from that distribution." The distribution stays autoregressive; only the sampling goes parallel.
+- **Two sets of weights.** "AR weights, trained using the standard NTP objective, and lightweight diffusion weights, trained to generate multiple tokens simultaneously." The diffusion weights come from a "Diffusion Distillation" phase the authors say "adds negligible overhead" to normal training, so Uno can be trained from scratch or bolted onto an existing open-weight model. The released checkpoints include one built on Qwen3 8B.
+- **The two contrasts the paper draws itself.** "Unlike speculative decoding, our method requires no separate draft model." "Unlike diffusion LLMs (d-LLMs), it accelerates generation without sacrificing the quality of the underlying AR model." The project page names the speculative-decoding baselines as DFlash and Eagle3.
+- **The numbers, with their hedges kept.** "Up to 3×" over the base AR model, and higher throughput than leading speculative decoding "at every evaluated batch size", "including at the largest batch size supported by the device". The project page's comparison figure says "up to 2.5×" and does not explain the gap. The 8B Uno is reported to outperform the 26B DiffusionGemma and the proprietary Mercury 2 "across all evaluated benchmarks" in agentic tool use, coding and long-context reasoning - the authors' evaluation, with no scores in the abstract.
+
+**Why it matters:** Speed and quality have looked like a trade in LLM decoding. Speculative decoding buys speed with a second model to host and keep in sync; diffusion LLMs buy it with a different, and so far weaker, model. Uno claims a third route: keep the model you trust and change only how it is sampled. The batch-size claim is the interesting half, because most decoding tricks help when the GPU is idle and fade once it is full of requests, which is exactly where serving costs live. If the "lossless" claim holds, this is a speedup you could add without re-running your evals for quality.
+
+**What I learned/tried:** The chemistry picture that made it click for me: a catalyst speeds a reaction up without moving its equilibrium. Uno claims to be that for an LLM - the same output distribution, reached faster. What I could not check is just as important. The arXiv HTML still returns 404 and the PDF did not extract, so I read only the abstract, the project page and the code README; I saw no proof of losslessness, no per-benchmark scores and no stated limitations. I have not run the checkpoints.
+
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
+
 ---
 
 ## 🤝 AI Collaboration
@@ -2042,7 +2059,7 @@ Nothing is posted that I have not read. Where the automation publishes, it publi
 
 <div align="center">
 <br>
-<sub><b>Day 83 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
+<sub><b>Day 84 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
 </div>
 
 

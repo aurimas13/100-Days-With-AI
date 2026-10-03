@@ -8,7 +8,7 @@ A public learning log of modern Artificial Intelligence - transformers, LLMs,
 agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 <!-- Day badge: bumped by the daily run. If this is stale, the run said so in its log. -->
-[![Day](https://img.shields.io/badge/Day-84%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
+[![Day](https://img.shields.io/badge/Day-85%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Streak](https://img.shields.io/badge/Streak-unbroken-2EA043?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Level mix](https://img.shields.io/badge/Sources-Advanced%20%2B%20Medium-8957E5?style=for-the-badge&labelColor=0D1117)](#-progress)
 
@@ -18,7 +18,7 @@ agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 **[📈 Progress](#-progress)** · **[📚 Day Notes](#-day-notes)** · **[🤝 AI Collaboration](#-ai-collaboration)** · **[🔗 Connect](#-connect)**
 
-`2026-07-12` ──────────── **Day 84 of 100** ────────────► `2026-10-19`
+`2026-07-12` ──────────── **Day 85 of 100** ────────────► `2026-10-19`
 
 </div>
 
@@ -180,6 +180,7 @@ for the shape of the progress table.
 | 82 | 2026-10-01 | "PageIndex: Vectorless, Reasoning-based RAG" - VectifyAI | Medium | An open-source (MIT) retrieval engine that replaces the vector index with "a hierarchical tree index" built from each document's layout and lets an LLM "reason its way through it", with "no vector DBs or chunking"; the README reports about $0.001 per page to index, native PDF input costing 2.1× more per query at 52 pages and 16.6× more at 420, and 98.7% on FinanceBench; read from the README only, numbers are vendor-reported and nothing was run | [GitHub](https://github.com/VectifyAI/PageIndex) |
 | 83 | 2026-10-02 | "Claude Agent From Scratch" - Aurimas Nausėdas (my build, from the Dextra Labs guide) | Advanced | My own ReAct agent on the Claude API, built by following the Day 15 guide and taken to a live site: a hand-written Think - Act - Observe loop, real tools (calculator, weather, world clock, web search), memory in Supabase, every step streamed to the page, plus an explained-like-you're-five walkthrough of the guide and the five fixes it needed | [Live](https://agent.aurimas.io) · [GitHub](https://github.com/aurimas13/Claude-Agent-From-Scratch) · [Guide](https://dev.to/dextralabs/how-to-build-an-ai-agent-from-scratch-using-claude-api-with-full-code-4b40) |
 | 84 | 2026-10-03 | "Unlocking Lossless Speedups in LLMs via Discrete Diffusion" - Sahoo et al. | Advanced | A preprint proposing "diffusion-augmented LLMs" that keep an autoregressive model's distribution but use lightweight diffusion weights and a sampler family called Ψ-Spec to "draw multiple tokens in parallel from that distribution"; the resulting Uno models claim "up to 3×" speedups over the base model and higher throughput than leading speculative decoding (DFlash, Eagle3) "at every evaluated batch size" with no separate draft model, and the 8B Uno is reported to beat the 26B DiffusionGemma and Mercury 2 on the authors' own evaluation; read from the abstract, project page and code README only (v1, 3 September 2026, not peer reviewed), the project page charts "up to 2.5×", and nothing was run | [arxiv.org](https://arxiv.org/abs/2609.04010) |
+| 85 | 2026-10-04 | "Getting started with Claude Code mods" - Addy Osmani | Medium | A claude.dev walkthrough (1 October 2026) of mods: small JavaScript or TypeScript files, shipped as hooks inside a plugin, that run in the Claude Code session and can "watch what's happening, change what Claude Code does, or draw its own UI" in the terminal or desktop app; each hook is middleware that can observe, rewrite or answer an event, with hot reload, persistent state and a 10-second budget per dispatch, illustrated by three example mods (Token Weather, Blast Radius, Replay Theater); read from the post only, nothing was built or run | [claude.dev](https://claude.dev/blog/getting-started-with-claude-code-mods/) |
 
 ---
 
@@ -1993,6 +1994,22 @@ Day 15 read [the guide](https://dev.to/dextralabs/how-to-build-an-ai-agent-from-
 
 <sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
 
+### Day 85 - "Getting started with Claude Code mods" (Addy Osmani)
+
+<img src="assets/cards/day-085.png" width="420" alt="Day 85 card">
+
+- **What a mod is.** "A mod is a small JavaScript or TypeScript file that runs inside your Claude Code session. It can watch what's happening, change what Claude Code does, or draw its own UI, in the terminal or the desktop app." The post places it one step past settings, permission rules, slash commands, skills and the status line: mods "can rewrite or replace what Claude Code does, and draw custom UI."
+- **The packaging is just a plugin.** A `.claude-plugin/plugin.json` manifest, a `hooks/hooks.json` that points at the modules, and modules that export `register(on, options)` and add hooks with `on(event, matcher?, hook)`. `claude plugin validate` checks the manifest, `claude plugin test` runs hooks against stubbed `$` calls, and sharing is a GitHub repo with a `marketplace.json`. The post names Claude Code 2.1.287 or later.
+- **Every hook is middleware with three moves.** It receives `$` (the mods API), `e` (the event) and `next`. Observe: `const r = await next(e); /* look */ return r`. Rewrite: `return next({ ...e, command: safer })`. Answer: `return { deny: "…" }` without calling `next`, so the event never reaches Claude Code.
+- **Three worked examples.** Token Weather (about 80 lines) draws context-window fill above the prompt as weather, in the `AbovePrompt` band that "Claude Code draws nothing there itself". Blast Radius intercepts risky Bash commands and opens an approval pane listing what they would touch. Replay Theater records the turn's file edits and steps through them with a `/replay` command. State in `$.state` survives hot reload, so a module can be edited mid-session without losing what it was tracking.
+- **The limits are stated plainly.** "A hook gets 10 seconds of its own time per dispatch, but time spent waiting inside a `$` call doesn't count." Blast Radius "reads the command text, so `$(…)`, aliases and scripts that call `rm` get past it. Use permission rules for a hard block." And: "A mod is code that runs inside Claude Code on your machine, with the same access Claude Code has, and it's written by its publisher, not Anthropic."
+
+**Why it matters:** Until now, customising a coding agent mostly meant configuring it from the outside - a rule here, a prompt there. Mods put your own code on the event path itself, which turns the agent into a host you can extend the way an editor hosts extensions. That is a real gain for teams who want their own guardrails and their own dashboards inside the tool. It is also a real responsibility: a mod has the agent's full access, so installing one deserves the same scrutiny as installing any other code.
+
+**What I learned/tried:** My own daily pipeline already leans on Claude Code hooks - Python scripts that screen every post and every outbound call before it goes out - so the observe/rewrite/answer split mapped straight onto something I use. The sentence I am keeping is the Blast Radius caveat: a hook that reads command text is a convenience, not a security boundary, and the post itself says to use permission rules for a hard block. I read the post only; I have not built or installed a mod yet.
+
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
+
 ---
 
 ## 🤝 AI Collaboration
@@ -2059,7 +2076,7 @@ Nothing is posted that I have not read. Where the automation publishes, it publi
 
 <div align="center">
 <br>
-<sub><b>Day 84 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
+<sub><b>Day 85 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
 </div>
 
 

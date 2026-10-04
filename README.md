@@ -8,7 +8,7 @@ A public learning log of modern Artificial Intelligence - transformers, LLMs,
 agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 <!-- Day badge: bumped by the daily run. If this is stale, the run said so in its log. -->
-[![Day](https://img.shields.io/badge/Day-85%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
+[![Day](https://img.shields.io/badge/Day-86%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Streak](https://img.shields.io/badge/Streak-unbroken-2EA043?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Level mix](https://img.shields.io/badge/Sources-Advanced%20%2B%20Medium-8957E5?style=for-the-badge&labelColor=0D1117)](#-progress)
 
@@ -18,7 +18,7 @@ agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 **[📈 Progress](#-progress)** · **[📚 Day Notes](#-day-notes)** · **[🤝 AI Collaboration](#-ai-collaboration)** · **[🔗 Connect](#-connect)**
 
-`2026-07-12` ──────────── **Day 85 of 100** ────────────► `2026-10-19`
+`2026-07-12` ──────────── **Day 86 of 100** ────────────► `2026-10-19`
 
 </div>
 
@@ -181,6 +181,7 @@ for the shape of the progress table.
 | 83 | 2026-10-02 | "Claude Agent From Scratch" - Aurimas Nausėdas (my build, from the Dextra Labs guide) | Advanced | My own ReAct agent on the Claude API, built by following the Day 15 guide and taken to a live site: a hand-written Think - Act - Observe loop, real tools (calculator, weather, world clock, web search), memory in Supabase, every step streamed to the page, plus an explained-like-you're-five walkthrough of the guide and the five fixes it needed | [Live](https://agent.aurimas.io) · [GitHub](https://github.com/aurimas13/Claude-Agent-From-Scratch) · [Guide](https://dev.to/dextralabs/how-to-build-an-ai-agent-from-scratch-using-claude-api-with-full-code-4b40) |
 | 84 | 2026-10-03 | "Unlocking Lossless Speedups in LLMs via Discrete Diffusion" - Sahoo et al. | Advanced | A preprint proposing "diffusion-augmented LLMs" that keep an autoregressive model's distribution but use lightweight diffusion weights and a sampler family called Ψ-Spec to "draw multiple tokens in parallel from that distribution"; the resulting Uno models claim "up to 3×" speedups over the base model and higher throughput than leading speculative decoding (DFlash, Eagle3) "at every evaluated batch size" with no separate draft model, and the 8B Uno is reported to beat the 26B DiffusionGemma and Mercury 2 on the authors' own evaluation; read from the abstract, project page and code README only (v1, 3 September 2026, not peer reviewed), the project page charts "up to 2.5×", and nothing was run | [arxiv.org](https://arxiv.org/abs/2609.04010) |
 | 85 | 2026-10-04 | "Getting started with Claude Code mods" - Addy Osmani | Medium | A claude.dev walkthrough (1 October 2026) of mods: small JavaScript or TypeScript files, shipped as hooks inside a plugin, that run in the Claude Code session and can "watch what's happening, change what Claude Code does, or draw its own UI" in the terminal or desktop app; each hook is middleware that can observe, rewrite or answer an event, with hot reload, persistent state and a 10-second budget per dispatch, illustrated by three example mods (Token Weather, Blast Radius, Replay Theater); read from the post only, nothing was built or run | [claude.dev](https://claude.dev/blog/getting-started-with-claude-code-mods/) |
+| 86 | 2026-10-05 | "Context Language Models" - Shao et al. | Advanced | A preprint introducing "Context Language Models (CLMs), language models that natively manage their own context" by "treating the context as a file and allowing the model to make unrestricted updates to this file"; built zero-shot from existing models, CLMs are reported to beat state-of-the-art context-management strategies (11.4% higher accuracy with 21.5% fewer FLOPs on BrowseComp-Plus, 5% higher scores with 59% fewer FLOPs on 12-hour EdgeBench), to extend to agent swarms as multiple context files, to learn context management by prompt optimisation and online RL, and to cut serving compute by 35% with Suffix Cache Reuse; read from the abstract and the arXiv HTML (v1, 29 September 2026, not peer reviewed), nothing was run | [arxiv.org](https://arxiv.org/abs/2609.37725) |
 
 ---
 
@@ -2010,6 +2011,22 @@ Day 15 read [the guide](https://dev.to/dextralabs/how-to-build-an-ai-agent-from-
 
 <sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
 
+### Day 86 - "Context Language Models" (Shao et al.)
+
+<img src="assets/cards/day-086.png" width="420" alt="Day 86 card">
+
+- **The idea in one sentence.** The authors introduce "Context Language Models (CLMs), language models that natively manage their own context", implemented "by treating the context as a file and allowing the model to make unrestricted updates to this file." Context management moves from the harness into the model.
+- **How the editing works.** The live context is mirrored to "a storage space with LM write access", and the model "can either append newly generated tokens or use Bash to freely edit the context file" - removing blocks, creating new roles, defining reusable functions, or moving material out to other files on disk.
+- **The numbers, zero-shot.** Built from existing models with no training, CLMs are reported to beat state-of-the-art strategies (the HTML names Codex-style Summary, Context Folding, RLM, Self-Compact, ACM and MEM1): "11.4% higher accuracy with 21.5% fewer FLOPs on BrowseComp-Plus" and "5% higher scores with 59% fewer FLOPs on 12-hour EdgeBench".
+- **Swarms fall out of the design.** Multiple agents become multiple context files that "coexist and remain synchronized with their respective LLM servers"; subagents start and stop by creating and deleting files. On a 24-hour multi-repository agent-swarm task the paper reports "65% greater improvement with the same compute".
+- **Learnable, and cheaper to serve.** Because context management is now model behaviour, it can be steered by prompts evolved in a skill-optimisation loop ("up to 35.9 points" on held-out accuracy) or trained with online RL (Qwen3.5-9B "by 47.6%" on BrowseComp-Plus with "12% fewer FLOPs"). Suffix Cache Reuse keeps the cached states of tokens that survive an edit instead of re-prefilling everything after the first change, cutting server-side compute "by 35% relative to standard SGLang at matched performance".
+
+**Why it matters:** Today almost every long-running agent manages its context from outside - a harness summarises, folds or truncates on a fixed rule, and the model lives with whatever is left. CLMs hand that decision to the model itself, which turns context management from hand-written policy into something you can prompt-optimise and train. The serving half matters as much: editing the middle of a context normally throws away the KV cache from that point on, and Suffix Cache Reuse is what keeps a self-editing model affordable to run.
+
+**What I learned/tried:** The picture that made it click for me is a cell membrane: a living thing survives by choosing what crosses in and what stays out, and here the model chooses what stays in its own working memory. The paper's own limitations section names the cost of that power plainly: "Editable context can become another channel through which prompt injections or self-generated instructions persist across turns." I read the abstract and the arXiv HTML; I have not run the code (github.com/facebookresearch/context-language-models) or checked the per-task tables.
+
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
+
 ---
 
 ## 🤝 AI Collaboration
@@ -2076,7 +2093,7 @@ Nothing is posted that I have not read. Where the automation publishes, it publi
 
 <div align="center">
 <br>
-<sub><b>Day 85 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
+<sub><b>Day 86 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
 </div>
 
 

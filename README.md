@@ -8,7 +8,7 @@ A public learning log of modern Artificial Intelligence - transformers, LLMs,
 agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 <!-- Day badge: bumped by the daily run. If this is stale, the run said so in its log. -->
-[![Day](https://img.shields.io/badge/Day-86%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
+[![Day](https://img.shields.io/badge/Day-87%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Streak](https://img.shields.io/badge/Streak-unbroken-2EA043?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Level mix](https://img.shields.io/badge/Sources-Advanced%20%2B%20Medium-8957E5?style=for-the-badge&labelColor=0D1117)](#-progress)
 
@@ -18,7 +18,7 @@ agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 **[📈 Progress](#-progress)** · **[📚 Day Notes](#-day-notes)** · **[🤝 AI Collaboration](#-ai-collaboration)** · **[🔗 Connect](#-connect)**
 
-`2026-07-12` ──────────── **Day 86 of 100** ────────────► `2026-10-19`
+`2026-07-12` ──────────── **Day 87 of 100** ────────────► `2026-10-19`
 
 </div>
 
@@ -182,6 +182,7 @@ for the shape of the progress table.
 | 84 | 2026-10-03 | "Unlocking Lossless Speedups in LLMs via Discrete Diffusion" - Sahoo et al. | Advanced | A preprint proposing "diffusion-augmented LLMs" that keep an autoregressive model's distribution but use lightweight diffusion weights and a sampler family called Ψ-Spec to "draw multiple tokens in parallel from that distribution"; the resulting Uno models claim "up to 3×" speedups over the base model and higher throughput than leading speculative decoding (DFlash, Eagle3) "at every evaluated batch size" with no separate draft model, and the 8B Uno is reported to beat the 26B DiffusionGemma and Mercury 2 on the authors' own evaluation; read from the abstract, project page and code README only (v1, 3 September 2026, not peer reviewed), the project page charts "up to 2.5×", and nothing was run | [arxiv.org](https://arxiv.org/abs/2609.04010) |
 | 85 | 2026-10-04 | "Getting started with Claude Code mods" - Addy Osmani | Medium | A claude.dev walkthrough (1 October 2026) of mods: small JavaScript or TypeScript files, shipped as hooks inside a plugin, that run in the Claude Code session and can "watch what's happening, change what Claude Code does, or draw its own UI" in the terminal or desktop app; each hook is middleware that can observe, rewrite or answer an event, with hot reload, persistent state and a 10-second budget per dispatch, illustrated by three example mods (Token Weather, Blast Radius, Replay Theater); read from the post only, nothing was built or run | [claude.dev](https://claude.dev/blog/getting-started-with-claude-code-mods/) |
 | 86 | 2026-10-05 | "Code-Editing Agent" - Aurimas Nausėdas (my build, from Thorsten Ball's guide) | Advanced | My own code-editing agent in Go, built from the Day 12 guide and taken to a live site: the guide's loop of Claude plus `read_file`, `list_files` and `edit_file` ("about forty lines and it has not changed"), wrapped in a per-visitor sandboxed workspace, caps at four levels and a daily dollar budget, a trace of every step streamed to the browser and stored in Supabase, web research as an optional fourth tool, and a step-by-step build guide; 25 sandbox and edit cases plus 14 loop cases on a scripted fake, and 15 live cases on claude-haiku-4-5, all passed before launch - then the first day of use by hand (24 messages, 7 sessions, 50 minutes, 48 cents) "turned up 13 problems that no suite had caught" | [code.aurimas.io](https://code.aurimas.io) |
+| 87 | 2026-10-06 | "Stealing Reasoning Traces from Proprietary LLM APIs" - Panfilov et al. | Advanced | A security preprint showing that the encrypted reasoning blocks major LLM APIs return to clients were "fully compatible and interchangeable across different sessions, users, and models" within a provider, so injecting one model's encrypted trace into a weaker, less safeguarded model from the same provider could coerce it into transcribing the reasoning in plain text; the authors list four attack vectors (bypassing anti-distillation, extracting private data, revealing hidden hazardous content, invisible prompt injection), report 367 PII artifacts and 182 credentials recovered from 315,320 publicly scraped reasoning blocks, and say the results are no longer reproducible after provider mitigations; read from the arXiv abstract and HTML (v1, 10 August 2026, not peer reviewed), nothing was run | [arxiv.org](https://arxiv.org/abs/2608.09867) |
 
 ---
 
@@ -2029,6 +2030,22 @@ Day 12 read [How to Build an Agent](https://ampcode.com/notes/how-to-build-an-ag
 
 <sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
 
+### Day 87 - "Stealing Reasoning Traces from Proprietary LLM APIs" (Panfilov et al.)
+
+<img src="assets/cards/day-087.png" width="420" alt="Day 87 card">
+
+- **What providers hide, and how.** Leading providers conceal their models' step-by-step reasoning "to protect intellectual property and limit information leakage", but they still hand it back to the client as an encrypted block, so a multi-turn conversation can carry it forward.
+- **The flaw.** Those blocks were "fully compatible and interchangeable across different sessions, users, and models" within one provider's ecosystem. The authors infer that providers appear to use a single global key to encrypt and authenticate every block - an inference from behaviour, not a disclosed design.
+- **The attack.** Take an encrypted trace from a capable model, inject it into a weaker and less safeguarded model from the same provider, and use a simple jailbreak prompt to make that model transcribe the reasoning verbatim. The strong model is never jailbroken. Fidelity was checked by comparing extracted token counts against the thinking tokens the API itself reports, and the two "track each other closely".
+- **What leaks.** Scanning 315,320 reasoning blocks from public datasets, they recovered 367 PII artifacts and 182 credentials; 64 of the 704 artifacts recovered from reasoning were absent from the visible chat history entirely. The paper names four attack vectors in all: bypassing anti-distillation, extracting private data, revealing hidden hazardous content, and invisible prompt injection.
+- **Disclosure and status.** The authors disclosed to the affected providers (Anthropic, OpenAI and Google), Microsoft and Hugging Face, and report that as of August 2026 the results are "no longer reproducible" because of provider mitigations. Their recommended defences include binding each block cryptographically to its context, storing traces server-side, and enforcing cross-model isolation.
+
+**Why it matters:** Encryption was doing the job of a lock on these traces, but one key opening every door is not a lock in any useful sense. The practical lesson reaches past this one bug: an encrypted blob you can carry around is still your data, and it travels into logs, agent transcripts and published datasets. The paper's own conclusion puts it sharply - a design that hides a user's own data from them while leaving it open to third-party extraction "provides neither privacy nor security."
+
+**What I learned/tried:** I had filed "encrypted reasoning" under safe-to-log. This paper moved it: if the block can be replayed into another model, it is only as private as the weakest model that will read it. I read the arXiv abstract and HTML only, ran nothing, and cannot verify the extraction counts myself. The authors themselves note they had no ground-truth plaintext to check every token against, that the scan was not an exhaustive audit, and that it covers API versions as of early July 2026. It is also worth saying plainly that Anthropic, the maker of the tool I build this project with, is one of the providers named.
+
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
+
 ---
 
 ## 🤝 AI Collaboration
@@ -2095,7 +2112,7 @@ Nothing is posted that I have not read. Where the automation publishes, it publi
 
 <div align="center">
 <br>
-<sub><b>Day 86 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
+<sub><b>Day 87 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
 </div>
 
 

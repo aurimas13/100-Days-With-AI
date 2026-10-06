@@ -8,7 +8,7 @@ A public learning log of modern Artificial Intelligence - transformers, LLMs,
 agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 <!-- Day badge: bumped by the daily run. If this is stale, the run said so in its log. -->
-[![Day](https://img.shields.io/badge/Day-87%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
+[![Day](https://img.shields.io/badge/Day-88%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Streak](https://img.shields.io/badge/Streak-unbroken-2EA043?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Level mix](https://img.shields.io/badge/Sources-Advanced%20%2B%20Medium-8957E5?style=for-the-badge&labelColor=0D1117)](#-progress)
 
@@ -18,7 +18,7 @@ agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 **[📈 Progress](#-progress)** · **[📚 Day Notes](#-day-notes)** · **[🤝 AI Collaboration](#-ai-collaboration)** · **[🔗 Connect](#-connect)**
 
-`2026-07-12` ──────────── **Day 87 of 100** ────────────► `2026-10-19`
+`2026-07-12` ──────────── **Day 88 of 100** ────────────► `2026-10-19`
 
 </div>
 
@@ -183,6 +183,7 @@ for the shape of the progress table.
 | 85 | 2026-10-04 | "Getting started with Claude Code mods" - Addy Osmani | Medium | A claude.dev walkthrough (1 October 2026) of mods: small JavaScript or TypeScript files, shipped as hooks inside a plugin, that run in the Claude Code session and can "watch what's happening, change what Claude Code does, or draw its own UI" in the terminal or desktop app; each hook is middleware that can observe, rewrite or answer an event, with hot reload, persistent state and a 10-second budget per dispatch, illustrated by three example mods (Token Weather, Blast Radius, Replay Theater); read from the post only, nothing was built or run | [claude.dev](https://claude.dev/blog/getting-started-with-claude-code-mods/) |
 | 86 | 2026-10-05 | "Code-Editing Agent" - Aurimas Nausėdas (my build, from Thorsten Ball's guide) | Advanced | My own code-editing agent in Go, built from the Day 12 guide and taken to a live site: the guide's loop of Claude plus `read_file`, `list_files` and `edit_file` ("about forty lines and it has not changed"), wrapped in a per-visitor sandboxed workspace, caps at four levels and a daily dollar budget, a trace of every step streamed to the browser and stored in Supabase, web research as an optional fourth tool, and a step-by-step build guide; 25 sandbox and edit cases plus 14 loop cases on a scripted fake, and 15 live cases on claude-haiku-4-5, all passed before launch - then the first day of use by hand (24 messages, 7 sessions, 50 minutes, 48 cents) "turned up 13 problems that no suite had caught" | [code.aurimas.io](https://code.aurimas.io) |
 | 87 | 2026-10-06 | "Stealing Reasoning Traces from Proprietary LLM APIs" - Panfilov et al. | Advanced | A security preprint showing that the encrypted reasoning blocks major LLM APIs return to clients were "fully compatible and interchangeable across different sessions, users, and models" within a provider, so injecting one model's encrypted trace into a weaker, less safeguarded model from the same provider could coerce it into transcribing the reasoning in plain text; the authors list four attack vectors (bypassing anti-distillation, extracting private data, revealing hidden hazardous content, invisible prompt injection), report 367 PII artifacts and 182 credentials recovered from 315,320 publicly scraped reasoning blocks, and say the results are no longer reproducible after provider mitigations; read from the arXiv abstract and HTML (v1, 10 August 2026, not peer reviewed), nothing was run | [arxiv.org](https://arxiv.org/abs/2608.09867) |
+| 88 | 2026-10-07 | "VoiceStudio" - debpalash | Medium | An AGPL-3.0 open-source desktop app for "voice cloning, voice design, video dubbing, dictation, transcription & audiobook creation in 646 languages", running locally on NVIDIA CUDA, Apple Silicon Metal or CPU, with the k2-fsa/OmniVoice engine as default, a dozen-plus alternative TTS engines, WhisperX and other speech-recognition back ends, and a local API plus MCP so agents can drive it; read from the repo page, README and feature catalogue only, nothing installed or run | [github.com](https://github.com/debpalash/VoiceStudio) |
 
 ---
 
@@ -2046,6 +2047,22 @@ Day 12 read [How to Build an Agent](https://ampcode.com/notes/how-to-build-an-ag
 
 <sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
 
+### Day 88 - "VoiceStudio" (debpalash)
+
+<img src="assets/cards/day-088.png" width="420" alt="Day 88 card">
+
+- **One app, the whole voice stack.** The README describes it as "open-source voice cloning, voice design, video dubbing, dictation, transcription & audiobook creation in 646 languages", grouped as Create (clone or design a voice), Produce (dub video with timed speech, build audiobooks) and Connect (local API, MCP for agents, optional remote workers).
+- **Local first, cloud optional.** Workflows run on your own hardware: CUDA on NVIDIA (Windows/Linux), Metal on Apple Silicon, and a CPU path the README describes as "Fully usable on the CPU, slower", needing about 5 GB of free disk for the CPU build of PyTorch. Intel Macs get the UI only and need a remote back end. Remote services are optional, and usage analytics need explicit consent.
+- **An engine shelf, not one model.** The default engine is built on k2-fsa/OmniVoice, which its own page describes as zero-shot voice-cloning TTS "for 600+ Languages" (Apache-2.0). The feature catalogue lists more than a dozen alternatives, among them CosyVoice 3, IndexTTS 2.5, VoxCPM2, KittenTTS, GPT-SoVITS and sherpa-onnx, and on the listening side WhisperX by default, with Faster-Whisper, MLX Whisper, Parakeet, Moonshine and FunASR as options.
+- **Built to be driven by agents.** A local API and an MCP server expose it to agents, and the README points agents at a dedicated install guide covering hardware detection, reusing existing data, asking before model downloads, and a test generation.
+- **Two licences to read, one rule to keep.** The app is AGPL-3.0, but the README is plain that "Models have their own licenses; review them before commercial use." The ethics line is short: "Clone voices only with permission."
+
+**Why it matters:** Voice used to be the part of an AI product you rented: a cloud TTS API for speech out, another for transcription in, a third for dubbing. VoiceStudio is a sign that this layer is turning into something you can own and run on a laptop GPU, with the engine swappable underneath. For anyone building agents, the MCP hook is the interesting part - speech becomes one more local tool an agent can call, not a paid round trip. The flip side arrives with it: a convincing cloned voice is now a local install away, which makes the consent line in the README the most important sentence in it.
+
+**What I learned/tried:** I read the repo page, the README, the feature catalogue and the OmniVoice page; I have not installed or run VoiceStudio, so I cannot speak to voice quality or speed. Two things I would check before trusting the headline: the "646 languages" figure is the app's tagline, while the default engine's own page says "600+", and the AGPL app licence says nothing about the licence of each model you load into it.
+
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
+
 ---
 
 ## 🤝 AI Collaboration
@@ -2112,7 +2129,7 @@ Nothing is posted that I have not read. Where the automation publishes, it publi
 
 <div align="center">
 <br>
-<sub><b>Day 87 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
+<sub><b>Day 88 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
 </div>
 
 

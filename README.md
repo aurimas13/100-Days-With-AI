@@ -8,7 +8,7 @@ A public learning log of modern Artificial Intelligence - transformers, LLMs,
 agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 <!-- Day badge: bumped by the daily run. If this is stale, the run said so in its log. -->
-[![Day](https://img.shields.io/badge/Day-88%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
+[![Day](https://img.shields.io/badge/Day-89%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Streak](https://img.shields.io/badge/Streak-unbroken-2EA043?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Level mix](https://img.shields.io/badge/Sources-Advanced%20%2B%20Medium-8957E5?style=for-the-badge&labelColor=0D1117)](#-progress)
 
@@ -18,7 +18,7 @@ agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 **[📈 Progress](#-progress)** · **[📚 Day Notes](#-day-notes)** · **[🤝 AI Collaboration](#-ai-collaboration)** · **[🔗 Connect](#-connect)**
 
-`2026-07-12` ──────────── **Day 88 of 100** ────────────► `2026-10-19`
+`2026-07-12` ──────────── **Day 89 of 100** ────────────► `2026-10-19`
 
 </div>
 
@@ -184,6 +184,7 @@ for the shape of the progress table.
 | 86 | 2026-10-05 | "Code-Editing Agent" - Aurimas Nausėdas (my build, from Thorsten Ball's guide) | Advanced | My own code-editing agent in Go, built from the Day 12 guide and taken to a live site: the guide's loop of Claude plus `read_file`, `list_files` and `edit_file` ("about forty lines and it has not changed"), wrapped in a per-visitor sandboxed workspace, caps at four levels and a daily dollar budget, a trace of every step streamed to the browser and stored in Supabase, web research as an optional fourth tool, and a step-by-step build guide; 25 sandbox and edit cases plus 14 loop cases on a scripted fake, and 15 live cases on claude-haiku-4-5, all passed before launch - then the first day of use by hand (24 messages, 7 sessions, 50 minutes, 48 cents) "turned up 13 problems that no suite had caught" | [code.aurimas.io](https://code.aurimas.io) |
 | 87 | 2026-10-06 | "Stealing Reasoning Traces from Proprietary LLM APIs" - Panfilov et al. | Advanced | A security preprint showing that the encrypted reasoning blocks major LLM APIs return to clients were "fully compatible and interchangeable across different sessions, users, and models" within a provider, so injecting one model's encrypted trace into a weaker, less safeguarded model from the same provider could coerce it into transcribing the reasoning in plain text; the authors list four attack vectors (bypassing anti-distillation, extracting private data, revealing hidden hazardous content, invisible prompt injection), report 367 PII artifacts and 182 credentials recovered from 315,320 publicly scraped reasoning blocks, and say the results are no longer reproducible after provider mitigations; read from the arXiv abstract and HTML (v1, 10 August 2026, not peer reviewed), nothing was run | [arxiv.org](https://arxiv.org/abs/2608.09867) |
 | 88 | 2026-10-07 | "VoiceStudio" - debpalash | Medium | An AGPL-3.0 open-source desktop app for "voice cloning, voice design, video dubbing, dictation, transcription & audiobook creation in 646 languages", running locally on NVIDIA CUDA, Apple Silicon Metal or CPU, with the k2-fsa/OmniVoice engine as default, a dozen-plus alternative TTS engines, WhisperX and other speech-recognition back ends, and a local API plus MCP so agents can drive it; read from the repo page, README and feature catalogue only, nothing installed or run | [github.com](https://github.com/debpalash/VoiceStudio) |
+| 89 | 2026-10-08 | "SlopShape: Identifying AI-Generated Commercial Web Content" - Madler | Advanced | A single-author preprint (Sitefire) that replicates the StoryScope idea - telling AI text from human text by structure alone - on 2,250 pre-ChatGPT company blog posts against 11,250 AI "mirror" posts from five frontier models; 176 structural features reach "97.0 macro-F1 on held-out companies" and 96.1 when every AI post is reworded, while a style-only baseline slips from 88.1 to 87.1, and "68.6 percent" of posts are attributed to the right source against a 16.7 percent chance rate; read from the abstract and the v3 HTML (v3, 28 September 2026, not peer reviewed), the instrument is LLM-run end to end, and nothing was run | [arxiv.org](https://arxiv.org/abs/2609.15369) |
 
 ---
 
@@ -2063,6 +2064,22 @@ Day 12 read [How to Build an Agent](https://ampcode.com/notes/how-to-build-an-ag
 
 <sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
 
+### Day 89 - "SlopShape: Identifying AI-Generated Commercial Web Content" (Madler)
+
+<img src="assets/cards/day-089.png" width="420" alt="Day 89 card">
+
+- **The problem with word-level detectors.** The abstract opens on it: they "identify unedited AI-generated text almost perfectly, but the literature documents their brittleness under rewording, and a word-level score neither characterizes a text nor identifies which AI model wrote it."
+- **The experiment.** StoryScope (Russell et al., 2026) had shown that AI fiction can be told apart from human fiction "by narrative structure alone". This paper asks whether that survives on text with no plot at all: 2,250 pre-ChatGPT blog posts from 268 company domains, each turned into an anonymised content brief and handed to five models - GPT-5.4, Claude Sonnet 4.6, Gemini-3-Flash, DeepSeek-V3.2 and Kimi-K2.5 - giving 11,250 AI "mirror" posts.
+- **Structure, not wording.** The instrument scores 203 features, 176 structural (purpose, audience, structure, evidence, voices and more) and 27 style. Structural features alone reach "97.0 macro-F1 on held-out companies", and 96.1 when every AI post is reworded. Style features "lose ground as expected under a wording attack (88.1 to 87.1)".
+- **It can name the writer.** "68.6 percent of posts are attributed to the correct source against a 16.7 percent chance rate" - six classes, the human plus five models.
+- **Humans live in the rare corners.** Human posts sit in rarer structural configurations than AI ones (mean rarity percentile 0.835 against 0.436, Cohen's d = 1.80). One feature that separates them: AI posts tend to put the payoff promise in the title.
+
+**Why it matters:** Most AI detection is an arms race over words, and rewording wins it cheaply. This paper moves the fight to a layer a paraphraser does not touch - what a post chooses to say, in what order, with what evidence. If that holds, it matters for anyone who publishes, ranks or buys web content, and it hints that "make the AI sound human" is the wrong goal: the sameness is in the skeleton.
+
+**What I learned/tried:** The version history was the first lesson. The v1 HTML reported 98.0 F1 and 79.3% attribution; v3, which drops 11 format-sensitive features tied to titles, headings and lists, reports 97.0 and 68.6%. Same paper, quieter headline - I used v3. The author lists its own limits plainly: one generation pass per model, the instrument is LLM-run end to end, rewording was tested only as model self-rewrites, and human posts predate ChatGPT while the mirrors are from 2026, a publication-year confound. Single author, from a company (Sitefire), not peer reviewed. I read the abstract and the HTML; I have not run the public code.
+
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
+
 ---
 
 ## 🤝 AI Collaboration
@@ -2129,7 +2146,7 @@ Nothing is posted that I have not read. Where the automation publishes, it publi
 
 <div align="center">
 <br>
-<sub><b>Day 88 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
+<sub><b>Day 89 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
 </div>
 
 

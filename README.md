@@ -8,7 +8,7 @@ A public learning log of modern Artificial Intelligence - transformers, LLMs,
 agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 <!-- Day badge: bumped by the daily run. If this is stale, the run said so in its log. -->
-[![Day](https://img.shields.io/badge/Day-89%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
+[![Day](https://img.shields.io/badge/Day-90%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Streak](https://img.shields.io/badge/Streak-unbroken-2EA043?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Level mix](https://img.shields.io/badge/Sources-Advanced%20%2B%20Medium-8957E5?style=for-the-badge&labelColor=0D1117)](#-progress)
 
@@ -18,7 +18,7 @@ agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 **[📈 Progress](#-progress)** · **[📚 Day Notes](#-day-notes)** · **[🤝 AI Collaboration](#-ai-collaboration)** · **[🔗 Connect](#-connect)**
 
-`2026-07-12` ──────────── **Day 89 of 100** ────────────► `2026-10-19`
+`2026-07-12` ──────────── **Day 90 of 100** ────────────► `2026-10-19`
 
 </div>
 
@@ -185,6 +185,7 @@ for the shape of the progress table.
 | 87 | 2026-10-06 | "Stealing Reasoning Traces from Proprietary LLM APIs" - Panfilov et al. | Advanced | A security preprint showing that the encrypted reasoning blocks major LLM APIs return to clients were "fully compatible and interchangeable across different sessions, users, and models" within a provider, so injecting one model's encrypted trace into a weaker, less safeguarded model from the same provider could coerce it into transcribing the reasoning in plain text; the authors list four attack vectors (bypassing anti-distillation, extracting private data, revealing hidden hazardous content, invisible prompt injection), report 367 PII artifacts and 182 credentials recovered from 315,320 publicly scraped reasoning blocks, and say the results are no longer reproducible after provider mitigations; read from the arXiv abstract and HTML (v1, 10 August 2026, not peer reviewed), nothing was run | [arxiv.org](https://arxiv.org/abs/2608.09867) |
 | 88 | 2026-10-07 | "VoiceStudio" - debpalash | Medium | An AGPL-3.0 open-source desktop app for "voice cloning, voice design, video dubbing, dictation, transcription & audiobook creation in 646 languages", running locally on NVIDIA CUDA, Apple Silicon Metal or CPU, with the k2-fsa/OmniVoice engine as default, a dozen-plus alternative TTS engines, WhisperX and other speech-recognition back ends, and a local API plus MCP so agents can drive it; read from the repo page, README and feature catalogue only, nothing installed or run | [github.com](https://github.com/debpalash/VoiceStudio) |
 | 89 | 2026-10-08 | "SlopShape: Identifying AI-Generated Commercial Web Content" - Madler | Advanced | A single-author preprint (Sitefire) that replicates the StoryScope idea - telling AI text from human text by structure alone - on 2,250 pre-ChatGPT company blog posts against 11,250 AI "mirror" posts from five frontier models; 176 structural features reach "97.0 macro-F1 on held-out companies" and 96.1 when every AI post is reworded, while a style-only baseline slips from 88.1 to 87.1, and "68.6 percent" of posts are attributed to the right source against a 16.7 percent chance rate; read from the abstract and the v3 HTML (v3, 28 September 2026, not peer reviewed), the instrument is LLM-run end to end, and nothing was run | [arxiv.org](https://arxiv.org/abs/2609.15369) |
+| 90 | 2026-10-09 | "Claude 3 Opus vs Sonnet vs Haiku: Which Model Should You Choose?" - Singh (Dextralabs) | Medium | A vendor guide to choosing between Claude's three tiers, read for its routing advice rather than its rankings: Opus for "ambiguous or open-ended research problems", architectural design and deep debugging, Sonnet as the default with the rule "Use Sonnet for 80–90% of tasks", Haiku for high-volume automation and real-time chatbots; its one benchmark sentence has "Claude Sonnet 4" at "a 95.1% Pass@1 success rate" and "Claude Opus 4 close behind at 94.5%" on HumanEval, and it recommends mixing tiers inside one agent system, with Opus as supervisor and Haiku on classification side-tasks; the H1 says "Claude 3" while the body runs to the 4.5 generation, the post ends in a Dextralabs services pitch, the cited benchmark paper returned 403, and nothing was run | [dextralabs.com](https://dextralabs.com/blog/claude-opus-vs-sonnet-vs-haiku/) |
 
 ---
 
@@ -2080,6 +2081,22 @@ Day 12 read [How to Build an Agent](https://ampcode.com/notes/how-to-build-an-ag
 
 <sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
 
+### Day 90 - "Claude 3 Opus vs Sonnet vs Haiku: Which Model Should You Choose?" (Singh, Dextralabs)
+
+<img src="assets/cards/day-090.png" width="420" alt="Day 90 card">
+
+- **Three tiers, three jobs.** The article frames the family as a toolkit rather than a ladder: Opus for "solving ambiguous or open-ended research problems", architectural system design and deep technical debugging; Sonnet for production agents, APIs at scale and RAG pipelines; Haiku for "high-volume automation", real-time chatbots and simple, repetitive tasks.
+- **Sonnet is the default.** Its headline rule is "Use Sonnet for 80–90% of tasks. Choose Opus for extremely complex reasoning or architecture design." It puts the saving at "up to 60–80%" of inference cost against Opus, "depending on workload scale" - a claim given without a worked example.
+- **On everyday code the gap nearly closes.** "In independent Python coding benchmarks, Claude Sonnet 4 achieved a 95.1% Pass@1 success rate, with Claude Opus 4 close behind at 94.5% on the HumanEval benchmark." The difference it describes shows up instead in complex, multi-file architectural problems; "for typical backend APIs, frontend components, and script automation, Sonnet performs nearly as well at a lower cost."
+- **Mix tiers inside one system.** "Sonnet works well as the default production agent model. Opus can act as a supervisory agent in multi-agent systems. Haiku supports classification side-tasks within agentic workflows." Its enterprise checklist adds a latency-versus-reasoning trade-off, token budgeting, a model fallback strategy and observability.
+- **Its own one-liner.** "Most enterprises overpay for intelligence they don't need."
+
+**Why it matters:** Picking a model is now a design decision on every AI project, and the default instinct - use the most capable one everywhere - is the expensive one. The lasting idea here is not which tier wins, but that a system can route each step to the cheapest model that does it well, and keep the strongest one for the decisions that are genuinely hard.
+
+**What I learned/tried:** The benchmark line taught me the most, though not in the way the article meant it. When the cheaper model edges the flagship on HumanEval, the benchmark has stopped telling the tiers apart; the difference the article points to lives in ambiguous, multi-file work that function-level tests do not measure. I also read it with its context in view: the H1 says "Claude 3" while the body covers up to Claude Opus 4.5 and Sonnet 4.5, it does not reach the 4.6 or 5 generations, and it closes by selling a model-selection service. Its per-token prices and context windows are not given. The HumanEval sentence cites an MDPI paper that returned 403 when I tried to open it, so those two numbers are the article's, not checked against the paper. I read the article; nothing was run.
+
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
+
 ---
 
 ## 🤝 AI Collaboration
@@ -2146,7 +2163,7 @@ Nothing is posted that I have not read. Where the automation publishes, it publi
 
 <div align="center">
 <br>
-<sub><b>Day 89 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
+<sub><b>Day 90 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
 </div>
 
 

@@ -8,7 +8,7 @@ A public learning log of modern Artificial Intelligence - transformers, LLMs,
 agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 <!-- Day badge: bumped by the daily run. If this is stale, the run said so in its log. -->
-[![Day](https://img.shields.io/badge/Day-91%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
+[![Day](https://img.shields.io/badge/Day-92%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Streak](https://img.shields.io/badge/Streak-unbroken-2EA043?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Level mix](https://img.shields.io/badge/Sources-Advanced%20%2B%20Medium-8957E5?style=for-the-badge&labelColor=0D1117)](#-progress)
 
@@ -18,7 +18,7 @@ agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 **[📈 Progress](#-progress)** · **[📚 Day Notes](#-day-notes)** · **[🤝 AI Collaboration](#-ai-collaboration)** · **[🔗 Connect](#-connect)**
 
-`2026-07-12` ──────────── **Day 91 of 100** ────────────► `2026-10-19`
+`2026-07-12` ──────────── **Day 92 of 100** ────────────► `2026-10-19`
 
 </div>
 
@@ -187,6 +187,7 @@ for the shape of the progress table.
 | 89 | 2026-10-08 | "SlopShape: Identifying AI-Generated Commercial Web Content" - Madler | Advanced | A single-author preprint (Sitefire) that replicates the StoryScope idea - telling AI text from human text by structure alone - on 2,250 pre-ChatGPT company blog posts against 11,250 AI "mirror" posts from five frontier models; 176 structural features reach "97.0 macro-F1 on held-out companies" and 96.1 when every AI post is reworded, while a style-only baseline slips from 88.1 to 87.1, and "68.6 percent" of posts are attributed to the right source against a 16.7 percent chance rate; read from the abstract and the v3 HTML (v3, 28 September 2026, not peer reviewed), the instrument is LLM-run end to end, and nothing was run | [arxiv.org](https://arxiv.org/abs/2609.15369) |
 | 90 | 2026-10-09 | "Claude 3 Opus vs Sonnet vs Haiku: Which Model Should You Choose?" - Singh (Dextralabs) | Medium | A vendor guide to choosing between Claude's three tiers, read for its routing advice rather than its rankings: Opus for "ambiguous or open-ended research problems", architectural design and deep debugging, Sonnet as the default with the rule "Use Sonnet for 80–90% of tasks", Haiku for high-volume automation and real-time chatbots; its one benchmark sentence has "Claude Sonnet 4" at "a 95.1% Pass@1 success rate" and "Claude Opus 4 close behind at 94.5%" on HumanEval, and it recommends mixing tiers inside one agent system, with Opus as supervisor and Haiku on classification side-tasks; the H1 says "Claude 3" while the body runs to the 4.5 generation, the post ends in a Dextralabs services pitch, the cited benchmark paper returned 403, and nothing was run | [dextralabs.com](https://dextralabs.com/blog/claude-opus-vs-sonnet-vs-haiku/) |
 | 91 | 2026-10-10 | "Context Language Models" - Shao et al. | Advanced | A preprint introducing "Context Language Models (CLMs), language models that natively manage their own context" by "treating the context as a file and allowing the model to make unrestricted updates to this file"; built zero-shot from existing models, CLMs are reported to beat state-of-the-art context-management strategies (11.4% higher accuracy with 21.5% fewer FLOPs on BrowseComp-Plus, 5% higher scores with 59% fewer FLOPs on 12-hour EdgeBench), to extend to agent swarms as multiple context files, to learn context management by prompt optimisation and online RL, and to cut serving compute by 35% with Suffix Cache Reuse; read from the abstract and the arXiv HTML (v1, 29 September 2026, not peer reviewed), nothing was run | [arxiv.org](https://arxiv.org/abs/2609.37725) |
+| 92 | 2026-10-11 | "Peter Norvig on AI's Future and the Limits of Trust" - Ksenia Se, Turing Post | Medium | An interview in which Peter Norvig, co-author of Artificial Intelligence: A Modern Approach, argues that "language models are world models, but they could be better world models", that small tweaks rather than a teardown will get there (where he parts ways with Yann LeCun), that a neural net with attention should stay the core with logic learned on top, and that students may skip his book's logic half while "the LLM should definitely read all of it"; also covers Google Search's three levels of feedback, recursive self-improvement as an engineering-practice question, and why he worries about trust in AI leaders; read from the published text (edited and reordered by Turing Post), video not watched | [Turing Post](https://www.turingpost.com/p/peter-norvig-on-ai-s-future-and-the-limits-of-trust) |
 
 ---
 
@@ -2114,6 +2115,22 @@ Day 12 read [How to Build an Agent](https://ampcode.com/notes/how-to-build-an-ag
 
 <sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
 
+### Day 92 - "Peter Norvig on AI's Future and the Limits of Trust" (Ksenia Se, Turing Post)
+
+<img src="assets/cards/day-092.png" width="420" alt="Day 92 card">
+
+- **Language models are already world models.** "I guess I feel like language models are world models, but they could be better world models." His evidence is simple: a model knows that "the cat chased the rat" is more likely than "the rat chased the cat". He agrees with Yann LeCun on what models still cannot do well, and disagrees on the remedy: "if we do small tweaks to what we have now, we'll end up in the same place."
+- **A neural core, logic learned on top.** "The core should be something like what we have now, a neural net with attention. On top of that, we should learn how to do logic." He compares it to people: we are not born knowing modus ponens, we learn it after learning to see and move. Hence the line about his own textbook - "the students probably don't have to read all of that, but the LLM should definitely read all of it."
+- **Clever algorithms still matter.** AlphaGo beat the world champion because neural nets encoded what people knew about a board position, plus Monte Carlo Tree Search, "this traditional, old-school algorithm". He also points to Rich Sutton's Bitter Lesson: "data gives you breadth, and then search gives you depth."
+- **Three levels of feedback.** Google Search combined "billions of pieces of not very useful data" (clicks), "tens of thousands of more detailed data" (human raters comparing result sets) and "dozens of pieces of very detailed data" (one-way-mirror user studies). "It felt like it would have been incomplete without any one of those levels."
+- **Control is an engineering question.** To him, recursive self-improvement is what optimising compilers already did. The real issue is "what are your software engineering practices?" - including whether humans still review code an AI wrote. On trust in AI leaders he is candid: "trust can only last so long", and he takes some comfort from smaller open models spreading power more widely.
+
+**Why it matters:** The world-model debate is usually framed as a fork: keep scaling LLMs, or start over with a new architecture. Norvig puts a co-author of the field's standard textbook on the incremental side, while agreeing on what is missing. His three-level feedback stack is also a practical template for evaluating anything you ship: cheap signals at huge scale, structured human judgements in the middle, and a handful of deep studies at the top, each catching what the others miss.
+
+**What I learned/tried:** The textbook line stuck with me because it inverts the usual worry - not "will students still learn the fundamentals?" but "who is the reader now?" His answer on recursive self-improvement also lands close to home: whether humans still need to review AI-written code is the exact question this campaign answers every day, and here the answer is yes. I read the published interview text, which Turing Post notes was edited for length and reordered; I have not watched the video.
+
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
+
 ---
 
 ## 🤝 AI Collaboration
@@ -2180,7 +2197,7 @@ Nothing is posted that I have not read. Where the automation publishes, it publi
 
 <div align="center">
 <br>
-<sub><b>Day 91 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
+<sub><b>Day 92 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
 </div>
 
 

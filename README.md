@@ -8,7 +8,7 @@ A public learning log of modern Artificial Intelligence - transformers, LLMs,
 agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 <!-- Day badge: bumped by the daily run. If this is stale, the run said so in its log. -->
-[![Day](https://img.shields.io/badge/Day-92%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
+[![Day](https://img.shields.io/badge/Day-93%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Streak](https://img.shields.io/badge/Streak-unbroken-2EA043?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Level mix](https://img.shields.io/badge/Sources-Advanced%20%2B%20Medium-8957E5?style=for-the-badge&labelColor=0D1117)](#-progress)
 
@@ -18,7 +18,7 @@ agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 **[📈 Progress](#-progress)** · **[📚 Day Notes](#-day-notes)** · **[🤝 AI Collaboration](#-ai-collaboration)** · **[🔗 Connect](#-connect)**
 
-`2026-07-12` ──────────── **Day 92 of 100** ────────────► `2026-10-19`
+`2026-07-12` ──────────── **Day 93 of 100** ────────────► `2026-10-19`
 
 </div>
 
@@ -188,6 +188,7 @@ for the shape of the progress table.
 | 90 | 2026-10-09 | "Claude 3 Opus vs Sonnet vs Haiku: Which Model Should You Choose?" - Singh (Dextralabs) | Medium | A vendor guide to choosing between Claude's three tiers, read for its routing advice rather than its rankings: Opus for "ambiguous or open-ended research problems", architectural design and deep debugging, Sonnet as the default with the rule "Use Sonnet for 80–90% of tasks", Haiku for high-volume automation and real-time chatbots; its one benchmark sentence has "Claude Sonnet 4" at "a 95.1% Pass@1 success rate" and "Claude Opus 4 close behind at 94.5%" on HumanEval, and it recommends mixing tiers inside one agent system, with Opus as supervisor and Haiku on classification side-tasks; the H1 says "Claude 3" while the body runs to the 4.5 generation, the post ends in a Dextralabs services pitch, the cited benchmark paper returned 403, and nothing was run | [dextralabs.com](https://dextralabs.com/blog/claude-opus-vs-sonnet-vs-haiku/) |
 | 91 | 2026-10-10 | "Context Language Models" - Shao et al. | Advanced | A preprint introducing "Context Language Models (CLMs), language models that natively manage their own context" by "treating the context as a file and allowing the model to make unrestricted updates to this file"; built zero-shot from existing models, CLMs are reported to beat state-of-the-art context-management strategies (11.4% higher accuracy with 21.5% fewer FLOPs on BrowseComp-Plus, 5% higher scores with 59% fewer FLOPs on 12-hour EdgeBench), to extend to agent swarms as multiple context files, to learn context management by prompt optimisation and online RL, and to cut serving compute by 35% with Suffix Cache Reuse; read from the abstract and the arXiv HTML (v1, 29 September 2026, not peer reviewed), nothing was run | [arxiv.org](https://arxiv.org/abs/2609.37725) |
 | 92 | 2026-10-11 | "Peter Norvig on AI's Future and the Limits of Trust" - Ksenia Se, Turing Post | Medium | An interview in which Peter Norvig, co-author of Artificial Intelligence: A Modern Approach, argues that "language models are world models, but they could be better world models", that small tweaks rather than a teardown will get there (where he parts ways with Yann LeCun), that a neural net with attention should stay the core with logic learned on top, and that students may skip his book's logic half while "the LLM should definitely read all of it"; also covers Google Search's three levels of feedback, recursive self-improvement as an engineering-practice question, and why he worries about trust in AI leaders; read from the published text (edited and reordered by Turing Post), video not watched | [Turing Post](https://www.turingpost.com/p/peter-norvig-on-ai-s-future-and-the-limits-of-trust) |
+| 93 | 2026-10-12 | "Introducing Gemini 3.8 Live and 3.8 Live Extended Thinking" - Tom Ouyang and Malini Jaganathan, Google | Medium | Google's announcement of two real-time voice models: 3.8 Live, built for scale and cost efficiency, and 3.8 Live Extended Thinking, which "reasons and speaks simultaneously", fills thinking time with early verbal cues like "Let me check that…", runs tools and API calls in the background while the conversation continues, and narrates progress on multi-step tasks; both switch between 97 languages mid-conversation, ship in the Gemini API and Google AI Studio, and carry SynthID audio watermarks; the benchmark results are Google's own reporting of third-party leaderboards | [Google blog](https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-8-live-gemini-3-8-live-extended-thinking/) |
 
 ---
 
@@ -2131,6 +2132,22 @@ Day 12 read [How to Build an Agent](https://ampcode.com/notes/how-to-build-an-ag
 
 <sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
 
+### Day 93 - "Introducing Gemini 3.8 Live and 3.8 Live Extended Thinking" (Tom Ouyang and Malini Jaganathan, Google)
+
+<img src="assets/cards/day-093.png" width="420" alt="Day 93 card">
+
+- **Two models, split by job.** 3.8 Live is built "for scale and cost efficiency", combining conversation with visual grounding and processing of visual inputs "in near real time". 3.8 Live Extended Thinking is for high-complexity tasks that need multi-step reasoning. It is the same trade-off text models made with fast and thinking tiers, now applied to a live voice.
+- **It reasons and speaks at the same time.** "For tasks that require deeper reasoning, 3.8 Live Extended Thinking reasons and speaks simultaneously." In voice, silence reads as failure. The model fills the gap with "early verbal cues like 'Let me check that…'" and "live progress narration to walk users through multi-step background tasks as they progress."
+- **Tools run in the background.** "It executes tools and API calls in the background while continuing the conversation." A voice agent no longer has to freeze while a lookup or booking call completes.
+- **97 languages, switched mid-conversation.** The model "automatically detects and transitions between 97 supported languages mid-conversation", without the user choosing a language first.
+- **The numbers, as Google reports them.** Extended Thinking takes the #1 spot on Artificial Analysis' Speech to Speech Quality Index (82.6), scores 68.6% on τ-Voice, 35.1% on Sierra's τ-Voice-banking benchmark and 97.7% on Big Bench Audio, and 3.8 Live places second in the Speech Agent Arena. All audio is watermarked with SynthID.
+
+**Why it matters:** Voice is where agent latency hurts most. A text chat can show a spinner, but a phone call cannot go quiet while the model thinks. Speaking while reasoning, with tools running underneath, turns latency from a model problem into a conversation-design problem, and the "Let me check that…" filler is exactly what a good human support agent does. The weakest score in the list is the most revealing: 35.1% on τ-Voice-banking says that multi-step voice agents in a regulated domain are still far from done.
+
+**What I learned/tried:** The idea I am keeping is to treat narration as part of the interface. When an agent of mine runs a slow tool, the user should hear or see what is happening, not wait in silence. I read the announcement only. I have not tried the models or checked the benchmark figures against the leaderboards. Every number above is Google's own reporting, and the post states no pricing.
+
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
+
 ---
 
 ## 🤝 AI Collaboration
@@ -2197,7 +2214,7 @@ Nothing is posted that I have not read. Where the automation publishes, it publi
 
 <div align="center">
 <br>
-<sub><b>Day 92 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
+<sub><b>Day 93 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
 </div>
 
 

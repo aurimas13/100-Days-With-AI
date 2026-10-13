@@ -8,7 +8,7 @@ A public learning log of modern Artificial Intelligence - transformers, LLMs,
 agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 <!-- Day badge: bumped by the daily run. If this is stale, the run said so in its log. -->
-[![Day](https://img.shields.io/badge/Day-94%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
+[![Day](https://img.shields.io/badge/Day-95%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Streak](https://img.shields.io/badge/Streak-unbroken-2EA043?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Level mix](https://img.shields.io/badge/Sources-Advanced%20%2B%20Medium-8957E5?style=for-the-badge&labelColor=0D1117)](#-progress)
 
@@ -18,7 +18,7 @@ agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 **[📈 Progress](#-progress)** · **[📚 Day Notes](#-day-notes)** · **[🤝 AI Collaboration](#-ai-collaboration)** · **[🔗 Connect](#-connect)**
 
-`2026-07-12` ──────────── **Day 94 of 100** ────────────► `2026-10-19`
+`2026-07-12` ──────────── **Day 95 of 100** ────────────► `2026-10-19`
 
 </div>
 
@@ -190,6 +190,7 @@ for the shape of the progress table.
 | 92 | 2026-10-11 | "Peter Norvig on AI's Future and the Limits of Trust" - Ksenia Se, Turing Post | Medium | An interview in which Peter Norvig, co-author of Artificial Intelligence: A Modern Approach, argues that "language models are world models, but they could be better world models", that small tweaks rather than a teardown will get there (where he parts ways with Yann LeCun), that a neural net with attention should stay the core with logic learned on top, and that students may skip his book's logic half while "the LLM should definitely read all of it"; also covers Google Search's three levels of feedback, recursive self-improvement as an engineering-practice question, and why he worries about trust in AI leaders; read from the published text (edited and reordered by Turing Post), video not watched | [Turing Post](https://www.turingpost.com/p/peter-norvig-on-ai-s-future-and-the-limits-of-trust) |
 | 93 | 2026-10-12 | "Introducing Gemini 3.8 Live and 3.8 Live Extended Thinking" - Tom Ouyang and Malini Jaganathan, Google | Medium | Google's announcement of two real-time voice models: 3.8 Live, built for scale and cost efficiency, and 3.8 Live Extended Thinking, which "reasons and speaks simultaneously", fills thinking time with early verbal cues like "Let me check that…", runs tools and API calls in the background while the conversation continues, and narrates progress on multi-step tasks; both switch between 97 languages mid-conversation, ship in the Gemini API and Google AI Studio, and carry SynthID audio watermarks; the benchmark results are Google's own reporting of third-party leaderboards | [Google blog](https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-8-live-gemini-3-8-live-extended-thinking/) |
 | 94 | 2026-10-13 | "3 Questions: A new resource to empower young entrepreneurs" - Zach Winn, MIT News | Medium | MIT News Q&A with Bill Aulet, managing director of the Martin Trust Center for MIT Entrepreneurship, on Dear Dreamer (deardreamer.org), a free, AI-powered youth entrepreneurship platform open to all middle and high school students and funded by a gift from the Frank and Eileen Foundation; it turns the 24-step Disciplined Entrepreneurship framework into a self-paced course of short videos, interactive exercises and personalised feedback on the student's own idea, keeps the same curriculum "presented differently" for 10-, 12- and 14-year-olds, was inspired by MIT's Jetpack generative AI tool trained on the framework, and aims to empower 50,000 young entrepreneurs by 2030; the interview does not explain how the AI works or measure its feedback | [MIT News](https://news.mit.edu/2026/3-questions-new-resource-empower-young-entrepreneurs-1002) |
+| 95 | 2026-10-14 | "Harness Engineering: Anatomy, Architecture, and Evolution of Coding Agents - A Source-Code Study of Eleven Systems" - Paul Barbaste, Tristan Darrigol, Germain Vu and Tom Wiltberger | Advanced | A source-code anatomy of eleven production coding-agent harnesses pinned to July 2026 releases - Claude Code, Codex CLI, Gemini CLI, Mistral Vibe, OpenHands, Aider, Mini-SWE-Agent, Hermes, Pi, OpenCode and OpenClaw - plus the Databricks meta-harness Omnigent as a contrast; it defines an agent as a model plus a harness, maps seven canonical subsystems (agent loop, LLM integration, tools and actions, memory and context, safety and permissions, orchestration, extensibility) with the minimal and maximal form of each, and reports 13 cross-cutting observations and 29 recurring design patterns; across roughly four million lines no runtime imports a general-purpose agentic framework and none retrieves code with vector embeddings, SKILL.md skills lead MCP in adoption (9/11 vs 8/11), a 90-day re-audit of eight systems shows convergence turning into imitation and behavioural policy moving from prompt prose to configuration, and it closes with 18 design recommendations and a 90-line minimum-viable-harness scaffold; it describes and compares, and does not benchmark or rank | [arXiv](https://arxiv.org/abs/2609.00006) |
 
 ---
 
@@ -2165,6 +2166,22 @@ Day 12 read [How to Build an Agent](https://ampcode.com/notes/how-to-build-an-ag
 
 <sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
 
+### Day 95 - "Harness Engineering: Anatomy, Architecture, and Evolution of Coding Agents" (Barbaste, Darrigol, Vu and Wiltberger)
+
+<img src="assets/cards/day-095.png" width="420" alt="Day 95 card">
+
+- **An agent is a model plus a harness.** The harness is "everything except the model": the loop, the tools, context management, safety controls, orchestration and extension surfaces. The paper reads the source of eleven production coding harnesses - Claude Code, Codex CLI, Gemini CLI, Mistral Vibe, OpenHands, Aider, Mini-SWE-Agent, Hermes, Pi, OpenCode and OpenClaw - with Databricks' Omnigent, a meta-harness, as a contrast. It describes and compares; it does not benchmark or rank.
+- **Seven subsystems, each with a floor and a ceiling.** Agent loop, LLM integration, tools and actions, memory and context, safety and permissions, orchestration, and extensibility. The floor is Mini-SWE-Agent: a linear `while` loop over one bash tool, about 100 lines in all. The ceilings include Claude Code's 43 typed tools with deferred loading, Codex's policy rules plus an LLM approval reviewer and a three-platform OS sandbox, and OpenHands' event-sourced loop.
+- **Two absences across about four million lines.** No agent runtime imports a general-purpose agentic framework (LangChain, LangGraph, AutoGen and others), and none retrieves code with vector embeddings. Retrieval is deterministic: ripgrep, tree-sitter, glob and auto-discovered Markdown context files.
+- **Skills lead MCP.** SKILL.md skills appear in 9 of 11 systems against 8 of 11 for MCP, and ACP ships in six. OpenHands now also hosts rival harnesses, running Claude Code, Codex or Gemini CLI as interchangeable backends.
+- **Ninety days of evolution, measured in source.** Eight systems were re-audited one quarter after an April edition. Convergence became imitation - Codex adopted Claude Code's hook vocabulary verbatim and ships an importer for its sessions - and behavioural policy moved from prompt prose into configuration. The paper closes with 18 design recommendations and a 90-line minimum-viable-harness scaffold that implements ten of them.
+
+**Why it matters:** Most comparisons of coding agents stop at a benchmark score. This one opens the source and shows that the engineering lives in the harness, not in the model call. The two absences are the most useful finding for anyone building an agent: the leading systems write their own loop instead of importing a framework, and they find code by searching it rather than embedding it. The Mini-SWE-Agent floor makes the point sharper - by the authors' self-reported figures, a 100-line loop lands in the same SWE-bench range as systems three orders of magnitude larger, so the rest of the code buys safety, recovery, cost control and extensibility rather than raw task completion.
+
+**What I learned/tried:** The seven-subsystem map is the part I am keeping, as a checklist to hold my own agent builds against. I read the abstract, the introduction and the subsystem map (Sections 1-2 and Table 1) and have not yet worked through the per-subsystem sections or the 90-line scaffold. The SWE-bench comparison is self-reported across different models and dates, as the paper itself says. One disclosure worth making: this entry was drafted with Claude Code, which is one of the eleven systems the paper studies.
+
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
+
 ---
 
 ## 🤝 AI Collaboration
@@ -2231,7 +2248,7 @@ Nothing is posted that I have not read. Where the automation publishes, it publi
 
 <div align="center">
 <br>
-<sub><b>Day 94 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
+<sub><b>Day 95 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
 </div>
 
 

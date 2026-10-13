@@ -8,7 +8,7 @@ A public learning log of modern Artificial Intelligence - transformers, LLMs,
 agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 <!-- Day badge: bumped by the daily run. If this is stale, the run said so in its log. -->
-[![Day](https://img.shields.io/badge/Day-93%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
+[![Day](https://img.shields.io/badge/Day-94%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Streak](https://img.shields.io/badge/Streak-unbroken-2EA043?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Level mix](https://img.shields.io/badge/Sources-Advanced%20%2B%20Medium-8957E5?style=for-the-badge&labelColor=0D1117)](#-progress)
 
@@ -18,7 +18,7 @@ agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 **[📈 Progress](#-progress)** · **[📚 Day Notes](#-day-notes)** · **[🤝 AI Collaboration](#-ai-collaboration)** · **[🔗 Connect](#-connect)**
 
-`2026-07-12` ──────────── **Day 93 of 100** ────────────► `2026-10-19`
+`2026-07-12` ──────────── **Day 94 of 100** ────────────► `2026-10-19`
 
 </div>
 
@@ -189,6 +189,7 @@ for the shape of the progress table.
 | 91 | 2026-10-10 | "Context Language Models" - Shao et al. | Advanced | A preprint introducing "Context Language Models (CLMs), language models that natively manage their own context" by "treating the context as a file and allowing the model to make unrestricted updates to this file"; built zero-shot from existing models, CLMs are reported to beat state-of-the-art context-management strategies (11.4% higher accuracy with 21.5% fewer FLOPs on BrowseComp-Plus, 5% higher scores with 59% fewer FLOPs on 12-hour EdgeBench), to extend to agent swarms as multiple context files, to learn context management by prompt optimisation and online RL, and to cut serving compute by 35% with Suffix Cache Reuse; read from the abstract and the arXiv HTML (v1, 29 September 2026, not peer reviewed), nothing was run | [arxiv.org](https://arxiv.org/abs/2609.37725) |
 | 92 | 2026-10-11 | "Peter Norvig on AI's Future and the Limits of Trust" - Ksenia Se, Turing Post | Medium | An interview in which Peter Norvig, co-author of Artificial Intelligence: A Modern Approach, argues that "language models are world models, but they could be better world models", that small tweaks rather than a teardown will get there (where he parts ways with Yann LeCun), that a neural net with attention should stay the core with logic learned on top, and that students may skip his book's logic half while "the LLM should definitely read all of it"; also covers Google Search's three levels of feedback, recursive self-improvement as an engineering-practice question, and why he worries about trust in AI leaders; read from the published text (edited and reordered by Turing Post), video not watched | [Turing Post](https://www.turingpost.com/p/peter-norvig-on-ai-s-future-and-the-limits-of-trust) |
 | 93 | 2026-10-12 | "Introducing Gemini 3.8 Live and 3.8 Live Extended Thinking" - Tom Ouyang and Malini Jaganathan, Google | Medium | Google's announcement of two real-time voice models: 3.8 Live, built for scale and cost efficiency, and 3.8 Live Extended Thinking, which "reasons and speaks simultaneously", fills thinking time with early verbal cues like "Let me check that…", runs tools and API calls in the background while the conversation continues, and narrates progress on multi-step tasks; both switch between 97 languages mid-conversation, ship in the Gemini API and Google AI Studio, and carry SynthID audio watermarks; the benchmark results are Google's own reporting of third-party leaderboards | [Google blog](https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-8-live-gemini-3-8-live-extended-thinking/) |
+| 94 | 2026-10-13 | "3 Questions: A new resource to empower young entrepreneurs" - Zach Winn, MIT News | Medium | MIT News Q&A with Bill Aulet, managing director of the Martin Trust Center for MIT Entrepreneurship, on Dear Dreamer (deardreamer.org), a free, AI-powered youth entrepreneurship platform open to all middle and high school students and funded by a gift from the Frank and Eileen Foundation; it turns the 24-step Disciplined Entrepreneurship framework into a self-paced course of short videos, interactive exercises and personalised feedback on the student's own idea, keeps the same curriculum "presented differently" for 10-, 12- and 14-year-olds, was inspired by MIT's Jetpack generative AI tool trained on the framework, and aims to empower 50,000 young entrepreneurs by 2030; the interview does not explain how the AI works or measure its feedback | [MIT News](https://news.mit.edu/2026/3-questions-new-resource-empower-young-entrepreneurs-1002) |
 
 ---
 
@@ -2148,6 +2149,22 @@ Day 12 read [How to Build an Agent](https://ampcode.com/notes/how-to-build-an-ag
 
 <sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
 
+### Day 94 - "3 Questions: A new resource to empower young entrepreneurs" (Zach Winn, MIT News)
+
+<img src="assets/cards/day-094.png" width="420" alt="Day 94 card">
+
+- **A proven curriculum, a new audience.** Dear Dreamer adapts Bill Aulet's Disciplined Entrepreneurship, a 24-step framework whose book has sold more than half a million copies and which is taught at hundreds of colleges. It was not designed for younger students. The new platform is free and open to all middle and high school students.
+- **Same content, "presented differently".** Aulet says the curriculum stays the same and only the presentation changes: case studies for each step, tailored for 10-, 12- and 14-year-olds, in a video-driven interface modelled on what young people already watch.
+- **AI as the feedback layer.** The course is self-paced, with short videos, interactive exercises and personalised feedback on the student's own idea. It was inspired by Jetpack, MIT's generative AI tool trained on the framework.
+- **The evidence comes from adults.** MIT students using the framework in the delta v accelerator have a 61 percent survival or acquisition rate and have raised over $3 billion between them. An edX version of the course reached hundreds of thousands of learners.
+- **The goal is a mindset, not only companies.** The target is 50,000 young entrepreneurs by 2030. Aulet calls entrepreneurship "a mindset, a skillset, and a way of operating", and frames the shift as moving "from a job seeker to a job creator".
+
+**Why it matters:** This is AI used in the right order. The hard part, a curriculum with a track record, came first, and the AI was added as the delivery layer that personalises it for a new audience. Most "AI-powered" education starts the other way round. The open question is transfer: the 61 percent figure was measured on MIT founders, not on 12-year-olds, so whether the framework and its AI feedback work at that age is still to be shown.
+
+**What I learned/tried:** The lesson I am keeping for my own builds is to put the proven content first and treat the model as the interface to it. I read the interview only. I have not tried the platform, and the article does not explain how its AI generates feedback or how that feedback is checked.
+
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
+
 ---
 
 ## 🤝 AI Collaboration
@@ -2214,7 +2231,7 @@ Nothing is posted that I have not read. Where the automation publishes, it publi
 
 <div align="center">
 <br>
-<sub><b>Day 93 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
+<sub><b>Day 94 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
 </div>
 
 

@@ -8,7 +8,7 @@ A public learning log of modern Artificial Intelligence - transformers, LLMs,
 agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 <!-- Day badge: bumped by the daily run. If this is stale, the run said so in its log. -->
-[![Day](https://img.shields.io/badge/Day-95%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
+[![Day](https://img.shields.io/badge/Day-96%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Streak](https://img.shields.io/badge/Streak-unbroken-2EA043?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Level mix](https://img.shields.io/badge/Sources-Advanced%20%2B%20Medium-8957E5?style=for-the-badge&labelColor=0D1117)](#-progress)
 
@@ -18,7 +18,7 @@ agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 **[📈 Progress](#-progress)** · **[📚 Day Notes](#-day-notes)** · **[🤝 AI Collaboration](#-ai-collaboration)** · **[🔗 Connect](#-connect)**
 
-`2026-07-12` ──────────── **Day 95 of 100** ────────────► `2026-10-19`
+`2026-07-12` ──────────── **Day 96 of 100** ────────────► `2026-10-19`
 
 </div>
 
@@ -191,6 +191,7 @@ for the shape of the progress table.
 | 93 | 2026-10-12 | "Introducing Gemini 3.8 Live and 3.8 Live Extended Thinking" - Tom Ouyang and Malini Jaganathan, Google | Medium | Google's announcement of two real-time voice models: 3.8 Live, built for scale and cost efficiency, and 3.8 Live Extended Thinking, which "reasons and speaks simultaneously", fills thinking time with early verbal cues like "Let me check that…", runs tools and API calls in the background while the conversation continues, and narrates progress on multi-step tasks; both switch between 97 languages mid-conversation, ship in the Gemini API and Google AI Studio, and carry SynthID audio watermarks; the benchmark results are Google's own reporting of third-party leaderboards | [Google blog](https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-8-live-gemini-3-8-live-extended-thinking/) |
 | 94 | 2026-10-13 | "3 Questions: A new resource to empower young entrepreneurs" - Zach Winn, MIT News | Medium | MIT News Q&A with Bill Aulet, managing director of the Martin Trust Center for MIT Entrepreneurship, on Dear Dreamer (deardreamer.org), a free, AI-powered youth entrepreneurship platform open to all middle and high school students and funded by a gift from the Frank and Eileen Foundation; it turns the 24-step Disciplined Entrepreneurship framework into a self-paced course of short videos, interactive exercises and personalised feedback on the student's own idea, keeps the same curriculum "presented differently" for 10-, 12- and 14-year-olds, was inspired by MIT's Jetpack generative AI tool trained on the framework, and aims to empower 50,000 young entrepreneurs by 2030; the interview does not explain how the AI works or measure its feedback | [MIT News](https://news.mit.edu/2026/3-questions-new-resource-empower-young-entrepreneurs-1002) |
 | 95 | 2026-10-14 | "Harness Engineering: Anatomy, Architecture, and Evolution of Coding Agents - A Source-Code Study of Eleven Systems" - Paul Barbaste, Tristan Darrigol, Germain Vu and Tom Wiltberger | Advanced | A source-code anatomy of eleven production coding-agent harnesses pinned to July 2026 releases - Claude Code, Codex CLI, Gemini CLI, Mistral Vibe, OpenHands, Aider, Mini-SWE-Agent, Hermes, Pi, OpenCode and OpenClaw - plus the Databricks meta-harness Omnigent as a contrast; it defines an agent as a model plus a harness, maps seven canonical subsystems (agent loop, LLM integration, tools and actions, memory and context, safety and permissions, orchestration, extensibility) with the minimal and maximal form of each, and reports 13 cross-cutting observations and 29 recurring design patterns; across roughly four million lines no runtime imports a general-purpose agentic framework and none retrieves code with vector embeddings, SKILL.md skills lead MCP in adoption (9/11 vs 8/11), a 90-day re-audit of eight systems shows convergence turning into imitation and behavioural policy moving from prompt prose to configuration, and it closes with 18 design recommendations and a 90-line minimum-viable-harness scaffold; it describes and compares, and does not benchmark or rank | [arXiv](https://arxiv.org/abs/2609.00006) |
+| 96 | 2026-10-15 | "Get started with Claude Managed Agents" - Anthropic, Claude Platform docs | Medium | The quickstart for Claude Managed Agents, Anthropic's hosted agent harness (beta, header `managed-agents-2026-04-01`); it builds the runtime from four objects - an agent (model, system prompt, tools, MCP servers and skills, created once and referenced by ID), an environment (an Anthropic-managed cloud sandbox or a self-hosted one, here with `limited` networking that only reaches package registries), a session that binds the two, and events streamed over SSE - then sends one user message and watches the agent write a Fibonacci script, run it in the sandbox and check its output until `session.status_idle`; the companion overview positions it against the Messages API as the choice for long-running and asynchronous work, lists the built-in toolset (bash, file operations, web search and fetch, MCP) and notes that, being stateful, it is not currently eligible for Zero Data Retention | [Docs](https://platform.claude.com/docs/en/managed-agents/quickstart) |
 
 ---
 
@@ -2182,6 +2183,22 @@ Day 12 read [How to Build an Agent](https://ampcode.com/notes/how-to-build-an-ag
 
 <sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
 
+### Day 96 - "Get started with Claude Managed Agents" (Anthropic, Claude Platform docs)
+
+<img src="assets/cards/day-096.png" width="420" alt="Day 96 card">
+
+- **Four objects instead of a runtime.** An **agent** is the model, system prompt, tools, MCP servers and skills, created once and reused by ID. An **environment** says where sessions run: an Anthropic-managed cloud sandbox or a self-hosted sandbox on your own infrastructure. A **session** is a running agent inside an environment, doing one task. **Events** are the messages between your application and the agent - user turns, tool results, status updates.
+- **One tool entry switches on the whole toolset.** Declaring `agent_toolset_20260401` gives the agent the pre-built tools: bash, file operations (read, write, edit, glob, grep), web search and fetch. The quickstart's agent runs on `claude-opus-5-5`, and can be created by SDK, by cURL, or declaratively with the `ant` CLI from a Markdown file whose front matter holds the config and whose body is the system prompt.
+- **Networking is a setting, not an afterthought.** The quickstart environment uses `limited` networking with package managers allowed, so code in the sandbox reaches public registries and nothing else - and the `allowed_hosts` list applies to web search and fetch too, which in this environment return nothing because no hosts are listed.
+- **What happens after one message.** The service provisions the sandbox, runs the agent loop, runs the tools inside the sandbox, streams events as it works, and emits `session.status_idle` when it has nothing left to do. In the example the agent writes a Fibonacci script, runs it, and checks the output file before stopping.
+- **The trade, from the overview.** The Messages API is for custom loops and fine-grained control; Managed Agents is for long-running and asynchronous work, with built-in prompt caching and compaction, steering or interrupting mid-run, and scheduled runs on a cron. Because sessions, sandbox state and history live server-side, it is not currently eligible for Zero Data Retention or HIPAA BAA coverage.
+
+**Why it matters:** Day 95's paper defined an agent as a model plus a harness and showed that the leading coding agents all write their own. This quickstart is the other side of that choice: the harness as a hosted service, reduced to four objects and an event stream. The five steps it lists - provision, loop, run tools, stream, go idle - are a compact spec of what any harness has to do, which makes it useful even if you never run it. The trade-off is stated plainly in the docs rather than hidden: control for convenience, and session data that lives on Anthropic's side.
+
+**What I learned/tried:** I read the public quickstart and overview in full. The link I was given was the Claude Console's own agent quickstart, which sits behind a sign-in, so its in-console walkthrough is not what this entry is built on. The four-object split is the part I am keeping: it is a cleaner way to think about my own scheduled pipelines, where the agent, the sandbox and each day's run are already separate things that I have been wiring together by hand.
+
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
+
 ---
 
 ## 🤝 AI Collaboration
@@ -2248,7 +2265,7 @@ Nothing is posted that I have not read. Where the automation publishes, it publi
 
 <div align="center">
 <br>
-<sub><b>Day 95 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
+<sub><b>Day 96 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
 </div>
 
 

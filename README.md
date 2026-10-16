@@ -8,7 +8,7 @@ A public learning log of modern Artificial Intelligence - transformers, LLMs,
 agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 <!-- Day badge: bumped by the daily run. If this is stale, the run said so in its log. -->
-[![Day](https://img.shields.io/badge/Day-96%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
+[![Day](https://img.shields.io/badge/Day-97%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Streak](https://img.shields.io/badge/Streak-unbroken-2EA043?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Level mix](https://img.shields.io/badge/Sources-Advanced%20%2B%20Medium-8957E5?style=for-the-badge&labelColor=0D1117)](#-progress)
 
@@ -18,7 +18,7 @@ agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 **[📈 Progress](#-progress)** · **[📚 Day Notes](#-day-notes)** · **[🤝 AI Collaboration](#-ai-collaboration)** · **[🔗 Connect](#-connect)**
 
-`2026-07-12` ──────────── **Day 96 of 100** ────────────► `2026-10-19`
+`2026-07-12` ──────────── **Day 97 of 100** ────────────► `2026-10-19`
 
 </div>
 
@@ -192,6 +192,7 @@ for the shape of the progress table.
 | 94 | 2026-10-13 | "3 Questions: A new resource to empower young entrepreneurs" - Zach Winn, MIT News | Medium | MIT News Q&A with Bill Aulet, managing director of the Martin Trust Center for MIT Entrepreneurship, on Dear Dreamer (deardreamer.org), a free, AI-powered youth entrepreneurship platform open to all middle and high school students and funded by a gift from the Frank and Eileen Foundation; it turns the 24-step Disciplined Entrepreneurship framework into a self-paced course of short videos, interactive exercises and personalised feedback on the student's own idea, keeps the same curriculum "presented differently" for 10-, 12- and 14-year-olds, was inspired by MIT's Jetpack generative AI tool trained on the framework, and aims to empower 50,000 young entrepreneurs by 2030; the interview does not explain how the AI works or measure its feedback | [MIT News](https://news.mit.edu/2026/3-questions-new-resource-empower-young-entrepreneurs-1002) |
 | 95 | 2026-10-14 | "Harness Engineering: Anatomy, Architecture, and Evolution of Coding Agents - A Source-Code Study of Eleven Systems" - Paul Barbaste, Tristan Darrigol, Germain Vu and Tom Wiltberger | Advanced | A source-code anatomy of eleven production coding-agent harnesses pinned to July 2026 releases - Claude Code, Codex CLI, Gemini CLI, Mistral Vibe, OpenHands, Aider, Mini-SWE-Agent, Hermes, Pi, OpenCode and OpenClaw - plus the Databricks meta-harness Omnigent as a contrast; it defines an agent as a model plus a harness, maps seven canonical subsystems (agent loop, LLM integration, tools and actions, memory and context, safety and permissions, orchestration, extensibility) with the minimal and maximal form of each, and reports 13 cross-cutting observations and 29 recurring design patterns; across roughly four million lines no runtime imports a general-purpose agentic framework and none retrieves code with vector embeddings, SKILL.md skills lead MCP in adoption (9/11 vs 8/11), a 90-day re-audit of eight systems shows convergence turning into imitation and behavioural policy moving from prompt prose to configuration, and it closes with 18 design recommendations and a 90-line minimum-viable-harness scaffold; it describes and compares, and does not benchmark or rank | [arXiv](https://arxiv.org/abs/2609.00006) |
 | 96 | 2026-10-15 | "Get started with Claude Managed Agents" - Anthropic, Claude Platform docs | Medium | The quickstart for Claude Managed Agents, Anthropic's hosted agent harness (beta, header `managed-agents-2026-04-01`); it builds the runtime from four objects - an agent (model, system prompt, tools, MCP servers and skills, created once and referenced by ID), an environment (an Anthropic-managed cloud sandbox or a self-hosted one, here with `limited` networking that only reaches package registries), a session that binds the two, and events streamed over SSE - then sends one user message and watches the agent write a Fibonacci script, run it in the sandbox and check its output until `session.status_idle`; the companion overview positions it against the Messages API as the choice for long-running and asynchronous work, lists the built-in toolset (bash, file operations, web search and fetch, MCP) and notes that, being stateful, it is not currently eligible for Zero Data Retention | [Docs](https://platform.claude.com/docs/en/managed-agents/quickstart) |
+| 97 | 2026-10-16 | "Get started with the desktop app" - Claude Code documentation | Medium | The quickstart for Claude Code inside the Claude desktop app, which "gives you Claude Code with a graphical interface, so you can ask Claude to work on the code in a folder on your computer and review its changes without using a terminal"; it separates the app's three tabs (Chat with no file access, Cowork as an autonomous background agent, Code with direct access to local files), states that the app bundles Claude Code so no Node.js or CLI install is needed, offers four places a session can run (Local, Cloud, SSH, and WSL on Windows), and makes the permission mode the real setting - Auto, where "a classifier reviews actions in the background and blocks the risky ones", Manual, Accept edits, and Plan - with every change reviewable in a diff view whose line comments Claude reads and acts on | [code.claude.com](https://code.claude.com/docs/en/desktop-quickstart) |
 
 ---
 
@@ -2199,6 +2200,22 @@ Day 12 read [How to Build an Agent](https://ampcode.com/notes/how-to-build-an-ag
 
 <sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
 
+### Day 97 - "Get started with the desktop app" (Claude Code documentation)
+
+<img src="assets/cards/day-097.png" width="420" alt="Day 97 card">
+
+- **Three tabs, three levels of reach.** **Chat** is general conversation "with no file access". **Cowork** is "an autonomous background agent that works on tasks independently while you do other work". **Code** is the interactive coding assistant "with direct access to your local files". The page covers only the Code tab, and it needs a Pro, Max, Team or Enterprise subscription.
+- **No terminal, and nothing else to install.** The app bundles Claude Code, so "you don't need to install Node.js or the CLI to use the Code tab". Builds exist for macOS (universal), Windows x64 and ARM64, and Linux in beta through apt.
+- **Where the session runs is the first choice.** **Local** works on your files directly. **Cloud** sessions "continue even if you close the app". **SSH** connects to your own servers, cloud VMs or dev containers, and installs Claude Code on the remote machine on first connect. **WSL** runs the session inside a WSL 2 distribution, with git and tools on the Linux side.
+- **The permission mode is the real setting.** **Auto**: "a classifier reviews actions in the background and blocks the risky ones instead of asking you". **Manual**: Claude asks before editing files or running commands, and files are not modified until you accept. **Accept edits** auto-accepts file edits. **Plan** proposes an approach without editing anything, which the page recommends before a large refactor.
+- **Review is built into the loop.** Every edit shows a `+12 -1` style indicator that opens a diff view, where you can comment on specific lines and "Claude reads your comments and revises". You can interrupt with the stop button or type a correction mid-action, run `/code-review`, watch a pull request's CI and let Claude fix failures, schedule recurring tasks, and run parallel sessions, each in its own Git worktree if you choose.
+
+**Why it matters:** Day 96 rented a hosted agent harness through an API. Day 97 is the same agent loop with a graphical front end, and it shows that the important controls are not about the interface. They are about where the session runs and how much it may do without asking. Four permission modes, from Plan to a classifier-guarded Auto, are a practical answer to the trust question this campaign keeps returning to. A diff view with line comments turns code review into the main way you talk to the agent.
+
+**What I learned/tried:** I read the quickstart in full. I run this campaign through Claude Code in the terminal, so the page's link for people "coming from the CLI" is the one I would read next. The part I am keeping is the permission ladder: Plan before a large change, Manual while trust is being earned, and Auto only where a classifier is watching. The detailed pages it links to, on the desktop app, cloud sessions and scheduled tasks, were not read for this entry.
+
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
+
 ---
 
 ## 🤝 AI Collaboration
@@ -2265,7 +2282,7 @@ Nothing is posted that I have not read. Where the automation publishes, it publi
 
 <div align="center">
 <br>
-<sub><b>Day 96 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
+<sub><b>Day 97 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
 </div>
 
 

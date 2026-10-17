@@ -8,7 +8,7 @@ A public learning log of modern Artificial Intelligence - transformers, LLMs,
 agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 <!-- Day badge: bumped by the daily run. If this is stale, the run said so in its log. -->
-[![Day](https://img.shields.io/badge/Day-98%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
+[![Day](https://img.shields.io/badge/Day-99%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Streak](https://img.shields.io/badge/Streak-unbroken-2EA043?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Level mix](https://img.shields.io/badge/Sources-Advanced%20%2B%20Medium-8957E5?style=for-the-badge&labelColor=0D1117)](#-progress)
 
@@ -18,7 +18,7 @@ agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 **[📈 Progress](#-progress)** · **[📚 Day Notes](#-day-notes)** · **[🤝 AI Collaboration](#-ai-collaboration)** · **[🔗 Connect](#-connect)**
 
-`2026-07-12` ──────────── **Day 98 of 100** ────────────► `2026-10-19`
+`2026-07-12` ──────────── **Day 99 of 100** ────────────► `2026-10-19`
 
 </div>
 
@@ -194,6 +194,7 @@ for the shape of the progress table.
 | 96 | 2026-10-15 | "Get started with Claude Managed Agents" - Anthropic, Claude Platform docs | Medium | The quickstart for Claude Managed Agents, Anthropic's hosted agent harness (beta, header `managed-agents-2026-04-01`); it builds the runtime from four objects - an agent (model, system prompt, tools, MCP servers and skills, created once and referenced by ID), an environment (an Anthropic-managed cloud sandbox or a self-hosted one, here with `limited` networking that only reaches package registries), a session that binds the two, and events streamed over SSE - then sends one user message and watches the agent write a Fibonacci script, run it in the sandbox and check its output until `session.status_idle`; the companion overview positions it against the Messages API as the choice for long-running and asynchronous work, lists the built-in toolset (bash, file operations, web search and fetch, MCP) and notes that, being stateful, it is not currently eligible for Zero Data Retention | [Docs](https://platform.claude.com/docs/en/managed-agents/quickstart) |
 | 97 | 2026-10-16 | "Get started with the desktop app" - Claude Code documentation | Medium | The quickstart for Claude Code inside the Claude desktop app, which "gives you Claude Code with a graphical interface, so you can ask Claude to work on the code in a folder on your computer and review its changes without using a terminal"; it separates the app's three tabs (Chat with no file access, Cowork as an autonomous background agent, Code with direct access to local files), states that the app bundles Claude Code so no Node.js or CLI install is needed, offers four places a session can run (Local, Cloud, SSH, and WSL on Windows), and makes the permission mode the real setting - Auto, where "a classifier reviews actions in the background and blocks the risky ones", Manual, Accept edits, and Plan - with every change reviewable in a diff view whose line comments Claude reads and acts on | [code.claude.com](https://code.claude.com/docs/en/desktop-quickstart) |
 | 98 | 2026-10-17 | "Redesigning source control at Anthropic" - Nick G. and the Anthropic source control team | Medium | An engineering post (13 October 2026, updated 15 October) on why Anthropic replaced git for its monorepo: merges grew from about 2,500 a day in May 2026 to over 30,000 by September, against a main-branch history near 100 GB, compressed working copies over 25 GB and about 25 million CI checkouts a day; a team of seven built Scion, an in-house version control system, in five months, on the premise that nearly every client is an always-online agent or job, so history, commits, merges and rebases move to the server, clients fetch trees and blobs on demand, refs update by compare-and-swap on a single Spanner row, and blame and path history become derived data; the authors report cache hit rates above 99%, a footprint 200x smaller than the old git mirrors and checkouts in seconds rather than minutes, credit Google's Piper and Meta's Sapling as prior art, and say plainly that Scion is not a general replacement for git | [anthropic.com](https://www.anthropic.com/engineering/redesigning-source-control) |
+| 99 | 2026-10-18 | "Next-Concept Modeling: Fast, Parallel Coarse-to-Fine Text Generation" - Kumbong, Khare et al., Stanford | Advanced | A preprint (v1, 9 October 2026, not peer reviewed) that generates text the way image models generate pictures: a multiscale residual VQ-VAE encodes text into K levels of discrete codes, short and coarse first, longer and finer after, and a transformer predicts every code within a level in one forward pass, so generation takes K steps rather than one per token; at roughly 100M parameters the authors report better generative perplexity than the strongest diffusion baseline on LM1B while running 21× faster, matching its ROUGE-L on XSum at 31× the speed, Sudoku solved at 99.5 / 96.5 / 86.1% (easy / medium / hard) with 12 function evaluations, and about 4.9× fewer training tokens on LM1B; code at HazyResearch/ncm, nothing run | [arxiv.org](https://arxiv.org/abs/2610.14162) |
 
 ---
 
@@ -2233,6 +2234,22 @@ Day 12 read [How to Build an Agent](https://ampcode.com/notes/how-to-build-an-ag
 
 <sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
 
+### Day 99 - "Next-Concept Modeling: Fast, Parallel Coarse-to-Fine Text Generation" (Kumbong, Khare et al., Stanford)
+
+<img src="assets/cards/day-099.png" width="420" alt="Day 99 card">
+
+- **The problem it targets is diffusion's, not autoregression's.** Diffusion language models already sample in parallel, but the paper names three costs that eat the gain: quality drops when you cut the number of denoising steps, every step processes the full sequence, and training takes many passes over the data - its example is strong baselines trained on OpenWebText for 1M steps, "processing over 500B tokens".
+- **Two stages, borrowed from images.** First a multiscale residual VQ-VAE learns to encode text into K levels of discrete codes, each level quantising the residual the earlier ones left behind, with level lengths growing from short to the full sequence length. Nested dropout during tokenizer training forces the early, coarse levels to carry real information instead of leaving it to the fine ones. Then, with the tokenizer frozen, a transformer learns to predict level k from the reconstruction of levels 1 to k-1, all codes in the level at once.
+- **Few steps, and cheap early steps.** Generation runs K steps, with K much smaller than the number of tokens, and the coarse levels are short, so the first steps touch very few positions. Timed on one H100 for 1,024 sequences, the authors report 11× fewer function evaluations and 21× faster than the strongest diffusion baseline (DUO) on LM1B at better generative perplexity, and 16× fewer evaluations and 31× faster than AURORA-LM on XSum at comparable ROUGE.
+- **Sudoku is where coarse-to-fine shows its point.** With 25M parameters and 12 function evaluations it solves 99.5%, 96.5% and 86.1% of easy, medium and hard boards, against 97.7 / 92.8 / 81.3% for the strongest diffusion baseline at 16 and about 1% of hard boards for the autoregressive baselines. The paper's reading: refining the whole board level by level lets later levels correct earlier choices, where left-to-right generation commits to each token and cannot revise it.
+- **Cheaper training, with honest scale.** On LM1B the tokenizer and generator together process 13.36B token positions, about 4.9× fewer than the baselines' 66B. Every generator is roughly 100M parameters (the scaling run goes to 725M), each dataset gets its own tokenizer, and reconstruction is not perfect outside Sudoku - the authors note substituted words and entities - so this is evidence at small scale, not a frontier model.
+
+**Why it matters:** For a hundred days nearly every model on this list has written left to right, one token after another, and Day 84's Uno was about making that same autoregressive distribution cheaper to sample. This paper changes the representation instead of the sampler: it decides the gist first and fills in detail after, which is how a person drafts and how image generators already work. If the result holds at larger scale, the cost of generation stops scaling with the number of tokens and starts scaling with the number of levels - and the Sudoku numbers suggest that planning-heavy tasks, where a left-to-right model cannot take back an early mistake, are where that matters most.
+
+**What I learned/tried:** I read the abstract and the first thirteen pages of the paper, through the method, experiments and conclusion; the appendices were not read and the code at github.com/HazyResearch/ncm was not run. The idea I am keeping is the Figure 3 trajectory, where a German-English translation goes from a few right words at step 1 to the finished sentence at step 11: the meaning is fixed early and the wording settles last. It is a useful picture of what a draft is, for models and for my own writing.
+
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
+
 ---
 
 ## 🤝 AI Collaboration
@@ -2299,7 +2316,7 @@ Nothing is posted that I have not read. Where the automation publishes, it publi
 
 <div align="center">
 <br>
-<sub><b>Day 98 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
+<sub><b>Day 99 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
 </div>
 
 

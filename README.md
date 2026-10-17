@@ -8,7 +8,7 @@ A public learning log of modern Artificial Intelligence - transformers, LLMs,
 agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 <!-- Day badge: bumped by the daily run. If this is stale, the run said so in its log. -->
-[![Day](https://img.shields.io/badge/Day-97%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
+[![Day](https://img.shields.io/badge/Day-98%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Streak](https://img.shields.io/badge/Streak-unbroken-2EA043?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Level mix](https://img.shields.io/badge/Sources-Advanced%20%2B%20Medium-8957E5?style=for-the-badge&labelColor=0D1117)](#-progress)
 
@@ -18,7 +18,7 @@ agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 **[📈 Progress](#-progress)** · **[📚 Day Notes](#-day-notes)** · **[🤝 AI Collaboration](#-ai-collaboration)** · **[🔗 Connect](#-connect)**
 
-`2026-07-12` ──────────── **Day 97 of 100** ────────────► `2026-10-19`
+`2026-07-12` ──────────── **Day 98 of 100** ────────────► `2026-10-19`
 
 </div>
 
@@ -193,6 +193,7 @@ for the shape of the progress table.
 | 95 | 2026-10-14 | "Harness Engineering: Anatomy, Architecture, and Evolution of Coding Agents - A Source-Code Study of Eleven Systems" - Paul Barbaste, Tristan Darrigol, Germain Vu and Tom Wiltberger | Advanced | A source-code anatomy of eleven production coding-agent harnesses pinned to July 2026 releases - Claude Code, Codex CLI, Gemini CLI, Mistral Vibe, OpenHands, Aider, Mini-SWE-Agent, Hermes, Pi, OpenCode and OpenClaw - plus the Databricks meta-harness Omnigent as a contrast; it defines an agent as a model plus a harness, maps seven canonical subsystems (agent loop, LLM integration, tools and actions, memory and context, safety and permissions, orchestration, extensibility) with the minimal and maximal form of each, and reports 13 cross-cutting observations and 29 recurring design patterns; across roughly four million lines no runtime imports a general-purpose agentic framework and none retrieves code with vector embeddings, SKILL.md skills lead MCP in adoption (9/11 vs 8/11), a 90-day re-audit of eight systems shows convergence turning into imitation and behavioural policy moving from prompt prose to configuration, and it closes with 18 design recommendations and a 90-line minimum-viable-harness scaffold; it describes and compares, and does not benchmark or rank | [arXiv](https://arxiv.org/abs/2609.00006) |
 | 96 | 2026-10-15 | "Get started with Claude Managed Agents" - Anthropic, Claude Platform docs | Medium | The quickstart for Claude Managed Agents, Anthropic's hosted agent harness (beta, header `managed-agents-2026-04-01`); it builds the runtime from four objects - an agent (model, system prompt, tools, MCP servers and skills, created once and referenced by ID), an environment (an Anthropic-managed cloud sandbox or a self-hosted one, here with `limited` networking that only reaches package registries), a session that binds the two, and events streamed over SSE - then sends one user message and watches the agent write a Fibonacci script, run it in the sandbox and check its output until `session.status_idle`; the companion overview positions it against the Messages API as the choice for long-running and asynchronous work, lists the built-in toolset (bash, file operations, web search and fetch, MCP) and notes that, being stateful, it is not currently eligible for Zero Data Retention | [Docs](https://platform.claude.com/docs/en/managed-agents/quickstart) |
 | 97 | 2026-10-16 | "Get started with the desktop app" - Claude Code documentation | Medium | The quickstart for Claude Code inside the Claude desktop app, which "gives you Claude Code with a graphical interface, so you can ask Claude to work on the code in a folder on your computer and review its changes without using a terminal"; it separates the app's three tabs (Chat with no file access, Cowork as an autonomous background agent, Code with direct access to local files), states that the app bundles Claude Code so no Node.js or CLI install is needed, offers four places a session can run (Local, Cloud, SSH, and WSL on Windows), and makes the permission mode the real setting - Auto, where "a classifier reviews actions in the background and blocks the risky ones", Manual, Accept edits, and Plan - with every change reviewable in a diff view whose line comments Claude reads and acts on | [code.claude.com](https://code.claude.com/docs/en/desktop-quickstart) |
+| 98 | 2026-10-17 | "Redesigning source control at Anthropic" - Nick G. and the Anthropic source control team | Medium | An engineering post (13 October 2026, updated 15 October) on why Anthropic replaced git for its monorepo: merges grew from about 2,500 a day in May 2026 to over 30,000 by September, against a main-branch history near 100 GB, compressed working copies over 25 GB and about 25 million CI checkouts a day; a team of seven built Scion, an in-house version control system, in five months, on the premise that nearly every client is an always-online agent or job, so history, commits, merges and rebases move to the server, clients fetch trees and blobs on demand, refs update by compare-and-swap on a single Spanner row, and blame and path history become derived data; the authors report cache hit rates above 99%, a footprint 200x smaller than the old git mirrors and checkouts in seconds rather than minutes, credit Google's Piper and Meta's Sapling as prior art, and say plainly that Scion is not a general replacement for git | [anthropic.com](https://www.anthropic.com/engineering/redesigning-source-control) |
 
 ---
 
@@ -2216,6 +2217,22 @@ Day 12 read [How to Build an Agent](https://ampcode.com/notes/how-to-build-an-ag
 
 <sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
 
+### Day 98 - "Redesigning source control at Anthropic" (Nick G. and the source control team, Anthropic)
+
+<img src="assets/cards/day-098.png" width="420" alt="Day 98 card">
+
+- **The bottleneck moved to source control.** Merges grew from about 2,500 code changes a day in May 2026 to over 30,000 a day by September. In the authors' words, "as our merges per day grew more than tenfold, source control became our biggest development bottleneck." The main-branch history is nearly 100 GB, a compressed working copy over 25 GB, and CI performs about 25 million checkouts a day - which several hundred internal git mirrors, shallow clones and sparse checkouts were struggling to serve.
+- **Git was decentralised; their use of it was not.** The key observation is that Anthropic ran git as a centralised system whose clients were almost all always-online agents and jobs. Scion takes that as its first principle - "Clients are always online" - and builds the rest around it: the server owns history, blame, commits, merges and rebases, while the client keeps a bounded object cache and sparse, virtualised working copies that materialise only what is read.
+- **A small data model with derived data on top.** The unit is a changeset in a write-ahead log, recording changed files against the first parent with content-addressed pointers to blob storage. Refs update by compare-and-swap on a single Spanner row, and refs other than main and release branches are discouraged. Blame, path history and commit-graph skip lists are "derived data", computed from parent values through one generic mechanism and invisible to clients, so the server can change them freely.
+- **Three tiers, one protocol.** scion-daemon (per node), scion-cache (regional) and scion-server (authoritative, on Spanner and cloud storage) speak the same RPCs. Clients ask for trees and blobs recursively instead of negotiating what they already hold, which makes transfers resumable and cache-friendly. The reported results: cache hit rates above 99%, a CPU and memory footprint 200x smaller than the git mirrors, checkouts in seconds rather than minutes, and 25% more CPU capacity for CI.
+- **Claude in the build, engineers saying no.** Claude Mythos Preview rewrote the git-to-Scion ingestion pipeline to use 20x less memory and run 4x faster, "superfan" Claude instances watch individual components through telemetry and logs, and merge queues gave way to post-merge and pre-deploy testing. The team's summary of its own role: "very often, we found that the role of the engineers was to tell Claude 'no.'"
+
+**Why it matters:** Version control is the layer most engineers assume is finished, and this post argues that agent-scale development breaks one of its founding assumptions. Git was designed for people who work offline and sync occasionally; a fleet of agents is always online and merges constantly, so the sensible design flips to a thin client and a smart server. The authors are careful about the limits - they name Piper and Sapling as prior art, call Scion "by no means a suitable replacement for git for general use", and ask git platforms to borrow ideas such as server-side RPCs and reworked negotiation rather than adopt their system.
+
+**What I learned/tried:** I read the post in full; I have not used Scion, which is internal to Anthropic, and every figure here is the authors' own report rather than something I measured. The idea I am keeping is to check a tool's design assumptions against who its clients actually are now. My own scheduled pipelines push to a single repo and rebase before every push, and they too are always-online jobs using a tool built for occasional human sync.
+
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
+
 ---
 
 ## 🤝 AI Collaboration
@@ -2282,7 +2299,7 @@ Nothing is posted that I have not read. Where the automation publishes, it publi
 
 <div align="center">
 <br>
-<sub><b>Day 97 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
+<sub><b>Day 98 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
 </div>
 
 

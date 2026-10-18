@@ -8,7 +8,7 @@ A public learning log of modern Artificial Intelligence - transformers, LLMs,
 agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 <!-- Day badge: bumped by the daily run. If this is stale, the run said so in its log. -->
-[![Day](https://img.shields.io/badge/Day-99%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
+[![Day](https://img.shields.io/badge/Day-100%20of%20100-1F6FEB?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Streak](https://img.shields.io/badge/Streak-unbroken-2EA043?style=for-the-badge&labelColor=0D1117)](#-progress)
 [![Level mix](https://img.shields.io/badge/Sources-Advanced%20%2B%20Medium-8957E5?style=for-the-badge&labelColor=0D1117)](#-progress)
 
@@ -18,7 +18,7 @@ agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
 
 **[📈 Progress](#-progress)** · **[📚 Day Notes](#-day-notes)** · **[🤝 AI Collaboration](#-ai-collaboration)** · **[🔗 Connect](#-connect)**
 
-`2026-07-12` ──────────── **Day 99 of 100** ────────────► `2026-10-19`
+`2026-07-12` ──────────── **Day 100 of 100** ────────────► `2026-10-19`
 
 </div>
 
@@ -195,6 +195,7 @@ for the shape of the progress table.
 | 97 | 2026-10-16 | "Get started with the desktop app" - Claude Code documentation | Medium | The quickstart for Claude Code inside the Claude desktop app, which "gives you Claude Code with a graphical interface, so you can ask Claude to work on the code in a folder on your computer and review its changes without using a terminal"; it separates the app's three tabs (Chat with no file access, Cowork as an autonomous background agent, Code with direct access to local files), states that the app bundles Claude Code so no Node.js or CLI install is needed, offers four places a session can run (Local, Cloud, SSH, and WSL on Windows), and makes the permission mode the real setting - Auto, where "a classifier reviews actions in the background and blocks the risky ones", Manual, Accept edits, and Plan - with every change reviewable in a diff view whose line comments Claude reads and acts on | [code.claude.com](https://code.claude.com/docs/en/desktop-quickstart) |
 | 98 | 2026-10-17 | "Redesigning source control at Anthropic" - Nick G. and the Anthropic source control team | Medium | An engineering post (13 October 2026, updated 15 October) on why Anthropic replaced git for its monorepo: merges grew from about 2,500 a day in May 2026 to over 30,000 by September, against a main-branch history near 100 GB, compressed working copies over 25 GB and about 25 million CI checkouts a day; a team of seven built Scion, an in-house version control system, in five months, on the premise that nearly every client is an always-online agent or job, so history, commits, merges and rebases move to the server, clients fetch trees and blobs on demand, refs update by compare-and-swap on a single Spanner row, and blame and path history become derived data; the authors report cache hit rates above 99%, a footprint 200x smaller than the old git mirrors and checkouts in seconds rather than minutes, credit Google's Piper and Meta's Sapling as prior art, and say plainly that Scion is not a general replacement for git | [anthropic.com](https://www.anthropic.com/engineering/redesigning-source-control) |
 | 99 | 2026-10-18 | "Next-Concept Modeling: Fast, Parallel Coarse-to-Fine Text Generation" - Kumbong, Khare et al., Stanford | Advanced | A preprint (v1, 9 October 2026, not peer reviewed) that generates text the way image models generate pictures: a multiscale residual VQ-VAE encodes text into K levels of discrete codes, short and coarse first, longer and finer after, and a transformer predicts every code within a level in one forward pass, so generation takes K steps rather than one per token; at roughly 100M parameters the authors report better generative perplexity than the strongest diffusion baseline on LM1B while running 21× faster, matching its ROUGE-L on XSum at 31× the speed, Sudoku solved at 99.5 / 96.5 / 86.1% (easy / medium / hard) with 12 function evaluations, and about 4.9× fewer training tokens on LM1B; code at HazyResearch/ncm, nothing run | [arxiv.org](https://arxiv.org/abs/2610.14162) |
+| 100 | 2026-10-19 | "Anthropic's Interactive Prompt Engineering Tutorial" - Anthropic | Medium | Milestone day, the last one: Anthropic's free, open course in nine chapters plus an appendix, from basic prompt structure through being clear and direct, roles, separating data from instructions, formatting output, step-by-step thinking and few-shot examples, to avoiding hallucinations and building complex industry prompts, each lesson a notebook with an Example Playground and exercises, also offered as a Google Sheets version; written for Claude 3 Haiku, so the techniques are the point rather than the model; notebooks not run | [github.com](https://github.com/anthropics/prompt-eng-interactive-tutorial) |
 
 ---
 
@@ -2250,6 +2251,22 @@ Day 12 read [How to Build an Agent](https://ampcode.com/notes/how-to-build-an-ag
 
 <sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
 
+### Day 100 - "Anthropic's Interactive Prompt Engineering Tutorial" (Anthropic) - milestone
+
+<img src="assets/cards/day-100.png" width="420" alt="Day 100 card">
+
+- **A course, not an article.** Nine chapters with exercises plus an appendix, grouped Beginner (basic prompt structure, being clear and direct, assigning roles), Intermediate (separating data from instructions, formatting output and speaking for Claude, precognition or thinking step by step, using examples) and Advanced (avoiding hallucinations, building complex prompts for chatbot, legal, financial and coding use cases). The appendix goes beyond the single prompt: chaining prompts, tool use, search and retrieval. Each lesson is a notebook (`.ipynb`) ending in an Example Playground, with an answer key kept in Google Sheets.
+- **Thinking only counts when it is written down.** Chapter 6 says step-by-step thinking "sometimes makes Claude more accurate, particularly for complex tasks", and then the line I will keep: "You cannot ask Claude to think but output only the answer - in this case, no thinking has actually occurred." Its fix for a wrong answer about an actor born in 1956 is to have the model brainstorm candidates in `<brainstorm>` tags before it answers.
+- **Order matters, and the course admits it is untidy.** The same chapter notes that Claude "is sometimes sensitive to ordering" and, "in most situations (but not all, confusingly enough)", more likely to choose the second of two options - shown by a movie-review verdict that flips when the positive and negative arguments swap places.
+- **Give it an out, and make it find evidence first.** Chapter 8's two hallucination fixes are permission to decline ("Only answer if you know the answer with certainty", against a question about the heaviest hippo of all time) and asking the model to pull the relevant quote from a long document into a scratchpad and judge whether it answers the question before it writes the answer. Lowering temperature is offered as a bonus fix, not the main one.
+- **Honest scope.** The course is written for Claude 3 Haiku, which it describes as Anthropic's "smallest, fastest, and cheapest model" at the time, and names Claude 3 Sonnet and Opus as the larger ones. The models have moved on; the habits it teaches - structure, clarity, evidence before answers - are the part that carries.
+
+**Why it matters:** Day 1 of this log was Karpathy's decade of agents, and the ninety-eight days between went through context engineering, prompt injection and its defences, harnesses, evals and new ways of generating text. Every one of those systems still begins with a model reading a prompt someone wrote. Ending on the fundamentals is the right last word: Day 10 read Anthropic's prompting best practices as reference documentation, and this course turns the same craft into exercises you can fail and redo.
+
+**What I learned/tried:** I read the repository README, the file listing of the `Anthropic 1P` folder, all of Chapter 6 and the first part of Chapter 8 (about the first 100,000 of its 177,000 characters); the other chapters and the appendix were not read and no notebook was run. The idea I am taking out of the hundred days is the one Chapter 6 states plainly: a model has not thought about something it has not written down. That is true of my own work too, and it is why this log exists.
+
+<sub>🤝 <b>AI collaboration:</b> researched, drafted and illustrated with Claude Code; reviewed, edited and approved by me before publishing - see <a href="#-ai-collaboration">AI Collaboration</a>.</sub>
+
 ---
 
 ## 🤝 AI Collaboration
@@ -2316,7 +2333,7 @@ Nothing is posted that I have not read. Where the automation publishes, it publi
 
 <div align="center">
 <br>
-<sub><b>Day 99 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
+<sub><b>Day 100 of 100.</b> Next entry tomorrow, ~7:00 EEST.</sub>
 </div>
 
 

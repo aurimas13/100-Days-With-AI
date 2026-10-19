@@ -2,7 +2,7 @@
 
 # 100 Days With AI 🤖
 
-### One source a day. One honest note. For 100 days.
+### One source a day. One honest note. For 100 days. 
 
 A public learning log of modern Artificial Intelligence - transformers, LLMs,
 agentic AI, RAG, fine-tuning, evals, MLOps and the rest of it.
